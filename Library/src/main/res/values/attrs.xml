@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="XLoadingView">
+        <attr name="loadingView" format="reference" />
+        <attr name="errorView" format="reference" />
+        <attr name="emptyView" format="reference" />
+        <attr name="noNetworkView" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="XStateButton">
+        <!--text color-->
+        <attr name="normalTextColor" format="color|reference" />
+        <attr name="pressedTextColor" format="color|reference" />
+        <attr name="unableTextColor" format="color|reference" />
+        <!--stroke width and color, dash width, dash gap-->
+        <attr name="strokeDashWidth" format="dimension|reference" />
+        <attr name="strokeDashGap" format="dimension|reference" />
+        <attr name="normalStrokeWidth" format="dimension|reference" />
+        <attr name="pressedStrokeWidth" format="dimension|reference" />
+        <attr name="unableStrokeWidth" format="dimension|reference" />
+        <attr name="normalStrokeColor" format="color|reference" />
+        <attr name="pressedStrokeColor" format="color|reference" />
+        <attr name="unableStrokeColor" format="color|reference" />
+        <!--background color-->
+        <attr name="normalBackgroundColor" format="color|reference" />
+        <attr name="pressedBackgroundColor" format="color|reference" />
+        <attr name="unableBackgroundColor" format="color|reference" />
+        <!--background radius-->
+        <attr name="radius" format="dimension|reference" />
+        <attr name="round" format="boolean|reference" />
+        <!--animation duration-->
+        <attr name="animationDuration" format="integer|reference" />
+
+    </declare-styleable>
+
+    <declare-styleable name="XStateImageView">
+        <attr name="normalBackground" format="color|reference" />
+        <attr name="pressedBackground" format="color|reference" />
+        <attr name="unableBackground" format="color|reference" />
+        <!--animation duration-->
+        <attr name="animDuration" format="integer|reference" />
+    </declare-styleable>
+
+    <!--带进度的圆形进度条-->
+    <declare-styleable name="RoundProgressBar">
+        <attr name="max" format="integer" />
+        <attr name="progress" format="integer"></attr>
+        <attr name="startAngle" format="integer"></attr>
+        <attr name="ringColor" format="color" />
+        <attr name="ringProgressColor" format="color" />
+        <attr name="ringWidth" format="dimension"></attr>
+        <attr name="centreColor" format="color" />
+        <attr name="textColor" format="color" />
+        <attr name="textSize" format="dimension" />
+        <attr name="textIsDisplayable" format="boolean"></attr>
+        <attr name="style">
+            <enum name="STROKE" value="0" />
+            <enum name="FILL" value="1" />
+        </attr>
+    </declare-styleable>
+
+    <!--可以描边的imageView-->
+    <declare-styleable name="CircleImageView">
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_fill_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+        <attr name="civ_border_width" format="dimension" />
+    </declare-styleable>
+</resources>
