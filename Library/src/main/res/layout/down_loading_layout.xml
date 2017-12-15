@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:layout_marginTop="5dp"
-        android:max="100"
         android:maxHeight="11dp"
         android:minHeight="11dp"
         android:progressDrawable="@drawable/progress_bar_bg" />

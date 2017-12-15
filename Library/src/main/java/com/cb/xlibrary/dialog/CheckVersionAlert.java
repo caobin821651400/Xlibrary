@@ -1,4 +1,4 @@
-package com.cb.xlibrary.version;
+package com.cb.xlibrary.dialog;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -8,8 +8,6 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 
-import com.cb.xlibrary.utils.XActivityStack;
-
 /**
  * author : caobin
  * e-mail : 821651400@qq.com
@@ -18,11 +16,11 @@ import com.cb.xlibrary.utils.XActivityStack;
  */
 public class CheckVersionAlert {
     private AlertDialog.Builder mAlertDialog;
-    private DownLoadListener downLoadListener;
     private Context mContext;
+    private BtnClickListener btnClickListener;
 
-    public CheckVersionAlert(DownLoadListener downLoadListener, Context mContext) {
-        this.downLoadListener = downLoadListener;
+    public CheckVersionAlert(Context mContext, BtnClickListener listener) {
+        this.btnClickListener = listener;
         this.mContext = mContext;
     }
 
@@ -31,40 +29,51 @@ public class CheckVersionAlert {
      *
      * @param updateMsg 更新说明
      * @param title     标题
-     * @param apkName
-     * @param apkPath   保存路径
-     * @param apkUrl    下载地址
      * @param isForce   是否强制更新
      */
-    public void showUpdateAlert(String updateMsg, String title, final String apkName, final String apkPath, final String apkUrl, boolean isForce) {
+    public void showUpdateAlert(String updateMsg, String title, boolean isForce) {
         SpannableString spanString = new SpannableString(updateMsg);
         spanString.setSpan(new ForegroundColorSpan(Color.parseColor("#878787")), 0, updateMsg.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-
-        mAlertDialog = new AlertDialog.Builder(mContext);
+        if (mAlertDialog == null)
+            mAlertDialog = new AlertDialog.Builder(mContext);
         mAlertDialog.setTitle(title);
         mAlertDialog.setMessage(spanString);
         mAlertDialog.setPositiveButton("更新", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                DownLoadApkDialog checkDialog = new DownLoadApkDialog(mContext, downLoadListener);
-                checkDialog.setApkName(apkName);
-                checkDialog.setApkSavePath(apkPath);
-                checkDialog.setApkUrl(apkUrl);
-                checkDialog.show();
+                if (btnClickListener != null) {
+                    btnClickListener.rightClick();
+                }
             }
         });
         if (isForce) {
             mAlertDialog.setNegativeButton("退出程序", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    XActivityStack.getInstance().appExit();
+                    if (btnClickListener != null) {
+                        btnClickListener.leftClick();
+                    }
                 }
             });
         } else {
             mAlertDialog.setNegativeButton("以后再说", null);
         }
         mAlertDialog.setCancelable(false);
+        mAlertDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                dialog.dismiss();
+            }
+        });
         mAlertDialog.create();
         mAlertDialog.show();
+    }
+
+
+    public interface BtnClickListener {
+        void leftClick();
+
+        void rightClick();
     }
 }
