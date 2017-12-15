@@ -65,7 +65,13 @@ public class XPermission {
         void onPermissionDenied();
     }
 
-    @TargetApi(Build.VERSION_CODES.M)
+    /**
+     *
+     * @param context
+     * @param requestCode
+     * @param permissions
+     * @param listener
+     */
     public static void requestPermissions(Context context, int requestCode
             , String[] permissions, OnPermissionListener listener) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {//6.0
@@ -76,7 +82,6 @@ public class XPermission {
                     mRequestCode = requestCode;
                     ((Activity) context).requestPermissions(deniedPermissions
                             .toArray(new String[deniedPermissions.size()]), requestCode);
-
                 } else {
                     if (mOnPermissionListener != null)
                         mOnPermissionListener.onPermissionGranted();
@@ -84,6 +89,9 @@ public class XPermission {
             } else {
                 throw new RuntimeException("Context must be an Activity");
             }
+        }else{
+            if (mOnPermissionListener != null)
+                mOnPermissionListener.onPermissionGranted();
         }
     }
 

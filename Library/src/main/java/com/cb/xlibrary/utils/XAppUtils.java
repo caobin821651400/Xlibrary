@@ -8,6 +8,8 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
+import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 
 import com.cb.xlibrary.XFrame;
@@ -71,16 +73,23 @@ public class XAppUtils {
     }
 
     /**
-     * 描述：打开并安装文件.
+     * 安装APP
      *
-     * @param file apk文件路径
+     * @param fileProviderName 7.0适配
+     * @param file             路径
      */
-    public static void installApk(File file) {
+    public static void installApk(String fileProviderName, File file) {
         Intent intent = new Intent();
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.setAction(Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.fromFile(file),
-                "application/vnd.android.package-archive");
+        Uri uri;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            uri = FileProvider.getUriForFile(context, fileProviderName, file);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        } else {
+            uri = Uri.fromFile(file);
+        }
+        intent.setDataAndType(uri, "application/vnd.android.package-archive");
         context.startActivity(intent);
     }
 

@@ -3,24 +3,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_blue_bright"
     android:orientation="vertical"
     tools:context="com.example.cb.test.MainActivity">
 
     <Button
+        android:id="@+id/btn_down_load"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="update" />
+        android:text="开始下载" />
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="5dp">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </android.support.v4.widget.SwipeRefreshLayout>
+        <TextView
+            android:id="@+id/downloadSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="--M/--M"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tvProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="--.--%"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/netSpeed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:text="---K/s"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/pbProgress"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp" />
 
 </LinearLayout>

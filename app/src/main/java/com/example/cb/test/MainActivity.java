@@ -1,92 +1,145 @@
 package com.example.cb.test;
 
+import android.Manifest;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.text.format.Formatter;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.cb.xlibrary.ItemDecoration.PaddingDividerDecoration;
-import com.cb.xlibrary.adapter.XRecyclerViewAdapter;
-import com.cb.xlibrary.adapter.XViewHolder;
+import com.cb.xlibrary.permission.XPermission;
+import com.cb.xlibrary.utils.XActivityStack;
+import com.cb.xlibrary.utils.XAppUtils;
 import com.cb.xlibrary.utils.log.XLog;
+import com.cb.xlibrary.version.CheckVersionAlert;
+import com.cb.xlibrary.version.DownLoadListener;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.Progress;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.File;
+import java.text.NumberFormat;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements DownLoadListener {
 
-    private RecyclerView mRecyclerView;
-    private MyAdapter myAdapter;
-    private List<String> mList;
-    private SwipeRefreshLayout mRefreshLayout;
+    private Button btnDownLoad;
+    private TextView downloadSize;
+    private TextView tvProgress;
+    private TextView netSpeed;
+    private ProgressBar pbProgress;
+
+    //
+//    private String apkUrl = "https://codeload.github.com/jeasonlzy/okhttp-OkGo/zip/master";
+    private String apkUrl = "http://60.28.125.1/f4.market.mi-img.com/download/AppStore/06954949fcd48414c16f726620cf2d52200550f56/so.ofo.labofo.apk";
+    private NumberFormat numberFormat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        XActivityStack.getInstance().addActivity(this);
+        initView();
+    }
 
+    private void initView() {
+        btnDownLoad = findViewById(R.id.btn_down_load);
+        downloadSize = findViewById(R.id.downloadSize);
+        tvProgress = findViewById(R.id.tvProgress);
+        netSpeed = findViewById(R.id.netSpeed);
+        pbProgress = findViewById(R.id.pbProgress);
 
-        mRecyclerView = findViewById(R.id.recycler_view);
-        mRefreshLayout = findViewById(R.id.swipe);
-        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        numberFormat = NumberFormat.getPercentInstance();
+        numberFormat.setMinimumFractionDigits(2);
+
+        XPermission.requestPermissions(MainActivity.this, 102, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE}, new XPermission.OnPermissionListener() {
             @Override
-            public void onRefresh() {
-                mList.clear();
-                myAdapter.setDataLists(mList);
+            public void onPermissionGranted() {
+                System.err.println("权限申请到了");
+
+            }
+
+            @Override
+            public void onPermissionDenied() {
+
             }
         });
-        myAdapter = new MyAdapter(mRecyclerView);
-        mRecyclerView.setAdapter(myAdapter);
-
-        PaddingDividerDecoration divider = new PaddingDividerDecoration.Builder(this)
-                .setHeight(R.dimen.default_divider_height)
-                .setPadding(R.dimen.default_divider_padding)
-                .setColorResource(R.color.colorAccent)
-                .build();
-
-        //mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.addItemDecoration(divider);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        mList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            mList.add("我是 " + i);
-        }
-        myAdapter.setDataLists(mList);
-
-        myAdapter.setNerworkErrorListener(new XRecyclerViewAdapter.OnNetworkErrorListener() {
+        btnDownLoad.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onRetry() {
-                XLog.d(" 哈哈");
+            public void onClick(View v) {
+                downLoad();
             }
         });
     }
 
-    public void update(View view) {
-//        for (int i = 0; i < 10; i++) {
-//            mList.add("新增加 " + i);
-//        }
-        // mList.clear();
-        myAdapter.showNetworkError(true);
+    private void downLoad() {
+        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/aaa/";
+        String content = "1.修复登录奔溃问题.\n2.修复查找好友时找不到BUG.\n3.修复登录奔溃问题\n4.我不想改BUG";
+        String updateMsg = "新版本号: " + "1.1.5" + "\n" + "更新内容: \n" + content;
+        CheckVersionAlert alert = new CheckVersionAlert(this, this);
+        alert.showUpdateAlert(updateMsg, "检查到有新版本", "测试.apk", path, apkUrl, true);
     }
 
-    class MyAdapter extends XRecyclerViewAdapter<String> {
-        TextView textView;
+    @Override
+    public void downComplete(String path, String apkName) {
+        XAppUtils.installApk("", new File(path + apkName));
+    }
 
-        public MyAdapter(@NonNull RecyclerView mRecyclerView) {
-            super(mRecyclerView, R.layout.item_list_recycler);
-        }
 
-        @Override
-        protected void bindData(XViewHolder holder, String data, int position) {
-            View view = holder.getConvertView();
-            textView = view.findViewById(R.id.textview);
-            textView.setText(data);
+    /**
+     * Android M 全局权限申请回调
+     *
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[]
+            grantResults) {
+        XPermission.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    private void refreshUi(Progress progress) {
+        String currentSize = Formatter.formatFileSize(this, progress.currentSize);
+        String totalSize = Formatter.formatFileSize(this, progress.totalSize);
+        downloadSize.setText(currentSize + "/" + totalSize);
+        String speed = Formatter.formatFileSize(this, progress.speed);
+        netSpeed.setText(String.format("%s/s", speed));
+        tvProgress.setText(numberFormat.format(progress.fraction));
+        pbProgress.setMax(10000);
+        pbProgress.setProgress((int) (progress.fraction * 10000));
+        switch (progress.status) {
+            case Progress.NONE:
+                btnDownLoad.setText("下载");
+                break;
+            case Progress.LOADING:
+                btnDownLoad.setText("暂停");
+                break;
+            case Progress.PAUSE:
+                btnDownLoad.setText("继续");
+                break;
+            case Progress.WAITING:
+                btnDownLoad.setText("等待");
+                break;
+            case Progress.ERROR:
+                btnDownLoad.setText("出错");
+                break;
+            case Progress.FINISH:
+                XLog.d("下载完成");
+                break;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //Activity销毁时，取消网络请求
+        XActivityStack.getInstance().finishActivity();
+        OkGo.getInstance().cancelTag(this);
     }
 }

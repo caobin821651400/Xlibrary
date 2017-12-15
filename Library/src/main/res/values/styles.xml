@@ -26,4 +26,12 @@
         <item name="android:paddingRight">@dimen/XFrame_spacing_large</item>
     </style>
 
+    <!--弹窗-->
+    <style name="XDialog" parent="android:Theme.Dialog">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
 </resources>
