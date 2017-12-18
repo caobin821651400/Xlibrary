@@ -8,10 +8,11 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.cb.xlibrary.dialog.XCheckVersionAlert;
+import com.cb.xlibrary.dialog.XDownLoadDialog;
+import com.cb.xlibrary.dialog.XInputDialog;
 import com.cb.xlibrary.permission.XPermission;
 import com.cb.xlibrary.utils.XActivityStack;
-import com.cb.xlibrary.dialog.CheckVersionAlert;
-import com.cb.xlibrary.dialog.DownLoadDialog;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.FileCallback;
 import com.lzy.okgo.model.Progress;
@@ -29,7 +30,8 @@ public class MainActivity extends BaseActivity {
     private TextView tvProgress;
     private TextView netSpeed;
     private ProgressBar pbProgress;
-    private DownLoadDialog downLoadDialog;
+    private XDownLoadDialog XDownLoadDialog;
+    private XInputDialog dialog2;
 
     //
     private String apkUrl = "https://codeload.github.com/jeasonlzy/okhttp-OkGo/zip/master";
@@ -54,7 +56,7 @@ public class MainActivity extends BaseActivity {
         numberFormat = NumberFormat.getPercentInstance();
         numberFormat.setMinimumFractionDigits(0);
 
-        downLoadDialog = new DownLoadDialog(this);
+        XDownLoadDialog = new XDownLoadDialog(this);
 
         XPermission.requestPermissions(MainActivity.this, 102, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE}, new XPermission.OnPermissionListener() {
@@ -72,15 +74,30 @@ public class MainActivity extends BaseActivity {
         btnDownLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAlert();
+              //  showAlert();
+                dialog2 = new XInputDialog.Builder(MainActivity.this)
+                        .title("输入")
+                        .leftBtnTxt("取消")
+                        .rightBtnTxt("确定")
+                        .setCancelable(false)
+                        .setSureClickListener(sureBtnClickListener)
+                        .create();
+                dialog2.show();
             }
         });
     }
 
+    private XInputDialog.SureBtnClickListener sureBtnClickListener = new XInputDialog.SureBtnClickListener() {
+        @Override
+        public void onClick(String content) {
+            System.err.println("哈哈 " + content);
+        }
+    };
+
     private void showAlert() {
         String content = "1.修复登录奔溃问题.\n2.修复查找好友时找不到BUG.\n3.修复登录奔溃问题\n4.我不想改BUG";
         String updateMsg = "新版本号: " + "1.1.5" + "\n" + "更新内容: \n" + content;
-        CheckVersionAlert versionAlert = new CheckVersionAlert(this, new CheckVersionAlert.BtnClickListener() {
+        XCheckVersionAlert versionAlert = new XCheckVersionAlert(this, new XCheckVersionAlert.BtnClickListener() {
             @Override
             public void leftClick() {
                 XActivityStack.getInstance().appExit();
@@ -89,7 +106,6 @@ public class MainActivity extends BaseActivity {
             @Override
             public void rightClick() {
                 downLoad();
-
             }
         });
         versionAlert.showUpdateAlert(updateMsg, "发现新版本", false);
@@ -103,24 +119,24 @@ public class MainActivity extends BaseActivity {
 
                     @Override
                     public void onStart(Request<File, ? extends Request> request) {
-                        downLoadDialog.show();
+                        XDownLoadDialog.show();
                     }
 
                     @Override
                     public void onSuccess(Response<File> response) {
-                        downLoadDialog.dismiss();
+                        XDownLoadDialog.dismiss();
                     }
 
                     @Override
                     public void onError(Response<File> response) {
-                        downLoadDialog.dismiss();
+                        XDownLoadDialog.dismiss();
                     }
 
                     @Override
                     public void downloadProgress(Progress progress) {
-                        downLoadDialog.getProgressTextView().setText(numberFormat.format(progress.fraction));
-                        downLoadDialog.getProgressBar().setMax(100);
-                        downLoadDialog.getProgressBar().setProgress((int) (progress.fraction * 100));
+                        XDownLoadDialog.getProgressTextView().setText(numberFormat.format(progress.fraction));
+                        XDownLoadDialog.getProgressBar().setMax(100);
+                        XDownLoadDialog.getProgressBar().setProgress((int) (progress.fraction * 100));
                     }
                 });
     }
@@ -128,6 +144,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (dialog2 != null) dialog2.cancel();
         //Activity销毁时，取消网络请求
         XActivityStack.getInstance().finishActivity();
         OkGo.getInstance().cancelTag(this);

@@ -18,13 +18,13 @@ import com.cb.xlibrary.R;
  * time   : 2017/12/14
  * desc   :下载进度条
  */
-public class DownLoadDialog extends Dialog {
+public class XDownLoadDialog extends Dialog {
 
     private View mRootView;
     private ProgressBar mProgressBar;
     private TextView tvProgress;
 
-    public DownLoadDialog(@NonNull Context context) {
+    public XDownLoadDialog(@NonNull Context context) {
         super(context, R.style.XDialog);
         setOnCancelListener(new OnCancelListener() {
 

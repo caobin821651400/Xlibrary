@@ -14,12 +14,12 @@ import android.text.style.ForegroundColorSpan;
  * time   : 2017/12/15
  * desc   : 更新提示弹窗
  */
-public class CheckVersionAlert {
+public class XCheckVersionAlert {
     private AlertDialog.Builder mAlertDialog;
     private Context mContext;
     private BtnClickListener btnClickListener;
 
-    public CheckVersionAlert(Context mContext, BtnClickListener listener) {
+    public XCheckVersionAlert(Context mContext, BtnClickListener listener) {
         this.btnClickListener = listener;
         this.mContext = mContext;
     }
