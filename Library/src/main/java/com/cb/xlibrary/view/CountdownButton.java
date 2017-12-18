@@ -124,7 +124,6 @@ public class CountdownButton extends android.support.v7.widget.AppCompatButton {
      * 结束mTimer
      */
     public void cancel() {
-        if (mTimer != null) mTimer.cancel();
         if (handler != null) handler.removeCallbacksAndMessages(null);
     }
 }

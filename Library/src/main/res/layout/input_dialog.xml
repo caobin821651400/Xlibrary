@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
-        android:background="@drawable/shape_input_corners_bg"
+        android:background="@drawable/shape_corners_5dp_bg"
         android:clickable="true"
         android:orientation="vertical">
 

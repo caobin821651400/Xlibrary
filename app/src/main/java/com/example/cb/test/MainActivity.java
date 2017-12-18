@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.cb.xlibrary.bean.BottomPopupBean;
+import com.cb.xlibrary.dialog.XActionSheetDialog;
 import com.cb.xlibrary.dialog.XCheckVersionAlert;
 import com.cb.xlibrary.dialog.XDownLoadDialog;
 import com.cb.xlibrary.dialog.XInputDialog;
@@ -21,6 +23,8 @@ import com.lzy.okgo.request.base.Request;
 
 import java.io.File;
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends BaseActivity {
@@ -75,16 +79,26 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 //  showAlert();
-                dialog2 = new XInputDialog.Builder(getApplicationContext())
-                        .title("输入")
-                        .leftBtnTxt("取消")
-                        .rightBtnTxt("确定")
-                        .setCancelable(false)
-                        .setSureClickListener(sureBtnClickListener)
-                        .create();
-                dialog2.show();
+                showBottomDialog();
             }
         });
+    }
+
+    private void showBottomDialog() {
+        List<BottomPopupBean> list = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            list.add(new BottomPopupBean("我是" + i, i));
+        }
+        XActionSheetDialog dialog = new XActionSheetDialog(this);
+        dialog.setMenusList(list);
+        dialog.setPopTitle("选择");
+        dialog.setOnItemClickListener(new XActionSheetDialog.XMenuListener() {
+            @Override
+            public void onItemSelected(int position, BottomPopupBean item) {
+
+            }
+        });
+        dialog.show();
     }
 
     private XInputDialog.SureBtnClickListener sureBtnClickListener = new XInputDialog.SureBtnClickListener() {
