@@ -74,8 +74,8 @@ public class MainActivity extends BaseActivity {
         btnDownLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  showAlert();
-                dialog2 = new XInputDialog.Builder(MainActivity.this)
+                //  showAlert();
+                dialog2 = new XInputDialog.Builder(getApplicationContext())
                         .title("输入")
                         .leftBtnTxt("取消")
                         .rightBtnTxt("确定")

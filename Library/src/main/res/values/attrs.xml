@@ -66,4 +66,11 @@
         <attr name="civ_border_overlay" format="boolean" />
         <attr name="civ_border_width" format="dimension" />
     </declare-styleable>
+    <!--倒计时按钮-->
+    <declare-styleable name="CountdownButton">
+        <attr name="countdown" format="integer" /><!--时间-->
+        <attr name="startText" format="string" /><!--开始文字-->
+        <attr name="endText" format="string" /><!--结束文字-->
+        <attr name="postfix" format="string" /><!--单位-->
+    </declare-styleable>
 </resources>
