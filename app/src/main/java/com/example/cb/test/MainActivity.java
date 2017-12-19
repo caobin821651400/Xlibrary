@@ -15,6 +15,7 @@ import com.cb.xlibrary.dialog.XDownLoadDialog;
 import com.cb.xlibrary.dialog.XInputDialog;
 import com.cb.xlibrary.permission.XPermission;
 import com.cb.xlibrary.utils.XActivityStack;
+import com.cb.xlibrary.view.WaveProgressView;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.FileCallback;
 import com.lzy.okgo.model.Progress;
@@ -37,6 +38,8 @@ public class MainActivity extends BaseActivity {
     private XDownLoadDialog XDownLoadDialog;
     private XInputDialog dialog2;
 
+    private WaveProgressView mWaveView;
+
     //
     private String apkUrl = "https://codeload.github.com/jeasonlzy/okhttp-OkGo/zip/master";
     //    private String apkUrl = "http://60.28.125.1/f4.market.mi-img.com/download/AppStore/06954949fcd48414c16f726620cf2d52200550f56/so.ofo.labofo.apk";
@@ -51,6 +54,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initView() {
+        mWaveView = (WaveProgressView) findViewById(R.id.waveView);
         btnDownLoad = findViewById(R.id.btn_down_load);
         downloadSize = findViewById(R.id.downloadSize);
         tvProgress = findViewById(R.id.tvProgress);
@@ -78,8 +82,8 @@ public class MainActivity extends BaseActivity {
         btnDownLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //  showAlert();
-                showBottomDialog();
+                showAlert();
+//                showBottomDialog();
             }
         });
     }
@@ -133,11 +137,13 @@ public class MainActivity extends BaseActivity {
 
                     @Override
                     public void onStart(Request<File, ? extends Request> request) {
-                        XDownLoadDialog.show();
+                        mWaveView.startAnimation();
+                        //XDownLoadDialog.show();
                     }
 
                     @Override
                     public void onSuccess(Response<File> response) {
+                        mWaveView.stopAnimation();
                         XDownLoadDialog.dismiss();
                     }
 
@@ -150,6 +156,7 @@ public class MainActivity extends BaseActivity {
                     public void downloadProgress(Progress progress) {
                         XDownLoadDialog.getProgressTextView().setText(numberFormat.format(progress.fraction));
                         XDownLoadDialog.getProgressBar().setMax(100);
+                        mWaveView.setProgress((int) (progress.fraction * 100));
                         XDownLoadDialog.getProgressBar().setProgress((int) (progress.fraction * 100));
                     }
                 });
