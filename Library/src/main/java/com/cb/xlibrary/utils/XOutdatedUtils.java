@@ -12,7 +12,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.view.View;
 
-import com.cb.xlibrary.XFrame;
+import com.cb.xlibrary.XLibrary;
 
 
 /**
@@ -44,7 +44,7 @@ public class XOutdatedUtils {
      * @return
      */
     public static Drawable getDrawable(@DrawableRes int id) {
-        return ContextCompat.getDrawable(XFrame.getContext(), id);
+        return ContextCompat.getDrawable(XLibrary.getContext(), id);
     }
 
     /**
@@ -56,7 +56,7 @@ public class XOutdatedUtils {
      */
     public static Drawable getDrawable(@DrawableRes int id,
                                        @Nullable Resources.Theme theme) {
-        return ResourcesCompat.getDrawable(XFrame.getResources(), id, theme);
+        return ResourcesCompat.getDrawable(XLibrary.getResources(), id, theme);
     }
 
     /**
@@ -66,7 +66,7 @@ public class XOutdatedUtils {
      * @return
      */
     public static int getColor(@ColorRes int id) {
-        return ContextCompat.getColor(XFrame.getContext(), id);
+        return ContextCompat.getColor(XLibrary.getContext(), id);
     }
 
     /**
@@ -77,7 +77,7 @@ public class XOutdatedUtils {
      * @return
      */
     public static int getColor(@ColorRes int id, @Nullable Resources.Theme theme) {
-        return ResourcesCompat.getColor(XFrame.getResources(), id, theme);
+        return ResourcesCompat.getColor(XLibrary.getResources(), id, theme);
     }
 
     /**
@@ -87,7 +87,7 @@ public class XOutdatedUtils {
      * @return
      */
     public static ColorStateList getColorStateList(@ColorRes int id) {
-        return ContextCompat.getColorStateList(XFrame.getContext(), id);
+        return ContextCompat.getColorStateList(XLibrary.getContext(), id);
     }
 
     /**
@@ -98,6 +98,6 @@ public class XOutdatedUtils {
      * @return
      */
     public static ColorStateList getColorStateList(@ColorRes int id, @Nullable Resources.Theme theme) {
-        return ResourcesCompat.getColorStateList(XFrame.getResources(), id, theme);
+        return ResourcesCompat.getColorStateList(XLibrary.getResources(), id, theme);
     }
 }

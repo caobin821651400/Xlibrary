@@ -2,7 +2,7 @@ package com.example.cb.test;
 
 import android.app.Application;
 
-import com.cb.xlibrary.XFrame;
+import com.cb.xlibrary.XLibrary;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
@@ -18,7 +18,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        XFrame.init(this);
+        XLibrary.init(this);
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         OkGo.getInstance().init(this)                           //必须调用初始化
                 .setOkHttpClient(builder.build())               //建议设置OkHttpClient，不设置会使用默认的

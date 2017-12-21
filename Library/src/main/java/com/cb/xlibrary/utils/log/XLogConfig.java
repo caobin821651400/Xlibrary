@@ -3,14 +3,14 @@ package com.cb.xlibrary.utils.log;
 
 import android.text.TextUtils;
 
-import com.cb.xlibrary.XFrame;
+import com.cb.xlibrary.XLibrary;
 
 
 public class XLogConfig {
 
     private boolean showThreadInfo = true;
-    private boolean debug = XFrame.isDebug;
-    private String tag = XFrame.tag;
+    private boolean debug = XLibrary.isDebug;
+    private String tag = XLibrary.tag;
 
 
     public XLogConfig setTag(String tag) {

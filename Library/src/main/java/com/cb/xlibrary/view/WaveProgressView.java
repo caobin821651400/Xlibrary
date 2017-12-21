@@ -99,6 +99,7 @@ public class WaveProgressView extends View {
         getAttrs(attrs);
         initPaint();
         initPath();
+        
     }
 
     private void getAttrs(AttributeSet attrs) {

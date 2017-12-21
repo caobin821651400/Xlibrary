@@ -12,7 +12,7 @@ import android.os.Build;
 import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 
-import com.cb.xlibrary.XFrame;
+import com.cb.xlibrary.XLibrary;
 
 import java.io.File;
 import java.security.MessageDigest;
@@ -28,7 +28,7 @@ public class XAppUtils {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
-    private static Context context = XFrame.getContext();
+    private static Context context = XLibrary.getContext();
 
     /**
      * 读取application 节点  meta-data 信息

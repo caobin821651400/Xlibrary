@@ -16,7 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cb.xlibrary.R;
-import com.cb.xlibrary.XFrame;
+import com.cb.xlibrary.XLibrary;
 import com.cb.xlibrary.utils.XOutdatedUtils;
 
 
@@ -34,7 +34,7 @@ public class XToast {
 
     private static final String TOAST_TYPEFACE = "sans-serif-condensed";
 
-    private static Context context= XFrame.getContext();
+    private static Context context= XLibrary.getContext();
 
     /** 上次显示的内容 */
     private static String oldMsg ;

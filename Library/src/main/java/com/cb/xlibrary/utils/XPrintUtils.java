@@ -1,7 +1,7 @@
 package com.cb.xlibrary.utils;
 
 
-import com.cb.xlibrary.XFrame;
+import com.cb.xlibrary.XLibrary;
 
 /**
  * 此内用于框架系统打印输出控制，使用者用XLog格式化体验更好。
@@ -13,8 +13,8 @@ public class XPrintUtils {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
-    private static String tag = XFrame.tag;
-    private static boolean log = XFrame.isDebug;
+    private static String tag = XLibrary.tag;
+    private static boolean log = XLibrary.isDebug;
 
     public static void setLog(boolean log) {
         XPrintUtils.log = log;

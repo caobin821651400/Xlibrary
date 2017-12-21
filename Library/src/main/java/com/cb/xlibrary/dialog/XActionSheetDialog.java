@@ -2,6 +2,7 @@ package com.cb.xlibrary.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -34,14 +35,26 @@ public class XActionSheetDialog extends Dialog {
     private View mRootView;
     private Animation mShowAnimation;
     private Animation mDismissAnimation;
+    private int txtColor = -1;
 
     //    private List<BottomPopupBean> menusList;
     private XMenuListener mMenuListener;
     private TextView titleTv;//标题
-    private boolean isDismissing;//动画是否结束
+    private TextView cancelTv;//标题
+    private boolean isDismissing;//结束过程
 
     public XActionSheetDialog(@NonNull Context context) {
         super(context, R.style.XDialog);
+        initView(context);
+    }
+
+    public XActionSheetDialog(@NonNull Context context, @ColorInt int color) {
+        super(context, R.style.XDialog);
+        this.txtColor = color;
+        initView(context);
+    }
+
+    private void initView(Context context) {
         Window window = getWindow();
         window.setGravity(Gravity.BOTTOM);
         window.getDecorView().setPadding(0, 0, 0, 0); //消除边距
@@ -49,18 +62,18 @@ public class XActionSheetDialog extends Dialog {
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;   //
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         window.setAttributes(lp);
-        initView(context);
-    }
 
-    private void initView(Context context) {
         mRootView = View.inflate(context, R.layout.layout_bottom_pop_view, null);
         mRecyclerView = (RecyclerView) mRootView.findViewById(R.id.recycler_view);
         titleTv = (TextView) mRootView.findViewById(R.id.tv_title);
-
+        cancelTv = (TextView) mRootView.findViewById(R.id.tv_cancel);
+        if (txtColor != -1) {
+            cancelTv.setTextColor(txtColor);
+        }
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mAdapter = new MyAdapter(mRecyclerView);
         mRecyclerView.setAdapter(mAdapter);
-        mRootView.findViewById(R.id.tv_cancel).setOnClickListener(
+        cancelTv.setOnClickListener(
                 new View.OnClickListener() {
 
                     @Override
@@ -70,15 +83,6 @@ public class XActionSheetDialog extends Dialog {
                 });
         setContentView(mRootView);
         initAnim(context);
-//        setOnCancelListener(new OnCancelListener() {
-//
-//            @Override
-//            public void onCancel(DialogInterface dialog) {
-//                if (mMenuListener != null) {
-//                    mMenuListener.onCancel();
-//                }
-//            }
-//        });
     }
 
     /**
@@ -100,7 +104,12 @@ public class XActionSheetDialog extends Dialog {
 
                     @Override
                     public void onAnimationEnd(Animation animation) {
-                        dismissMe();
+                        mRootView.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                dismissMe();
+                            }
+                        });
                     }
 
                     @Override
@@ -140,7 +149,9 @@ public class XActionSheetDialog extends Dialog {
         return super.onKeyDown(keyCode, event);
     }
 
-
+    /**
+     * 适配器
+     */
     class MyAdapter extends XRecyclerViewAdapter<BottomPopupBean> {
 
         private TextView content;
@@ -154,11 +165,16 @@ public class XActionSheetDialog extends Dialog {
             View itemView = holder.getConvertView();
             content = (TextView) itemView.findViewById(R.id.tv_content);
             content.setText(data.getTitle());
+            if (txtColor != -1) {
+                content.setTextColor(txtColor);
+            }
             content.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (mMenuListener != null) mMenuListener.onItemSelected(position, data);
                     dismiss();
+                    if (mMenuListener != null) {
+                        mMenuListener.onItemSelected(position, data);
+                    }
                 }
             });
         }
@@ -184,7 +200,6 @@ public class XActionSheetDialog extends Dialog {
      * @param menusList
      */
     public void setMenusList(List<BottomPopupBean> menusList) {
-//        this.menusList = menusList;
         mAdapter.setDataLists(menusList);
     }
 

@@ -8,7 +8,7 @@ import android.net.wifi.WifiManager;
 import android.telephony.TelephonyManager;
 
 
-import com.cb.xlibrary.XFrame;
+import com.cb.xlibrary.XLibrary;
 
 import java.lang.reflect.Method;
 import java.net.InetAddress;
@@ -32,7 +32,7 @@ public class XNetworkUtils {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
-    private static Context context= XFrame.getContext();
+    private static Context context= XLibrary.getContext();
 
     public enum NetworkType {
         NETWORK_WIFI,

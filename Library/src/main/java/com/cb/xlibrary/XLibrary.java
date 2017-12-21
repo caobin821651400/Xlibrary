@@ -17,18 +17,18 @@ import com.cb.xlibrary.utils.log.XLog;
 import com.cb.xlibrary.utils.log.XLogConfig;
 
 
-public class XFrame {
+public class XLibrary {
     private static Context context;
     public static int screenHeight;
     public static int screenWidth;
 
     // #log
-    public static String tag = "XFrame";
+    public static String tag = "XLibrary";
     public static boolean isDebug = true;
 
 
     public static void init(Context context) {
-        XFrame.context = context;
+        XLibrary.context = context;
         screenHeight = XDensityUtils.getScreenHeight();
         screenWidth = XDensityUtils.getScreenWidth();
     }
@@ -38,16 +38,16 @@ public class XFrame {
     }
 
     public static Context getContext() {
-        synchronized (XFrame.class) {
-            if (XFrame.context == null)
-                throw new NullPointerException("Call XFrame.init(context) within your Application onCreate() method." +
+        synchronized (XLibrary.class) {
+            if (XLibrary.context == null)
+                throw new NullPointerException("Call XLibrary.init(context) within your Application onCreate() method." +
                         "Or extends XApplication");
-            return XFrame.context.getApplicationContext();
+            return XLibrary.context.getApplicationContext();
         }
     }
 
     public static Resources getResources() {
-        return XFrame.getContext().getResources();
+        return XLibrary.getContext().getResources();
     }
 
     public static String getString(@StringRes int id) {
@@ -55,11 +55,11 @@ public class XFrame {
     }
 
     public static Resources.Theme getTheme() {
-        return XFrame.getContext().getTheme();
+        return XLibrary.getContext().getTheme();
     }
 
     public static AssetManager getAssets() {
-        return XFrame.getContext().getAssets();
+        return XLibrary.getContext().getAssets();
     }
 
     public static Drawable getDrawable(@DrawableRes int id) {
@@ -71,15 +71,15 @@ public class XFrame {
     }
 
     public static Object getSystemService(String name){
-        return XFrame.getContext().getSystemService(name);
+        return XLibrary.getContext().getSystemService(name);
     }
 
     public static Configuration getConfiguration() {
-        return XFrame.getResources().getConfiguration();
+        return XLibrary.getResources().getConfiguration();
     }
 
     public static DisplayMetrics getDisplayMetrics() {
-        return XFrame.getResources().getDisplayMetrics();
+        return XLibrary.getResources().getDisplayMetrics();
     }
 
 }

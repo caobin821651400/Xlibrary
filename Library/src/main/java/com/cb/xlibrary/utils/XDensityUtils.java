@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 
 
-import com.cb.xlibrary.XFrame;
+import com.cb.xlibrary.XLibrary;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -34,7 +34,7 @@ public class XDensityUtils {
      * @return px值
      */
     public static int dp2px(float dpValue) {
-        final float scale = XFrame.getDisplayMetrics().density;
+        final float scale = XLibrary.getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
 
@@ -45,7 +45,7 @@ public class XDensityUtils {
      * @return dp值
      */
     public static int px2dp( float pxValue) {
-        final float scale = XFrame.getDisplayMetrics().density;
+        final float scale = XLibrary.getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
     }
 
@@ -56,7 +56,7 @@ public class XDensityUtils {
      * @return px值
      */
     public static int sp2px(float spValue) {
-        final float fontScale = XFrame.getDisplayMetrics().scaledDensity;
+        final float fontScale = XLibrary.getDisplayMetrics().scaledDensity;
         return (int) (spValue * fontScale + 0.5f);
     }
 
@@ -67,7 +67,7 @@ public class XDensityUtils {
      * @return sp值
      */
     public static int px2sp( float pxValue) {
-        final float fontScale = XFrame.getDisplayMetrics().scaledDensity;
+        final float fontScale = XLibrary.getDisplayMetrics().scaledDensity;
         return (int) (pxValue / fontScale + 0.5f);
     }
 
@@ -103,7 +103,7 @@ public class XDensityUtils {
      * @return
      */
     public static int getScreenWidth() {
-        return XFrame.getDisplayMetrics().widthPixels;
+        return XLibrary.getDisplayMetrics().widthPixels;
     }
 
     /**
@@ -111,7 +111,7 @@ public class XDensityUtils {
      * @return
      */
     public static int getScreenHeight() {
-        return XFrame.getDisplayMetrics().heightPixels;
+        return XLibrary.getDisplayMetrics().heightPixels;
     }
 
     /**
@@ -121,7 +121,7 @@ public class XDensityUtils {
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     public static int getScreenRealHeight() {
         int h;
-        WindowManager winMgr = (WindowManager) XFrame.getSystemService(Context.WINDOW_SERVICE);
+        WindowManager winMgr = (WindowManager) XLibrary.getSystemService(Context.WINDOW_SERVICE);
         Display display = winMgr.getDefaultDisplay();
         DisplayMetrics dm = new DisplayMetrics();
         if (Build.VERSION.SDK_INT >= 17) {
@@ -154,7 +154,7 @@ public class XDensityUtils {
             obj = c.newInstance();
             field = c.getField("status_bar_height");
             int x = Integer.parseInt(field.get(obj).toString());
-            statusBarHeight = XFrame.getResources().getDimensionPixelSize(x);
+            statusBarHeight = XLibrary.getResources().getDimensionPixelSize(x);
         } catch (Exception e1) {
             e1.printStackTrace();
         }
@@ -167,7 +167,7 @@ public class XDensityUtils {
      */
     public static int getNavigationBarHeight() {
         int navigationBarHeight = 0;
-        Resources resources = XFrame.getResources();
+        Resources resources = XLibrary.getResources();
         int resourceId = resources.getIdentifier(resources.getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? "navigation_bar_height" : "navigation_bar_height_landscape", "dimen", "android");
         if (resourceId > 0 && checkDeviceHasNavigationBar()) {
             navigationBarHeight = resources.getDimensionPixelSize(resourceId);
@@ -182,7 +182,7 @@ public class XDensityUtils {
      */
     public static boolean checkDeviceHasNavigationBar() {
         boolean hasNavigationBar = false;
-        Resources resources = XFrame.getResources();
+        Resources resources = XLibrary.getResources();
         int id = resources.getIdentifier("config_showNavigationBar", "bool", "android");
         if (id > 0) {
             hasNavigationBar = resources.getBoolean(id);
