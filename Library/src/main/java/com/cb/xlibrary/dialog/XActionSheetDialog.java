@@ -2,8 +2,9 @@ package com.cb.xlibrary.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.support.annotation.ColorInt;
+import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -48,9 +49,9 @@ public class XActionSheetDialog extends Dialog {
         initView(context);
     }
 
-    public XActionSheetDialog(@NonNull Context context, @ColorInt int color) {
+    public XActionSheetDialog(@NonNull Context context, @ColorRes int color) {
         super(context, R.style.XDialog);
-        this.txtColor = color;
+        this.txtColor = ContextCompat.getColor(context, color);
         initView(context);
     }
 
