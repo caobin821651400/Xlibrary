@@ -22,7 +22,7 @@ import com.cb.xlibrary.R;
  * time   : 2017/12/19
  * desc   : 圆形进度条
  */
-public class WaveProgressView extends View {
+public class XWaveProgressView extends View {
     /**
      * 默认波长
      */
@@ -86,15 +86,15 @@ public class WaveProgressView extends View {
     private ValueAnimator mAnimator;
     private int mMoveX = 0;
 
-    public WaveProgressView(Context context) {
+    public XWaveProgressView(Context context) {
         this(context, null);
     }
 
-    public WaveProgressView(Context context, @Nullable AttributeSet attrs) {
+    public XWaveProgressView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public WaveProgressView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public XWaveProgressView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         getAttrs(attrs);
         initPaint();
@@ -103,18 +103,18 @@ public class WaveProgressView extends View {
     }
 
     private void getAttrs(AttributeSet attrs) {
-        TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.WaveProgressView);
-        mRadius = ta.getDimensionPixelSize(R.styleable.WaveProgressView_wave_radius, DEFAULT_RADIUS);
+        TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.XWaveProgressView);
+        mRadius = ta.getDimensionPixelSize(R.styleable.XWaveProgressView_wave_radius, DEFAULT_RADIUS);
         mProgressHeight = mRadius * 2;
-        mTextColor = ta.getColor(R.styleable.WaveProgressView_wave_textColor, Color.BLACK);
-        mWaveColor = ta.getColor(R.styleable.WaveProgressView_wave_waveColor, Color.RED);
-        mBorderColor = ta.getColor(R.styleable.WaveProgressView_wave_borderColor, Color.RED);
-        borderWidth = ta.getDimensionPixelOffset(R.styleable.WaveProgressView_wave_borderWidth, dp2px(DEFAULT_BORDER_WIDTH));
-        mTextSize = ta.getDimensionPixelSize(R.styleable.WaveProgressView_wave_textSize, sp2px(DEFAULT_TEXT_SIZE));
-        mWaveHeight = ta.getDimensionPixelSize(R.styleable.WaveProgressView_wave_waveHeight, dp2px(DEFAULT_WAVE_HEIGHT));
-        mProgress = ta.getInteger(R.styleable.WaveProgressView_wave_progress, 0);
-        isHideProgressText = ta.getBoolean(R.styleable.WaveProgressView_wave_hideText, false);
-        isDrawBorder = ta.getBoolean(R.styleable.WaveProgressView_wave_haveBorder, false);
+        mTextColor = ta.getColor(R.styleable.XWaveProgressView_wave_textColor, Color.BLACK);
+        mWaveColor = ta.getColor(R.styleable.XWaveProgressView_wave_waveColor, Color.RED);
+        mBorderColor = ta.getColor(R.styleable.XWaveProgressView_wave_borderColor, Color.RED);
+        borderWidth = ta.getDimensionPixelOffset(R.styleable.XWaveProgressView_wave_borderWidth, dp2px(DEFAULT_BORDER_WIDTH));
+        mTextSize = ta.getDimensionPixelSize(R.styleable.XWaveProgressView_wave_textSize, sp2px(DEFAULT_TEXT_SIZE));
+        mWaveHeight = ta.getDimensionPixelSize(R.styleable.XWaveProgressView_wave_waveHeight, dp2px(DEFAULT_WAVE_HEIGHT));
+        mProgress = ta.getInteger(R.styleable.XWaveProgressView_wave_progress, 0);
+        isHideProgressText = ta.getBoolean(R.styleable.XWaveProgressView_wave_hideText, false);
+        isDrawBorder = ta.getBoolean(R.styleable.XWaveProgressView_wave_haveBorder, false);
         ta.recycle();
     }
 

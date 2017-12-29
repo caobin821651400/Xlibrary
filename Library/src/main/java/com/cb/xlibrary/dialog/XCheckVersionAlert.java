@@ -33,7 +33,8 @@ public class XCheckVersionAlert {
      */
     public void showUpdateAlert(String updateMsg, String title, boolean isForce) {
         SpannableString spanString = new SpannableString(updateMsg);
-        spanString.setSpan(new ForegroundColorSpan(Color.parseColor("#878787")), 0, updateMsg.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        spanString.setSpan(new ForegroundColorSpan(Color.parseColor("#878787")),
+                0, updateMsg.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         if (mAlertDialog == null)
             mAlertDialog = new AlertDialog.Builder(mContext);
         mAlertDialog.setTitle(title);
@@ -42,7 +43,7 @@ public class XCheckVersionAlert {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (btnClickListener != null) {
-                    btnClickListener.rightClick();
+                    btnClickListener.rightBtnClick();
                 }
             }
         });
@@ -51,7 +52,7 @@ public class XCheckVersionAlert {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     if (btnClickListener != null) {
-                        btnClickListener.leftClick();
+                        btnClickListener.leftBtnClick();
                     }
                 }
             });
@@ -72,8 +73,8 @@ public class XCheckVersionAlert {
 
 
     public interface BtnClickListener {
-        void leftClick();
+        void leftBtnClick();
 
-        void rightClick();
+        void rightBtnClick();
     }
 }

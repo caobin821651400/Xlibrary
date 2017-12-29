@@ -4,16 +4,13 @@ import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.cb.xlibrary.bean.BottomPopupBean;
-import com.cb.xlibrary.dialog.XActionSheetDialog;
-import com.cb.xlibrary.dialog.XCheckVersionAlert;
 import com.cb.xlibrary.dialog.XDownLoadDialog;
 import com.cb.xlibrary.dialog.XInputDialog;
 import com.cb.xlibrary.dialog.XUserHeadDialog;
@@ -21,6 +18,7 @@ import com.cb.xlibrary.imagepicker.ImagePicker;
 import com.cb.xlibrary.imagepicker.bean.ImageItem;
 import com.cb.xlibrary.permission.XPermission;
 import com.cb.xlibrary.utils.XActivityStack;
+import com.cb.xlibrary.utils.XIdCardUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.FileCallback;
 import com.lzy.okgo.model.Progress;
@@ -30,7 +28,6 @@ import com.lzy.okgo.request.base.Request;
 import java.io.File;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class MainActivity extends BaseActivity {
@@ -68,6 +65,9 @@ public class MainActivity extends BaseActivity {
         numberFormat = NumberFormat.getPercentInstance();
         numberFormat.setMinimumFractionDigits(0);
 
+        RecyclerView recyclerView = new RecyclerView(this);
+        recyclerView.setNestedScrollingEnabled(false);
+
         XDownLoadDialog = new XDownLoadDialog(this);
 
         XPermission.requestPermissions(MainActivity.this, 102, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -86,10 +86,10 @@ public class MainActivity extends BaseActivity {
         btnDownLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                showAlert();
-//                showBottomDialog();s
-                showBottomDialog();
-
+//                Intent intent = new Intent(MainActivity.this, ScrollingActivity.class);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                startActivity(intent);
+                System.err.println("哈哈 "+ XIdCardUtils.isValidatedAllIdcard("652123199507052"));
             }
         });
     }
@@ -100,53 +100,12 @@ public class MainActivity extends BaseActivity {
         if (requestCode == XUserHeadDialog.CHANGE_HEAD_REQUEST_CODE) {
             if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
                 if (data != null) {
-                    Glide.with(MainActivity.this).load(((ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS)).get(0).path)
-                            .placeholder(R.drawable.ic_default_image)
-                            .into(mImageView);
+                    showImg(((ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS)).get(0).path, mImageView);
                 }
             }
         }
     }
 
-    private void showBottomDialog() {
-        List<BottomPopupBean> list = new ArrayList<>();
-        list.add(new BottomPopupBean("男", 1));
-        list.add(new BottomPopupBean("女", 2));
-        XActionSheetDialog dialog = new XActionSheetDialog(this);
-        dialog.setMenusList(list);
-        dialog.setPopTitle("选择性别");
-        dialog.setOnItemClickListener(new XActionSheetDialog.XMenuListener() {
-            @Override
-            public void onItemSelected(int position, BottomPopupBean item) {
-                System.err.println("哈哈 " + item.getTitle() + "   " + item.getValue());
-            }
-        });
-        dialog.show();
-    }
-
-    private XInputDialog.SureBtnClickListener sureBtnClickListener = new XInputDialog.SureBtnClickListener() {
-        @Override
-        public void onClick(String content) {
-            System.err.println("哈哈 " + content);
-        }
-    };
-
-    private void showAlert() {
-        String content = "1.修复登录奔溃问题.\n2.修复查找好友时找不到BUG.\n3.修复登录奔溃问题\n4.我不想改BUG";
-        String updateMsg = "新版本号: " + "1.1.5" + "\n" + "更新内容: \n" + content;
-        XCheckVersionAlert versionAlert = new XCheckVersionAlert(this, new XCheckVersionAlert.BtnClickListener() {
-            @Override
-            public void leftClick() {
-                XActivityStack.getInstance().appExit();
-            }
-
-            @Override
-            public void rightClick() {
-                downLoad();
-            }
-        });
-        versionAlert.showUpdateAlert(updateMsg, "发现新版本", false);
-    }
 
     private void downLoad() {
         String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/aaa/";

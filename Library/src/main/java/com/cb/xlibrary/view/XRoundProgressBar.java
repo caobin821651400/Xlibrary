@@ -1,4 +1,4 @@
-package com.cb.xlibrary.widget;
+package com.cb.xlibrary.view;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -15,12 +15,13 @@ import android.view.View;
 
 import com.cb.xlibrary.R;
 
+
 /**
  * 圆形进度条
  * Created by caobin on 2017/8/25.
  */
 
-public class RoundProgressBar extends View {
+public class XRoundProgressBar extends View {
 
     private Paint mPaint;
 
@@ -49,15 +50,15 @@ public class RoundProgressBar extends View {
     public static final int STROKE = 0;
     public static final int FILL = 1;
 
-    public RoundProgressBar(Context context) {
+    public XRoundProgressBar(Context context) {
         this(context, null);
     }
 
-    public RoundProgressBar(Context context, @Nullable AttributeSet attrs) {
+    public XRoundProgressBar(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public RoundProgressBar(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public XRoundProgressBar(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
     }
@@ -68,30 +69,30 @@ public class RoundProgressBar extends View {
      */
     private void init(Context context, AttributeSet attrs) {
         mPaint = new Paint();
-        TypedArray mTypedArray = context.obtainStyledAttributes(attrs, R.styleable.RoundProgressBar);
+        TypedArray mTypedArray = context.obtainStyledAttributes(attrs, R.styleable.XRoundProgressBar);
         //获取自定义属性和默认值，第一个参数是从用户属性中得到的设置，如果用户没有设置，那么就用默认的属性，即：第二个参数
         //圆环的颜色
-        ringColor = mTypedArray.getColor(R.styleable.RoundProgressBar_ringColor, 0xff50c0e9);
+        ringColor = mTypedArray.getColor(R.styleable.XRoundProgressBar_ringColor, 0xff50c0e9);
         //圆环进度条的颜色
-        ringProgressColor = mTypedArray.getColor(R.styleable.RoundProgressBar_ringProgressColor, 0xffffc641);
+        ringProgressColor = mTypedArray.getColor(R.styleable.XRoundProgressBar_ringProgressColor, 0xffffc641);
         //文字的颜色
-        centerTxtColor = mTypedArray.getColor(R.styleable.RoundProgressBar_textColor, 0xffff5f5f);
+        centerTxtColor = mTypedArray.getColor(R.styleable.XRoundProgressBar_textColor, 0xffff5f5f);
         //文字的大小
-        centerTxtSize = mTypedArray.getDimension(R.styleable.RoundProgressBar_textSize, 35);
+        centerTxtSize = mTypedArray.getDimension(R.styleable.XRoundProgressBar_textSize, 35);
         //圆环的宽度
-        ringWidth = mTypedArray.getDimension(R.styleable.RoundProgressBar_ringWidth, 10);
+        ringWidth = mTypedArray.getDimension(R.styleable.XRoundProgressBar_ringWidth, 10);
         //最大进度
-        maxProgress = mTypedArray.getInteger(R.styleable.RoundProgressBar_max, 100);
+        maxProgress = mTypedArray.getInteger(R.styleable.XRoundProgressBar_max, 100);
         //当前进度
-        currentProgress = mTypedArray.getInt(R.styleable.RoundProgressBar_progress, 0);
+        currentProgress = mTypedArray.getInt(R.styleable.XRoundProgressBar_progress, 0);
         //是否显示中间的进度
-        isShowCenterTxt = mTypedArray.getBoolean(R.styleable.RoundProgressBar_textIsDisplayable, true);
+        isShowCenterTxt = mTypedArray.getBoolean(R.styleable.XRoundProgressBar_textIsDisplayable, true);
         //进度的风格，实心或者空心
-        style = mTypedArray.getInt(R.styleable.RoundProgressBar_style, 0);
+        style = mTypedArray.getInt(R.styleable.XRoundProgressBar_style, 0);
         //进度开始的角度数
-        startAngle = mTypedArray.getInt(R.styleable.RoundProgressBar_startAngle, -90);
+        startAngle = mTypedArray.getInt(R.styleable.XRoundProgressBar_startAngle, -90);
         //圆心背景颜色
-        centerBg = mTypedArray.getColor(R.styleable.RoundProgressBar_centreColor, 0);
+        centerBg = mTypedArray.getColor(R.styleable.XRoundProgressBar_centreColor, 0);
         //回收资源
         mTypedArray.recycle();
     }

@@ -1,9 +1,12 @@
 package com.cb.xlibrary.utils;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.Rect;
 import android.os.Build;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -12,10 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
-
-import com.cb.xlibrary.XLibrary;
-
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 /**
@@ -30,45 +29,45 @@ public class XDensityUtils {
     /**
      * dp转px
      *
-     * @param dpValue dp值
-     * @return px值
+     * @param context
+     * @return
      */
-    public static int dp2px(float dpValue) {
-        final float scale = XLibrary.getDisplayMetrics().density;
-        return (int) (dpValue * scale + 0.5f);
-    }
-
-    /**
-     * px转dp
-     *
-     * @param pxValue px值
-     * @return dp值
-     */
-    public static int px2dp( float pxValue) {
-        final float scale = XLibrary.getDisplayMetrics().density;
-        return (int) (pxValue / scale + 0.5f);
+    public static int dp2px(Context context, float dpVal) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                dpVal, context.getResources().getDisplayMetrics());
     }
 
     /**
      * sp转px
      *
-     * @param spValue sp值
-     * @return px值
+     * @param context
+     * @return
      */
-    public static int sp2px(float spValue) {
-        final float fontScale = XLibrary.getDisplayMetrics().scaledDensity;
-        return (int) (spValue * fontScale + 0.5f);
+    public static int sp2px(Context context, float spVal) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,
+                spVal, context.getResources().getDisplayMetrics());
+    }
+
+    /**
+     * px转dp
+     *
+     * @param context
+     * @param pxVal
+     * @return
+     */
+    public static float px2dp(Context context, float pxVal) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (pxVal / scale);
     }
 
     /**
      * px转sp
      *
-     * @param pxValue px值
-     * @return sp值
+     * @param pxVal
+     * @return
      */
-    public static int px2sp( float pxValue) {
-        final float fontScale = XLibrary.getDisplayMetrics().scaledDensity;
-        return (int) (pxValue / fontScale + 0.5f);
+    public static float px2sp(Context context, float pxVal) {
+        return (pxVal / context.getResources().getDisplayMetrics().scaledDensity);
     }
 
     /**
@@ -99,29 +98,42 @@ public class XDensityUtils {
     }
 
     /**
-     * 获取屏幕的宽度
+     * 获得屏幕高度
+     *
+     * @param context
      * @return
      */
-    public static int getScreenWidth() {
-        return XLibrary.getDisplayMetrics().widthPixels;
+    public static int getScreenWidth(Context context) {
+        WindowManager wm = (WindowManager) context
+                .getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(outMetrics);
+        return outMetrics.widthPixels;
     }
 
     /**
-     * 获取屏幕的高度
+     * 获得屏幕宽度
+     *
+     * @param context
      * @return
      */
-    public static int getScreenHeight() {
-        return XLibrary.getDisplayMetrics().heightPixels;
+    public static int getScreenHeight(Context context) {
+        WindowManager wm = (WindowManager) context
+                .getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(outMetrics);
+        return outMetrics.heightPixels;
     }
 
     /**
      * 获取屏幕真正的高度
+     *
      * @return
      */
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    public static int getScreenRealHeight() {
+    public static int getScreenRealHeight(Context context) {
         int h;
-        WindowManager winMgr = (WindowManager) XLibrary.getSystemService(Context.WINDOW_SERVICE);
+        WindowManager winMgr = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display display = winMgr.getDefaultDisplay();
         DisplayMetrics dm = new DisplayMetrics();
         if (Build.VERSION.SDK_INT >= 17) {
@@ -141,35 +153,37 @@ public class XDensityUtils {
     }
 
     /**
-     * 获取顶部状态栏高度
+     * 获得状态栏的高度
+     *
+     * @param context
      * @return
      */
-    public static int getStatusBarHeight() {
-        Class<?> c;
-        Object obj;
-        Field field;
-        int statusBarHeight = 0;
+    public static int getStatusHeight(Context context) {
+
+        int statusHeight = -1;
         try {
-            c = Class.forName("com.android.internal.R$dimen");
-            obj = c.newInstance();
-            field = c.getField("status_bar_height");
-            int x = Integer.parseInt(field.get(obj).toString());
-            statusBarHeight = XLibrary.getResources().getDimensionPixelSize(x);
-        } catch (Exception e1) {
-            e1.printStackTrace();
+            Class<?> clazz = Class.forName("com.android.internal.R$dimen");
+            Object object = clazz.newInstance();
+            int height = Integer.parseInt(clazz.getField("status_bar_height")
+                    .get(object).toString());
+            statusHeight = context.getResources().getDimensionPixelSize(height);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return statusBarHeight;
+        return statusHeight;
     }
 
     /**
      * 获取底部导航栏高度
+     *
      * @return
      */
-    public static int getNavigationBarHeight() {
+    public static int getNavigationBarHeight(Context context) {
         int navigationBarHeight = 0;
-        Resources resources = XLibrary.getResources();
-        int resourceId = resources.getIdentifier(resources.getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? "navigation_bar_height" : "navigation_bar_height_landscape", "dimen", "android");
-        if (resourceId > 0 && checkDeviceHasNavigationBar()) {
+        Resources resources = context.getResources();
+        int resourceId = resources.getIdentifier(resources.getConfiguration().orientation ==
+                Configuration.ORIENTATION_PORTRAIT ? "navigation_bar_height" : "navigation_bar_height_landscape", "dimen", "android");
+        if (resourceId > 0 && checkDeviceHasNavigationBar(context)) {
             navigationBarHeight = resources.getDimensionPixelSize(resourceId);
         }
         return navigationBarHeight;
@@ -180,9 +194,9 @@ public class XDensityUtils {
      *
      * @return
      */
-    public static boolean checkDeviceHasNavigationBar() {
+    public static boolean checkDeviceHasNavigationBar(Context context) {
         boolean hasNavigationBar = false;
-        Resources resources = XLibrary.getResources();
+        Resources resources = context.getResources();
         int id = resources.getIdentifier("config_showNavigationBar", "bool", "android");
         if (id > 0) {
             hasNavigationBar = resources.getBoolean(id);
@@ -200,6 +214,50 @@ public class XDensityUtils {
 
         }
         return hasNavigationBar;
+    }
+
+    /**
+     * 获取当前屏幕截图，包含状态栏
+     *
+     * @param activity
+     * @return
+     */
+    public static Bitmap snapShotWithStatusBar(Activity activity) {
+        View view = activity.getWindow().getDecorView();
+        view.setDrawingCacheEnabled(true);
+        view.buildDrawingCache();
+        Bitmap bmp = view.getDrawingCache();
+        int width = getScreenWidth(activity);
+        int height = getScreenHeight(activity);
+        Bitmap bp = null;
+        bp = Bitmap.createBitmap(bmp, 0, 0, width, height);
+        view.destroyDrawingCache();
+        return bp;
+
+    }
+
+    /**
+     * 获取当前屏幕截图，不包含状态栏
+     *
+     * @param activity
+     * @return
+     */
+    public static Bitmap snapShotWithoutStatusBar(Activity activity) {
+        View view = activity.getWindow().getDecorView();
+        view.setDrawingCacheEnabled(true);
+        view.buildDrawingCache();
+        Bitmap bmp = view.getDrawingCache();
+        Rect frame = new Rect();
+        activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
+        int statusBarHeight = frame.top;
+
+        int width = getScreenWidth(activity);
+        int height = getScreenHeight(activity);
+        Bitmap bp = null;
+        bp = Bitmap.createBitmap(bmp, 0, statusBarHeight, width, height
+                - statusBarHeight);
+        view.destroyDrawingCache();
+        return bp;
     }
 
     /**

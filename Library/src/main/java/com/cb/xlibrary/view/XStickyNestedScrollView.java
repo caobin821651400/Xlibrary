@@ -19,7 +19,7 @@ import java.util.List;
  * Created by wenld on 2017/10/14.
  */
 
-public class StickyNestedScrollView extends NestedScrollView {
+public class XStickyNestedScrollView extends NestedScrollView {
 
     public interface OnViewStickyListener {
 
@@ -70,15 +70,15 @@ public class StickyNestedScrollView extends NestedScrollView {
 
     private List<OnViewStickyListener> mOnViewStickyListeners;
 
-    public StickyNestedScrollView(Context context) {
+    public XStickyNestedScrollView(Context context) {
         this(context, null);
     }
 
-    public StickyNestedScrollView(Context context, AttributeSet attrs) {
+    public XStickyNestedScrollView(Context context, AttributeSet attrs) {
         this(context, attrs, android.R.attr.scrollViewStyle);
     }
 
-    public StickyNestedScrollView(Context context, AttributeSet attrs, int defStyle) {
+    public XStickyNestedScrollView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         setup();
     }

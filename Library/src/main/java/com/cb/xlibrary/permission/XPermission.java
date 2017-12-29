@@ -1,7 +1,6 @@
 package com.cb.xlibrary.permission;
 
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -66,7 +65,6 @@ public class XPermission {
     }
 
     /**
-     *
      * @param context
      * @param requestCode
      * @param permissions
@@ -89,7 +87,7 @@ public class XPermission {
             } else {
                 throw new RuntimeException("Context must be an Activity");
             }
-        }else{
+        } else {
             if (mOnPermissionListener != null)
                 mOnPermissionListener.onPermissionGranted();
         }
@@ -133,5 +131,18 @@ public class XPermission {
             }
         }
         return true;
+    }
+
+    /**
+     * 在点击过后过后再进行一次判断，判断点击前是否已经获取了该权限或者用户在手机设置中手动拒绝了
+     * 该权限，如果是后者应该给出相应的提示
+     *
+     * @param context
+     * @param permission 要判断的权限
+     * @return
+     */
+    public static boolean isHavePermission(Context context, String permission) {
+        return ContextCompat.checkSelfPermission(context, permission) !=
+                PackageManager.PERMISSION_GRANTED;
     }
 }

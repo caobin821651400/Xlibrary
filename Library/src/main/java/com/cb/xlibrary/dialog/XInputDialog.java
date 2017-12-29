@@ -25,7 +25,7 @@ import com.cb.xlibrary.R;
  */
 public class XInputDialog extends Dialog {
 
-    public interface SureBtnClickListener {
+    public interface InputDialogBtnClickListener {
         void onClick(String content);
     }
 
@@ -33,7 +33,7 @@ public class XInputDialog extends Dialog {
     private Button btnCancel;
     private EditText etContent;
     private TextView tvTitle;
-    private SureBtnClickListener sureBtnClickListener;
+    private InputDialogBtnClickListener inputDialogBtnClickListener;
 
     private String title;
     private String leftBtnTxt = "";
@@ -78,8 +78,8 @@ public class XInputDialog extends Dialog {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (sureBtnClickListener != null)
-                    sureBtnClickListener.onClick(etContent.getText().toString().trim());
+                if (inputDialogBtnClickListener != null)
+                    inputDialogBtnClickListener.onClick(etContent.getText().toString().trim());
                 dismiss();
 
             }
@@ -165,8 +165,8 @@ public class XInputDialog extends Dialog {
          * @param listener
          * @return
          */
-        public Builder setSureClickListener(SureBtnClickListener listener) {
-            xInputDialog.sureBtnClickListener = listener;
+        public Builder setSureClickListener(InputDialogBtnClickListener listener) {
+            xInputDialog.inputDialogBtnClickListener = listener;
             return this;
         }
 

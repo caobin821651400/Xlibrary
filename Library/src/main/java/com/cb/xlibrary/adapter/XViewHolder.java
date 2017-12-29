@@ -21,8 +21,6 @@ import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.cb.xlibrary.XLibrary;
-
 
 public class XViewHolder extends RecyclerView.ViewHolder {
 
@@ -116,12 +114,6 @@ public class XViewHolder extends RecyclerView.ViewHolder {
     public XViewHolder setTextColor(@IdRes int viewId, int textColor) {
         TextView view = getView(viewId);
         view.setTextColor(textColor);
-        return this;
-    }
-
-    public XViewHolder setTextColorRes(@IdRes int viewId, int textColorRes) {
-        TextView view = getView(viewId);
-        view.setTextColor(XLibrary.getResources().getColor(textColorRes));
         return this;
     }
 

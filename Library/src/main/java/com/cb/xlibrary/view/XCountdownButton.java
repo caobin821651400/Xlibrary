@@ -16,7 +16,7 @@ import java.util.TimerTask;
  * time   : 2017/12/18
  * desc   :验证码倒计时按钮
  */
-public class CountdownButton extends android.support.v7.widget.AppCompatButton {
+public class XCountdownButton extends android.support.v7.widget.AppCompatButton {
 
     private Handler handler = new Handler();
     private TimerTask mTimerTask;
@@ -58,15 +58,15 @@ public class CountdownButton extends android.support.v7.widget.AppCompatButton {
         this.count = count;
     }
 
-    public CountdownButton(Context context) {
+    public XCountdownButton(Context context) {
         this(context, null);
     }
 
-    public CountdownButton(Context context, AttributeSet attrs) {
+    public XCountdownButton(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public CountdownButton(Context context, AttributeSet attrs, int defStyleAttr) {
+    public XCountdownButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
     }
@@ -78,11 +78,11 @@ public class CountdownButton extends android.support.v7.widget.AppCompatButton {
      * @param attrs
      */
     private void init(Context context, AttributeSet attrs) {
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CountdownButton);
-        this.count = typedArray.getInt(R.styleable.CountdownButton_countdown, 60);
-        this.endText = typedArray.getString(R.styleable.CountdownButton_endText);
-        this.startText = typedArray.getString(R.styleable.CountdownButton_startText);
-        this.postfix = typedArray.getString(R.styleable.CountdownButton_postfix);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.XCountdownButton);
+        this.count = typedArray.getInt(R.styleable.XCountdownButton_countdown, 60);
+        this.endText = typedArray.getString(R.styleable.XCountdownButton_endText);
+        this.startText = typedArray.getString(R.styleable.XCountdownButton_startText);
+        this.postfix = typedArray.getString(R.styleable.XCountdownButton_postfix);
         typedArray.recycle();
         setText(startText);
     }

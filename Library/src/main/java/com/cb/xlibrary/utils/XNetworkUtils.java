@@ -7,9 +7,6 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.telephony.TelephonyManager;
 
-
-import com.cb.xlibrary.XLibrary;
-
 import java.lang.reflect.Method;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -32,7 +29,6 @@ public class XNetworkUtils {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
-    private static Context context= XLibrary.getContext();
 
     public enum NetworkType {
         NETWORK_WIFI,
@@ -47,7 +43,7 @@ public class XNetworkUtils {
      * 打开网络设置界面
      * <p>3.0以下打开设置界面</p>
      */
-    public static void openWirelessSettings() {
+    public static void openWirelessSettings(Context context) {
         if (android.os.Build.VERSION.SDK_INT > 10) {
             context.startActivity(new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
         } else {
@@ -61,7 +57,7 @@ public class XNetworkUtils {
      *
      * @return NetworkInfo
      */
-    private static NetworkInfo getActiveNetworkInfo() {
+    private static NetworkInfo getActiveNetworkInfo(Context context) {
         return ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
     }
 
@@ -71,8 +67,8 @@ public class XNetworkUtils {
      *
      * @return {@code true}: 是<br>{@code false}: 否
      */
-    public static boolean isConnected() {
-        NetworkInfo info = getActiveNetworkInfo();
+    public static boolean isConnected(Context context) {
+        NetworkInfo info = getActiveNetworkInfo(context);
         return info != null && info.isConnected();
     }
 
@@ -82,13 +78,14 @@ public class XNetworkUtils {
      *
      * @return {@code true}: 可用<br>{@code false}: 不可用
      */
-    public static boolean isAvailable() {
-        NetworkInfo info = getActiveNetworkInfo();
+    public static boolean isAvailable(Context context) {
+        NetworkInfo info = getActiveNetworkInfo(context);
         return info != null && info.isAvailable();
     }
 
     /**
      * Android 判断是否能真正上网(避免连入wifi无网的状态)
+     *
      * @return
      */
     public static final boolean ping() {
@@ -104,12 +101,13 @@ public class XNetworkUtils {
         }
         return false;
     }
+
     /**
      * 判断移动数据是否打开
      *
      * @return {@code true}: 是<br>{@code false}: 否
      */
-    public static boolean getDataEnabled() {
+    public static boolean getDataEnabled(Context context) {
         try {
             TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
             Method getMobileDataEnabledMethod = tm.getClass().getDeclaredMethod("getDataEnabled");
@@ -128,7 +126,7 @@ public class XNetworkUtils {
      *
      * @param enabled {@code true}: 打开<br>{@code false}: 关闭
      */
-    public static void setDataEnabled(boolean enabled) {
+    public static void setDataEnabled(Context context, boolean enabled) {
         try {
             TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
             Method setMobileDataEnabledMethod = tm.getClass().getDeclaredMethod("setDataEnabled", boolean.class);
@@ -146,8 +144,8 @@ public class XNetworkUtils {
      *
      * @return {@code true}: 是<br>{@code false}: 否
      */
-    public static boolean is4G() {
-        NetworkInfo info = getActiveNetworkInfo();
+    public static boolean is4G(Context context) {
+        NetworkInfo info = getActiveNetworkInfo(context);
         return info != null && info.isAvailable() && info.getSubtype() == TelephonyManager.NETWORK_TYPE_LTE;
     }
 
@@ -157,7 +155,7 @@ public class XNetworkUtils {
      *
      * @return {@code true}: 是<br>{@code false}: 否
      */
-    public static boolean getWifiEnabled() {
+    public static boolean getWifiEnabled(Context context) {
         WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         return wifiManager.isWifiEnabled();
     }
@@ -168,7 +166,7 @@ public class XNetworkUtils {
      *
      * @param enabled {@code true}: 打开<br>{@code false}: 关闭
      */
-    public static void setWifiEnabled(boolean enabled) {
+    public static void setWifiEnabled(Context context, boolean enabled) {
         WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         if (enabled) {
             if (!wifiManager.isWifiEnabled()) {
@@ -187,7 +185,7 @@ public class XNetworkUtils {
      *
      * @return {@code true}: 连接<br>{@code false}: 未连接
      */
-    public static boolean isWifiConnected() {
+    public static boolean isWifiConnected(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm != null && cm.getActiveNetworkInfo() != null
@@ -201,8 +199,8 @@ public class XNetworkUtils {
      *
      * @return {@code true}: 是<br>{@code false}: 否
      */
-    public static boolean isWifiAvailable() {
-        return getWifiEnabled() && isAvailable();
+    public static boolean isWifiAvailable(Context context) {
+        return getWifiEnabled(context) && isAvailable(context);
     }
 
     /**
@@ -211,14 +209,14 @@ public class XNetworkUtils {
      *
      * @return 运营商名称
      */
-    public static String getNetworkOperatorName() {
+    public static String getNetworkOperatorName(Context context) {
         TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         return tm != null ? tm.getNetworkOperatorName() : null;
     }
 
-    private static final int NETWORK_TYPE_GSM      = 16;
+    private static final int NETWORK_TYPE_GSM = 16;
     private static final int NETWORK_TYPE_TD_SCDMA = 17;
-    private static final int NETWORK_TYPE_IWLAN    = 18;
+    private static final int NETWORK_TYPE_IWLAN = 18;
 
     /**
      * 获取当前网络类型
@@ -234,9 +232,9 @@ public class XNetworkUtils {
      * <li>{@link XNetworkUtils.NetworkType#NETWORK_NO     } </li>
      * </ul>
      */
-    public static NetworkType getNetworkType() {
+    public static NetworkType getNetworkType(Context context) {
         NetworkType netType = NetworkType.NETWORK_NO;
-        NetworkInfo info = getActiveNetworkInfo();
+        NetworkInfo info = getActiveNetworkInfo(context);
         if (info != null && info.isAvailable()) {
 
             if (info.getType() == ConnectivityManager.TYPE_WIFI) {

@@ -5,7 +5,9 @@ import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.cb.xlibrary.permission.XPermission;
 
 /**
@@ -18,6 +20,18 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
+    }
+
+    /**
+     * 展示图片
+     *
+     * @param path
+     * @param mImageView
+     */
+    public void showImg(String path, ImageView mImageView) {
+        Glide.with(getApplicationContext()).load(path)
+                .placeholder(R.drawable.ic_default_image)
+                .into(mImageView);
     }
 
     /**

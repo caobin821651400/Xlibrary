@@ -12,8 +12,6 @@ import android.os.Build;
 import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 
-import com.cb.xlibrary.XLibrary;
-
 import java.io.File;
 import java.security.MessageDigest;
 import java.util.Iterator;
@@ -28,12 +26,11 @@ public class XAppUtils {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
-    private static Context context = XLibrary.getContext();
 
     /**
      * 读取application 节点  meta-data 信息
      */
-    public static String readMetaDataFromApplication(String key) {
+    public static String readMetaDataFromApplication(Context context, String key) {
         try {
             ApplicationInfo appInfo = context.getPackageManager()
                     .getApplicationInfo(context.getPackageName(),
@@ -50,7 +47,7 @@ public class XAppUtils {
      *
      * @param packageName 包名
      */
-    public static void startApp(String packageName) {
+    public static void startApp(Context context, String packageName) {
         if (TextUtils.isEmpty(packageName)) return;
         context.startActivity(context.getPackageManager().getLaunchIntentForPackage(packageName));
     }
@@ -61,7 +58,7 @@ public class XAppUtils {
      * @param packageName App包名
      * @return
      */
-    public static boolean isInstallApp(String packageName) {
+    public static boolean isInstallApp(Context context, String packageName) {
         PackageManager manager = context.getPackageManager();
         List<PackageInfo> pkgList = manager.getInstalledPackages(0);
         for (int i = 0; i < pkgList.size(); i++) {
@@ -78,7 +75,7 @@ public class XAppUtils {
      * @param fileProviderName 7.0适配
      * @param file             路径
      */
-    public static void installApk(String fileProviderName, File file) {
+    public static void installApk(Context context, String fileProviderName, File file) {
         Intent intent = new Intent();
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.setAction(Intent.ACTION_VIEW);
@@ -98,7 +95,7 @@ public class XAppUtils {
      *
      * @param packageName 包名
      */
-    public static void uninstallApk(String packageName) {
+    public static void uninstallApk(Context context,String packageName) {
         Intent intent = new Intent(Intent.ACTION_DELETE);
         Uri packageURI = Uri.parse("package:" + packageName);
         intent.setData(packageURI);
@@ -117,7 +114,7 @@ public class XAppUtils {
      * 而这个权限是不对三方应用开放的。（在Manifest里申请了也没有作用）
      * 系统应用（有系统签名）可以调用该权限。
      */
-    public static boolean isRunningForeground() {
+    public static boolean isRunningForeground(Context context) {
         ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.RunningTaskInfo> taskList = am.getRunningTasks(1);
         if (taskList != null && !taskList.isEmpty()) {
@@ -135,7 +132,7 @@ public class XAppUtils {
      * @param className 判断的服务名字 "com.xxx.xx..XXXService"
      * @return true 在运行 false 不在运行
      */
-    public static boolean isServiceRunning(String className) {
+    public static boolean isServiceRunning(Context context,String className) {
         boolean isRunning = false;
         ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.RunningServiceInfo> servicesList = activityManager.getRunningServices(Integer.MAX_VALUE);
@@ -155,7 +152,7 @@ public class XAppUtils {
      * @param className the class name
      * @return true, if successful
      */
-    public static boolean stopRunningService(String className) {
+    public static boolean stopRunningService(Context context,String className) {
         Intent intent = null;
         boolean ret = false;
         try {
@@ -174,7 +171,7 @@ public class XAppUtils {
      *
      * @return PackageInfo
      */
-    public static PackageInfo getPackageInfo() {
+    public static PackageInfo getPackageInfo(Context context) {
         PackageManager packageManager = context.getPackageManager();
         PackageInfo packageInfo = null;
         try {
@@ -192,7 +189,7 @@ public class XAppUtils {
      * @return 当前应用的版本名称
      */
     public static String getVersionName(Context context) {
-        return getPackageInfo().versionName;
+        return getPackageInfo( context).versionName;
     }
 
     /**
@@ -202,7 +199,7 @@ public class XAppUtils {
      * @return 当前应用的版本号
      */
     public static int getVersionCode(Context context) {
-        return getPackageInfo().versionCode;
+        return getPackageInfo(context).versionCode;
     }
 
     /**
@@ -211,7 +208,7 @@ public class XAppUtils {
      * @param pkgName 包名
      * @return 返回应用的签名
      */
-    public static String getSign(String pkgName) {
+    public static String getSign(Context context,String pkgName) {
         try {
             PackageInfo pis = context.getPackageManager()
                     .getPackageInfo(pkgName,

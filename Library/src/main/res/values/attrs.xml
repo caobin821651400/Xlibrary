@@ -42,7 +42,7 @@
     </declare-styleable>
 
     <!--带进度的圆形进度条-->
-    <declare-styleable name="RoundProgressBar">
+    <declare-styleable name="XRoundProgressBar">
         <attr name="max" format="integer" />
         <attr name="progress" format="integer" />
         <attr name="startAngle" format="integer" />
@@ -60,14 +60,14 @@
     </declare-styleable>
 
     <!--可以描边的imageView-->
-    <declare-styleable name="CircleImageView">
+    <declare-styleable name="XCircleImageView">
         <attr name="civ_border_color" format="color" />
         <attr name="civ_fill_color" format="color" />
         <attr name="civ_border_overlay" format="boolean" />
         <attr name="civ_border_width" format="dimension" />
     </declare-styleable>
     <!--倒计时按钮-->
-    <declare-styleable name="CountdownButton">
+    <declare-styleable name="XCountdownButton">
         <attr name="countdown" format="integer" /><!--时间-->
         <attr name="startText" format="string" /><!--开始文字-->
         <attr name="endText" format="string" /><!--结束文字-->
@@ -99,7 +99,7 @@
         </attr>
     </declare-styleable>
     <!--水波进度条-->
-    <declare-styleable name="WaveProgressView">
+    <declare-styleable name="XWaveProgressView">
         <attr name="wave_radius" format="dimension" />
         <attr name="wave_progress" format="integer" />
         <attr name="wave_textColor" format="color" />

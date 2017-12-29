@@ -17,17 +17,16 @@ import android.view.View;
 import com.cb.xlibrary.adapter.XRecyclerViewAdapter;
 
 /**
- * A simple divider decoration with customizable colour, height, and left and right padding.
- * Used only for LRecyclerView
+ * 带左右边距的分割线,只支持vertical的layoutManager
  */
-public class PaddingDividerDecoration extends RecyclerView.ItemDecoration {
+public class XPaddingDividerDecoration extends RecyclerView.ItemDecoration {
 
     private int mHeight;
     private int mLPadding;
     private int mRPadding;
     private Paint mPaint;
 
-    private PaddingDividerDecoration(int height, int lPadding, int rPadding, int colour) {
+    private XPaddingDividerDecoration(int height, int lPadding, int rPadding, int colour) {
         mHeight = height;
         mLPadding = lPadding;
         mRPadding = rPadding;
@@ -40,14 +39,13 @@ public class PaddingDividerDecoration extends RecyclerView.ItemDecoration {
      */
     @Override
     public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
-
+        System.err.println(" onDrawOver ");
         RecyclerView.Adapter adapter = parent.getAdapter();
-
         XRecyclerViewAdapter lRecyclerViewAdapter;
         if (adapter instanceof XRecyclerViewAdapter) {
             lRecyclerViewAdapter = (XRecyclerViewAdapter) adapter;
         } else {
-            throw new RuntimeException("the adapter must be LRecyclerViewAdapter");
+            throw new RuntimeException("the adapter must be XRecyclerViewAdapter");
         }
 
         int count = parent.getChildCount();
@@ -64,7 +62,6 @@ public class PaddingDividerDecoration extends RecyclerView.ItemDecoration {
 
             c.save();
 
-//            if (lRecyclerViewAdapter.isRefreshHeader(position) || lRecyclerViewAdapter. isHeader(position) || lRecyclerViewAdapter.isFooter(position)) {
             if (lRecyclerViewAdapter.isHeaderPosition(position) || lRecyclerViewAdapter.isFooterPosition(position)) {
                 c.drawRect(0, 0, 0, 0, mPaint);
             } else {
@@ -86,7 +83,7 @@ public class PaddingDividerDecoration extends RecyclerView.ItemDecoration {
         if (adapter instanceof XRecyclerViewAdapter) {
             lRecyclerViewAdapter = (XRecyclerViewAdapter) adapter;
         } else {
-            throw new RuntimeException("the adapter must be LRecyclerViewAdapter");
+            throw new RuntimeException("the adapter must be XRecyclerViewAdapter");
         }
 
         int position = parent.getChildAdapterPosition(view);
@@ -241,12 +238,12 @@ public class PaddingDividerDecoration extends RecyclerView.ItemDecoration {
         }
 
         /**
-         * Instantiates a PaddingDividerDecoration with the specified parameters.
+         * Instantiates a XPaddingDividerDecoration with the specified parameters.
          *
-         * @return a properly initialized PaddingDividerDecoration instance
+         * @return a properly initialized XPaddingDividerDecoration instance
          */
-        public PaddingDividerDecoration build() {
-            return new PaddingDividerDecoration(mHeight, mLPadding, mRPadding, mColour);
+        public XPaddingDividerDecoration build() {
+            return new XPaddingDividerDecoration(mHeight, mLPadding, mRPadding, mColour);
         }
     }
 }

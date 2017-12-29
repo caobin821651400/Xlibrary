@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:text="开始下载" />
 
-
     <ImageView
         android:id="@+id/imageview"
         android:layout_width="70dp"

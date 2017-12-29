@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.cb.xlibrary.adapter.decoration;
+package com.cb.xlibrary.ItemDecoration;
 
 import android.graphics.Canvas;
 import android.graphics.Rect;
@@ -30,7 +30,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * A sticky header decoration for android's RecyclerView.
+ * 悬浮的recyclerView分割线
  */
 public class StickyHeaderDecoration extends RecyclerView.ItemDecoration {
     /**

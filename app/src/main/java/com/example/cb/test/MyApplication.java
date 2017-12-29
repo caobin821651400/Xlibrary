@@ -2,7 +2,7 @@ package com.example.cb.test;
 
 import android.app.Application;
 
-import com.cb.xlibrary.XLibrary;
+import com.cb.xlibrary.utils.XCrashHandlerUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
@@ -18,7 +18,6 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        XLibrary.init(this);
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         OkGo.getInstance().init(this)                           //必须调用初始化
                 .setOkHttpClient(builder.build())               //建议设置OkHttpClient，不设置会使用默认的
@@ -26,5 +25,9 @@ public class MyApplication extends Application {
                 .setCacheTime(CacheEntity.CACHE_NEVER_EXPIRE)   //全局统一缓存时间，默认永不过期，可以不传
                 .setRetryCount(0);                              //全局统一超时重连次数，默认为三次，那么最差的情况会请求4次(一次原始请求，三次重连请求)，不需要可以设置为0
 
+
+        XCrashHandlerUtils.getInstance().init(this);
     }
+
+
 }

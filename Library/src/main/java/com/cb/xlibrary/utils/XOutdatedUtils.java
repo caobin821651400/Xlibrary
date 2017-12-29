@@ -1,5 +1,6 @@
 package com.cb.xlibrary.utils;
 
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -11,8 +12,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.view.View;
-
-import com.cb.xlibrary.XLibrary;
 
 
 /**
@@ -43,20 +42,20 @@ public class XOutdatedUtils {
      * @param id
      * @return
      */
-    public static Drawable getDrawable(@DrawableRes int id) {
-        return ContextCompat.getDrawable(XLibrary.getContext(), id);
+    public static Drawable getDrawable(Context context, @DrawableRes int id) {
+        return ContextCompat.getDrawable(context.getApplicationContext(), id);
     }
 
     /**
      * getDrawable过时方法处理
      *
-     * @param id 资源id
+     * @param id    资源id
      * @param theme 指定主题
      * @return
      */
-    public static Drawable getDrawable(@DrawableRes int id,
+    public static Drawable getDrawable(Context context, @DrawableRes int id,
                                        @Nullable Resources.Theme theme) {
-        return ResourcesCompat.getDrawable(XLibrary.getResources(), id, theme);
+        return ResourcesCompat.getDrawable(context.getApplicationContext().getResources(), id, theme);
     }
 
     /**
@@ -65,19 +64,19 @@ public class XOutdatedUtils {
      * @param id
      * @return
      */
-    public static int getColor(@ColorRes int id) {
-        return ContextCompat.getColor(XLibrary.getContext(), id);
+    public static int getColor(Context context, @ColorRes int id) {
+        return ContextCompat.getColor(context, id);
     }
 
     /**
      * getColor过时方法处理
      *
-     * @param id 资源id
+     * @param id    资源id
      * @param theme 指定主题
      * @return
      */
-    public static int getColor(@ColorRes int id, @Nullable Resources.Theme theme) {
-        return ResourcesCompat.getColor(XLibrary.getResources(), id, theme);
+    public static int getColor(Context context, @ColorRes int id, @Nullable Resources.Theme theme) {
+        return ResourcesCompat.getColor(context.getApplicationContext().getResources(), id, theme);
     }
 
     /**
@@ -86,18 +85,18 @@ public class XOutdatedUtils {
      * @param id 资源id
      * @return
      */
-    public static ColorStateList getColorStateList(@ColorRes int id) {
-        return ContextCompat.getColorStateList(XLibrary.getContext(), id);
+    public static ColorStateList getColorStateList(Context context, @ColorRes int id) {
+        return ContextCompat.getColorStateList(context.getApplicationContext(), id);
     }
 
     /**
      * getColorStateList过时方法处理
      *
-     * @param id 资源id
+     * @param id    资源id
      * @param theme 指定主题
      * @return
      */
-    public static ColorStateList getColorStateList(@ColorRes int id, @Nullable Resources.Theme theme) {
-        return ResourcesCompat.getColorStateList(XLibrary.getResources(), id, theme);
+    public static ColorStateList getColorStateList(Context context, @ColorRes int id, @Nullable Resources.Theme theme) {
+        return ResourcesCompat.getColorStateList(context.getApplicationContext().getResources(), id, theme);
     }
 }
