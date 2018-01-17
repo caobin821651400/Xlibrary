@@ -39,6 +39,7 @@ public class XInputDialog extends Dialog {
     private String leftBtnTxt = "";
     private String rightBtnTxt = "";
     private Drawable editBg;
+    private boolean isBgTrsnsparent = false;//背景半透明
     private int leftBtnTxtColor = Color.parseColor("#000000");
     private int rightBtnTxtColor = Color.parseColor("#FAC200");
 
@@ -138,6 +139,16 @@ public class XInputDialog extends Dialog {
         }
 
         /**
+         * 背景是否半透明
+         *
+         * @return
+         */
+        public Builder setBgTransparent(boolean b) {
+            xInputDialog.isBgTrsnsparent = b;
+            return this;
+        }
+
+        /**
          * 左边按钮颜色
          *
          * @param leftBtnTxtColor
@@ -190,6 +201,9 @@ public class XInputDialog extends Dialog {
             WindowManager.LayoutParams lp = window.getAttributes();
             lp.width = WindowManager.LayoutParams.MATCH_PARENT;   //设置宽度充满屏幕
             lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+            if (xInputDialog.isBgTrsnsparent) {
+                lp.dimAmount = 0f;
+            }
             window.setAttributes(lp);
             return xInputDialog;
         }

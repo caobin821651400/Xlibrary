@@ -1,9 +1,7 @@
 package com.example.cb.test;
 
 import android.Manifest;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -11,23 +9,22 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.cb.xlibrary.dialog.XDownLoadDialog;
-import com.cb.xlibrary.dialog.XInputDialog;
-import com.cb.xlibrary.dialog.XUserHeadDialog;
-import com.cb.xlibrary.imagepicker.ImagePicker;
-import com.cb.xlibrary.imagepicker.bean.ImageItem;
 import com.cb.xlibrary.permission.XPermission;
 import com.cb.xlibrary.utils.XActivityStack;
-import com.cb.xlibrary.utils.XIdCardUtils;
-import com.lzy.okgo.OkGo;
-import com.lzy.okgo.callback.FileCallback;
-import com.lzy.okgo.model.Progress;
-import com.lzy.okgo.model.Response;
-import com.lzy.okgo.request.base.Request;
+import com.example.cb.test.rx.MovieHttpRequest;
+import com.example.cb.test.ui.RetrofitEntity;
+import com.example.cb.test.ui.RetrofitService;
+import com.example.cb.test.ui.RetrofitServiceManager;
 
-import java.io.File;
 import java.text.NumberFormat;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import rx.Observer;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 
 public class MainActivity extends BaseActivity {
@@ -37,9 +34,9 @@ public class MainActivity extends BaseActivity {
     private TextView tvProgress;
     private TextView netSpeed;
     private ProgressBar pbProgress;
-    private XDownLoadDialog XDownLoadDialog;
-    private XInputDialog dialog2;
     private ImageView mImageView;
+    private static final String WEATHRE_API_URL = "http://php.weather.sina.com.cn/xml.php?city=%s&password=DJOYnieT8234jlsK&day=0";
+    private String result;
 
     //
     private String apkUrl = "https://codeload.github.com/jeasonlzy/okhttp-OkGo/zip/master";
@@ -68,7 +65,6 @@ public class MainActivity extends BaseActivity {
         RecyclerView recyclerView = new RecyclerView(this);
         recyclerView.setNestedScrollingEnabled(false);
 
-        XDownLoadDialog = new XDownLoadDialog(this);
 
         XPermission.requestPermissions(MainActivity.this, 102, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, new XPermission.OnPermissionListener() {
@@ -86,53 +82,52 @@ public class MainActivity extends BaseActivity {
         btnDownLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, ScrollingActivity.class);
-//                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                startActivity(intent);
-                System.err.println("哈哈 "+ XIdCardUtils.isValidatedAllIdcard("652123199507052"));
+               downLoad1();
             }
         });
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == XUserHeadDialog.CHANGE_HEAD_REQUEST_CODE) {
-            if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
-                if (data != null) {
-                    showImg(((ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS)).get(0).path, mImageView);
-                }
+    private void downLoad1() {
+        Map<String, String> map = new HashMap<>();
+        map.put("name", "");
+        MovieHttpRequest.sendPostRequestByMap(map, new Observer<RetrofitEntity>() {
+            @Override
+            public void onCompleted() {
+
             }
-        }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(RetrofitEntity retrofitEntity) {
+                System.err.println("实打实大所"+retrofitEntity.getMsg());
+            }
+        });
     }
 
 
     private void downLoad() {
-        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/aaa/";
-        OkGo.<File>get(apkUrl)//
-                .tag(this)//
-                .execute(new FileCallback(path, "哈哈.zip") {
-
+        RetrofitService anInterface = RetrofitServiceManager.getInstance().create(RetrofitService.class);
+        Subscription subscription = anInterface.getAllAudio(true)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<RetrofitEntity>() {
                     @Override
-                    public void onStart(Request<File, ? extends Request> request) {
-                        XDownLoadDialog.show();
+                    public void onCompleted() {
+
                     }
 
                     @Override
-                    public void onSuccess(Response<File> response) {
-                        XDownLoadDialog.dismiss();
+                    public void onError(Throwable e) {
+
                     }
 
                     @Override
-                    public void onError(Response<File> response) {
-                        XDownLoadDialog.dismiss();
-                    }
-
-                    @Override
-                    public void downloadProgress(Progress progress) {
-                        XDownLoadDialog.getProgressTextView().setText(numberFormat.format(progress.fraction));
-                        XDownLoadDialog.getProgressBar().setMax(100);
-                        XDownLoadDialog.getProgressBar().setProgress((int) (progress.fraction * 100));
+                    public void onNext(RetrofitEntity retrofitEntity) {
+                        System.err.println(retrofitEntity.getMsg());
                     }
                 });
     }
@@ -140,9 +135,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (dialog2 != null) dialog2.cancel();
         //Activity销毁时，取消网络请求
         XActivityStack.getInstance().finishActivity();
-        OkGo.getInstance().cancelTag(this);
     }
 }

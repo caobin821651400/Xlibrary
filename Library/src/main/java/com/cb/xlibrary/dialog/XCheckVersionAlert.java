@@ -43,7 +43,7 @@ public class XCheckVersionAlert {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (btnClickListener != null) {
-                    btnClickListener.rightBtnClick();
+                    btnClickListener.sureBtnClick();
                 }
             }
         });
@@ -52,7 +52,7 @@ public class XCheckVersionAlert {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     if (btnClickListener != null) {
-                        btnClickListener.leftBtnClick();
+                        btnClickListener.negativeBtnClick();
                     }
                 }
             });
@@ -73,8 +73,8 @@ public class XCheckVersionAlert {
 
 
     public interface BtnClickListener {
-        void leftBtnClick();
+        void negativeBtnClick();
 
-        void rightBtnClick();
+        void sureBtnClick();
     }
 }

@@ -37,7 +37,6 @@ public class XGridItemDecoration extends RecyclerView.ItemDecoration {
 
     @Override
     public void onDraw(Canvas c, RecyclerView parent, State state) {
-        System.err.println("hh onDraw ");
         drawHorizontal(c, parent);
         drawVertical(c, parent);
     }
@@ -73,9 +72,9 @@ public class XGridItemDecoration extends RecyclerView.ItemDecoration {
             if ((adapter.isHeaderPosition(i) || adapter.isFooterPosition(i))) {
                 c.drawRect(0, 0, 0, 0, mPaint);
             } else {//this
-                final View child = parent.getChildAt(i);
-                final int top = child.getBottom();
-                final int bottom = top + verticalSpace;
+                View child = parent.getChildAt(i);
+                int top = child.getBottom();
+                int bottom = top + verticalSpace;
                 int left = child.getLeft();
                 int right = child.getRight();
                 c.drawRect(left, top, right, bottom, mPaint);
@@ -90,12 +89,11 @@ public class XGridItemDecoration extends RecyclerView.ItemDecoration {
      * @param parent
      */
     public void drawVertical(Canvas c, RecyclerView parent) {
-        System.err.println("哈哈 drawVertical");
         final int childCount = parent.getChildCount();
         XRecyclerViewAdapter adapter = (XRecyclerViewAdapter) parent.getAdapter();
         for (int i = 0; i < childCount; i++) {
-            final View child = parent.getChildAt(i);
-            final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
+            View child = parent.getChildAt(i);
+            RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
             //
             if (adapter.isHeaderPosition(i) || adapter.isFooterPosition(i)) {
                 continue;
