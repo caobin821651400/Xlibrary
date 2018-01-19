@@ -1,15 +1,16 @@
 package com.example.cb.test.rx;
 
-import com.example.cb.test.ui.RetrofitEntity;
-
 import java.util.Map;
 
-import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 import rx.Observable;
-import rx.Observer;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * author : caobin
@@ -19,48 +20,51 @@ import rx.Observer;
  */
 public class MovieHttpRequest extends BaseHttpRequest {
 
-    protected static final MovieService movieService = getRetrofit().create(MovieService.class);
+    private static final ApiService apiService = getRetrofit().create(ApiService.class);
+    private static CompositeSubscription compositeSubscription = new CompositeSubscription();//管理所有的订阅
 
-
-    public interface MovieService {
+    public interface ApiService {
 
         @FormUrlEncoded
-        @POST("AppFiftyToneGraph/videoLink")
-        Observable<RetrofitEntity> getAllAudio(@Field("name") String name);
-
-        //POST请求
-        @FormUrlEncoded
-        @POST("AppFiftyToneGraph/videoLink")
-        Observable<RetrofitEntity> getAllAudioWithMap(@FieldMap Map<String, String> map);
+        @POST("toutiao/index")
+        Observable<NewsResp> getNews(@FieldMap Map<String, String> map);
+        //f323c09a114635eb935ed8dd19f7284e
     }
 
 
-    //POST请求
-    public static void sendPostRequest(String s,final IHttpCallback iHttpCallback) {
-        setSubscribe(movieService.getAllAudio(s), new Observer<RetrofitEntity>() {
-            @Override
-            public void onCompleted() {
+    public static void sendNewsRequest(Map<String, String> map, final XHttpCallback<NewsResp> xHttpCallback) {
+        Observable<NewsResp> observable = apiService.getNews(map);
+        Subscription subscription = observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<NewsResp>() {
+                    @Override
+                    public void onCompleted() {
 
-            }
+                    }
 
-            @Override
-            public void onError(Throwable e) {
+                    @Override
+                    public void onError(Throwable e) {
+                        xHttpCallback.onError(handleError(e));
+                    }
 
-            }
-
-            @Override
-            public void onNext(RetrofitEntity retrofitEntity) {
-                if (retrofitEntity.getMsg() != null) {
-                    iHttpCallback.onResponseSuccess(retrofitEntity);
-                }else{
-
-                }
-            }
-        });
+                    @Override
+                    public void onNext(NewsResp newsResp) {
+                        if (newsResp.getError_code() == 0) {
+                            xHttpCallback.onSuccess(newsResp);
+                        } else {
+                            xHttpCallback.onError(newsResp.getReason());
+                        }
+                    }
+                });
+        compositeSubscription.add(subscription);
     }
 
-    //POST请求参数以map传入
-    public static void sendPostRequestByMap(Map<String, String> map, Observer<RetrofitEntity> observer) {
-        setSubscribe(movieService.getAllAudioWithMap(map), observer);
+    /**
+     * 获取订阅管理对象
+     *
+     * @return
+     */
+    public static CompositeSubscription getCompositeSubscription() {
+        return compositeSubscription;
     }
 }

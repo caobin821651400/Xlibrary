@@ -12,19 +12,12 @@ import android.widget.TextView;
 import com.cb.xlibrary.permission.XPermission;
 import com.cb.xlibrary.utils.XActivityStack;
 import com.example.cb.test.rx.MovieHttpRequest;
-import com.example.cb.test.ui.RetrofitEntity;
-import com.example.cb.test.ui.RetrofitService;
-import com.example.cb.test.ui.RetrofitServiceManager;
+import com.example.cb.test.rx.NewsResp;
+import com.example.cb.test.rx.XHttpCallback;
 
 import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Map;
-
-import rx.Observer;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 
 public class MainActivity extends BaseActivity {
@@ -82,59 +75,33 @@ public class MainActivity extends BaseActivity {
         btnDownLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               downLoad1();
+                downLoad1();
             }
         });
     }
 
     private void downLoad1() {
         Map<String, String> map = new HashMap<>();
-        map.put("name", "");
-        MovieHttpRequest.sendPostRequestByMap(map, new Observer<RetrofitEntity>() {
+        map.put("type", "top");
+        map.put("key", "f323c09a114635eb935ed8dd19f7284e");
+        MovieHttpRequest.sendNewsRequest(map, new XHttpCallback<NewsResp>() {
             @Override
-            public void onCompleted() {
-
+            public void onSuccess(NewsResp newsResp) {
+                System.err.println("哈哈 " + newsResp.getResult().getData().get(0).getTitle());
             }
 
             @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onNext(RetrofitEntity retrofitEntity) {
-                System.err.println("实打实大所"+retrofitEntity.getMsg());
+            public void onError(String error) {
+                System.err.println("哈哈 error " + error);
             }
         });
-    }
-
-
-    private void downLoad() {
-        RetrofitService anInterface = RetrofitServiceManager.getInstance().create(RetrofitService.class);
-        Subscription subscription = anInterface.getAllAudio(true)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<RetrofitEntity>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onNext(RetrofitEntity retrofitEntity) {
-                        System.err.println(retrofitEntity.getMsg());
-                    }
-                });
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (MovieHttpRequest.getCompositeSubscription() != null)
+            MovieHttpRequest.getCompositeSubscription().unsubscribe();
         //Activity销毁时，取消网络请求
         XActivityStack.getInstance().finishActivity();
     }
