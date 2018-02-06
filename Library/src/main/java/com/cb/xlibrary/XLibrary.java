@@ -11,8 +11,8 @@ public class XLibrary {
     private static Context context;
 
     // #log
-    public static String tag = "XLibrary";
-    public static boolean isDebug = true;
+    public static String logTag = "";
+    public static boolean isDebug =false;
 
 
     public static void init(Context context) {

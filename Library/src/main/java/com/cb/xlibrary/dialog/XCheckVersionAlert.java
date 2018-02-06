@@ -19,9 +19,12 @@ public class XCheckVersionAlert {
     private Context mContext;
     private BtnClickListener btnClickListener;
 
-    public XCheckVersionAlert(Context mContext, BtnClickListener listener) {
-        this.btnClickListener = listener;
+    public XCheckVersionAlert(Context mContext) {
         this.mContext = mContext;
+    }
+
+    public void setBtnClickListener(BtnClickListener listener) {
+        this.btnClickListener = listener;
     }
 
     /**
@@ -43,7 +46,7 @@ public class XCheckVersionAlert {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (btnClickListener != null) {
-                    btnClickListener.sureBtnClick();
+                    btnClickListener.update();
                 }
             }
         });
@@ -52,7 +55,7 @@ public class XCheckVersionAlert {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     if (btnClickListener != null) {
-                        btnClickListener.negativeBtnClick();
+                        btnClickListener.noUpdate();
                     }
                 }
             });
@@ -73,8 +76,8 @@ public class XCheckVersionAlert {
 
 
     public interface BtnClickListener {
-        void negativeBtnClick();
+        void noUpdate();
 
-        void sureBtnClick();
+        void update();
     }
 }

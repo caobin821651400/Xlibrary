@@ -10,7 +10,7 @@ public class XLogConfig {
 
     private boolean showThreadInfo = true;
     private boolean debug = XLibrary.isDebug;
-    private String tag = XLibrary.tag;
+    private String tag = XLibrary.logTag;
 
 
     public XLogConfig setTag(String tag) {

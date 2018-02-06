@@ -1,11 +1,14 @@
 package com.cb.xlibrary.adapter;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.v7.widget.RecyclerView;
@@ -59,6 +62,21 @@ public class XViewHolder extends RecyclerView.ViewHolder {
             viewArray.put(viewId, view);
         }
         return (T) view;
+    }
+
+    /**
+     * 跳转activity
+     *
+     * @param cls    跳转的类
+     * @param bundle 携带的数据
+     */
+    public void launchActivity(Context context,Class<?> cls, Bundle bundle) {
+        Intent intent = new Intent(context, cls);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
     }
 
 

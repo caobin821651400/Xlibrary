@@ -2,6 +2,7 @@ package com.example.cb.test;
 
 import android.app.Application;
 
+import com.cb.xlibrary.XLibrary;
 import com.cb.xlibrary.utils.XCrashHandlerUtils;
 
 /**
@@ -15,6 +16,9 @@ public class MyApplication extends Application {
         super.onCreate();
 
         XCrashHandlerUtils.getInstance().init(this);
+        XLibrary.init(this);
+        XLibrary.logTag = "曹斌";
+        XLibrary.isDebug = true;
     }
 
 

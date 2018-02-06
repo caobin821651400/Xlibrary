@@ -8,11 +8,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cb.xlibrary.permission.XPermission;
+import com.cb.xlibrary.statusbar.StatusBarUtils;
 import com.cb.xlibrary.utils.XActivityStack;
 import com.example.cb.test.rx.MovieHttpRequest;
 import com.example.cb.test.rx.NewsResp;
+import com.example.cb.test.rx.UserInfoResp;
 import com.example.cb.test.rx.XHttpCallback;
 
 import java.text.NumberFormat;
@@ -75,7 +78,7 @@ public class MainActivity extends BaseActivity {
         btnDownLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                downLoad1();
+//                downLoad2();
             }
         });
     }
@@ -84,7 +87,7 @@ public class MainActivity extends BaseActivity {
         Map<String, String> map = new HashMap<>();
         map.put("type", "top");
         map.put("key", "f323c09a114635eb935ed8dd19f7284e");
-        MovieHttpRequest.sendNewsRequest(map, new XHttpCallback<NewsResp>() {
+        MovieHttpRequest.getInstance().sendNewsRequest(map, new XHttpCallback<NewsResp>() {
             @Override
             public void onSuccess(NewsResp newsResp) {
                 System.err.println("哈哈 " + newsResp.getResult().getData().get(0).getTitle());
@@ -97,12 +100,27 @@ public class MainActivity extends BaseActivity {
         });
     }
 
+    private void downLoad2() {
+        Map<String, String> map = new HashMap<>();
+        map.put("staffAccount", "gNwTv7GOKr+9tK+bHVlw5A==");
+        MovieHttpRequest.getInstance().getUesrInfo(map, new XHttpCallback<UserInfoResp>() {
+            @Override
+            public void onSuccess(UserInfoResp userInfoResp) {
+                System.err.println(userInfoResp.getCode());
+            }
+
+            @Override
+            public void onError(String error) {
+                Toast.makeText(MainActivity.this, error, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (MovieHttpRequest.getCompositeSubscription() != null)
-            MovieHttpRequest.getCompositeSubscription().unsubscribe();
         //Activity销毁时，取消网络请求
+        MovieHttpRequest.getInstance().dispose();
         XActivityStack.getInstance().finishActivity();
     }
 }

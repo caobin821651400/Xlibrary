@@ -3,6 +3,8 @@ package com.example.cb.test.rx;
 import android.net.ParseException;
 
 import com.google.gson.JsonParseException;
+import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import org.json.JSONException;
 
@@ -10,9 +12,9 @@ import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.HttpException;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -33,8 +35,10 @@ public class BaseHttpRequest {
     private static final int GATEWAY_TIMEOUT = 504;
 
     //服务器路径
-//    private static final String API_SERVER = "http://www.izaodao.com/Api/";
-    private static final String API_SERVER = "http://v.juhe.cn/";
+//    private static final String API_SERVER = "http://v.juhe.cn/";
+    private static final String API_SERVER = "https://mo.sctel.com.cn/scportal_mh/";
+
+    private static CompositeDisposable compositeDisposable = null;//统一管理所有的订阅生命周期
 
     private static Retrofit mRetrofit;
 
@@ -48,11 +52,32 @@ public class BaseHttpRequest {
             mRetrofit = new Retrofit.Builder()
                     .client(OkHttpConfiguration.getOkHttpClient())
                     .addConverterFactory(GsonConverterFactory.create())//gson解析
-                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())//加入rxjava
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())//加入rxjava
                     .baseUrl(API_SERVER)
                     .build();
         }
         return mRetrofit;
+    }
+
+    /**
+     * add  Disposable
+     *
+     * @param d
+     */
+    public static void addDisposable(Disposable d) {
+        if (compositeDisposable == null) {
+            compositeDisposable = new CompositeDisposable();
+        }
+        compositeDisposable.add(d);
+    }
+
+    /**
+     * 移除Disposable
+     *
+     */
+    public static void removeDisposable() {
+        if (compositeDisposable != null)
+            compositeDisposable.dispose();
     }
 
     /**

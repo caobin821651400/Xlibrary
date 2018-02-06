@@ -1,16 +1,17 @@
 package com.example.cb.test.rx;
 
+import com.google.gson.Gson;
+
 import java.util.Map;
 
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
-import rx.Observable;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-import rx.subscriptions.CompositeSubscription;
 
 /**
  * author : caobin
@@ -20,8 +21,18 @@ import rx.subscriptions.CompositeSubscription;
  */
 public class MovieHttpRequest extends BaseHttpRequest {
 
+    private static class HttpRequestHolder {
+        public static MovieHttpRequest instance = new MovieHttpRequest();
+    }
+
+    public MovieHttpRequest() {
+    }
+
+    public static MovieHttpRequest getInstance() {
+        return HttpRequestHolder.instance;
+    }
+
     private static final ApiService apiService = getRetrofit().create(ApiService.class);
-    private static CompositeSubscription compositeSubscription = new CompositeSubscription();//管理所有的订阅
 
     public interface ApiService {
 
@@ -29,42 +40,82 @@ public class MovieHttpRequest extends BaseHttpRequest {
         @POST("toutiao/index")
         Observable<NewsResp> getNews(@FieldMap Map<String, String> map);
         //f323c09a114635eb935ed8dd19f7284e
+
+        @FormUrlEncoded
+        @POST("userInfor/queryUserInfor")
+        Observable<UserInfoResp> getUserInfo(@FieldMap Map<String, String> map);
     }
 
-
-    public static void sendNewsRequest(Map<String, String> map, final XHttpCallback<NewsResp> xHttpCallback) {
+    /**
+     * 获取新闻信息
+     *
+     * @param map
+     * @param xHttpCallback
+     */
+    public void sendNewsRequest(Map<String, String> map, final XHttpCallback<NewsResp> xHttpCallback) {
         Observable<NewsResp> observable = apiService.getNews(map);
-        Subscription subscription = observable.subscribeOn(Schedulers.io())
+        observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<NewsResp>() {
+                .subscribe(new Observer<NewsResp>() {
                     @Override
-                    public void onCompleted() {
+                    public void onSubscribe(Disposable d) {
+                        addDisposable(d);
+                    }
+
+                    @Override
+                    public void onNext(NewsResp value) {
+                        xHttpCallback.onSuccess(value);
 
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        xHttpCallback.onError(handleError(e));
+                        handleError(e);
                     }
 
                     @Override
-                    public void onNext(NewsResp newsResp) {
-                        if (newsResp.getError_code() == 0) {
-                            xHttpCallback.onSuccess(newsResp);
-                        } else {
-                            xHttpCallback.onError(newsResp.getReason());
-                        }
+                    public void onComplete() {
+
                     }
                 });
-        compositeSubscription.add(subscription);
+    }
+
+    public void getUesrInfo(Map<String, String> map, final XHttpCallback<UserInfoResp> xHttpCallback) {
+        Observable<UserInfoResp> observable = apiService.getUserInfo(map);
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<UserInfoResp>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        addDisposable(d);
+                    }
+
+                    @Override
+                    public void onNext(UserInfoResp value) {
+                        System.err.println("请求结果--》" + new Gson().toJson(value));
+                        if (value.getCode().equals("200")) {
+                            xHttpCallback.onSuccess(value);
+                        } else {
+                            xHttpCallback.onError(value.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        handleError(e);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     /**
-     * 获取订阅管理对象
-     *
-     * @return
+     * 接触订阅,在activity退出时调用，防止发生内存泄漏
      */
-    public static CompositeSubscription getCompositeSubscription() {
-        return compositeSubscription;
+    public void dispose() {
+        removeDisposable();
     }
 }

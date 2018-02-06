@@ -156,9 +156,11 @@ public class StatusBarUtils {
         if (isFlyme4Later()) {
             darkModeForFlyme4(window, true);
             immersive(window, color, alpha);
-        } else if (isMIUI6Later()) {
+        } else if (isMIUI6Later() && !DeviceHelper.isMIUIV9()) {
             darkModeForMIUI6(window, true);
             immersive(window, color, alpha);
+        } else if (DeviceHelper.isMIUIV9()) { //MIUI9 与谷歌一致
+            googleMethod(window);
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             darkModeForM(window, true);
             immersive(window, color, alpha);
@@ -216,6 +218,15 @@ public class StatusBarUtils {
         }
 
         return result;
+    }
+
+    /**
+     * 谷歌官方方法，适用6.0以上
+     */
+    public static void googleMethod(Window window){
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
     }
 
     /**

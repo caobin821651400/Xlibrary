@@ -13,7 +13,7 @@ public class XPrintUtils {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
-    private static String tag = XLibrary.tag;
+    private static String tag = XLibrary.logTag;
     private static boolean log = XLibrary.isDebug;
 
     public static void setLog(boolean log) {

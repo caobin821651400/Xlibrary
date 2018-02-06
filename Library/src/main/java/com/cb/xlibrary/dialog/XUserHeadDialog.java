@@ -2,9 +2,9 @@ package com.cb.xlibrary.dialog;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
-import android.os.Looper;
 
 import com.cb.xlibrary.bean.BottomPopupBean;
 import com.cb.xlibrary.imagepicker.ImagePicker;
@@ -28,7 +28,7 @@ public class XUserHeadDialog implements XActionSheetDialog.XMenuListener {
     private ImageLoader mImageLoader;
     private XActionSheetDialog dialog;
     private List<BottomPopupBean> mList = new ArrayList<>();
-    private Handler mHandler = new Handler(Looper.getMainLooper());
+    private Handler mHandler = new Handler();
 
 
     public XUserHeadDialog(Context mContext) {
@@ -47,10 +47,19 @@ public class XUserHeadDialog implements XActionSheetDialog.XMenuListener {
     }
 
     public void showChoseSexDialog() {
+        if (mImageLoader == null) {
+            throw new RuntimeException("必须先调用setImageLoader()方法。");
+        }
         dialog = new XActionSheetDialog(mContext);
         dialog.setMenusList(mList);
         dialog.setPopTitle("选择更换方式");
         dialog.setOnItemClickListener(this);
+        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                if (mHandler != null) mHandler.removeCallbacksAndMessages(null);
+            }
+        });
         dialog.show();
     }
 
@@ -65,7 +74,7 @@ public class XUserHeadDialog implements XActionSheetDialog.XMenuListener {
                     byCamera();
                 }
             }
-        }, 410);
+        }, 550);
     }
 
     /**

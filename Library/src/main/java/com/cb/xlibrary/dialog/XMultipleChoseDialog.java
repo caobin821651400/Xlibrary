@@ -90,6 +90,7 @@ public class XMultipleChoseDialog {
     }
 
     public static class Builder {
+
         private XMultipleChoseDialog choseDialog;
 
         public Builder(Context context) {
