@@ -123,19 +123,4 @@
             <enum name="circle" value="1" />
         </attr>
     </declare-styleable>
-
-    <declare-styleable name="LoadMoreFooterView">
-        <attr name="srlPrimaryColor" format="color" />
-        <attr name="srlAccentColor" format="color" />
-        <attr name="srlFinishDuration" format="integer" />
-        <attr name="srlTextSizeTitle" format="integer"/>
-        <attr name="srlDrawableArrow" format="reference"/>
-        <attr name="srlDrawableProgress" format="reference"/>
-        <attr name="srlDrawableMarginRight" format="integer"/>
-        <attr name="srlDrawableSize" format="integer"/>
-        <attr name="srlDrawableArrowSize" format="integer"/>
-        <attr name="srlDrawableProgressSize" format="integer"/>
-        <attr name="srlTextTimeMarginTop" format="dimension" />
-        <attr name="srlEnableLastTime" format="boolean" />
-    </declare-styleable>
 </resources>

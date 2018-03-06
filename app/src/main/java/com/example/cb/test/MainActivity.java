@@ -17,6 +17,7 @@ import com.cb.xlibrary.imagepicker.ImagePicker;
 import com.cb.xlibrary.imagepicker.bean.ImageItem;
 import com.cb.xlibrary.permission.XPermission;
 import com.cb.xlibrary.utils.XActivityStack;
+import com.cb.xlibrary.utils.log.XLog;
 import com.example.cb.test.rx.MovieHttpRequest;
 import com.example.cb.test.rx.NewsResp;
 import com.example.cb.test.rx.UserInfoResp;
@@ -52,6 +53,9 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         XActivityStack.getInstance().addActivity(this);
         initView();
+        XLog.d("ssssssss");
+        XLog.e("ssssssss");
+        XLog.v("ssssssss");
     }
 
     private void initView() {
@@ -73,7 +77,6 @@ public class MainActivity extends BaseActivity {
                 Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, new XPermission.OnPermissionListener() {
             @Override
             public void onPermissionGranted() {
-                System.err.println("权限申请到了");
 
             }
 
@@ -105,7 +108,6 @@ public class MainActivity extends BaseActivity {
         if (requestCode == XUserHeadDialog.CHANGE_HEAD_REQUEST_CODE) {
             if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
                 ArrayList<ImageItem> list = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-                System.err.println("还好 " + list.get(0).path);
                 Glide.with(MainActivity.this).load(list.get(0).path).into(mImageView);
             }
         }

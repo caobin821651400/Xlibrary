@@ -45,7 +45,7 @@ final class LoggerPrinter implements Printer {
 
     public static String LINE_SEPARATOR = System.getProperty("line.separator");
 
-    private StringBuilder logStr=new StringBuilder();
+    private StringBuilder logStr = new StringBuilder();
 
     /**
      * 初始化
@@ -57,6 +57,7 @@ final class LoggerPrinter implements Printer {
 
     /**
      * 返回最后一次格式化的打印结果样式
+     *
      * @return
      */
     @Override
@@ -115,10 +116,10 @@ final class LoggerPrinter implements Printer {
     public void json(String json) {
         if (TextUtils.isEmpty(json)) {
             d("json 数据为空！");
-            return ;
+            return;
         }
         try {
-            String message="";
+            String message = "";
             if (json.startsWith("{")) {
                 JSONObject jo = new JSONObject(json);
                 message = jo.toString(4);
@@ -148,7 +149,7 @@ final class LoggerPrinter implements Printer {
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
             transformer.transform(xmlInput, xmlOutput);
-            String message=xmlOutput.getWriter().toString().replaceFirst(">", ">" + LINE_SEPARATOR);
+            String message = xmlOutput.getWriter().toString().replaceFirst(">", ">" + LINE_SEPARATOR);
             d(message);
         } catch (TransformerException e) {
             e(e.getCause().getMessage() + LINE_SEPARATOR + xml);
@@ -196,7 +197,7 @@ final class LoggerPrinter implements Printer {
         if (!config.isDebug()) {
             return;
         }
-        logStr.delete(0,logStr.length());
+        logStr.delete(0, logStr.length());
         String message = args.length == 0 ? msg : String.format(msg, args);
         logChunk(priority, TOP_BORDER);
         if (config.isShowThreadInfo()) {
@@ -207,7 +208,7 @@ final class LoggerPrinter implements Printer {
         byte[] bytes = message.getBytes();
         int length = bytes.length;
         if (length <= CHUNK_SIZE) {
-            logContent(priority, message);
+            logContent(priority, "content--> " + message);
             logChunk(priority, BOTTOM_BORDER);
             return;
         }
@@ -259,33 +260,35 @@ final class LoggerPrinter implements Printer {
     private void getStackInfo(int priority) {
         logChunk(priority, HORIZONTAL_DOUBLE_LINE + "[Thread] → " + Thread.currentThread().getName());
         logChunk(priority, MIDDLE_BORDER);
-        String str="";
+        String str = "";
         StackTraceElement[] traces = Thread.currentThread().getStackTrace();
 
-        for (int i = 0; i < traces.length; i++) {
-            StackTraceElement element = traces[i];
-            StringBuilder perTrace = new StringBuilder(str);
-            if (element.isNativeMethod()) {
-                continue;
-            }
-            String className=element.getClassName();
-            if (className.startsWith("android.")
-                    ||className.contains("com.android")
-                    ||className.contains("java.lang")
-                    ||className.contains("com.youth.xframe")) {
-                continue;
-            }
-            perTrace.append(element.getClassName())
-                    .append('.')
-                    .append(element.getMethodName())
-                    .append("  (")
-                    .append(element.getFileName())
-                    .append(':')
-                    .append(element.getLineNumber())
-                    .append(")");
-            str+="  ";
-            logContent(priority, perTrace.toString());
+//        for (int i = 0; i < traces.length; i++) {
+        StackTraceElement element = traces[6];
+        StringBuilder perTrace = new StringBuilder(str);
+        if (element.isNativeMethod()) {
+//                    continue;
+            return;
         }
+        String className = element.getClassName();
+        if (className.startsWith("android.")
+                || className.contains("com.android")
+                || className.contains("java.lang")
+                || className.contains("com.youth.xframe")) {
+//                    continue;
+            return;
+        }
+        perTrace.append(element.getClassName())
+                .append('.')
+                .append(element.getMethodName())
+                .append("  (")
+                .append(element.getFileName())
+                .append(':')
+                .append(element.getLineNumber())
+                .append(")");
+        str += "  ";
+        logContent(priority, perTrace.toString());
+//            }
         logChunk(priority, MIDDLE_BORDER);
     }
 }

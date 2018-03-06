@@ -17,9 +17,7 @@ public class MyApplication extends Application {
 
         XCrashHandlerUtils.getInstance().init(this);
         XLibrary.init(this);
-        XLibrary.logTag = "曹斌";
+        XLibrary.logTag = "自定义日志";
         XLibrary.isDebug = true;
     }
-
-
 }

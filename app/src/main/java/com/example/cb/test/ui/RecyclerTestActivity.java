@@ -43,9 +43,7 @@ public class RecyclerTestActivity extends BaseActivity {
         for (int i = 0; i < 20; i++) {
             list.add("我是第几个 " + (i + 1));
         }
-
         mAdapter.setDataLists(list);
-
     }
 
 
