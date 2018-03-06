@@ -1,6 +1,7 @@
 package com.example.cb.test;
 
 import android.Manifest;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -10,15 +11,21 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.cb.xlibrary.dialog.XUserHeadDialog;
+import com.cb.xlibrary.imagepicker.ImagePicker;
+import com.cb.xlibrary.imagepicker.bean.ImageItem;
 import com.cb.xlibrary.permission.XPermission;
-import com.cb.xlibrary.statusbar.StatusBarUtils;
 import com.cb.xlibrary.utils.XActivityStack;
 import com.example.cb.test.rx.MovieHttpRequest;
 import com.example.cb.test.rx.NewsResp;
 import com.example.cb.test.rx.UserInfoResp;
 import com.example.cb.test.rx.XHttpCallback;
+import com.example.cb.test.ui.RecyclerTestActivity;
+import com.example.cb.test.utils.GlideImageLoader;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -78,9 +85,30 @@ public class MainActivity extends BaseActivity {
         btnDownLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                downLoad2();
+                XUserHeadDialog xUserHeadDialog = new XUserHeadDialog(MainActivity.this);
+                xUserHeadDialog.setImageLoader(new GlideImageLoader());
+                xUserHeadDialog.showChoseSexDialog();
             }
         });
+        //
+        findViewById(R.id.btn_list).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                launchActivity(RecyclerTestActivity.class, null);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == XUserHeadDialog.CHANGE_HEAD_REQUEST_CODE) {
+            if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
+                ArrayList<ImageItem> list = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+                System.err.println("还好 " + list.get(0).path);
+                Glide.with(MainActivity.this).load(list.get(0).path).into(mImageView);
+            }
+        }
     }
 
     private void downLoad1() {

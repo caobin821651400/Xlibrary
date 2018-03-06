@@ -3,13 +3,11 @@ package com.example.cb.test.ui;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.cb.xlibrary.ItemDecoration.XGridItemDecoration;
 import com.cb.xlibrary.ItemDecoration.XPaddingDividerDecoration;
 import com.cb.xlibrary.adapter.XRecyclerViewAdapter;
 import com.cb.xlibrary.adapter.XViewHolder;
@@ -33,20 +31,14 @@ public class RecyclerTestActivity extends BaseActivity {
 
     private void initView() {
         mRecyclerView = findViewById(R.id.recycler_view);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(this,6));
+
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new MyAdapter(mRecyclerView);
-//        XPaddingDividerDecoration decoration = new XPaddingDividerDecoration.Builder(this)
-//                .setColor(Color.RED).setHeight(R.dimen.dp_10).build();
-        XGridItemDecoration decoration = new XGridItemDecoration.Builder(this)
-                .setColor(Color.RED).setHorizontal(10f).setVertical(10f)
-                .build();
-        mRecyclerView.setAdapter(mAdapter);
+        XPaddingDividerDecoration decoration = new XPaddingDividerDecoration.Builder(this)
+                .setColor(Color.RED).setHeight(R.dimen.dp_10).build();
         mRecyclerView.addItemDecoration(decoration);
+        mRecyclerView.setAdapter(mAdapter);
 
-        TextView textView = new TextView(this);
-        textView.setText("h哈哈");
-
-        mAdapter.addFooterView(textView);
         List<String> list = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
             list.add("我是第几个 " + (i + 1));
