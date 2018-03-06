@@ -17,13 +17,11 @@ import com.cb.xlibrary.imagepicker.ImagePicker;
 import com.cb.xlibrary.imagepicker.bean.ImageItem;
 import com.cb.xlibrary.permission.XPermission;
 import com.cb.xlibrary.utils.XActivityStack;
-import com.cb.xlibrary.utils.log.XLog;
 import com.example.cb.test.rx.MovieHttpRequest;
 import com.example.cb.test.rx.NewsResp;
 import com.example.cb.test.rx.UserInfoResp;
 import com.example.cb.test.rx.XHttpCallback;
 import com.example.cb.test.ui.RecyclerTestActivity;
-import com.example.cb.test.utils.GlideImageLoader;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -53,9 +51,6 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         XActivityStack.getInstance().addActivity(this);
         initView();
-        XLog.d("ssssssss");
-        XLog.e("ssssssss");
-        XLog.v("ssssssss");
     }
 
     private void initView() {
@@ -88,9 +83,10 @@ public class MainActivity extends BaseActivity {
         btnDownLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                XUserHeadDialog xUserHeadDialog = new XUserHeadDialog(MainActivity.this);
-                xUserHeadDialog.setImageLoader(new GlideImageLoader());
-                xUserHeadDialog.showChoseSexDialog();
+//                XUserHeadDialog xUserHeadDialog = new XUserHeadDialog(MainActivity.this);
+//                xUserHeadDialog.setImageLoader(new GlideImageLoader());
+//                xUserHeadDialog.showChoseSexDialog();
+                downLoad2();
             }
         });
         //
@@ -136,7 +132,6 @@ public class MainActivity extends BaseActivity {
         MovieHttpRequest.getInstance().getUesrInfo(map, new XHttpCallback<UserInfoResp>() {
             @Override
             public void onSuccess(UserInfoResp userInfoResp) {
-                System.err.println(userInfoResp.getCode());
             }
 
             @Override

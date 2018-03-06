@@ -73,7 +73,6 @@ public class BaseHttpRequest {
 
     /**
      * 移除Disposable
-     *
      */
     public static void removeDisposable() {
         if (compositeDisposable != null)
