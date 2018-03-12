@@ -47,7 +47,7 @@ public class BaseHttpRequest {
      *
      * @return
      */
-    protected static Retrofit getRetrofit() {
+    protected  Retrofit getRetrofit() {
         if (mRetrofit == null) {
             mRetrofit = new Retrofit.Builder()
                     .client(OkHttpConfiguration.getOkHttpClient())
@@ -64,7 +64,7 @@ public class BaseHttpRequest {
      *
      * @param d
      */
-    public static void addDisposable(Disposable d) {
+    public void addDisposable(Disposable d) {
         if (compositeDisposable == null) {
             compositeDisposable = new CompositeDisposable();
         }
@@ -72,9 +72,9 @@ public class BaseHttpRequest {
     }
 
     /**
-     * 移除Disposable
+     * 移除Disposable(取消订阅避免内存溢出)
      */
-    public static void removeDisposable() {
+    public void removeDisposable() {
         if (compositeDisposable != null)
             compositeDisposable.dispose();
     }

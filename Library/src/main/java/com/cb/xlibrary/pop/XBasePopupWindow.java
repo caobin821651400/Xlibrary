@@ -6,10 +6,11 @@ import android.widget.PopupWindow;
 
 
 /**
+ * 弹窗公共类
  * Created by caobin on 2017/5/2.
  */
 
-public class XPopupWindow extends PopupWindow {
+public class XBasePopupWindow extends PopupWindow {
     final XPopupController controller;
 
     @Override
@@ -26,7 +27,7 @@ public class XPopupWindow extends PopupWindow {
         void getChildView(View view, int layoutResId);
     }
 
-    private XPopupWindow(Context context) {
+    private XBasePopupWindow(Context context) {
         controller = new XPopupController(context, this);
     }
 
@@ -121,8 +122,8 @@ public class XPopupWindow extends PopupWindow {
             return this;
         }
 
-        public XPopupWindow create() {
-            final XPopupWindow popupWindow = new XPopupWindow(params.mContext);
+        public XBasePopupWindow create() {
+            final XBasePopupWindow popupWindow = new XBasePopupWindow(params.mContext);
             params.apply(popupWindow.controller);
             if (listener != null && params.layoutResId != 0) {
                 listener.getChildView(popupWindow.controller.mPopupView, params.layoutResId);

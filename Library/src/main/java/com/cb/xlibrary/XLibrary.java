@@ -12,7 +12,7 @@ public class XLibrary {
 
     // #log
     public static String logTag = "";
-    public static boolean isDebug =false;
+    public static boolean isDebug = false;
 
 
     public static void init(Context context) {
@@ -26,8 +26,7 @@ public class XLibrary {
     public static Context getContext() {
         synchronized (XLibrary.class) {
             if (XLibrary.context == null)
-                throw new NullPointerException("Call XLibrary.init(context) within your Application onCreate() method." +
-                        "Or extends XApplication");
+                throw new NullPointerException("XLibrary未初始化");
             return XLibrary.context.getApplicationContext();
         }
     }

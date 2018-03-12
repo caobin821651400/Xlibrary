@@ -32,7 +32,7 @@ public class MovieHttpRequest extends BaseHttpRequest {
         return HttpRequestHolder.instance;
     }
 
-    private static final ApiService apiService = getRetrofit().create(ApiService.class);
+    private ApiService apiService = getRetrofit().create(ApiService.class);
 
     public interface ApiService {
 
@@ -70,7 +70,7 @@ public class MovieHttpRequest extends BaseHttpRequest {
 
                     @Override
                     public void onError(Throwable e) {
-                        handleError(e);
+                        xHttpCallback.onError(handleError(e));
                     }
 
                     @Override
@@ -102,7 +102,8 @@ public class MovieHttpRequest extends BaseHttpRequest {
 
                     @Override
                     public void onError(Throwable e) {
-                        handleError(e);
+                        e.printStackTrace();
+                        xHttpCallback.onError(handleError(e));
                     }
 
                     @Override

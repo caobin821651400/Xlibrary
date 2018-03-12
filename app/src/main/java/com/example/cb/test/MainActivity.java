@@ -21,6 +21,7 @@ import com.example.cb.test.rx.MovieHttpRequest;
 import com.example.cb.test.rx.NewsResp;
 import com.example.cb.test.rx.UserInfoResp;
 import com.example.cb.test.rx.XHttpCallback;
+import com.example.cb.test.ui.RXActivity;
 import com.example.cb.test.ui.RecyclerTestActivity;
 
 import java.text.NumberFormat;
@@ -52,6 +53,7 @@ public class MainActivity extends BaseActivity {
         XActivityStack.getInstance().addActivity(this);
         initView();
     }
+
 
     private void initView() {
         btnDownLoad = findViewById(R.id.btn_down_load);
@@ -86,14 +88,15 @@ public class MainActivity extends BaseActivity {
 //                XUserHeadDialog xUserHeadDialog = new XUserHeadDialog(MainActivity.this);
 //                xUserHeadDialog.setImageLoader(new GlideImageLoader());
 //                xUserHeadDialog.showChoseSexDialog();
-                downLoad2();
+                downLoad1();
             }
         });
         //
         findViewById(R.id.btn_list).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                launchActivity(RecyclerTestActivity.class, null);
+//                launchActivity(RecyclerTestActivity.class, null);
+                launchActivity(RXActivity.class, null);
             }
         });
     }
