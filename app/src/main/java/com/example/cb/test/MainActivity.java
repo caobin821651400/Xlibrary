@@ -17,17 +17,23 @@ import com.cb.xlibrary.imagepicker.ImagePicker;
 import com.cb.xlibrary.imagepicker.bean.ImageItem;
 import com.cb.xlibrary.permission.XPermission;
 import com.cb.xlibrary.utils.XActivityStack;
+import com.example.cb.test.bean.UploadBean;
 import com.example.cb.test.rx.MovieHttpRequest;
 import com.example.cb.test.rx.NewsResp;
 import com.example.cb.test.rx.UserInfoResp;
 import com.example.cb.test.rx.XHttpCallback;
+import com.example.cb.test.rx.body.ProgressInfo;
+import com.example.cb.test.rx.body.ProgressListener;
 import com.example.cb.test.ui.RXActivity;
-import com.example.cb.test.ui.RecyclerTestActivity;
 
+import java.io.File;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 
 public class MainActivity extends BaseActivity {
@@ -88,7 +94,26 @@ public class MainActivity extends BaseActivity {
 //                XUserHeadDialog xUserHeadDialog = new XUserHeadDialog(MainActivity.this);
 //                xUserHeadDialog.setImageLoader(new GlideImageLoader());
 //                xUserHeadDialog.showChoseSexDialog();
-                downLoad1();
+
+                Map<String, RequestBody> map = new HashMap<>();
+                map.put("itvNum", convertRequestBody("DMT2015122206@ITVP"));
+                map.put("contentType", convertRequestBody("1"));
+                map.put("tag", convertRequestBody("曹斌测"));
+                map.put("desp", convertRequestBody("12344321"));
+                map.put("phone", convertRequestBody("15108460749"));
+
+                String filePath = "/storage/emulated/0/DCIM/Camera/IMG_20180301_163032.jpg";
+                MovieHttpRequest.getInstance().uploadImage(new File(filePath), map, new XHttpCallback<UploadBean>() {
+                    @Override
+                    public void onSuccess(UploadBean userInfoResp) {
+
+                    }
+
+                    @Override
+                    public void onError(String error) {
+
+                    }
+                }, listener);
             }
         });
         //
@@ -99,6 +124,29 @@ public class MainActivity extends BaseActivity {
                 launchActivity(RXActivity.class, null);
             }
         });
+    }
+
+    ProgressListener listener = new ProgressListener() {
+        @Override
+        public void onProgress(ProgressInfo progressInfo) {
+
+            System.err.println("进度 " + progressInfo.getPercent() + " / " + "100");
+        }
+
+        @Override
+        public void onError(long id, Exception e) {
+
+        }
+    };
+
+    /**
+     * 将参数value转变为RequestBody
+     *
+     * @param param
+     * @return
+     */
+    private RequestBody convertRequestBody(String param) {
+        return RequestBody.create(MediaType.parse("text/plain"), param);
     }
 
     @Override

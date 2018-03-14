@@ -41,22 +41,36 @@ public class BaseHttpRequest {
     private static CompositeDisposable compositeDisposable = null;//统一管理所有的订阅生命周期
 
     private static Retrofit mRetrofit;
+    private OkHttpConfiguration okHttpConfiguration;
 
     /**
      * 获取Retrofit对象
      *
      * @return
      */
-    protected  Retrofit getRetrofit() {
+    protected Retrofit getRetrofit() {
+        okHttpConfiguration = new OkHttpConfiguration();
         if (mRetrofit == null) {
             mRetrofit = new Retrofit.Builder()
-                    .client(OkHttpConfiguration.getOkHttpClient())
+                    .client(okHttpConfiguration.getOkHttpClient())
                     .addConverterFactory(GsonConverterFactory.create())//gson解析
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())//加入rxjava
                     .baseUrl(API_SERVER)
                     .build();
         }
         return mRetrofit;
+    }
+
+    /**
+     * 获取okHttp配置信息
+     *
+     * @return
+     */
+    public OkHttpConfiguration getOkHttpConfiguration() {
+        if (okHttpConfiguration == null) {
+            return new OkHttpConfiguration();
+        }
+        return okHttpConfiguration;
     }
 
     /**

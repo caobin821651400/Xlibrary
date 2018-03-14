@@ -1,7 +1,10 @@
 package com.example.cb.test.rx;
 
+import com.example.cb.test.bean.UploadBean;
+import com.example.cb.test.rx.body.ProgressListener;
 import com.google.gson.Gson;
 
+import java.io.File;
 import java.util.Map;
 
 import io.reactivex.Observable;
@@ -9,9 +12,15 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 
 /**
  * author : caobin
@@ -44,6 +53,15 @@ public class MovieHttpRequest extends BaseHttpRequest {
         @FormUrlEncoded
         @POST("userInfor/queryUserInfor")
         Observable<UserInfoResp> getUserInfo(@FieldMap Map<String, String> map);
+
+        /**
+         * 注意1：必须使用{@code @POST}注解为post请求<br>
+         * 注意2：使用{@code @Body}注解参数，则不能使用{@code @Multipart}注解方法了<br>
+         * 直接将所有的{@link MultipartBody.Part}合并到一个{@link MultipartBody}中
+         */
+        @Multipart
+        @POST("http://110.190.90.237:9091/server/upload")
+        Observable<UploadBean> uploadImg(@PartMap Map<String, RequestBody> map, @Part MultipartBody.Part part);
     }
 
     /**
@@ -97,6 +115,50 @@ public class MovieHttpRequest extends BaseHttpRequest {
                             xHttpCallback.onSuccess(value);
                         } else {
                             xHttpCallback.onError(value.getMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                        xHttpCallback.onError(handleError(e));
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    /**
+     * 上传图片
+     *
+     * @param file
+     * @param map
+     * @param xHttpCallback
+     */
+    public void uploadImage(File file, Map<String, RequestBody> map, final XHttpCallback<UploadBean> xHttpCallback, ProgressListener listener) {
+        RequestBody requestBody = RequestBody.create(MediaType.parse("image/jpg"), file);
+        MultipartBody.Part part = MultipartBody.Part.createFormData("multipartFiles", file.getName(), requestBody);
+
+        Observable<UploadBean> observable = apiService.uploadImg(map, part);
+        getOkHttpConfiguration().setmProgressListener(listener);
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<UploadBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        addDisposable(d);
+                    }
+
+                    @Override
+                    public void onNext(UploadBean uploadBean) {
+//                        System.err.println("哈哈  " + new Gson().toJson(uploadBean));
+                        if (uploadBean.getCode().equals("0")) {
+                            xHttpCallback.onSuccess(uploadBean);
+                        } else {
+                            xHttpCallback.onError(uploadBean.getMsg());
                         }
                     }
 
