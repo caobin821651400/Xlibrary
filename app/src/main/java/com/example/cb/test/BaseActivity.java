@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.cb.xlibrary.permission.XPermission;
+import com.cb.xlibrary.utils.XPermission;
 
 /**
  * author : caobin

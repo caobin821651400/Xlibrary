@@ -15,7 +15,7 @@ import com.bumptech.glide.Glide;
 import com.cb.xlibrary.dialog.XUserHeadDialog;
 import com.cb.xlibrary.imagepicker.ImagePicker;
 import com.cb.xlibrary.imagepicker.bean.ImageItem;
-import com.cb.xlibrary.permission.XPermission;
+import com.cb.xlibrary.utils.XPermission;
 import com.cb.xlibrary.utils.XActivityStack;
 import com.example.cb.test.bean.UploadBean;
 import com.example.cb.test.rx.MovieHttpRequest;

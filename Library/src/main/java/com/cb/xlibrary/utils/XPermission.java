@@ -1,4 +1,4 @@
-package com.cb.xlibrary.permission;
+package com.cb.xlibrary.utils;
 
 
 import android.app.Activity;

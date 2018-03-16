@@ -123,4 +123,26 @@
             <enum name="circle" value="1" />
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="WheelPicker">
+        <attr name="halfVisibleItemCount" format="integer"/>
+        <attr name="itemTextSize" format="integer"/>
+        <attr name="itemMaximumWidthText" format="integer"/>
+        <attr name="itemTextColor" format="color"/>
+        <attr name="textGradual" format="boolean"/>
+        <attr name="selectedTextColor" format="color"/>
+        <attr name="selectedTextSize" format="integer"/>
+        <attr name="currentItemPosition" format="integer"/>
+        <attr name="itemWidthSpace" format="integer"/>
+        <attr name="itemHeightSpace" format="integer"/>
+        <attr name="zoomInSelectedItem" format="boolean"/>
+        <attr name="wheelCyclic" format="boolean"/>
+        <attr name="wheelCurtain" format="boolean"/>
+        <attr name="wheelCurtainColor" format="color"/>
+        <attr name="wheelCurtainBorder" format="boolean"/>
+        <attr name="wheelCurtainBorderColor" format="reference"/>
+        <attr name="indicatorText" format="string"/>
+        <attr name="indicatorTextSize" format="integer"/>
+        <attr name="indicatorTextColor" format="color"/>
+    </declare-styleable>
 </resources>
