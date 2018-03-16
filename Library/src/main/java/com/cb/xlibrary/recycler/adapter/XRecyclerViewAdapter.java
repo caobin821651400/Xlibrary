@@ -1,4 +1,4 @@
-package com.cb.xlibrary.adapter;
+package com.cb.xlibrary.recycler.adapter;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;

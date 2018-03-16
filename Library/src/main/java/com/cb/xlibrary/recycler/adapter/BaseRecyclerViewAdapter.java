@@ -1,4 +1,4 @@
-package com.cb.xlibrary.adapter;
+package com.cb.xlibrary.recycler.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;

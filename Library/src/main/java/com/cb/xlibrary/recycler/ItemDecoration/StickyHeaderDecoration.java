@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.cb.xlibrary.ItemDecoration;
+package com.cb.xlibrary.recycler.ItemDecoration;
 
 import android.graphics.Canvas;
 import android.graphics.Rect;
@@ -24,7 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-import com.cb.xlibrary.adapter.XRecyclerViewAdapter;
+import com.cb.xlibrary.recycler.adapter.XRecyclerViewAdapter;
 
 import java.util.HashMap;
 import java.util.Map;
