@@ -20,4 +20,9 @@
     <string name="ip_photo_crop">图片裁剪</string>
     <string name="ip_origin">原图</string>
     <string name="ip_origin_size">原图(%1$s)</string>
+
+    <string name="ycuwq_datepicker_cancel">取消</string>
+    <string name="ycuwq_datepicker_decide">确认</string>
+    <string name="ycuwq_datepicker_hour">时</string>
+    <string name="ycuwq_datepicker_minute">分</string>
 </resources>

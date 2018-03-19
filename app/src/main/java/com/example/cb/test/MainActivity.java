@@ -15,8 +15,10 @@ import com.bumptech.glide.Glide;
 import com.cb.xlibrary.dialog.XUserHeadDialog;
 import com.cb.xlibrary.imagepicker.ImagePicker;
 import com.cb.xlibrary.imagepicker.bean.ImageItem;
+import com.cb.xlibrary.picker.date.DatePickerDialogFragment;
 import com.cb.xlibrary.utils.XPermission;
 import com.cb.xlibrary.utils.XActivityStack;
+import com.cb.xlibrary.picker.date.DatePicker;
 import com.example.cb.test.bean.UploadBean;
 import com.example.cb.test.rx.MovieHttpRequest;
 import com.example.cb.test.rx.NewsResp;
@@ -68,6 +70,7 @@ public class MainActivity extends BaseActivity {
         netSpeed = findViewById(R.id.netSpeed);
         pbProgress = findViewById(R.id.pbProgress);
         mImageView = findViewById(R.id.imageview);
+        DatePicker datePicker = findViewById(R.id.datePicker);
 
         numberFormat = NumberFormat.getPercentInstance();
         numberFormat.setMinimumFractionDigits(0);
@@ -94,26 +97,14 @@ public class MainActivity extends BaseActivity {
 //                XUserHeadDialog xUserHeadDialog = new XUserHeadDialog(MainActivity.this);
 //                xUserHeadDialog.setImageLoader(new GlideImageLoader());
 //                xUserHeadDialog.showChoseSexDialog();
-
-                Map<String, RequestBody> map = new HashMap<>();
-                map.put("itvNum", convertRequestBody("DMT2015122206@ITVP"));
-                map.put("contentType", convertRequestBody("1"));
-                map.put("tag", convertRequestBody("曹斌测"));
-                map.put("desp", convertRequestBody("12344321"));
-                map.put("phone", convertRequestBody("15108460749"));
-
-                String filePath = "/storage/emulated/0/DCIM/Camera/IMG_20180301_163032.jpg";
-                MovieHttpRequest.getInstance().uploadImage(new File(filePath), map, new XHttpCallback<UploadBean>() {
+                DatePickerDialogFragment datePickerDialogFragment = new DatePickerDialogFragment();
+                datePickerDialogFragment.setOnDateChooseListener(new DatePickerDialogFragment.OnDateChooseListener() {
                     @Override
-                    public void onSuccess(UploadBean userInfoResp) {
-
+                    public void onDateChoose(int year, int month, int day) {
+                        Toast.makeText(getApplicationContext(), year + "-" + month + "-" + day, Toast.LENGTH_SHORT).show();
                     }
-
-                    @Override
-                    public void onError(String error) {
-
-                    }
-                }, listener);
+                });
+                datePickerDialogFragment.show(getSupportFragmentManager(), "DatePickerDialogFragment");
             }
         });
         //
@@ -124,6 +115,29 @@ public class MainActivity extends BaseActivity {
                 launchActivity(RXActivity.class, null);
             }
         });
+    }
+
+
+    private void uploadImg(){
+        Map<String, RequestBody> map = new HashMap<>();
+        map.put("itvNum", convertRequestBody("DMT2015122206@ITVP"));
+        map.put("contentType", convertRequestBody("1"));
+        map.put("tag", convertRequestBody("曹斌测"));
+        map.put("desp", convertRequestBody("12344321"));
+        map.put("phone", convertRequestBody("15108460749"));
+
+        String filePath = "/storage/emulated/0/DCIM/Camera/IMG_20180301_163032.jpg";
+        MovieHttpRequest.getInstance().uploadImage(new File(filePath), map, new XHttpCallback<UploadBean>() {
+            @Override
+            public void onSuccess(UploadBean userInfoResp) {
+
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+        }, listener);
     }
 
     ProgressListener listener = new ProgressListener() {

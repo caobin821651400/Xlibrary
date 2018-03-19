@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mView="http://schemas.android.com/apk/res"
+    android:orientation="horizontal"
+    android:background="#f7f7f7"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.cb.xlibrary.picker.time.HourPicker
+        android:id="@+id/hourPicker_layout_time"
+        mView:halfVisibleItemCount="2"
+        mView:indicatorText="@string/ycuwq_datepicker_hour"
+        mView:wheelCyclic="true"
+        mView:indicatorTextSize="12sp"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+    <com.cb.xlibrary.picker.time.MinutePicker
+        android:id="@+id/minutePicker_layout_time"
+        mView:wheelCyclic="true"
+        mView:indicatorText="@string/ycuwq_datepicker_minute"
+        mView:indicatorTextSize="12sp"
+        mView:halfVisibleItemCount="2"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

@@ -19,4 +19,7 @@
     <color name="ip_color_accent">#1AAD19</color>
     <color name="ip_text_secondary_inverted">#66ffffff</color>
     <color name="ip_text_primary_inverted">#ffffff</color>
+
+    <color name="com_ycuwq_datepicker_selectedTextColor">#33aaff</color>
+    <color name="com_ycuwq_datepicker_divider">#cccccc</color>
 </resources>
