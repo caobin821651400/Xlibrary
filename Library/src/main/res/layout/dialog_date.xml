@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -7,34 +8,34 @@
     <com.cb.xlibrary.picker.date.DatePicker
         android:id="@+id/dayPicker_dialog"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        app:wheelCyclic="true" />
 
-        <Button
-            android:id="@+id/btn_dialog_date_cancel"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="#f7f7f7"
-            android:text="@string/ycuwq_datepicker_cancel"
-            android:textColor="@color/com_ycuwq_datepicker_selectedTextColor" />
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="horizontal">-->
 
-        <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:background="@color/com_ycuwq_datepicker_divider" />
+    <!--<Button-->
+    <!--android:id="@+id/btn_dialog_date_cancel"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="40dp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:background="#f7f7f7"-->
+    <!--android:text="@string/ycuwq_datepicker_cancel"-->
+    <!--android:textColor="@color/com_ycuwq_datepicker_selectedTextColor" />-->
 
-        <Button
-            android:id="@+id/btn_dialog_date_decide"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="#f7f7f7"
-            android:text="@string/ycuwq_datepicker_decide"
-            android:textColor="@color/com_ycuwq_datepicker_selectedTextColor" />
-    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/com_ycuwq_datepicker_divider" />
+
+    <Button
+        android:id="@+id/btn_dialog_date_decide"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="#f7f7f7"
+        android:text="@string/ycuwq_datepicker_decide"
+        android:textColor="@color/com_ycuwq_datepicker_selectedTextColor" />
+    <!--</LinearLayout>-->
 </LinearLayout>

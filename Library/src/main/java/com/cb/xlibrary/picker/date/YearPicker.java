@@ -20,7 +20,7 @@ import java.util.List;
 public class YearPicker extends WheelPicker<Integer> {
 
     private int mStartYear, mEndYear;
-    private int mSelectedYear;
+    private int mSelectedYear;//当前年份
     private OnYearSelectedListener mOnYearSelectedListener;
 
     public YearPicker(Context context) {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -62,10 +62,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="5dp" />
-    
-    <com.cb.xlibrary.picker.date.DatePicker
-        android:id="@+id/datePicker"
+
+    <!--<com.cb.xlibrary.picker.date.DatePicker-->
+    <!--android:id="@+id/datePicker"-->
+    <!--android:layout_width="match_parent"-->
+    <!--app:wheelCyclic="true"-->
+    <!--app:wheelCurtain="true"-->
+    <!--app:wheelCurtainBorder="true"-->
+    <!--android:layout_height="wrap_content"/>-->
+
+    <com.cb.xlibrary.picker.time.HourAndMinutePicker
         android:layout_width="match_parent"
-        app:wheelCyclic="true"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        app:wheelCurtain="true"
+        app:wheelCurtainBorder="true"
+        app:wheelCyclic="true" />
 </LinearLayout>

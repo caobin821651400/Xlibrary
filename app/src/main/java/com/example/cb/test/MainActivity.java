@@ -16,9 +16,8 @@ import com.cb.xlibrary.dialog.XUserHeadDialog;
 import com.cb.xlibrary.imagepicker.ImagePicker;
 import com.cb.xlibrary.imagepicker.bean.ImageItem;
 import com.cb.xlibrary.picker.date.DatePickerDialogFragment;
-import com.cb.xlibrary.utils.XPermission;
 import com.cb.xlibrary.utils.XActivityStack;
-import com.cb.xlibrary.picker.date.DatePicker;
+import com.cb.xlibrary.utils.XPermission;
 import com.example.cb.test.bean.UploadBean;
 import com.example.cb.test.rx.MovieHttpRequest;
 import com.example.cb.test.rx.NewsResp;
@@ -70,7 +69,6 @@ public class MainActivity extends BaseActivity {
         netSpeed = findViewById(R.id.netSpeed);
         pbProgress = findViewById(R.id.pbProgress);
         mImageView = findViewById(R.id.imageview);
-        DatePicker datePicker = findViewById(R.id.datePicker);
 
         numberFormat = NumberFormat.getPercentInstance();
         numberFormat.setMinimumFractionDigits(0);
@@ -118,7 +116,7 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    private void uploadImg(){
+    private void uploadImg() {
         Map<String, RequestBody> map = new HashMap<>();
         map.put("itvNum", convertRequestBody("DMT2015122206@ITVP"));
         map.put("contentType", convertRequestBody("1"));

@@ -43,14 +43,14 @@ public class DatePickerDialogFragment extends DialogFragment {
 
 
 		mDatePicker = view.findViewById(R.id.dayPicker_dialog);
-		mCancelButton = view.findViewById(R.id.btn_dialog_date_cancel);
+		//mCancelButton = view.findViewById(R.id.btn_dialog_date_cancel);
 		mDecideButton = view.findViewById(R.id.btn_dialog_date_decide);
-		mCancelButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismiss();
-			}
-		});
+//		mCancelButton.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				dismiss();
+//			}
+//		});
 		mDecideButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

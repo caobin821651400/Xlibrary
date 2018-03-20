@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class MonthPicker extends WheelPicker<Integer> {
 
-    private int mSelectedMonth;
+    private int mSelectedMonth;//当前月
 
     private OnMonthSelectedListener mOnMonthSelectedListener;
 
