@@ -24,7 +24,8 @@
         </activity>
         <activity android:name=".ui.RecyclerTestActivity" />
         <activity android:name=".ui.RXActivity" />
-        <activity android:name=".ui.db.MainDBActivity"></activity>
+        <activity android:name=".ui.db.MainDBActivity" />
+        <activity android:name=".event.EventBusActivity"></activity>
     </application>
 
 </manifest>

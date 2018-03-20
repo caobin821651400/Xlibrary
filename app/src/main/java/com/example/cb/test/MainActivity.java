@@ -19,6 +19,8 @@ import com.cb.xlibrary.picker.date.DatePickerDialogFragment;
 import com.cb.xlibrary.utils.XActivityStack;
 import com.cb.xlibrary.utils.XPermission;
 import com.example.cb.test.bean.UploadBean;
+import com.example.cb.test.event.EventBusActivity;
+import com.example.cb.test.event.MessageEvent;
 import com.example.cb.test.rx.MovieHttpRequest;
 import com.example.cb.test.rx.NewsResp;
 import com.example.cb.test.rx.UserInfoResp;
@@ -26,6 +28,10 @@ import com.example.cb.test.rx.XHttpCallback;
 import com.example.cb.test.rx.body.ProgressInfo;
 import com.example.cb.test.rx.body.ProgressListener;
 import com.example.cb.test.ui.RXActivity;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 import java.text.NumberFormat;
@@ -92,17 +98,7 @@ public class MainActivity extends BaseActivity {
         btnDownLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                XUserHeadDialog xUserHeadDialog = new XUserHeadDialog(MainActivity.this);
-//                xUserHeadDialog.setImageLoader(new GlideImageLoader());
-//                xUserHeadDialog.showChoseSexDialog();
-                DatePickerDialogFragment datePickerDialogFragment = new DatePickerDialogFragment();
-                datePickerDialogFragment.setOnDateChooseListener(new DatePickerDialogFragment.OnDateChooseListener() {
-                    @Override
-                    public void onDateChoose(int year, int month, int day) {
-                        Toast.makeText(getApplicationContext(), year + "-" + month + "-" + day, Toast.LENGTH_SHORT).show();
-                    }
-                });
-                datePickerDialogFragment.show(getSupportFragmentManager(), "DatePickerDialogFragment");
+                launchActivity(EventBusActivity.class, null);
             }
         });
         //
@@ -113,9 +109,37 @@ public class MainActivity extends BaseActivity {
                 launchActivity(RXActivity.class, null);
             }
         });
+        MessageEvent event = new MessageEvent();
+        event.setName("传进去");
+        EventBus.getDefault().postSticky(event);
     }
 
+    /**
+     * 选择用户头像
+     */
+    private void showChoseHeadDialog() {
+//                XUserHeadDialog xUserHeadDialog = new XUserHeadDialog(MainActivity.this);
+//                xUserHeadDialog.setImageLoader(new GlideImageLoader());
+//                xUserHeadDialog.showChoseSexDialog();
+    }
 
+    /**
+     * 日期选择
+     */
+    private void showDateDialog() {
+        DatePickerDialogFragment datePickerDialogFragment = new DatePickerDialogFragment();
+        datePickerDialogFragment.setOnDateChooseListener(new DatePickerDialogFragment.OnDateChooseListener() {
+            @Override
+            public void onDateChoose(int year, int month, int day) {
+                Toast.makeText(getApplicationContext(), year + "-" + month + "-" + day, Toast.LENGTH_SHORT).show();
+            }
+        });
+        datePickerDialogFragment.show(getSupportFragmentManager(), "DatePickerDialogFragment");
+    }
+
+    /**
+     * retrofit+okhttp实现图片上传
+     */
     private void uploadImg() {
         Map<String, RequestBody> map = new HashMap<>();
         map.put("itvNum", convertRequestBody("DMT2015122206@ITVP"));
