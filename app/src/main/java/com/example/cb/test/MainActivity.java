@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.cb.xlibrary.dialog.XTipDialog;
 import com.cb.xlibrary.dialog.XUserHeadDialog;
 import com.cb.xlibrary.imagepicker.ImagePicker;
 import com.cb.xlibrary.imagepicker.bean.ImageItem;
@@ -19,7 +20,6 @@ import com.cb.xlibrary.picker.date.DatePickerDialogFragment;
 import com.cb.xlibrary.utils.XActivityStack;
 import com.cb.xlibrary.utils.XPermission;
 import com.example.cb.test.bean.UploadBean;
-import com.example.cb.test.event.EventBusActivity;
 import com.example.cb.test.event.MessageEvent;
 import com.example.cb.test.rx.MovieHttpRequest;
 import com.example.cb.test.rx.NewsResp;
@@ -30,8 +30,6 @@ import com.example.cb.test.rx.body.ProgressListener;
 import com.example.cb.test.ui.RXActivity;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 import java.text.NumberFormat;
@@ -98,7 +96,18 @@ public class MainActivity extends BaseActivity {
         btnDownLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                launchActivity(EventBusActivity.class, null);
+//                launchActivity(EventBusActivity.class, null);
+                new XTipDialog.Builder(MainActivity.this)
+                        .leftBtnTxt("取消")
+                        .title("温馨提示")
+                        .setMessage("防不胜防收款方")
+                        .rightBtnTxt("确定")
+                        .setSureClickListener(new XTipDialog.InputDialogBtnClickListener() {
+                            @Override
+                            public void sureClick() {
+
+                            }
+                        }).create().show();
             }
         });
         //
