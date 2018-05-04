@@ -1,4 +1,4 @@
-package com.cb.xlibrary.widget;
+package com.cb.xlibrary.dialog;
 
 
 import android.app.Dialog;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.cb.xlibrary.R;
 import com.cb.xlibrary.utils.XOutdatedUtils;
+import com.cb.xlibrary.widget.XColorDrawable;
 
 
 /**

@@ -7,9 +7,9 @@ import com.cb.xlibrary.XLibrary;
  * 此内用于框架系统打印输出控制，使用者用XLog格式化体验更好。
  *
  */
-public class XPrintUtils {
+public class XLogUtils {
 
-    private XPrintUtils() {
+    private XLogUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
@@ -17,7 +17,7 @@ public class XPrintUtils {
     private static boolean log = XLibrary.isDebug;
 
     public static void setLog(boolean log) {
-        XPrintUtils.log = log;
+        XLogUtils.log = log;
     }
 
     public static void i(String msg) {

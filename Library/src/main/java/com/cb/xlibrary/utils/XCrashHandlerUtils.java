@@ -8,7 +8,7 @@ import android.os.Environment;
 import android.os.Looper;
 import android.widget.Toast;
 
-import com.cb.xlibrary.utils.log.XPrintUtils;
+import com.cb.xlibrary.utils.log.XLogUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -137,16 +137,16 @@ public class XCrashHandlerUtils implements Thread.UncaughtExceptionHandler {
                 infos.put("versionCode", versionCode);
             }
         } catch (PackageManager.NameNotFoundException e) {
-            XPrintUtils.e("an adapter_loading_error occured when collect package info --> "+e);
+            XLogUtils.e("an adapter_loading_error occured when collect package info --> "+e);
         }
         Field[] fields = Build.class.getDeclaredFields();
         for (Field field : fields) {
             try {
                 field.setAccessible(true);
                 infos.put(field.getName(), field.get(null).toString());
-                XPrintUtils.d(field.getName() + " : " + field.get(null));
+                XLogUtils.d(field.getName() + " : " + field.get(null));
             } catch (Exception e) {
-                XPrintUtils.e("an adapter_loading_error occured when collect crash info --> "+e);
+                XLogUtils.e("an adapter_loading_error occured when collect crash info --> "+e);
             }
         }
     }
@@ -179,10 +179,10 @@ public class XCrashHandlerUtils implements Thread.UncaughtExceptionHandler {
         sb.append(result);
         try {
             long timestamp = System.currentTimeMillis();
-            String fileName = "crash-" + XDateUtils.getCurrentDate() + "-" + timestamp + ".XPrintUtils";
+            String fileName = "crash-" + XDateUtils.getCurrentDate() + "-" + timestamp + ".XLogUtils";
             if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
                 String path = Environment.getExternalStorageDirectory().getPath() + "/crash/";
-                XPrintUtils.d("path=" + path);
+                XLogUtils.d("path=" + path);
                 File dir = new File(path);
                 if (!dir.exists()) {
                     dir.mkdirs();
@@ -193,7 +193,7 @@ public class XCrashHandlerUtils implements Thread.UncaughtExceptionHandler {
             }
             return fileName;
         } catch (Exception e) {
-            XPrintUtils.e("an adapter_loading_error occured while writing file... --> "+e);
+            XLogUtils.e("an adapter_loading_error occured while writing file... --> "+e);
         }
         return null;
     }

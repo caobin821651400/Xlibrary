@@ -11,7 +11,7 @@ public class XLibrary {
     private static Context context;
 
     // #log
-    public static String logTag = "";
+    public static String logTag = "TT";
     public static boolean isDebug = false;
 
 

@@ -2,6 +2,7 @@ package com.example.cb.test;
 
 import android.Manifest;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -19,17 +20,14 @@ import com.cb.xlibrary.imagepicker.bean.ImageItem;
 import com.cb.xlibrary.picker.date.DatePickerDialogFragment;
 import com.cb.xlibrary.utils.XActivityStack;
 import com.cb.xlibrary.utils.XPermission;
+import com.cb.xlibrary.dialog.XLoadingDialog;
 import com.example.cb.test.bean.UploadBean;
-import com.example.cb.test.event.MessageEvent;
 import com.example.cb.test.rx.MovieHttpRequest;
 import com.example.cb.test.rx.NewsResp;
 import com.example.cb.test.rx.UserInfoResp;
 import com.example.cb.test.rx.XHttpCallback;
 import com.example.cb.test.rx.body.ProgressInfo;
 import com.example.cb.test.rx.body.ProgressListener;
-import com.example.cb.test.ui.ViewPagerActivity;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 import java.text.NumberFormat;
@@ -110,11 +108,17 @@ public class MainActivity extends BaseActivity {
                         }).create().show();
             }
         });
+
         //
         findViewById(R.id.btn_list).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                launchActivity(ViewPagerActivity.class, null);
+//                launchActivity(ViewPagerActivity.class, null);
+                XLoadingDialog.with(MainActivity.this)
+                        .setMessage("正在加载中。。。")
+                        .setBackgroundColor(Color.parseColor("#7f000000"))
+                        .setMessageColor(Color.parseColor("#ffffff"))
+                        .show();
             }
         });
     }

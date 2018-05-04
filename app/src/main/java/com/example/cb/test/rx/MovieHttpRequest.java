@@ -64,17 +64,8 @@ public class MovieHttpRequest extends BaseHttpRequest {
         @Multipart
         @POST("http://110.190.90.237:9091/server/upload")
         Observable<UploadBean> uploadImg(@PartMap Map<String, RequestBody> map, @Part MultipartBody.Part part);
-
-        @POST("sdasdd")
-        Observable<UploadBean> jsonPost(@Body RequestBody body);
-
     }
 
-    public void sendJsonPost(){
-        String jsonString = "adsadsad";
-        RequestBody body = RequestBody.create(MediaType.parse("application/json"), jsonString);
-        Observable<UploadBean> observable = apiService.jsonPost(body);
-    }
 
     /**
      * 获取新闻信息
