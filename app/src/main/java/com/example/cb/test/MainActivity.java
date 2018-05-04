@@ -27,7 +27,7 @@ import com.example.cb.test.rx.UserInfoResp;
 import com.example.cb.test.rx.XHttpCallback;
 import com.example.cb.test.rx.body.ProgressInfo;
 import com.example.cb.test.rx.body.ProgressListener;
-import com.example.cb.test.ui.RXActivity;
+import com.example.cb.test.ui.ViewPagerActivity;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -114,13 +114,9 @@ public class MainActivity extends BaseActivity {
         findViewById(R.id.btn_list).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                launchActivity(RecyclerTestActivity.class, null);
-                launchActivity(RXActivity.class, null);
+                launchActivity(ViewPagerActivity.class, null);
             }
         });
-        MessageEvent event = new MessageEvent();
-        event.setName("传进去");
-        EventBus.getDefault().postSticky(event);
     }
 
     /**

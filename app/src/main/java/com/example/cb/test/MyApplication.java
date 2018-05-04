@@ -15,7 +15,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        XCrashHandlerUtils.getInstance().init(this);
+//        XCrashHandlerUtils.getInstance().init(this);
         XLibrary.init(this);
         XLibrary.logTag = "自定义日志";
         XLibrary.isDebug = true;
