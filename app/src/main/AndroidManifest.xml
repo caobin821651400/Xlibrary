@@ -24,6 +24,14 @@
         </activity>
         <activity android:name=".ui.RecyclerTestActivity" />
         <activity android:name=".ui.ViewPagerActivity" />
+        <activity android:name=".event.EventBusActivity" />
+        <activity android:name=".ui.provider.MContentProviderActivity"></activity>
+
+        <provider
+            android:name=".ui.provider.BookProvider"
+            android:authorities="com.example.cb.test.book.provider"
+            android:permission=".ui.provider.permission"
+            android:process=":provider" />
 
         <service android:name=".service.XService">
             <intent-filter>

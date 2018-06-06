@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.ToxicBakery.viewpager.transforms.StackTransformer;
 import com.example.cb.test.BaseActivity;
 import com.example.cb.test.R;
 
@@ -65,7 +66,7 @@ public class ViewPagerActivity extends BaseActivity {
         });
 
         mViewPager.setCurrentItem(1, false);
-//        mViewPager.setPageTransformer(true, new StackTransformer());
+        mViewPager.setPageTransformer(true, new StackTransformer());
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

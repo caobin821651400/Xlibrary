@@ -299,9 +299,6 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
             mBtnPre.setTextColor(ContextCompat.getColor(this, R.color.ip_text_secondary_inverted));
             mBtnOk.setTextColor(ContextCompat.getColor(this, R.color.ip_text_secondary_inverted));
         }
-//        mImageGridAdapter.notifyDataSetChanged();
-//        mRecyclerAdapter.notifyItemChanged(position); // 17/4/21 fix the position while click img to preview
-//        mRecyclerAdapter.notifyItemChanged(position + (imagePicker.isShowCamera() ? 1 : 0));// 17/4/24  fix the position while click right bottom preview button
         for (int i = imagePicker.isShowCamera() ? 1 : 0; i < mRecyclerAdapter.getItemCount(); i++) {
             if (mRecyclerAdapter.getItem(i).path != null && mRecyclerAdapter.getItem(i).path.equals(item.path)) {
                 mRecyclerAdapter.notifyItemChanged(i);
@@ -332,27 +329,7 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
             if (resultCode == RESULT_OK && requestCode == ImagePicker.REQUEST_CODE_TAKE) {
                 //发送广播通知图片增加了
                 ImagePicker.galleryAddPic(this, imagePicker.getTakeImageFile());
-
-                /**
-                 * 2017-03-21 对机型做旋转处理
-                 */
                 String path = imagePicker.getTakeImageFile().getAbsolutePath();
-//                int degree = BitmapUtil.getBitmapDegree(path);
-//                if (degree != 0){
-//                    Bitmap bitmap = BitmapUtil.rotateBitmapByDegree(path,degree);
-//                    if (bitmap != null){
-//                        File file = new File(path);
-//                        try {
-//                            FileOutputStream bos = new FileOutputStream(file);
-//                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
-//                            bos.flush();
-//                            bos.close();
-//                        } catch (IOException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                }
-
                 ImageItem imageItem = new ImageItem();
                 imageItem.path = path;
                 imagePicker.clearSelectedImages();
