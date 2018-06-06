@@ -46,7 +46,7 @@ public class XUserHeadDialog implements XActionSheetDialog.XMenuListener {
         this.mImageLoader = imageLoader;
     }
 
-    public void showChoseSexDialog() {
+    public void show() {
         if (mImageLoader == null) {
             throw new RuntimeException("必须先调用setImageLoader()方法。");
         }

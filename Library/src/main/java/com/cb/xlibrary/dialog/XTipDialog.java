@@ -22,15 +22,17 @@ import com.cb.xlibrary.R;
  */
 public class XTipDialog extends Dialog {
 
-    public interface InputDialogBtnClickListener {
-        void sureClick();
+    public interface BtnClickListener {
+        void leftBtnClick();
+
+        void rightBtnClick();
     }
 
-    private Button btnSave;
-    private Button btnCancel;
+    private Button btnRight;
+    private Button btnLeft;
     private TextView tvContent;
     private TextView tvTitle;
-    private InputDialogBtnClickListener inputDialogBtnClickListener;
+    private BtnClickListener btnClickListener;
 
     private String title;
     private String leftBtnTxt = "";
@@ -50,8 +52,8 @@ public class XTipDialog extends Dialog {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tip_dialog);
         tvTitle = (TextView) findViewById(R.id.tv_title);
-        btnSave = (Button) findViewById(R.id.btn_save);
-        btnCancel = (Button) findViewById(R.id.btn_cancel);
+        btnRight = (Button) findViewById(R.id.btn_right);
+        btnLeft = (Button) findViewById(R.id.btn_left);
         tvContent = (TextView) findViewById(R.id.tv_content);
     }
 
@@ -66,25 +68,27 @@ public class XTipDialog extends Dialog {
      */
     private void show(XTipDialog xInputDialog) {
         tvTitle.setText(xInputDialog.title);
-        btnSave.setText(xInputDialog.rightBtnTxt);
-        btnSave.setTextColor(xInputDialog.rightBtnTxtColor);
-        btnCancel.setText(xInputDialog.leftBtnTxt);
+        btnRight.setText(xInputDialog.rightBtnTxt);
+        btnRight.setTextColor(xInputDialog.rightBtnTxtColor);
+        btnLeft.setText(xInputDialog.leftBtnTxt);
+        btnLeft.setTextColor(xInputDialog.leftBtnTxtColor);
         tvContent.setText(xInputDialog.message);
-        btnCancel.setTextColor(xInputDialog.leftBtnTxtColor);
 
-        btnSave.setOnClickListener(new View.OnClickListener() {
+        btnRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (inputDialogBtnClickListener != null)
-                    inputDialogBtnClickListener.sureClick();
+                if (btnClickListener != null)
+                    btnClickListener.rightBtnClick();
                 dismiss();
 
             }
         });
-        btnCancel.setOnClickListener(new View.OnClickListener() {
+        btnLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cancel();
+                if (btnClickListener != null)
+                    btnClickListener.leftBtnClick();
+                dismiss();
             }
         });
     }
@@ -161,8 +165,8 @@ public class XTipDialog extends Dialog {
          * @param listener
          * @return
          */
-        public Builder setSureClickListener(InputDialogBtnClickListener listener) {
-            xInputDialog.inputDialogBtnClickListener = listener;
+        public Builder setSureClickListener(BtnClickListener listener) {
+            xInputDialog.btnClickListener = listener;
             return this;
         }
 

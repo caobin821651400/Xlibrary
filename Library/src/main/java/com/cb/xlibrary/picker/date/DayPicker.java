@@ -71,8 +71,8 @@ public class DayPicker extends WheelPicker<Integer> {
         return mSelectedDay;
     }
 
-    public void setSelectedDay(int selectedMonth) {
-        setSelectedDay(selectedMonth, true);
+    public void setSelectedDay(int selectedDay) {
+        setSelectedDay(selectedDay, true);
     }
 
     public void setSelectedDay(int selectedDay, boolean smoothScroll) {

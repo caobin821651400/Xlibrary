@@ -24,8 +24,12 @@
         </activity>
         <activity android:name=".ui.RecyclerTestActivity" />
         <activity android:name=".ui.ViewPagerActivity" />
-        <activity android:name=".ui.db.MainDBActivity" />
-        <activity android:name=".event.EventBusActivity"></activity>
+
+        <service android:name=".service.XService">
+            <intent-filter>
+                <action android:name="cn.scu.finch" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

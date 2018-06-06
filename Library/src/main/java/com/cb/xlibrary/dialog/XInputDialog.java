@@ -81,7 +81,7 @@ public class XInputDialog extends Dialog {
             public void onClick(View v) {
                 if (inputDialogBtnClickListener != null)
                     inputDialogBtnClickListener.onClick(etContent.getText().toString().trim());
-                dismiss();
+                cancel();
 
             }
         });

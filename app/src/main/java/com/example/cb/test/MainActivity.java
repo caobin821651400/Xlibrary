@@ -2,7 +2,6 @@ package com.example.cb.test;
 
 import android.Manifest;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -10,33 +9,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.cb.xlibrary.dialog.XTipDialog;
-import com.cb.xlibrary.dialog.XUserHeadDialog;
-import com.cb.xlibrary.imagepicker.ImagePicker;
-import com.cb.xlibrary.imagepicker.bean.ImageItem;
-import com.cb.xlibrary.picker.date.DatePickerDialogFragment;
 import com.cb.xlibrary.utils.XActivityStack;
 import com.cb.xlibrary.utils.XPermission;
-import com.cb.xlibrary.dialog.XLoadingDialog;
-import com.example.cb.test.bean.UploadBean;
-import com.example.cb.test.rx.MovieHttpRequest;
-import com.example.cb.test.rx.NewsResp;
-import com.example.cb.test.rx.UserInfoResp;
-import com.example.cb.test.rx.XHttpCallback;
-import com.example.cb.test.rx.body.ProgressInfo;
-import com.example.cb.test.rx.body.ProgressListener;
+import com.example.cb.test.service.XService;
 
-import java.io.File;
 import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
 
 
 public class MainActivity extends BaseActivity {
@@ -94,154 +72,172 @@ public class MainActivity extends BaseActivity {
         btnDownLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                launchActivity(EventBusActivity.class, null);
-                new XTipDialog.Builder(MainActivity.this)
-                        .leftBtnTxt("取消")
-                        .title("温馨提示")
-                        .setMessage("防不胜防收款方")
-                        .rightBtnTxt("确定")
-                        .setSureClickListener(new XTipDialog.InputDialogBtnClickListener() {
-                            @Override
-                            public void sureClick() {
-
-                            }
-                        }).create().show();
+                Intent intent = new Intent(MainActivity.this, XService.class);
+                intent.putExtra("taskName", "task1");
+                startService(intent);
             }
         });
-
         //
         findViewById(R.id.btn_list).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                launchActivity(ViewPagerActivity.class, null);
-                XLoadingDialog.with(MainActivity.this)
-                        .setMessage("正在加载中。。。")
-                        .setBackgroundColor(Color.parseColor("#7f000000"))
-                        .setMessageColor(Color.parseColor("#ffffff"))
-                        .show();
+                Intent intent = new Intent(MainActivity.this, XService.class);
+                intent.putExtra("taskName", "task2");
+                startService(intent);
             }
         });
     }
 
-    /**
-     * 选择用户头像
-     */
-    private void showChoseHeadDialog() {
-//                XUserHeadDialog xUserHeadDialog = new XUserHeadDialog(MainActivity.this);
-//                xUserHeadDialog.setImageLoader(new GlideImageLoader());
-//                xUserHeadDialog.showChoseSexDialog();
-    }
 
-    /**
-     * 日期选择
-     */
-    private void showDateDialog() {
-        DatePickerDialogFragment datePickerDialogFragment = new DatePickerDialogFragment();
-        datePickerDialogFragment.setOnDateChooseListener(new DatePickerDialogFragment.OnDateChooseListener() {
-            @Override
-            public void onDateChoose(int year, int month, int day) {
-                Toast.makeText(getApplicationContext(), year + "-" + month + "-" + day, Toast.LENGTH_SHORT).show();
-            }
-        });
-        datePickerDialogFragment.show(getSupportFragmentManager(), "DatePickerDialogFragment");
-    }
+//    /**
+//     * 选择用户头像
+//     */
+//    private void showChoseHeadDialog() {
+//        XUserHeadDialog xUserHeadDialog = new XUserHeadDialog(MainActivity.this);
+//        xUserHeadDialog.setImageLoader(new GlideImageLoader());
+//        xUserHeadDialog.show();
+//    }
+//
+//    private void showLoadingDialog() {
+//        if (xLoadingDialog == null) {
+//            xLoadingDialog = new XLoadingDialog(MainActivity.this);
+//            xLoadingDialog.setMessage("正在加载中。。。");
+//            xLoadingDialog.show();
+//        } else {
+//            xLoadingDialog.show();
+//        }
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                xLoadingDialog.dismiss();
+//            }
+//        }, 2000);
+//    }
 
-    /**
-     * retrofit+okhttp实现图片上传
-     */
-    private void uploadImg() {
-        Map<String, RequestBody> map = new HashMap<>();
-        map.put("itvNum", convertRequestBody("DMT2015122206@ITVP"));
-        map.put("contentType", convertRequestBody("1"));
-        map.put("tag", convertRequestBody("曹斌测"));
-        map.put("desp", convertRequestBody("12344321"));
-        map.put("phone", convertRequestBody("15108460749"));
+//    private void showInputDialog() {
+//        new XInputDialog.Builder(MainActivity.this)
+//                .leftBtnTxt("取消")
+//                .rightBtnTxt("确定")
+//                .setCancelable(false)
+//                .title("请输入")
+//                .setSureClickListener(new XInputDialog.InputDialogBtnClickListener() {
+//                    @Override
+//                    public void onClick(String content) {
+//                        XLog.d(content);
+//                    }
+//                }).create().show();
+//    }
 
-        String filePath = "/storage/emulated/0/DCIM/Camera/IMG_20180301_163032.jpg";
-        MovieHttpRequest.getInstance().uploadImage(new File(filePath), map, new XHttpCallback<UploadBean>() {
-            @Override
-            public void onSuccess(UploadBean userInfoResp) {
+//    /**
+//     * 日期选择
+//     */
+//    private void showDateDialog() {
+//        DatePickerDialogFragment datePickerDialogFragment = new DatePickerDialogFragment();
+//        datePickerDialogFragment.setOnDateChooseListener(new DatePickerDialogFragment.OnDateChooseListener() {
+//            @Override
+//            public void onDateChoose(int year, int month, int day) {
+//                Toast.makeText(getApplicationContext(), year + "-" + month + "-" + day, Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//        datePickerDialogFragment.show(getSupportFragmentManager(), "DatePickerDialogFragment");
+//    }
 
-            }
-
-            @Override
-            public void onError(String error) {
-
-            }
-        }, listener);
-    }
-
-    ProgressListener listener = new ProgressListener() {
-        @Override
-        public void onProgress(ProgressInfo progressInfo) {
-
-            System.err.println("进度 " + progressInfo.getPercent() + " / " + "100");
-        }
-
-        @Override
-        public void onError(long id, Exception e) {
-
-        }
-    };
-
-    /**
-     * 将参数value转变为RequestBody
-     *
-     * @param param
-     * @return
-     */
-    private RequestBody convertRequestBody(String param) {
-        return RequestBody.create(MediaType.parse("text/plain"), param);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == XUserHeadDialog.CHANGE_HEAD_REQUEST_CODE) {
-            if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
-                ArrayList<ImageItem> list = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-                Glide.with(MainActivity.this).load(list.get(0).path).into(mImageView);
-            }
-        }
-    }
-
-    private void downLoad1() {
-        Map<String, String> map = new HashMap<>();
-        map.put("type", "top");
-        map.put("key", "f323c09a114635eb935ed8dd19f7284e");
-        MovieHttpRequest.getInstance().sendNewsRequest(map, new XHttpCallback<NewsResp>() {
-            @Override
-            public void onSuccess(NewsResp newsResp) {
-                System.err.println("哈哈 " + newsResp.getResult().getData().get(0).getTitle());
-            }
-
-            @Override
-            public void onError(String error) {
-                System.err.println("哈哈 error " + error);
-            }
-        });
-    }
-
-    private void downLoad2() {
-        Map<String, String> map = new HashMap<>();
-        map.put("staffAccount", "gNwTv7GOKr+9tK+bHVlw5A==");
-        MovieHttpRequest.getInstance().getUesrInfo(map, new XHttpCallback<UserInfoResp>() {
-            @Override
-            public void onSuccess(UserInfoResp userInfoResp) {
-            }
-
-            @Override
-            public void onError(String error) {
-                Toast.makeText(MainActivity.this, error, Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
+//    /**
+//     * retrofit+okhttp实现图片上传
+//     */
+//    private void uploadImg() {
+//        Map<String, RequestBody> map = new HashMap<>();
+//        map.put("itvNum", convertRequestBody("DMT2015122206@ITVP"));
+//        map.put("contentType", convertRequestBody("1"));
+//        map.put("tag", convertRequestBody("曹斌测"));
+//        map.put("desp", convertRequestBody("12344321"));
+//        map.put("phone", convertRequestBody("15108460749"));
+//
+//        String filePath = "/storage/emulated/0/DCIM/Camera/IMG_20180301_163032.jpg";
+//        MovieHttpRequest.getInstance().uploadImage(new File(filePath), map, new XHttpCallback<UploadBean>() {
+//            @Override
+//            public void onSuccess(UploadBean userInfoResp) {
+//
+//            }
+//
+//            @Override
+//            public void onError(String error) {
+//
+//            }
+//        }, listener);
+//    }
+//
+//    ProgressListener listener = new ProgressListener() {
+//        @Override
+//        public void onProgress(ProgressInfo progressInfo) {
+//
+//            System.err.println("进度 " + progressInfo.getPercent() + " / " + "100");
+//        }
+//
+//        @Override
+//        public void onError(long id, Exception e) {
+//
+//        }
+//    };
+//
+//    /**
+//     * 将参数value转变为RequestBody
+//     *
+//     * @param param
+//     * @return
+//     */
+//    private RequestBody convertRequestBody(String param) {
+//        return RequestBody.create(MediaType.parse("text/plain"), param);
+//    }
+//
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == XUserHeadDialog.CHANGE_HEAD_REQUEST_CODE) {
+//            if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
+//                ArrayList<ImageItem> list = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+//                Glide.with(MainActivity.this).load(list.get(0).path).into(mImageView);
+//            }
+//        }
+//    }
+//
+//    private void downLoad1() {
+//        Map<String, String> map = new HashMap<>();
+//        map.put("type", "top");
+//        map.put("key", "f323c09a114635eb935ed8dd19f7284e");
+//        MovieHttpRequest.getInstance().sendNewsRequest(map, new XHttpCallback<NewsResp>() {
+//            @Override
+//            public void onSuccess(NewsResp newsResp) {
+//                System.err.println("哈哈 " + newsResp.getResult().getData().get(0).getTitle());
+//            }
+//
+//            @Override
+//            public void onError(String error) {
+//                System.err.println("哈哈 error " + error);
+//            }
+//        });
+//    }
+//
+//    private void downLoad2() {
+//        Map<String, String> map = new HashMap<>();
+//        map.put("staffAccount", "gNwTv7GOKr+9tK+bHVlw5A==");
+//        MovieHttpRequest.getInstance().getUesrInfo(map, new XHttpCallback<UserInfoResp>() {
+//            @Override
+//            public void onSuccess(UserInfoResp userInfoResp) {
+//            }
+//
+//            @Override
+//            public void onError(String error) {
+//                Toast.makeText(MainActivity.this, error, Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         //Activity销毁时，取消网络请求
-        MovieHttpRequest.getInstance().dispose();
+        // MovieHttpRequest.getInstance().dispose();
         XActivityStack.getInstance().finishActivity();
     }
 }

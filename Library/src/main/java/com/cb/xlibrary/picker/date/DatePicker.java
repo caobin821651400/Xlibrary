@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 
 
 import com.cb.xlibrary.R;
+import com.cb.xlibrary.utils.log.XLog;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -129,6 +130,7 @@ public class DatePicker extends LinearLayout implements YearPicker.OnYearSelecte
 	@Override
 	public void onMonthSelected(int month) {
 		mDayPicker.setMonth(getYear(), month);
+		mDayPicker.setSelectedDay(0);
 		onDateSelected();
 	}
 
