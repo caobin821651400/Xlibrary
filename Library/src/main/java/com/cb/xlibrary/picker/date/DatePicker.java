@@ -12,7 +12,6 @@ import android.widget.LinearLayout;
 
 
 import com.cb.xlibrary.R;
-import com.cb.xlibrary.utils.log.XLog;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

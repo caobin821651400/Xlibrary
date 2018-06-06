@@ -8,8 +8,6 @@ import android.os.Environment;
 import android.os.Looper;
 import android.widget.Toast;
 
-import com.cb.xlibrary.utils.log.XLogUtils;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;

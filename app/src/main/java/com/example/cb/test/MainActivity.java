@@ -1,7 +1,6 @@
 package com.example.cb.test;
 
 import android.Manifest;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 
 import com.cb.xlibrary.utils.XActivityStack;
 import com.cb.xlibrary.utils.XPermission;
-import com.example.cb.test.service.XService;
 
 import java.text.NumberFormat;
 
@@ -72,22 +70,18 @@ public class MainActivity extends BaseActivity {
         btnDownLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, XService.class);
-                intent.putExtra("taskName", "task1");
-                startService(intent);
             }
         });
+
+
         //
         findViewById(R.id.btn_list).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, XService.class);
-                intent.putExtra("taskName", "task2");
-                startService(intent);
+
             }
         });
     }
-
 
 //    /**
 //     * 选择用户头像
@@ -232,6 +226,36 @@ public class MainActivity extends BaseActivity {
 //            }
 //        });
 //    }
+
+    /*****************************************服务开始**********************************/
+    //启动服务
+//    Intent intent1 = new Intent(MainActivity.this, XService.class);
+//    Bundle bundle = new Bundle();
+//        bundle.putString("taskName", "task2");
+//        intent1.putExtras(bundle);
+//    startService(intent1);
+//
+////    绑定服务
+//Intent intent1 = new Intent(MainActivity.this, XService.class);
+//    bindService(intent1, conn, Context.BIND_AUTO_CREATE);
+//
+//    //
+//    XService xService;
+//    ServiceConnection conn = new ServiceConnection() {
+//        @Override
+//        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+//            XService.MyBinder binder = (XService.MyBinder) iBinder;
+//            xService = binder.getService();
+//            xService.aa();
+//        }
+//
+//        @Override
+//        public void onServiceDisconnected(ComponentName componentName) {
+//
+//        }
+//    };
+
+    /**********************************服务结束**********************************/
 
     @Override
     protected void onDestroy() {

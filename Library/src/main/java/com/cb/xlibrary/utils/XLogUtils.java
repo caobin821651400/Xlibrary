@@ -1,4 +1,4 @@
-package com.cb.xlibrary.utils.log;
+package com.cb.xlibrary.utils;
 
 
 import com.cb.xlibrary.XLibrary;

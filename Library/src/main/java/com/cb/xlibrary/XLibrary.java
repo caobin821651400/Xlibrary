@@ -3,9 +3,6 @@ package com.cb.xlibrary;
 
 import android.content.Context;
 
-import com.cb.xlibrary.utils.log.XLog;
-import com.cb.xlibrary.utils.log.XLogConfig;
-
 
 public class XLibrary {
     private static Context context;
@@ -17,10 +14,6 @@ public class XLibrary {
 
     public static void init(Context context) {
         XLibrary.context = context;
-    }
-
-    public static XLogConfig initXLog() {
-        return XLog.init();
     }
 
     public static Context getContext() {
