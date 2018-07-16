@@ -8,9 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.cb.xlibrary.adapter.XRecyclerViewAdapter;
+import com.cb.xlibrary.adapter.XViewHolder;
 import com.cb.xlibrary.recycler.ItemDecoration.XPaddingDividerDecoration;
-import com.cb.xlibrary.recycler.adapter.XRecyclerViewAdapter;
-import com.cb.xlibrary.recycler.adapter.XViewHolder;
 import com.example.cb.test.BaseActivity;
 import com.example.cb.test.R;
 
