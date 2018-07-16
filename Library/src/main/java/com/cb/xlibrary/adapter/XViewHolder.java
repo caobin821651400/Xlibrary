@@ -1,4 +1,4 @@
-package com.cb.xlibrary.recycler.adapter;
+package com.cb.xlibrary.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

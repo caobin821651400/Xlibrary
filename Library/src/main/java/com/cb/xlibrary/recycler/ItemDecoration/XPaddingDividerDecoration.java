@@ -14,7 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.View;
 
-import com.cb.xlibrary.recycler.adapter.XRecyclerViewAdapter;
+import com.cb.xlibrary.adapter.XRecyclerViewAdapter;
 
 /**
  * 带左右边距的分割线,只支持vertical的layoutManager

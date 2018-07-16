@@ -9,7 +9,7 @@ public class XLibrary {
 
     // #log
     public static String logTag = "TT";
-    public static boolean isDebug = false;
+    public static boolean isDebug = true;
 
 
     public static void init(Context context) {

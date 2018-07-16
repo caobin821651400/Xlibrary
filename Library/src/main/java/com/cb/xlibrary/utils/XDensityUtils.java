@@ -27,6 +27,22 @@ public class XDensityUtils {
     }
 
     /**
+     * 根据屏幕宽度与密度计算GridView显示的列数， 获取Item宽度
+     *
+     * @param activity
+     * @param colum    列
+     * @return
+     */
+    public static int getImageItemWidth(Activity activity, int colum) {
+        int screenWidth = activity.getResources().getDisplayMetrics().widthPixels;
+        int densityDpi = activity.getResources().getDisplayMetrics().densityDpi;
+        int cols = screenWidth / densityDpi;
+        cols = cols < colum ? colum : cols;
+        int columnSpace = (int) (2 * activity.getResources().getDisplayMetrics().density);
+        return (screenWidth - columnSpace * (cols - 1)) / cols;
+    }
+
+    /**
      * dp转px
      *
      * @param context

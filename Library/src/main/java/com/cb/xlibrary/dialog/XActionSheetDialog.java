@@ -17,8 +17,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.cb.xlibrary.R;
-import com.cb.xlibrary.recycler.adapter.XRecyclerViewAdapter;
-import com.cb.xlibrary.recycler.adapter.XViewHolder;
+import com.cb.xlibrary.adapter.XRecyclerViewAdapter;
+import com.cb.xlibrary.adapter.XViewHolder;
 import com.cb.xlibrary.bean.BottomPopupBean;
 
 import java.util.List;

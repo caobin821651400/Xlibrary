@@ -24,7 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-import com.cb.xlibrary.recycler.adapter.XRecyclerViewAdapter;
+import com.cb.xlibrary.adapter.XRecyclerViewAdapter;
 
 import java.util.HashMap;
 import java.util.Map;

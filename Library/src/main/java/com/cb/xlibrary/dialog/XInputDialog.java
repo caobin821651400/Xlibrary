@@ -42,6 +42,7 @@ public class XInputDialog extends Dialog {
     private boolean isBgTrsnsparent = false;//背景半透明
     private int leftBtnTxtColor = Color.parseColor("#000000");
     private int rightBtnTxtColor = Color.parseColor("#FAC200");
+    private int inputType;
 
 
     private XInputDialog(@NonNull Context context) {
@@ -75,6 +76,7 @@ public class XInputDialog extends Dialog {
         btnCancel.setText(xInputDialog.leftBtnTxt);
         btnCancel.setTextColor(xInputDialog.leftBtnTxtColor);
         etContent.setBackgroundDrawable(editBg);
+        etContent.setInputType(xInputDialog.inputType);
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -188,6 +190,17 @@ public class XInputDialog extends Dialog {
          */
         public Builder setCancelable(boolean cancelable) {
             xInputDialog.setCancelable(cancelable);
+            return this;
+        }
+
+        /**
+         * 设置输入类型
+         *
+         * @param type
+         * @return
+         */
+        public Builder setEditInputType(int type) {
+            xInputDialog.inputType = type;
             return this;
         }
 

@@ -64,4 +64,25 @@
         <item name="android:windowEnterAnimation">@anim/com_ycuwq_datepicker_dialog_in</item>
         <item name="android:windowExitAnimation">@anim/com_ycuwq_datepicker_dialog_out</item>
     </style>
+
+    <style name="XTabLayout_Default_Style" parent="Base.Widget.Design.TabLayout">
+        <item name="x_tabMaxWidth">264dp</item>
+        <item name="x_tabIndicatorColor">?attr/colorAccent</item>
+        <item name="x_tabIndicatorHeight">2dp</item>
+        <item name="x_tabPaddingStart">12dp</item>
+        <item name="x_tabPaddingEnd">12dp</item>
+        <item name="x_tabBackground">?attr/selectableItemBackground</item>
+        <item name="x_tabTextAppearance">@style/TextAppearance.Design.Tab</item>
+        <item name="x_tabSelectedTextColor">?android:textColorPrimary</item>
+
+        <item name="x_tabGravity">fill</item>
+        <item name="x_tabMode">fixed</item>
+
+    </style>
+
+    <style name="TextAppearance.Design.Tab" parent="TextAppearance.AppCompat.Button">
+        <item name="android:textSize">@dimen/design_tab_text_size</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
+        <item name="textAllCaps">true</item>
+    </style>
 </resources>

@@ -11,9 +11,9 @@ import java.io.File;
  * time   : 2017/12/25
  * desc   :SD卡工具类
  */
-public class XSDCardUtils {
+public class XFileUtils {
 
-    private XSDCardUtils() {
+    private XFileUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
@@ -90,5 +90,23 @@ public class XSDCardUtils {
      */
     public static String getRootDirectoryPath() {
         return Environment.getRootDirectory().getAbsolutePath();
+    }
+
+
+    /**
+     * 删除指定目录文件和文件夹
+     */
+    public static void deleteDir(String path) {
+        File dir = new File(path);
+        if (dir == null || !dir.exists() || !dir.isDirectory())
+            return;
+
+        for (File file : dir.listFiles()) {
+            if (file.isFile())
+                file.delete(); // 删除所有文件
+            else if (file.isDirectory())
+                deleteDir(file.getAbsolutePath()); // 递规的方式删除文件夹
+        }
+        //dir.delete();// 删除目录本身
     }
 }
