@@ -9,8 +9,10 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.cb.xlibrary.dialog.XUserHeadDialog;
 import com.cb.xlibrary.utils.XActivityStack;
 import com.cb.xlibrary.utils.XPermission;
+import com.example.cb.test.utils.GlideImageLoader;
 
 import java.text.NumberFormat;
 
@@ -83,14 +85,14 @@ public class MainActivity extends BaseActivity {
         });
     }
 
-//    /**
-//     * 选择用户头像
-//     */
-//    private void showChoseHeadDialog() {
-//        XUserHeadDialog xUserHeadDialog = new XUserHeadDialog(MainActivity.this);
-//        xUserHeadDialog.setImageLoader(new GlideImageLoader());
-//        xUserHeadDialog.show();
-//    }
+    /**
+     * 选择用户头像
+     */
+    private void showChoseHeadDialog() {
+        XUserHeadDialog xUserHeadDialog = new XUserHeadDialog(MainActivity.this);
+        xUserHeadDialog.setImageLoader(new GlideImageLoader());
+        xUserHeadDialog.show();
+    }
 //
 //    private void showLoadingDialog() {
 //        if (xLoadingDialog == null) {
