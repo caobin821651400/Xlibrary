@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.cb.xlibrary.dialog.XUserHeadDialog;
 import com.cb.xlibrary.utils.XActivityStack;
 import com.cb.xlibrary.utils.XPermission;
+import com.example.cb.test.ui.RecyclerTestActivity;
 import com.example.cb.test.utils.GlideImageLoader;
 
 import java.text.NumberFormat;
@@ -80,7 +81,7 @@ public class MainActivity extends BaseActivity {
         findViewById(R.id.btn_list).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                launchActivity(RecyclerTestActivity.class, null);
             }
         });
     }

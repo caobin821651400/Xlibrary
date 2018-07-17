@@ -38,6 +38,7 @@ public class RecyclerTestActivity extends BaseActivity {
                 .setColor(Color.RED).setHeight(R.dimen.dp_10).build();
         mRecyclerView.addItemDecoration(decoration);
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setNestedScrollingEnabled(false);
 
         List<String> list = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
