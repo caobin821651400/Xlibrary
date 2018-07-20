@@ -63,18 +63,16 @@
         android:layout_height="wrap_content"
         android:padding="5dp" />
 
-    <!--<com.cb.xlibrary.picker.date.DatePicker-->
-    <!--android:id="@+id/datePicker"-->
-    <!--android:layout_width="match_parent"-->
-    <!--app:wheelCyclic="true"-->
-    <!--app:wheelCurtain="true"-->
-    <!--app:wheelCurtainBorder="true"-->
-    <!--android:layout_height="wrap_content"/>-->
-
-    <com.cb.xlibrary.picker.time.HourAndMinutePicker
+    <com.cb.xlibrary.view.XTextPathView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:wheelCurtain="true"
-        app:wheelCurtainBorder="true"
-        app:wheelCyclic="true" />
+        app:cycle="false"
+        app:duration="2000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:pathTextColor="#1AAD19"
+        app:pathTextSize="25sp"
+        app:text="好哈哈哈哈或" />
+
 </LinearLayout>
