@@ -2,6 +2,8 @@ package com.example.cb.test;
 
 import android.Manifest;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -10,11 +12,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.cb.xlibrary.dialog.XUserHeadDialog;
-import com.cb.xlibrary.utils.DesUtils;
 import com.cb.xlibrary.utils.XActivityStack;
+import com.cb.xlibrary.utils.XLogUtils;
 import com.cb.xlibrary.utils.XPermission;
 import com.example.cb.test.ui.RecyclerTestActivity;
 import com.example.cb.test.utils.GlideImageLoader;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import java.text.NumberFormat;
 
@@ -35,10 +38,14 @@ public class MainActivity extends BaseActivity {
     //    private String apkUrl = "http://60.28.125.1/f4.market.mi-img.com/download/AppStore/06954949fcd48414c16f726620cf2d52200550f56/so.ofo.labofo.apk";
     private NumberFormat numberFormat;
 
+    FragmentTest fragmentTest;
+    FragmentManager fragmentManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        XLogUtils.d("activity onCreate");
         XActivityStack.getInstance().addActivity(this);
         initView();
     }
@@ -74,6 +81,7 @@ public class MainActivity extends BaseActivity {
         btnDownLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                launchActivity(RecyclerTestActivity.class,null);
             }
         });
 
@@ -82,8 +90,15 @@ public class MainActivity extends BaseActivity {
         findViewById(R.id.btn_list).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                showChoseHeadDialog();
             }
         });
+
+        fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTest = new FragmentTest();
+        fragmentTransaction.add(R.id.test, fragmentTest);
+        fragmentTransaction.commit();
     }
 
     /**
@@ -258,10 +273,44 @@ public class MainActivity extends BaseActivity {
 //        }
 //    };
 
+    @Override
+    protected void onPause() {
+        XLogUtils.d("activity onPause");
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        XLogUtils.d("activity onResume");
+        super.onResume();
+    }
+
+    @Override
+    protected void onStop() {
+        XLogUtils.d("activity onStop");
+        super.onStop();
+    }
+
+    @Override
+    protected void onRestart() {
+
+        XLogUtils.d("activity onRestart");
+        super.onRestart();
+    }@Override
+    public void onStart() {
+        XLogUtils.d("activity onStart");
+        super.onStart();
+
+    }
+
     /**********************************服务结束**********************************/
+
+
+
 
     @Override
     protected void onDestroy() {
+        XLogUtils.d("activity onDestroy");
         super.onDestroy();
         //Activity销毁时，取消网络请求
         // MovieHttpRequest.getInstance().dispose();

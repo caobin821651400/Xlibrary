@@ -3,6 +3,7 @@ package com.example.cb.test;
 import android.app.Application;
 
 import com.cb.xlibrary.XLibrary;
+import com.tencent.bugly.crashreport.CrashReport;
 
 
 /**
@@ -19,5 +20,7 @@ public class MyApplication extends Application {
         XLibrary.init(this);
         XLibrary.logTag = "ME日志";
         XLibrary.isDebug = true;
+
+        CrashReport.initCrashReport(getApplicationContext(), "c4163937f8", true);
     }
 }

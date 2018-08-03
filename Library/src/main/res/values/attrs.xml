@@ -249,4 +249,14 @@
         <attr name="x_tabPadding" format="dimension"/>
         <attr name="x_indicatorMarginTop" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="XTextPathView">
+        <attr name="text" format="string" />
+        <attr name="pathTextSize" format="dimension" />
+        <attr name="pathTextColor" format="color" />
+        <attr name="duration" format="integer" />
+        <attr name="strokeWidth" format="dimension" />
+        <attr name="cycle" format="boolean" />
+        <attr name="autoStart" format="boolean" />
+    </declare-styleable>
 </resources>

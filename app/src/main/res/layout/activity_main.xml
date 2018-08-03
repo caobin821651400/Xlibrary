@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -63,16 +62,21 @@
         android:layout_height="wrap_content"
         android:padding="5dp" />
 
-    <com.cb.xlibrary.view.XTextPathView
+    <!--<com.cb.xlibrary.view.XTextPathView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--app:cycle="false"-->
+    <!--app:duration="2000"-->
+    <!--app:layout_constraintEnd_toEndOf="parent"-->
+    <!--app:layout_constraintStart_toStartOf="parent"-->
+    <!--app:layout_constraintTop_toBottomOf="@+id/toolbar"-->
+    <!--app:pathTextColor="#1AAD19"-->
+    <!--app:pathTextSize="25sp"-->
+    <!--app:text="好哈哈哈哈或" />-->
+
+    <FrameLayout
+        android:id="@+id/test"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cycle="false"
-        app:duration="2000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:pathTextColor="#1AAD19"
-        app:pathTextSize="25sp"
-        app:text="好哈哈哈哈或" />
+        android:layout_height="200dp"></FrameLayout>
 
 </LinearLayout>
