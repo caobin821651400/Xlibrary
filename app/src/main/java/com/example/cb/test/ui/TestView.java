@@ -34,25 +34,24 @@ public class TestView extends android.support.v7.widget.AppCompatButton {
      */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        XLogUtils.v("onTouchEvent");
-        XLogUtils.e("值 " + super.onTouchEvent(event));
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                XLogUtils.e("onTouchEvent: ======ACTION_DOWN");
-                break;
-            case MotionEvent.ACTION_MOVE:
-                XLogUtils.e("onTouchEvent: ======ACTION_MOVE");
-                break;
-            case MotionEvent.ACTION_UP:
-                XLogUtils.e("onTouchEvent: ======ACTION_UP");
-                break;
-            case MotionEvent.ACTION_CANCEL:
-                XLogUtils.e("onTouchEvent: ======ACTION_CANCEL");
-                break;
-            default:
-                XLogUtils.e("onTouchEvent: ======default");
-                break;
-        }
+        XLogUtils.v("view  onTouchEvent");
+//        switch (event.getAction()) {
+//            case MotionEvent.ACTION_DOWN:
+//                XLogUtils.e("onTouchEvent: ======ACTION_DOWN");
+//                break;
+//            case MotionEvent.ACTION_MOVE:
+//                XLogUtils.e("onTouchEvent: ======ACTION_MOVE");
+//                break;
+//            case MotionEvent.ACTION_UP:
+//                XLogUtils.e("onTouchEvent: ======ACTION_UP");
+//                break;
+//            case MotionEvent.ACTION_CANCEL:
+//                XLogUtils.e("onTouchEvent: ======ACTION_CANCEL");
+//                break;
+//            default:
+//                XLogUtils.e("onTouchEvent: ======default");
+//                break;
+//        }
         return super.onTouchEvent(event);
     }
 

@@ -39,7 +39,6 @@ public class XPaddingDividerDecoration extends RecyclerView.ItemDecoration {
      */
     @Override
     public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
-        System.err.println(" onDrawOver ");
         RecyclerView.Adapter adapter = parent.getAdapter();
         XRecyclerViewAdapter lRecyclerViewAdapter;
         if (adapter instanceof XRecyclerViewAdapter) {

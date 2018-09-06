@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cb.xlibrary.R;
+import com.cb.xlibrary.utils.XLogUtils;
 
 import java.util.List;
 
@@ -122,11 +123,13 @@ public abstract class XRecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T,
             View view = inflater.inflate(R.layout.adapter_network_error, mRecyclerView, false);
             return new XViewHolder(view);
         }
+        XLogUtils.d("onCreateViewHolder 111111111111111");
         return new XViewHolder(inflater.inflate(viewType, parent, false));
     }
 
     @Override
     public void onBindViewHolder(final XViewHolder holder, int position) {
+        XLogUtils.v("onBindViewHolder 222222222222222222");
         if (holder.getItemViewType() == TYPE_EMPTY) return;
         if (holder.getItemViewType() == TYPE_NETWORK_ERROR) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {

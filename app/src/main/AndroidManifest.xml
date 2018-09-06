@@ -25,7 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.RecyclerTestActivity" />
+        <activity android:name=".ui.rv.RecyclerTestActivity" />
         <activity android:name=".ui.ViewPagerActivity" />
         <activity android:name=".ui.provider.MContentProviderActivity" />
 

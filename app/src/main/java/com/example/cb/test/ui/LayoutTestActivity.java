@@ -21,7 +21,6 @@ public class LayoutTestActivity extends BaseActivity {
 
         Button button = findViewById(R.id.button);
 
-
         /**
          * 顺序 onTouch-->onTouchEvent-->onClick
          */
@@ -30,7 +29,7 @@ public class LayoutTestActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                XLogUtils.v("onClick");
+                XLogUtils.v("view onClick");
             }
         });
 
@@ -42,7 +41,7 @@ public class LayoutTestActivity extends BaseActivity {
         button.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                XLogUtils.v("onTouch");
+                XLogUtils.v("view onTouch");
                 return false;
             }
         });

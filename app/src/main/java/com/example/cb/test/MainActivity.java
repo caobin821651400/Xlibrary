@@ -5,20 +5,14 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.cb.xlibrary.dialog.XUserHeadDialog;
 import com.cb.xlibrary.picker.date.DatePickerDialogFragment;
 import com.cb.xlibrary.utils.XActivityStack;
 import com.cb.xlibrary.utils.XLogUtils;
 import com.cb.xlibrary.utils.XPermission;
 import com.example.cb.test.ui.LayoutTestActivity;
-import com.example.cb.test.ui.RecyclerTestActivity;
-import com.example.cb.test.ui.ViewPagerActivity;
-import com.example.cb.test.utils.GlideImageLoader;
+import com.example.cb.test.ui.rv.RecyclerTestActivity;
 
 import java.text.NumberFormat;
 
@@ -70,6 +64,7 @@ public class MainActivity extends BaseActivity {
         btnDownLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                launchActivity(RecyclerTestActivity.class, null);
             }
         });
 
@@ -78,7 +73,7 @@ public class MainActivity extends BaseActivity {
         findViewById(R.id.btn_list).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                launchActivity(LayoutTestActivity.class,null);
+                launchActivity(LayoutTestActivity.class, null);
             }
         });
     }

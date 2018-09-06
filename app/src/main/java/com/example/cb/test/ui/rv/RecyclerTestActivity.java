@@ -1,4 +1,4 @@
-package com.example.cb.test.ui;
+package com.example.cb.test.ui.rv;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.cb.xlibrary.adapter.XRecyclerViewAdapter;
 import com.cb.xlibrary.adapter.XViewHolder;
 import com.cb.xlibrary.recycler.ItemDecoration.XPaddingDividerDecoration;
+import com.cb.xlibrary.utils.XLogUtils;
 import com.example.cb.test.BaseActivity;
 import com.example.cb.test.R;
 
@@ -21,7 +22,7 @@ public class RecyclerTestActivity extends BaseActivity {
 
     private RecyclerView mRecyclerView;
     private MyAdapter mAdapter;
-
+    List<String> list = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,13 +39,24 @@ public class RecyclerTestActivity extends BaseActivity {
                 .setColor(Color.RED).setHeight(R.dimen.dp_10).build();
         mRecyclerView.addItemDecoration(decoration);
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setNestedScrollingEnabled(false);
+//        mRecyclerView.setNestedScrollingEnabled(false);
 
-        List<String> list = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            list.add("我是第几个 " + (i + 1));
-        }
-        mAdapter.setDataLists(list);
+
+
+        //mAdapter.setDataLists(list);
+        mAdapter.showNetworkError(true);
+
+        mAdapter.setNerworkErrorListener(new XRecyclerViewAdapter.OnNetworkErrorListener() {
+            @Override
+            public void onRetry() {
+                mAdapter.showNetworkError(false);
+                for (int i = 0; i < 30; i++) {
+                    list.add("我是第几个 " + (i + 1));
+                }
+                mAdapter.setDataLists(list);
+                XLogUtils.d("!11111111");
+            }
+        });
     }
 
 
