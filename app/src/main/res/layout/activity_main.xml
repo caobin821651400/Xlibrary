@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,50 +19,6 @@
         android:layout_height="wrap_content"
         android:text="list" />
 
-    <ImageView
-        android:id="@+id/imageview"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_gravity="center_horizontal" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:padding="5dp">
-
-        <TextView
-            android:id="@+id/downloadSize"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="--M/--M"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/tvProgress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="--.--%"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/netSpeed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:text="---K/s"
-            android:textSize="12sp" />
-    </RelativeLayout>
-
-    <ProgressBar
-        android:id="@+id/pbProgress"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp" />
-
     <!--<com.cb.xlibrary.view.XTextPathView-->
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="wrap_content"-->
@@ -74,9 +31,10 @@
     <!--app:pathTextSize="25sp"-->
     <!--app:text="好哈哈哈哈或" />-->
 
-    <FrameLayout
-        android:id="@+id/test"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"></FrameLayout>
-
+    <!--<com.airbnb.lottie.LottieAnimationView-->
+        <!--android:layout_width="300dp"-->
+        <!--android:layout_height="300dp"-->
+        <!--app:lottie_autoPlay="true"-->
+        <!--app:lottie_fileName="check.json"-->
+        <!--app:lottie_loop="true" />-->
 </LinearLayout>
