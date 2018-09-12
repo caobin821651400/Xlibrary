@@ -9,7 +9,6 @@ import android.os.Looper;
 import android.util.AttributeSet;
 import android.util.Log;
 
-
 import com.cb.qrcode.library.core.BarcodeScannerView;
 import com.cb.qrcode.library.core.DisplayUtils;
 import com.google.zxing.BarcodeFormat;
@@ -27,7 +26,9 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * 主要处理扫描结果处理
+ */
 public class ZXingScannerView extends BarcodeScannerView {
     private static final String TAG = "ZXingScannerView";
 
@@ -75,15 +76,16 @@ public class ZXingScannerView extends BarcodeScannerView {
         mResultHandler = resultHandler;
     }
 
+
     public Collection<BarcodeFormat> getFormats() {
-        if(mFormats == null) {
+        if (mFormats == null) {
             return ALL_FORMATS;
         }
         return mFormats;
     }
 
     private void initMultiFormatReader() {
-        Map<DecodeHintType,Object> hints = new EnumMap<DecodeHintType,Object>(DecodeHintType.class);
+        Map<DecodeHintType, Object> hints = new EnumMap<DecodeHintType, Object>(DecodeHintType.class);
         hints.put(DecodeHintType.POSSIBLE_FORMATS, getFormats());
         mMultiFormatReader = new MultiFormatReader();
         mMultiFormatReader.setHints(hints);
@@ -91,10 +93,10 @@ public class ZXingScannerView extends BarcodeScannerView {
 
     @Override
     public void onPreviewFrame(byte[] data, Camera camera) {
-        if(mResultHandler == null) {
+        if (mResultHandler == null) {
             return;
         }
-        
+
         try {
             Camera.Parameters parameters = camera.getParameters();
             Camera.Size size = parameters.getPreviewSize();
@@ -144,16 +146,18 @@ public class ZXingScannerView extends BarcodeScannerView {
                         ResultHandler tmpResultHandler = mResultHandler;
                         mResultHandler = null;
 
-                        stopCameraPreview();
+                        // stopCameraPreview();
                         if (tmpResultHandler != null) {
                             tmpResultHandler.handleResult(finalRawResult);
                         }
                     }
                 });
             } else {
-                camera.setOneShotPreviewCallback(this);
+                //防止caera已经release后继续预览导致抛出的异常
+                if (!mCameraIsRelease)
+                    camera.setOneShotPreviewCallback(this);
             }
-        } catch(RuntimeException e) {
+        } catch (RuntimeException e) {
             // TODO: Terrible hack. It is possible that this method is invoked after camera is released.
             Log.e(TAG, e.toString(), e);
         }
@@ -175,7 +179,7 @@ public class ZXingScannerView extends BarcodeScannerView {
         try {
             source = new PlanarYUVLuminanceSource(data, width, height, rect.left, rect.top,
                     rect.width(), rect.height(), false);
-        } catch(Exception e) {
+        } catch (Exception e) {
         }
 
         return source;

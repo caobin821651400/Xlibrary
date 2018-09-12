@@ -13,6 +13,7 @@ import com.cb.xlibrary.utils.XLogUtils;
 import com.cb.xlibrary.utils.XPermission;
 import com.example.cb.test.ui.LayoutTestActivity;
 import com.example.cb.test.ui.rv.RecyclerTestActivity;
+import com.example.cb.test.ui.scan.ScanCodeActivity;
 
 import java.text.NumberFormat;
 
@@ -64,7 +65,7 @@ public class MainActivity extends BaseActivity {
         btnDownLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                launchActivity(RecyclerTestActivity.class, null);
+                launchActivity(ScanCodeActivity.class, null);
             }
         });
 
@@ -249,37 +250,6 @@ public class MainActivity extends BaseActivity {
 //
 //        }
 //    };
-    @Override
-    protected void onPause() {
-        XLogUtils.d("activity onPause");
-        super.onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        XLogUtils.d("activity onResume");
-        super.onResume();
-    }
-
-    @Override
-    protected void onStop() {
-        XLogUtils.d("activity onStop");
-        super.onStop();
-    }
-
-    @Override
-    protected void onRestart() {
-
-        XLogUtils.d("activity onRestart");
-        super.onRestart();
-    }
-
-    @Override
-    public void onStart() {
-        XLogUtils.d("activity onStart");
-        super.onStart();
-
-    }
 
     /**********************************服务结束**********************************/
 

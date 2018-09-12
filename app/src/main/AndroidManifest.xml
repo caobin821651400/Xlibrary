@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name=".MyApplication"
@@ -41,7 +42,8 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".ui.LayoutTestActivity"></activity>
+        <activity android:name=".ui.LayoutTestActivity" />
+        <activity android:name=".ui.scan.ScanCodeActivity"></activity>
     </application>
 
 </manifest>
