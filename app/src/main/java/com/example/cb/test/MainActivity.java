@@ -12,8 +12,7 @@ import com.cb.xlibrary.utils.XActivityStack;
 import com.cb.xlibrary.utils.XLogUtils;
 import com.cb.xlibrary.utils.XPermission;
 import com.example.cb.test.ui.LayoutTestActivity;
-import com.example.cb.test.ui.rv.RecyclerTestActivity;
-import com.example.cb.test.ui.scan.ScanCodeActivity;
+import com.example.cb.test.ui.scan.QRcodeDecoderActivity;
 
 import java.text.NumberFormat;
 
@@ -65,7 +64,7 @@ public class MainActivity extends BaseActivity {
         btnDownLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                launchActivity(ScanCodeActivity.class, null);
+                launchActivity(QRcodeDecoderActivity.class, null);
             }
         });
 
