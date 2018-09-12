@@ -42,7 +42,6 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".ui.LayoutTestActivity" />
         <activity android:name=".ui.scan.ScanCodeActivity" />
         <activity android:name=".ui.scan.QRcodeEncoderActivity" />
         <activity android:name=".ui.scan.QRcodeDecoderActivity"></activity>

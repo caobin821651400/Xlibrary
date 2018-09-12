@@ -11,7 +11,6 @@ import com.cb.xlibrary.picker.date.DatePickerDialogFragment;
 import com.cb.xlibrary.utils.XActivityStack;
 import com.cb.xlibrary.utils.XLogUtils;
 import com.cb.xlibrary.utils.XPermission;
-import com.example.cb.test.ui.LayoutTestActivity;
 import com.example.cb.test.ui.scan.QRcodeDecoderActivity;
 
 import java.text.NumberFormat;
@@ -73,7 +72,6 @@ public class MainActivity extends BaseActivity {
         findViewById(R.id.btn_list).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                launchActivity(LayoutTestActivity.class, null);
             }
         });
     }
