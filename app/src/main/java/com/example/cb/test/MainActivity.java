@@ -5,16 +5,14 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
-import com.cb.xlibrary.picker.date.DatePickerDialogFragment;
 import com.cb.xlibrary.utils.XActivityStack;
 import com.cb.xlibrary.utils.XLogUtils;
 import com.cb.xlibrary.utils.XPermission;
-import com.example.cb.test.rx.MovieHttpRequest;
-import com.example.cb.test.rx.NewsResp;
-import com.example.cb.test.rx.UserInfoResp;
-import com.example.cb.test.rx.XHttpCallback;
+import com.example.cb.test.rx.RxJavaTestActivity;
+import com.example.cb.test.rx.http.MovieHttpRequest;
+import com.example.cb.test.rx.http.NewsResp;
+import com.example.cb.test.rx.http.XHttpCallback;
 import com.example.cb.test.ui.scan.QRcodeDecoderActivity;
 
 import java.text.NumberFormat;
@@ -69,7 +67,7 @@ public class MainActivity extends BaseActivity {
         btnDownLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                launchActivity(QRcodeDecoderActivity.class, null);
+                launchActivity(RxJavaTestActivity.class, null);
             }
         });
 
@@ -136,7 +134,7 @@ public class MainActivity extends BaseActivity {
 //        datePickerDialogFragment.show(getSupportFragmentManager(), "DatePickerDialogFragment");
 //    }
 
-//    /**
+    //    /**
 //     * retrofit+okhttp实现图片上传
 //     */
 //    private void uploadImg() {

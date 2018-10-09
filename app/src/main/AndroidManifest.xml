@@ -44,7 +44,8 @@
 
         <activity android:name=".ui.scan.ScanCodeActivity" />
         <activity android:name=".ui.scan.QRcodeEncoderActivity" />
-        <activity android:name=".ui.scan.QRcodeDecoderActivity"></activity>
+        <activity android:name=".ui.scan.QRcodeDecoderActivity" />
+        <activity android:name=".rx.RxJavaTestActivity"></activity>
     </application>
 
 </manifest>

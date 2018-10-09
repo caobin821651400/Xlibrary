@@ -1,4 +1,4 @@
-package com.example.cb.test.rx;
+package com.example.cb.test.rx.http;
 
 import android.net.ParseException;
 

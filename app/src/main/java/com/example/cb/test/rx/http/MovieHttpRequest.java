@@ -1,4 +1,4 @@
-package com.example.cb.test.rx;
+package com.example.cb.test.rx.http;
 
 import com.example.cb.test.bean.UploadBean;
 import com.example.cb.test.rx.body.ProgressListener;
