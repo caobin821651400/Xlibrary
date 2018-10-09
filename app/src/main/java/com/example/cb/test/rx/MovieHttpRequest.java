@@ -15,10 +15,8 @@ import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import retrofit2.http.Body;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -31,16 +29,20 @@ import retrofit2.http.PartMap;
  * desc   :
  */
 public class MovieHttpRequest extends BaseHttpRequest {
+    private static MovieHttpRequest instance;
 
-    private static class HttpRequestHolder {
-        public static MovieHttpRequest instance = new MovieHttpRequest();
+    public static MovieHttpRequest getInstance() {
+        if (instance == null) {
+            synchronized (MovieHttpRequest.class) {
+                if (instance == null) {
+                    instance = new MovieHttpRequest();
+                }
+            }
+        }
+        return instance;
     }
 
     public MovieHttpRequest() {
-    }
-
-    public static MovieHttpRequest getInstance() {
-        return HttpRequestHolder.instance;
     }
 
     private ApiService apiService = getRetrofit().create(ApiService.class);

@@ -11,9 +11,15 @@ import com.cb.xlibrary.picker.date.DatePickerDialogFragment;
 import com.cb.xlibrary.utils.XActivityStack;
 import com.cb.xlibrary.utils.XLogUtils;
 import com.cb.xlibrary.utils.XPermission;
+import com.example.cb.test.rx.MovieHttpRequest;
+import com.example.cb.test.rx.NewsResp;
+import com.example.cb.test.rx.UserInfoResp;
+import com.example.cb.test.rx.XHttpCallback;
 import com.example.cb.test.ui.scan.QRcodeDecoderActivity;
 
 import java.text.NumberFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class MainActivity extends BaseActivity {
@@ -72,6 +78,7 @@ public class MainActivity extends BaseActivity {
         findViewById(R.id.btn_list).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                downLoad1();
             }
         });
     }
@@ -115,19 +122,19 @@ public class MainActivity extends BaseActivity {
 //                }).create().show();
 //    }
 
-    /**
-     * 日期选择
-     */
-    private void showDateDialog() {
-        DatePickerDialogFragment datePickerDialogFragment = new DatePickerDialogFragment();
-        datePickerDialogFragment.setOnDateChooseListener(new DatePickerDialogFragment.OnDateChooseListener() {
-            @Override
-            public void onDateChoose(int year, int month, int day) {
-                Toast.makeText(getApplicationContext(), year + "-" + month + "-" + day, Toast.LENGTH_SHORT).show();
-            }
-        });
-        datePickerDialogFragment.show(getSupportFragmentManager(), "DatePickerDialogFragment");
-    }
+//    /**
+//     * 日期选择
+//     */
+//    private void showDateDialog() {
+//        DatePickerDialogFragment datePickerDialogFragment = new DatePickerDialogFragment();
+//        datePickerDialogFragment.setOnDateChooseListener(new DatePickerDialogFragment.OnDateChooseListener() {
+//            @Override
+//            public void onDateChoose(int year, int month, int day) {
+//                Toast.makeText(getApplicationContext(), year + "-" + month + "-" + day, Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//        datePickerDialogFragment.show(getSupportFragmentManager(), "DatePickerDialogFragment");
+//    }
 
 //    /**
 //     * retrofit+okhttp实现图片上传
@@ -188,23 +195,23 @@ public class MainActivity extends BaseActivity {
 //        }
 //    }
 //
-//    private void downLoad1() {
-//        Map<String, String> map = new HashMap<>();
-//        map.put("type", "top");
-//        map.put("key", "f323c09a114635eb935ed8dd19f7284e");
-//        MovieHttpRequest.getInstance().sendNewsRequest(map, new XHttpCallback<NewsResp>() {
-//            @Override
-//            public void onSuccess(NewsResp newsResp) {
-//                System.err.println("哈哈 " + newsResp.getResult().getData().get(0).getTitle());
-//            }
-//
-//            @Override
-//            public void onError(String error) {
-//                System.err.println("哈哈 error " + error);
-//            }
-//        });
-//    }
-//
+    private void downLoad1() {
+        Map<String, String> map = new HashMap<>();
+        map.put("type", "top");
+        map.put("key", "f323c09a114635eb935ed8dd19f7284e");
+        MovieHttpRequest.getInstance().sendNewsRequest(map, new XHttpCallback<NewsResp>() {
+            @Override
+            public void onSuccess(NewsResp newsResp) {
+                System.err.println("哈哈 " + newsResp.getResult().getData().get(0).getTitle());
+            }
+
+            @Override
+            public void onError(String error) {
+                System.err.println("哈哈 error " + error);
+            }
+        });
+    }
+
 //    private void downLoad2() {
 //        Map<String, String> map = new HashMap<>();
 //        map.put("staffAccount", "gNwTv7GOKr+9tK+bHVlw5A==");
