@@ -2,9 +2,9 @@ package com.example.cb.test.mvp.presenter;
 
 import com.example.cb.test.mvp.BasePresenter;
 import com.example.cb.test.mvp.presenter.view.INewListView;
-import com.example.cb.test.rx.MovieHttpRequest;
-import com.example.cb.test.rx.NewsResp;
-import com.example.cb.test.rx.XHttpCallback;
+import com.example.cb.test.rx.http.MovieHttpRequest;
+import com.example.cb.test.rx.http.NewsResp;
+import com.example.cb.test.rx.http.XHttpCallback;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,12 +26,11 @@ public class NewListPresenter extends BasePresenter<INewListView> {
             @Override
             public void onSuccess(NewsResp newsResp) {
                 mView.onRequestSuccess(newsResp);
-                System.err.println("哈哈 " + newsResp.getResult().getData().get(0).getTitle());
             }
 
             @Override
             public void onError(String error) {
-                System.err.println("哈哈 error " + error);
+                mView.onError(error);
             }
         });
     }

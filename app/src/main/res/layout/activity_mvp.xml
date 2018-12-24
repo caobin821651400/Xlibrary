@@ -6,4 +6,11 @@
     android:layout_height="match_parent"
     tools:context="com.example.cb.test.mvp.MvpActivity">
 
+    <TextView
+        android:id="@+id/aa"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="测试"/>
+
 </android.support.constraint.ConstraintLayout>

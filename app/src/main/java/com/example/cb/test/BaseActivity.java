@@ -1,11 +1,10 @@
 package com.example.cb.test;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
@@ -22,10 +21,8 @@ import com.cb.xlibrary.utils.XPermission;
  */
 public class BaseActivity extends AppCompatActivity {
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
-    }
+    private static long mPreTime;
+    private static Activity mCurrentActivity;// 对所有activity进行管理
 
     /**
      * 展示图片
@@ -66,20 +63,6 @@ public class BaseActivity extends AppCompatActivity {
 
 
     /**
-     * 简化findviewbyid
-     * 此处用不到，此基类已使用ButterKnife注解
-     * 在不使用注解的时候可以使用
-     *
-     * @param resId
-     * @param <T>
-     * @return
-     */
-    public <T extends View> T mFindViewById(int resId) {
-        return (T) findViewById(resId);
-    }
-
-
-    /**
      * 弹出AlertDialog
      *
      * @param msg
@@ -90,6 +73,43 @@ public class BaseActivity extends AppCompatActivity {
                 .setPositiveButton("确定", null).create().show();
     }
 
+
+    /**
+     * 统一退出控制
+     */
+    @Override
+    public void onBackPressed() {
+        if (mCurrentActivity instanceof MainActivity) {
+            //如果是主页面
+            if (System.currentTimeMillis() - mPreTime > 2000) {// 两次点击间隔大于2秒
+                Toast.makeText(this, "再按一次，退出应用", Toast.LENGTH_SHORT).show();
+                mPreTime = System.currentTimeMillis();
+                return;
+            }
+        }
+        super.onBackPressed();// finish()
+    }
+
+    /**
+     * 获取前台activity
+     *
+     * @return
+     */
+    public static Activity getCurrentActivity() {
+        return mCurrentActivity;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mCurrentActivity = this;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mCurrentActivity = null;
+    }
 
     /**
      * Android M 全局权限申请回调

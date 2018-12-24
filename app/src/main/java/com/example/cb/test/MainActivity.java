@@ -2,43 +2,28 @@ package com.example.cb.test;
 
 import android.Manifest;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.cb.xlibrary.dialog.XUserHeadDialog;
 import com.cb.xlibrary.picker.time.HourAndMinutePicker;
 import com.cb.xlibrary.utils.XActivityStack;
 import com.cb.xlibrary.utils.XLogUtils;
 import com.cb.xlibrary.utils.XPermission;
+import com.example.cb.test.mvp.MvpActivity;
 import com.example.cb.test.utils.GlideImageLoader;
 
-import java.text.NumberFormat;
 
 
 public class MainActivity extends BaseActivity {
 
     private Button btnDownLoad;
-    private TextView downloadSize;
-    private TextView tvProgress;
-    private TextView netSpeed;
-    private ProgressBar pbProgress;
-    private ImageView mImageView;
     private static final String WEATHRE_API_URL = "http://php.weather.sina.com.cn/xml.php?city=%s&password=DJOYnieT8234jlsK&day=0";
-    private String result;
-    private HourAndMinutePicker hourAndMinutePicker;
 
     //
     private String apkUrl = "https://codeload.github.com/jeasonlzy/okhttp-OkGo/zip/master";
     //    private String apkUrl = "http://60.28.125.1/f4.market.mi-img.com/download/AppStore/06954949fcd48414c16f726620cf2d52200550f56/so.ofo.labofo.apk";
-    private NumberFormat numberFormat;
-
-    FragmentTest fragmentTest;
-    FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,18 +37,6 @@ public class MainActivity extends BaseActivity {
 
     private void initView() {
         btnDownLoad = findViewById(R.id.btn_down_load);
-        downloadSize = findViewById(R.id.downloadSize);
-        tvProgress = findViewById(R.id.tvProgress);
-        netSpeed = findViewById(R.id.netSpeed);
-        pbProgress = findViewById(R.id.pbProgress);
-        mImageView = findViewById(R.id.imageview);
-        hourAndMinutePicker = findViewById(R.id.picker);
-
-//        hourAndMinutePicker.setTime(11,11);
-
-        numberFormat = NumberFormat.getPercentInstance();
-        numberFormat.setMinimumFractionDigits(0);
-
         RecyclerView recyclerView = new RecyclerView(this);
         recyclerView.setNestedScrollingEnabled(false);
 
@@ -83,6 +56,7 @@ public class MainActivity extends BaseActivity {
         btnDownLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                launchActivity(MvpActivity.class, null);
             }
         });
 
@@ -307,8 +281,6 @@ public class MainActivity extends BaseActivity {
     }
 
     /**********************************服务结束**********************************/
-
-
 
 
     @Override

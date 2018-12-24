@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,34 +17,4 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="list" />
-
-    <!--<com.cb.xlibrary.view.XTextPathView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--app:cycle="false"-->
-    <!--app:duration="2000"-->
-    <!--app:layout_constraintEnd_toEndOf="parent"-->
-    <!--app:layout_constraintStart_toStartOf="parent"-->
-    <!--app:layout_constraintTop_toBottomOf="@+id/toolbar"-->
-    <!--app:pathTextColor="#1AAD19"-->
-    <!--app:pathTextSize="25sp"-->
-    <!--app:text="好哈哈哈哈或" />-->
-
-    <!--<FrameLayout-->
-        <!--android:id="@+id/test"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="200dp"></FrameLayout>-->
-
-    <com.cb.xlibrary.picker.time.HourAndMinutePicker
-        android:id="@+id/picker"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        ></com.cb.xlibrary.picker.time.HourAndMinutePicker>
-
-    <!--<com.airbnb.lottie.LottieAnimationView-->
-        <!--android:layout_width="300dp"-->
-        <!--android:layout_height="300dp"-->
-        <!--app:lottie_autoPlay="true"-->
-        <!--app:lottie_fileName="check.json"-->
-        <!--app:lottie_loop="true" />-->
 </LinearLayout>
