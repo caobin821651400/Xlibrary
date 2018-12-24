@@ -43,14 +43,13 @@ public class DatePickerDialogFragment extends DialogFragment {
 
 
 		mDatePicker = view.findViewById(R.id.dayPicker_dialog);
-		//mCancelButton = view.findViewById(R.id.btn_dialog_date_cancel);
+		mDatePicker.post(new Runnable() {
+			@Override
+			public void run() {
+				setSelectedDate();
+			}
+		});
 		mDecideButton = view.findViewById(R.id.btn_dialog_date_decide);
-//		mCancelButton.setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				dismiss();
-//			}
-//		});
 		mDecideButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -103,7 +102,6 @@ public class DatePickerDialogFragment extends DialogFragment {
 		mSelectedYear = year;
 		mSelectedMonth = month;
 		mSelectedDay = day;
-		setSelectedDate();
 	}
 
 	private void setSelectedDate() {

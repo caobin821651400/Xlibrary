@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.cb.test.ui.provider.MContentProviderActivity">
+    tools:context="com.example.cb.test.mvp.MvpActivity">
 
 </android.support.constraint.ConstraintLayout>
