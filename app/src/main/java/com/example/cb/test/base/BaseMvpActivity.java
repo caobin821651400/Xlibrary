@@ -1,12 +1,12 @@
-package com.example.cb.test.mvp;
+package com.example.cb.test.base;
 
 import android.os.Bundle;
 
-import com.example.cb.test.BaseActivity;
-
 /**
- * MVP基类
- * Created by bin on 2018/12/24.
+ * MVP模式activity的基类
+ *
+ * @author bin
+ * @date 2018/12/25.
  */
 public abstract class BaseMvpActivity<T extends BasePresenter> extends BaseActivity {
     protected T mPresenter;

@@ -10,7 +10,7 @@ import android.widget.ImageView;
 
 import com.cb.qrcode.library.view.ZXingScannerView;
 import com.cb.xlibrary.utils.XLogUtils;
-import com.example.cb.test.BaseActivity;
+import com.example.cb.test.base.BaseActivity;
 import com.example.cb.test.R;
 import com.google.zxing.Result;
 

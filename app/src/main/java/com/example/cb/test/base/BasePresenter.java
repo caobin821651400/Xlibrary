@@ -1,4 +1,4 @@
-package com.example.cb.test.mvp;
+package com.example.cb.test.base;
 
 public abstract class BasePresenter<V> {
 

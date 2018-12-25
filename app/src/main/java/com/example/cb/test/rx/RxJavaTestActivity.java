@@ -3,7 +3,7 @@ package com.example.cb.test.rx;
 import android.os.Bundle;
 
 import com.cb.xlibrary.utils.XLogUtils;
-import com.example.cb.test.BaseActivity;
+import com.example.cb.test.base.BaseActivity;
 import com.example.cb.test.R;
 
 import io.reactivex.Observable;

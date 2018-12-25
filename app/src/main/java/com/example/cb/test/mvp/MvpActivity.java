@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 
 import com.cb.xlibrary.utils.XLogUtils;
 import com.example.cb.test.R;
+import com.example.cb.test.base.BaseMvpActivity;
 import com.example.cb.test.mvp.presenter.NewListPresenter;
 import com.example.cb.test.mvp.view.INewListView;
 import com.example.cb.test.rx.http.NewsResp;

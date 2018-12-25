@@ -1,4 +1,4 @@
-package com.example.cb.test;
+package com.example.cb.test.base;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -6,12 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.cb.xlibrary.utils.XPermission;
+import com.example.cb.test.MainActivity;
+import com.example.cb.test.R;
 
 /**
  * author : caobin

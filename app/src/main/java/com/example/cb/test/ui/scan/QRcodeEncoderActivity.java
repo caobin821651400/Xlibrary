@@ -6,7 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cb.qrcode.library.util.QRCodeDecoder;
-import com.example.cb.test.BaseActivity;
+import com.example.cb.test.base.BaseActivity;
 import com.example.cb.test.R;
 
 /**

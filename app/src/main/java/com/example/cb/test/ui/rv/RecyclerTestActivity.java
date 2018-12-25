@@ -12,7 +12,7 @@ import com.cb.xlibrary.adapter.XRecyclerViewAdapter;
 import com.cb.xlibrary.adapter.XViewHolder;
 import com.cb.xlibrary.ItemDecoration.XPaddingDividerDecoration;
 import com.cb.xlibrary.utils.XLogUtils;
-import com.example.cb.test.BaseActivity;
+import com.example.cb.test.base.BaseActivity;
 import com.example.cb.test.R;
 
 import java.util.ArrayList;

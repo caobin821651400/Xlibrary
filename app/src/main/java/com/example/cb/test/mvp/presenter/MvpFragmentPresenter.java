@@ -1,6 +1,6 @@
 package com.example.cb.test.mvp.presenter;
 
-import com.example.cb.test.mvp.BasePresenter;
+import com.example.cb.test.base.BasePresenter;
 import com.example.cb.test.mvp.view.IMvpFragmentView;
 import com.example.cb.test.rx.http.MovieHttpRequest;
 import com.example.cb.test.rx.http.NewsResp;

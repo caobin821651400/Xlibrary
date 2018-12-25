@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.example.cb.test.BaseActivity;
+import com.example.cb.test.base.BaseActivity;
 import com.example.cb.test.R;
 
 import java.util.ArrayList;

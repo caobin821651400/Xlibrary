@@ -5,6 +5,7 @@ import android.widget.TextView;
 
 import com.cb.xlibrary.utils.XLogUtils;
 import com.example.cb.test.R;
+import com.example.cb.test.base.BaseMvpFragment;
 import com.example.cb.test.mvp.presenter.MvpFragmentPresenter;
 import com.example.cb.test.mvp.view.IMvpFragmentView;
 import com.example.cb.test.rx.http.NewsResp;

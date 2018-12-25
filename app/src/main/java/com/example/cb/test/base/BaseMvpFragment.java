@@ -1,16 +1,16 @@
-package com.example.cb.test.mvp;
+package com.example.cb.test.base;
 
 import android.view.View;
-
-import com.example.cb.test.BaseFragment;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * Created by bin on 2018/12/25.
+ * MVP模式fragment的基类
+ *
+ * @author bin
+ * @date 2018/12/25.
  */
-
 public abstract class BaseMvpFragment<T extends BasePresenter> extends BaseFragment {
 
     protected T mPresenter;
