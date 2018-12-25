@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+
+    <color name="ip_color_press_cblibrary">#ffe0e0e0</color>
+    <color name="ip_camera_pre_cblibrary">#353535</color>
+    <color name="ip_color_primary_dark_cblibrary">#303135</color>
+    <color name="ip_color_primary_cblibrary">#393A3F</color>
+    <color name="ic_back_press_cblibrary">#323336</color>
+
+    <color name="ip_color_accent_cblibrary">#1AAD19</color>
+    <color name="ip_text_primary_inverted_cblibrary">#ffffff</color>
+    <color name="ip_text_secondary_inverted_cblibrary">#66ffffff</color>
+</resources>

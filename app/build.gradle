@@ -54,4 +54,5 @@ dependencies {
     implementation project(':Library')
     implementation project(':QrCodeLibrary')
     implementation 'com.tencent.bugly:crashreport:2.6.6'
+    implementation project(':ImagePicker')
 }
