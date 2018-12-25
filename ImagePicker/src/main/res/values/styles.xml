@@ -1,13 +1,4 @@
 <resources>
-
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
-
     <declare-styleable name="CbCropImageView">
         <attr name="cblibrary_cropMaskColor" format="color" />
         <attr name="cblibrary_cropBorderColor" format="color" />
@@ -29,6 +20,7 @@
     <style name="CbImagePickerTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:fitsSystemWindows">true</item>
     </style>
+
     <style name="CbImagePickerThemeFullScreen" parent="CbImagePickerTheme">
         <item name="android:fitsSystemWindows">false</item>
     </style>

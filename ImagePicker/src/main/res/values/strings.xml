@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">ImagePickerLibrary</string>
     <string name="ip_folder_image_count_cblibrary">共%1$d张</string>
     <string name="ip_select_limit_cblibrary">最多选择%1$d张图片</string>
     <string name="ip_select_complete_cblibrary">完成(%1$d/%2$d)</string>
