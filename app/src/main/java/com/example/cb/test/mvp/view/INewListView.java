@@ -1,4 +1,4 @@
-package com.example.cb.test.mvp.presenter.view;
+package com.example.cb.test.mvp.view;
 
 import com.example.cb.test.rx.http.NewsResp;
 

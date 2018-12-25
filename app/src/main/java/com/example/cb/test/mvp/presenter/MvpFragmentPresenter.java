@@ -1,7 +1,7 @@
 package com.example.cb.test.mvp.presenter;
 
 import com.example.cb.test.mvp.BasePresenter;
-import com.example.cb.test.mvp.view.INewListView;
+import com.example.cb.test.mvp.view.IMvpFragmentView;
 import com.example.cb.test.rx.http.MovieHttpRequest;
 import com.example.cb.test.rx.http.NewsResp;
 import com.example.cb.test.rx.http.XHttpCallback;
@@ -12,9 +12,9 @@ import java.util.Map;
 /**
  * Created by bin on 2018/12/24.
  */
-public class NewListPresenter extends BasePresenter<INewListView> {
+public class MvpFragmentPresenter extends BasePresenter<IMvpFragmentView> {
 
-    public NewListPresenter(INewListView view) {
+    public MvpFragmentPresenter(IMvpFragmentView view) {
         super(view);
     }
 
@@ -25,12 +25,12 @@ public class NewListPresenter extends BasePresenter<INewListView> {
         MovieHttpRequest.getInstance().sendNewsRequest(map, new XHttpCallback<NewsResp>() {
             @Override
             public void onSuccess(NewsResp newsResp) {
-                mView.onRequestSuccess(newsResp);
+                mView.onNewsSuccess(newsResp);
             }
 
             @Override
             public void onError(String error) {
-                mView.onError(error);
+                mView.onNewsError(error);
             }
         });
     }

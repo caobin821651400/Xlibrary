@@ -12,10 +12,6 @@ import com.cb.xlibrary.imagepicker.util.Utils;
 
 import java.util.ArrayList;
 
-import uk.co.senab.photoview.PhotoView;
-import uk.co.senab.photoview.PhotoViewAttacher;
-
-
 /**
  * ================================================
  * 作    者：jeasonlzy（廖子尧 Github地址：https://github.com/jeasonlzy0216
@@ -54,17 +50,17 @@ public class ImagePageAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        PhotoView photoView = new PhotoView(mActivity);
-        ImageItem imageItem = images.get(position);
-        imagePicker.getImageLoader().displayImagePreview(mActivity, imageItem.path, photoView, screenWidth, screenHeight);
-        photoView.setOnPhotoTapListener(new PhotoViewAttacher.OnPhotoTapListener() {
-            @Override
-            public void onPhotoTap(View view, float x, float y) {
-                if (listener != null) listener.OnPhotoTapListener(view, x, y);
-            }
-        });
-        container.addView(photoView);
-        return photoView;
+//        PhotoView photoView = new PhotoView(mActivity);
+//        ImageItem imageItem = images.get(position);
+//        imagePicker.getImageLoader().displayImagePreview(mActivity, imageItem.path, photoView, screenWidth, screenHeight);
+//        photoView.setOnPhotoTapListener(new PhotoViewAttacher.OnPhotoTapListener() {
+//            @Override
+//            public void onPhotoTap(View view, float x, float y) {
+//                if (listener != null) listener.OnPhotoTapListener(view, x, y);
+//            }
+//        });
+//        container.addView(photoView);
+        return null;
     }
 
     @Override

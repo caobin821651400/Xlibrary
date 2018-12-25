@@ -58,8 +58,7 @@ public abstract class BaseMvpActivity<T extends BasePresenter> extends BaseActiv
     protected void onDestroy() {
         super.onDestroy();
         //及时销毁mvp的view
-        if (mPresenter != null) {
+        if (mPresenter != null)
             mPresenter.detachView();
-        }
     }
 }
