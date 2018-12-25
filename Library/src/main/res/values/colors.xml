@@ -10,16 +10,6 @@
 
     <color name="XFrame_loading_dialog_message">#595959</color>
 
-    <color name="ic_back_press">#323336</color>
-    <color name="ip_color_primary">#393A3F</color>
-    <color name="ip_color_primary_dark">#303135</color>
-    <color name="ip_color_primary_trans">#ec2f3335</color>
-    <color name="ip_color_press">#ffe0e0e0</color>
-    <color name="ip_camera_pre">#353535</color>
-    <color name="ip_color_accent">#1AAD19</color>
-    <color name="ip_text_secondary_inverted">#66ffffff</color>
-    <color name="ip_text_primary_inverted">#ffffff</color>
-
     <color name="com_ycuwq_datepicker_selectedTextColor">#33aaff</color>
     <color name="com_ycuwq_datepicker_divider">#cccccc</color>
 </resources>

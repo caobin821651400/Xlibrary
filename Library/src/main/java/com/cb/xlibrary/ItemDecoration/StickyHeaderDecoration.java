@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.cb.xlibrary.recycler.ItemDecoration;
+package com.cb.xlibrary.ItemDecoration;
 
 import android.graphics.Canvas;
 import android.graphics.Rect;

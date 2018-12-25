@@ -6,13 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 
-import com.cb.xlibrary.dialog.XUserHeadDialog;
-import com.cb.xlibrary.picker.time.HourAndMinutePicker;
 import com.cb.xlibrary.utils.XActivityStack;
 import com.cb.xlibrary.utils.XLogUtils;
 import com.cb.xlibrary.utils.XPermission;
 import com.example.cb.test.mvp.MvpActivity;
-import com.example.cb.test.utils.GlideImageLoader;
 
 
 
@@ -80,9 +77,9 @@ public class MainActivity extends BaseActivity {
      * 选择用户头像
      */
     private void showChoseHeadDialog() {
-        XUserHeadDialog xUserHeadDialog = new XUserHeadDialog(MainActivity.this);
-        xUserHeadDialog.setImageLoader(new GlideImageLoader());
-        xUserHeadDialog.show();
+//        XUserHeadDialog xUserHeadDialog = new XUserHeadDialog(MainActivity.this);
+//        xUserHeadDialog.setImageLoader(new GlideImageLoader());
+//        xUserHeadDialog.show();
     }
 //
 //    private void showLoadingDialog() {

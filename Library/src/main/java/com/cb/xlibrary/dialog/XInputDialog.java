@@ -46,7 +46,7 @@ public class XInputDialog extends Dialog {
 
 
     private XInputDialog(@NonNull Context context) {
-        super(context, R.style.XDialog);
+        super(context, R.style.Dialog_cblibrary);
         editBg = ContextCompat.getDrawable(context, R.drawable.shape_input_et_bg);
     }
 

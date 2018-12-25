@@ -1,4 +1,4 @@
-package com.cb.xlibrary.recycler.ItemDecoration;
+package com.cb.xlibrary.ItemDecoration;
 
 import android.content.Context;
 import android.content.res.Resources;

@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.cb.xlibrary.adapter.XRecyclerViewAdapter;
 import com.cb.xlibrary.adapter.XViewHolder;
-import com.cb.xlibrary.recycler.ItemDecoration.XPaddingDividerDecoration;
+import com.cb.xlibrary.ItemDecoration.XPaddingDividerDecoration;
 import com.cb.xlibrary.utils.XLogUtils;
 import com.example.cb.test.BaseActivity;
 import com.example.cb.test.R;

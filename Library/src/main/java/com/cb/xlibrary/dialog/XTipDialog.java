@@ -44,7 +44,7 @@ public class XTipDialog extends Dialog {
 
 
     private XTipDialog(@NonNull Context context) {
-        super(context, R.style.XDialog);
+        super(context, R.style.Dialog_cblibrary);
     }
 
     @Override

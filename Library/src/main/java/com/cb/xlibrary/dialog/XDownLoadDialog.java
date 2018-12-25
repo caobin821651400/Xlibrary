@@ -25,7 +25,7 @@ public class XDownLoadDialog extends Dialog {
     private TextView tvProgress;
 
     public XDownLoadDialog(@NonNull Context context) {
-        super(context, R.style.XDialog);
+        super(context, R.style.Dialog_cblibrary);
         setOnCancelListener(new OnCancelListener() {
 
             @Override

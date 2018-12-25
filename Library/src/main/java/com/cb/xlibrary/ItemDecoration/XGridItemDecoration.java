@@ -1,4 +1,4 @@
-package com.cb.xlibrary.recycler.ItemDecoration;
+package com.cb.xlibrary.ItemDecoration;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -19,7 +19,6 @@ import android.util.TypedValue;
 import android.view.View;
 
 import com.cb.xlibrary.adapter.XRecyclerViewAdapter;
-import com.cb.xlibrary.utils.XLogUtils;
 
 /**
  * RecyclerView的GridItem分割线

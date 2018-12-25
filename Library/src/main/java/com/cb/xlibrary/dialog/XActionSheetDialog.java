@@ -45,12 +45,12 @@ public class XActionSheetDialog extends Dialog {
     private boolean isDismissing;//结束过程
 
     public XActionSheetDialog(@NonNull Context context) {
-        super(context, R.style.XDialog);
+        super(context, R.style.Dialog_cblibrary);
         initView(context);
     }
 
     public XActionSheetDialog(@NonNull Context context, @ColorRes int color) {
-        super(context, R.style.XDialog);
+        super(context, R.style.Dialog_cblibrary);
         this.txtColor = ContextCompat.getColor(context, color);
         initView(context);
     }
@@ -64,10 +64,10 @@ public class XActionSheetDialog extends Dialog {
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         window.setAttributes(lp);
 
-        mRootView = View.inflate(context, R.layout.layout_bottom_pop_view, null);
-        mRecyclerView = (RecyclerView) mRootView.findViewById(R.id.recycler_view);
-        titleTv = (TextView) mRootView.findViewById(R.id.tv_title);
-        cancelTv = (TextView) mRootView.findViewById(R.id.tv_cancel);
+        mRootView = View.inflate(context, R.layout.layout_bottom_pop_view_cblibrary, null);
+        mRecyclerView = mRootView.findViewById(R.id.recycler_view);
+        titleTv = mRootView.findViewById(R.id.tv_title);
+        cancelTv = mRootView.findViewById(R.id.tv_cancel);
         if (txtColor != -1) {
             cancelTv.setTextColor(txtColor);
         }
@@ -93,9 +93,9 @@ public class XActionSheetDialog extends Dialog {
      */
     private void initAnim(Context context) {
         mShowAnimation = AnimationUtils.loadAnimation(context,
-                R.anim.popshow_anim);
+                R.anim.dialog_show_anim_cblibrary);
         mDismissAnimation = AnimationUtils.loadAnimation(context,
-                R.anim.pophidden_anim);
+                R.anim.dialog_dismiss_anim_cblibrary);
         mDismissAnimation
                 .setAnimationListener(new Animation.AnimationListener() {
                     @Override
@@ -164,7 +164,7 @@ public class XActionSheetDialog extends Dialog {
         @Override
         protected void bindData(XViewHolder holder, final BottomPopupBean data, final int position) {
             View itemView = holder.getConvertView();
-            content = (TextView) itemView.findViewById(R.id.tv_content);
+            content = itemView.findViewById(R.id.tv_content);
             content.setText(data.getTitle());
             if (txtColor != -1) {
                 content.setTextColor(txtColor);
