@@ -5,8 +5,16 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <com.cb.xlibrary.picker.date.DatePicker
-        android:id="@+id/dayPicker_dialog"
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#f7f7f7"
+        android:gravity="center"
+        android:text="选择时间" />
+
+    <com.cb.xlibrary.picker.time.HourAndMinutePicker
+        android:id="@+id/time_picker_dialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:wheelCyclic="true" />
@@ -21,6 +29,6 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="#f7f7f7"
-        android:text="@string/datepicker_decide_cblibrary"
+        android:text="确定"
         android:textColor="@color/datepicker_selectedTextColor_cblibrary" />
 </LinearLayout>
