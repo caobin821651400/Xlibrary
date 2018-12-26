@@ -151,7 +151,7 @@
         <attr name="endYear" format="integer" />
     </declare-styleable>
 
-    <declare-styleable name="MonthPicker"/>
+    <declare-styleable name="MonthPicker" />
 
     <declare-styleable name="DatePicker">
         <attr name="halfVisibleItemCount" />
@@ -187,28 +187,28 @@
         <attr name="wheelCurtainBorderColor" />
     </declare-styleable>
 
-    <attr name="halfVisibleItemCount" format="integer"/>
-    <attr name="itemTextSize" format="dimension"/>
-    <attr name="itemMaximumWidthText" format="string"/>
-    <attr name="itemTextColor" format="color"/>
-    <attr name="textGradual" format="boolean"/>
-    <attr name="selectedTextColor" format="color"/>
-    <attr name="selectedTextSize" format="dimension"/>
-    <attr name="currentItemPosition" format="integer"/>
-    <attr name="itemWidthSpace" format="dimension"/>
-    <attr name="itemHeightSpace" format="dimension"/>
-    <attr name="zoomInSelectedItem" format="boolean"/>
-    <attr name="wheelCyclic" format="boolean"/>
-    <attr name="wheelCurtain" format="boolean"/>
-    <attr name="wheelCurtainColor" format="color"/>
-    <attr name="wheelCurtainBorder" format="boolean"/>
-    <attr name="wheelCurtainBorderColor" format="color"/>
-    <attr name="indicatorText" format="string"/>
-    <attr name="indicatorTextSize" format="dimension"/>
-    <attr name="indicatorTextColor" format="color"/>
+    <attr name="halfVisibleItemCount" format="integer" />
+    <attr name="itemTextSize" format="dimension" />
+    <attr name="itemMaximumWidthText" format="string" />
+    <attr name="itemTextColor" format="color" />
+    <attr name="textGradual" format="boolean" />
+    <attr name="selectedTextColor" format="color" />
+    <attr name="selectedTextSize" format="dimension" />
+    <attr name="currentItemPosition" format="integer" />
+    <attr name="itemWidthSpace" format="dimension" />
+    <attr name="itemHeightSpace" format="dimension" />
+    <attr name="zoomInSelectedItem" format="boolean" />
+    <attr name="wheelCyclic" format="boolean" />
+    <attr name="wheelCurtain" format="boolean" />
+    <attr name="wheelCurtainColor" format="color" />
+    <attr name="wheelCurtainBorder" format="boolean" />
+    <attr name="wheelCurtainBorderColor" format="color" />
+    <attr name="indicatorText" format="string" />
+    <attr name="indicatorTextSize" format="dimension" />
+    <attr name="indicatorTextColor" format="color" />
 
     <declare-styleable name="TagFlowLayoutCbLibrary">
-        <attr name="max_select" format="integer"/>
+        <attr name="max_select" format="integer" />
         <attr name="tag_gravity">
             <enum name="left" value="-1" />
             <enum name="center" value="0" />
@@ -217,46 +217,36 @@
     </declare-styleable>
 
     <declare-styleable name="XTabItem">
-        <attr name="android:text"/>
-        <attr name="android:icon"/>
-        <attr name="android:layout"/>
+        <attr name="android:text" />
+        <attr name="android:icon" />
+        <attr name="android:layout" />
     </declare-styleable>
 
     <declare-styleable name="XTabLayoutCbLibrary">
-        <attr name="x_tabIndicatorAnimation" format="boolean"/>
-        <attr name="x_tabIndicatorColor" format="color"/>
-        <attr name="x_tabIndicatorHeight" format="dimension"/>
-        <attr name="x_tabIndicatorWidth" format="dimension"/>
-        <attr name="x_tabContentStart" format="dimension"/>
-        <attr name="x_tabBackground" format="reference"/>
+        <attr name="x_tabIndicatorAnimation" format="boolean" />
+        <attr name="x_tabIndicatorColor" format="color" />
+        <attr name="x_tabIndicatorHeight" format="dimension" />
+        <attr name="x_tabIndicatorWidth" format="dimension" />
+        <attr name="x_tabContentStart" format="dimension" />
+        <attr name="x_tabBackground" format="reference" />
         <attr name="x_tabMode">
-            <enum name="scrollable" value="0"/>
-            <enum name="fixed" value="1"/>
+            <enum name="scrollable" value="0" />
+            <enum name="fixed" value="1" />
         </attr>
         <attr name="x_tabGravity">
-            <enum name="fill" value="0"/>
-            <enum name="center" value="1"/>
+            <enum name="fill" value="0" />
+            <enum name="center" value="1" />
         </attr>
-        <attr name="x_tabMinWidth" format="dimension"/>
-        <attr name="x_tabMaxWidth" format="dimension"/>
-        <attr name="x_tabTextAppearance" format="reference"/>
-        <attr name="x_tabTextColor" format="color"/>
-        <attr name="x_tabSelectedTextColor" format="color"/>
-        <attr name="x_tabPaddingStart" format="dimension"/>
-        <attr name="x_tabPaddingTop" format="dimension"/>
-        <attr name="x_tabPaddingEnd" format="dimension"/>
-        <attr name="x_tabPaddingBottom" format="dimension"/>
-        <attr name="x_tabPadding" format="dimension"/>
+        <attr name="x_tabMinWidth" format="dimension" />
+        <attr name="x_tabMaxWidth" format="dimension" />
+        <attr name="x_tabTextAppearance" format="reference" />
+        <attr name="x_tabTextColor" format="color" />
+        <attr name="x_tabSelectedTextColor" format="color" />
+        <attr name="x_tabPaddingStart" format="dimension" />
+        <attr name="x_tabPaddingTop" format="dimension" />
+        <attr name="x_tabPaddingEnd" format="dimension" />
+        <attr name="x_tabPaddingBottom" format="dimension" />
+        <attr name="x_tabPadding" format="dimension" />
         <attr name="x_indicatorMarginTop" format="dimension" />
-    </declare-styleable>
-
-    <declare-styleable name="XTextPathViewCbLibrary">
-        <attr name="text" format="string" />
-        <attr name="pathTextSize" format="dimension" />
-        <attr name="pathTextColor" format="color" />
-        <attr name="duration" format="integer" />
-        <attr name="strokeWidth" format="dimension" />
-        <attr name="cycle" format="boolean" />
-        <attr name="autoStart" format="boolean" />
     </declare-styleable>
 </resources>
