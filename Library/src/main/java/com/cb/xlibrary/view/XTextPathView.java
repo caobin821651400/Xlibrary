@@ -73,14 +73,14 @@ public class XTextPathView extends View {
     private void init(Context context, AttributeSet attrs) {
         //关闭硬件加速
         setLayerType(LAYER_TYPE_SOFTWARE, null);
-        TypedArray tt = context.obtainStyledAttributes(attrs, R.styleable.XTextPathView);
-        mText = tt.getString(R.styleable.XTextPathView_text);
-        mTextSize = tt.getDimensionPixelSize(R.styleable.XTextPathView_pathTextSize, 108);
-        mTextColor = tt.getColor(R.styleable.XTextPathView_pathTextColor, Color.RED);
-        mDuration = tt.getInt(R.styleable.XTextPathView_duration, 6000);
-        mStrokeWidth = tt.getDimensionPixelOffset(R.styleable.XTextPathView_strokeWidth, 5);
-        mIsCycle = tt.getBoolean(R.styleable.XTextPathView_cycle, false);
-        mIsAutoStart = tt.getBoolean(R.styleable.XTextPathView_autoStart, true);
+        TypedArray tt = context.obtainStyledAttributes(attrs, R.styleable.XTextPathViewCbLibrary);
+        mText = tt.getString(R.styleable.XTextPathViewCbLibrary_text);
+        mTextSize = tt.getDimensionPixelSize(R.styleable.XTextPathViewCbLibrary_pathTextSize, 108);
+        mTextColor = tt.getColor(R.styleable.XTextPathViewCbLibrary_pathTextColor, Color.RED);
+        mDuration = tt.getInt(R.styleable.XTextPathViewCbLibrary_duration, 6000);
+        mStrokeWidth = tt.getDimensionPixelOffset(R.styleable.XTextPathViewCbLibrary_strokeWidth, 5);
+        mIsCycle = tt.getBoolean(R.styleable.XTextPathViewCbLibrary_cycle, false);
+        mIsAutoStart = tt.getBoolean(R.styleable.XTextPathViewCbLibrary_autoStart, true);
         tt.recycle();
 
         mPaint = new TextPaint();
