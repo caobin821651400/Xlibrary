@@ -232,7 +232,7 @@ public class XTabLayout extends HorizontalScrollView {
                 LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT));
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.XTabLayout,
-                defStyleAttr, R.style.XTabLayout_Default_Style);
+                defStyleAttr, R.style.XTabLayout_Default_Style_cblibrary);
 
         mTabStrip.setSelectedIndicatorHeight(
                 a.getDimensionPixelSize(R.styleable.XTabLayout_x_tabIndicatorHeight, 0));

@@ -1,24 +1,24 @@
 <resources>
-    <dimen name="XFrame_spacing_small">8dp</dimen>
-    <dimen name="XFrame_spacing">10dp</dimen>
-    <dimen name="XFrame_spacing_large">16dp</dimen>
+    <dimen name="XFrame_spacing_small_cblibrary">8dp</dimen>
+    <dimen name="XFrame_spacing_cblibrary">10dp</dimen>
+    <dimen name="XFrame_spacing_large_cblibrary">16dp</dimen>
 
-    <dimen name="XFrame_text_size_small">13sp</dimen>
-    <dimen name="XFrame_text_size">15sp</dimen>
+    <dimen name="XFrame_text_size_small_cblibrary">13sp</dimen>
+    <dimen name="XFrame_text_size_cblibrary">15sp</dimen>
 
-    <dimen name="XFrame_adapter_icon_size">24dp</dimen>
-    <dimen name="XFrame_progressbar_size">24dp</dimen>
-    <dimen name="XFrame_radius">6dp</dimen>
-    <dimen name="default_divider_height">1dp</dimen>
-    <dimen name="default_divider_padding">4dp</dimen>
+    <dimen name="XFrame_adapter_icon_size_cblibrary">24dp</dimen>
+    <dimen name="XFrame_progressbar_size_cblibrary">24dp</dimen>
+    <dimen name="XFrame_radius_cblibrary_cblibrary">6dp</dimen>
+    <dimen name="default_divider_height_cblibrary">1dp</dimen>
+    <dimen name="default_divider_padding_cblibrary">4dp</dimen>
 
 
-    <dimen name="WheelItemTextSize">14sp</dimen>
-    <dimen name="WheelSelectedItemTextSize">20sp</dimen>
-    <dimen name="WheelItemSpace">12dp</dimen>
-    <dimen name="WheelIndicatorSize">2dp</dimen>
-    <dimen name="WheelMargins">8dp</dimen>
-    <dimen name="WheelItemHeightSpace">16dp</dimen>
-    <dimen name="WheelItemWidthSpace">32dp</dimen>
+    <dimen name="WheelItemTextSize_cblibrary">14sp</dimen>
+    <dimen name="WheelSelectedItemTextSize_cblibrary">20sp</dimen>
+    <dimen name="WheelItemSpace_cblibrary">12dp</dimen>
+    <dimen name="WheelIndicatorSize_cblibrary">2dp</dimen>
+    <dimen name="WheelMargins_cblibrary">8dp</dimen>
+    <dimen name="WheelItemHeightSpace_cblibrary">16dp</dimen>
+    <dimen name="WheelItemWidthSpace_cblibrary">32dp</dimen>
 
 </resources>

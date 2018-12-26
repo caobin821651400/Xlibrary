@@ -3,16 +3,16 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:padding="@dimen/XFrame_spacing"
-    android:background="@color/XFrame_white"
+    android:padding="@dimen/XFrame_spacing_cblibrary"
+    android:background="@color/XFrame_white_cblibrary"
     android:orientation="horizontal">
 
 
     <ProgressBar
         android:id="@+id/xframe_loading_progressbar"
         style="@style/Widget.AppCompat.ProgressBar"
-        android:layout_width="@dimen/XFrame_progressbar_size"
-        android:layout_height="@dimen/XFrame_progressbar_size"
+        android:layout_width="@dimen/XFrame_progressbar_size_cblibrary"
+        android:layout_height="@dimen/XFrame_progressbar_size_cblibrary"
         android:layout_gravity="center"/>
 
 
@@ -21,8 +21,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/xloading_dialog_message"
-        android:textColor="@color/XFrame_loading_dialog_message"
-        android:textSize="@dimen/XFrame_text_size_small" />
+        android:text="@string/xloading_dialog_message_cblibrary"
+        android:textColor="@color/XFrame_loading_dialog_message_cblibrary"
+        android:textSize="@dimen/XFrame_text_size_small_cblibrary" />
 
 </LinearLayout>

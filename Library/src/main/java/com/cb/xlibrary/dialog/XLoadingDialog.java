@@ -29,7 +29,7 @@ public class XLoadingDialog extends Dialog {
     private XColorDrawable drawable;
 
     public XLoadingDialog(Context context) {
-        super(context, R.style.loading_dialog);
+        super(context, R.style.xloading_dialog_style_cblibrary);
         this.context = context;
         drawable = new XColorDrawable();
         setContentView(R.layout.xloading_dialog_cblibrary);

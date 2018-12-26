@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#3CB264</color>
+    <color name="XFrame_darker_gray_cblibrary">#aaaaaa</color>
+    <color name="XFrame_white_cblibrary">#ffffff</color>
+    <color name="XFrame_text_gray_cblibrary">#8a8a8a</color>
 
-    <color name="XFrame_darker_gray">#aaaaaa</color>
-    <color name="XFrame_white">#ffffff</color>
-    <color name="XFrame_text_gray">#8a8a8a</color>
+    <color name="XFrame_loading_dialog_message_cblibrary">#595959</color>
 
-    <color name="XFrame_loading_dialog_message">#595959</color>
-
-    <color name="com_ycuwq_datepicker_selectedTextColor">#33aaff</color>
-    <color name="com_ycuwq_datepicker_divider">#cccccc</color>
+    <color name="datepicker_selectedTextColor_cblibrary">#33aaff</color>
+    <color name="datepicker_divider_cblibrary">#cccccc</color>
 </resources>

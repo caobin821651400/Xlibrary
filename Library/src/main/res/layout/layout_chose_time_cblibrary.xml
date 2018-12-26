@@ -9,7 +9,7 @@
     <com.cb.xlibrary.picker.time.HourPicker
         android:id="@+id/hourPicker_layout_time"
         app:halfVisibleItemCount="2"
-        app:indicatorText="@string/ycuwq_datepicker_hour"
+        app:indicatorText="@string/datepicker_hour_cblibrary"
         app:wheelCyclic="true"
         app:indicatorTextSize="12sp"
         android:layout_weight="1"
@@ -18,7 +18,7 @@
     <com.cb.xlibrary.picker.time.MinutePicker
         android:id="@+id/minutePicker_layout_time"
         app:wheelCyclic="true"
-        app:indicatorText="@string/ycuwq_datepicker_minute"
+        app:indicatorText="@string/datepicker_minute_cblibrary"
         app:indicatorTextSize="12sp"
         app:halfVisibleItemCount="2"
         android:layout_weight="1"

@@ -14,14 +14,14 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/com_ycuwq_datepicker_divider" />
+        android:background="@color/datepicker_divider_cblibrary" />
 
     <Button
         android:id="@+id/btn_dialog_date_decide"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="#f7f7f7"
-        android:text="@string/ycuwq_datepicker_decide"
-        android:textColor="@color/com_ycuwq_datepicker_selectedTextColor" />
+        android:text="@string/datepicker_decide_cblibrary"
+        android:textColor="@color/datepicker_selectedTextColor_cblibrary" />
     <!--</LinearLayout>-->
 </LinearLayout>

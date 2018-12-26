@@ -76,7 +76,7 @@ public class DatePickerDialogFragment extends DialogFragment {
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		Dialog dialog = new Dialog(getActivity(), R.style.DatePickerBottomDialog);
+		Dialog dialog = new Dialog(getActivity(), R.style.DatePickerBottomDialog_cblibrary);
 		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // 设置Content前设定
 
 		dialog.setContentView(R.layout.dialog_chose_date_cblibrary);
@@ -85,7 +85,7 @@ public class DatePickerDialogFragment extends DialogFragment {
 		Window window = dialog.getWindow();
 		if (window != null) {
 			if (mIsShowAnimation) {
-				window.getAttributes().windowAnimations = R.style.DatePickerDialogAnim;
+				window.getAttributes().windowAnimations = R.style.DatePickerDialogAnim_cblibrary;
 			}
 			WindowManager.LayoutParams lp = window.getAttributes();
 			lp.gravity = Gravity.BOTTOM; // 紧贴底部

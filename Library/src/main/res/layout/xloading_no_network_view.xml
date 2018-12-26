@@ -11,17 +11,17 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/xloading_no_network_text"
-        android:layout_margin="@dimen/XFrame_spacing"
-        android:textColor="@color/XFrame_text_gray"
-        android:textSize="@dimen/XFrame_text_size" />
+        android:text="@string/xloading_no_network_text_cblibrary"
+        android:layout_margin="@dimen/XFrame_spacing_cblibrary"
+        android:textColor="@color/XFrame_text_gray_cblibrary"
+        android:textSize="@dimen/XFrame_text_size_cblibrary" />
     <TextView
         android:id="@id/xloading_retry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/xloading_retry_text"
-        android:textColor="@color/XFrame_text_gray"
-        android:textSize="@dimen/XFrame_text_size"
+        android:text="@string/xloading_retry_text_cblibrary"
+        android:textColor="@color/XFrame_text_gray_cblibrary"
+        android:textSize="@dimen/XFrame_text_size_cblibrary"
         android:background="@drawable/xloading_btn_selector_cblibrary"
-        style="@style/xloading_padding_style" />
+        style="@style/xloading_padding_style_cblibrary" />
 </LinearLayout>

@@ -72,26 +72,26 @@ public class DatePicker extends LinearLayout implements YearPicker.OnYearSelecte
 		}
 		TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DatePicker);
 		int textSize = a.getDimensionPixelSize(R.styleable.DatePicker_itemTextSize,
-				getResources().getDimensionPixelSize(R.dimen.WheelItemTextSize));
+				getResources().getDimensionPixelSize(R.dimen.WheelItemTextSize_cblibrary));
 		int textColor = a.getColor(R.styleable.DatePicker_itemTextColor,
 				Color.BLACK);
 		boolean isTextGradual = a.getBoolean(R.styleable.DatePicker_textGradual, true);
 		boolean isCyclic = a.getBoolean(R.styleable.DatePicker_wheelCyclic, false);
 		int halfVisibleItemCount = a.getInteger(R.styleable.DatePicker_halfVisibleItemCount, 2);
 		int selectedItemTextColor = a.getColor(R.styleable.DatePicker_selectedTextColor,
-				getResources().getColor(R.color.com_ycuwq_datepicker_selectedTextColor));
+				getResources().getColor(R.color.datepicker_selectedTextColor_cblibrary));
 		int selectedItemTextSize = a.getDimensionPixelSize(R.styleable.DatePicker_selectedTextSize,
-				getResources().getDimensionPixelSize(R.dimen.WheelSelectedItemTextSize));
+				getResources().getDimensionPixelSize(R.dimen.WheelSelectedItemTextSize_cblibrary));
 		int itemWidthSpace = a.getDimensionPixelSize(R.styleable.DatePicker_itemWidthSpace,
-				getResources().getDimensionPixelOffset(R.dimen.WheelItemWidthSpace));
+				getResources().getDimensionPixelOffset(R.dimen.WheelItemWidthSpace_cblibrary));
 		int itemHeightSpace = a.getDimensionPixelSize(R.styleable.DatePicker_itemHeightSpace,
-				getResources().getDimensionPixelOffset(R.dimen.WheelItemHeightSpace));
+				getResources().getDimensionPixelOffset(R.dimen.WheelItemHeightSpace_cblibrary));
 		boolean isZoomInSelectedItem = a.getBoolean(R.styleable.DatePicker_zoomInSelectedItem, true);
 		boolean isShowCurtain = a.getBoolean(R.styleable.DatePicker_wheelCurtain, true);
 		int curtainColor = a.getColor(R.styleable.DatePicker_wheelCurtainColor, Color.WHITE);
 		boolean isShowCurtainBorder = a.getBoolean(R.styleable.DatePicker_wheelCurtainBorder, true);
 		int curtainBorderColor = a.getColor(R.styleable.DatePicker_wheelCurtainBorderColor,
-				getResources().getColor(R.color.com_ycuwq_datepicker_divider));
+				getResources().getColor(R.color.datepicker_divider_cblibrary));
 		a.recycle();
 
 		setTextSize(textSize);

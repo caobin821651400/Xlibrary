@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/XFrame_spacing">
+    android:padding="@dimen/XFrame_spacing_cblibrary">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -13,8 +13,8 @@
         <ProgressBar
             android:id="@+id/adapter_loading_progressbar"
             style="@style/Widget.AppCompat.ProgressBar"
-            android:layout_width="@dimen/XFrame_progressbar_size"
-            android:layout_height="@dimen/XFrame_progressbar_size"
+            android:layout_width="@dimen/XFrame_progressbar_size_cblibrary"
+            android:layout_height="@dimen/XFrame_progressbar_size_cblibrary"
             android:layout_gravity="center_vertical"/>
 
         <TextView
@@ -22,10 +22,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/XFrame_spacing"
+            android:layout_marginLeft="@dimen/XFrame_spacing_cblibrary"
             android:text="努力加载中..."
-            android:textColor="@color/XFrame_darker_gray"
-            android:textSize="@dimen/XFrame_text_size" />
+            android:textColor="@color/XFrame_darker_gray_cblibrary"
+            android:textSize="@dimen/XFrame_text_size_cblibrary" />
 
     </LinearLayout>
 

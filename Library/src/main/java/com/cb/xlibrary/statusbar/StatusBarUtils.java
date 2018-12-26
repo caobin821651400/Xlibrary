@@ -33,8 +33,8 @@ public class StatusBarUtils {
     public static int DEFAULT_COLOR = 0;
     public static float DEFAULT_ALPHA = 0;//Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ? 0.2f : 0.3f;
     public static final int MIN_API = 19;
-    private static final int FAKE_STATUS_BAR_VIEW_ID = R.id.statusbarutil_fake_status_bar_view;
-    private static final int FAKE_TRANSLUCENT_VIEW_ID = R.id.statusbarutil_translucent_view;
+    private static final int FAKE_STATUS_BAR_VIEW_ID = R.id.statusbarutil_fake_status_bar_view_cblibrary;
+    private static final int FAKE_TRANSLUCENT_VIEW_ID = R.id.statusbarutil_translucent_view_cblibrary;
 
     //<editor-fold desc="沉侵">
     public static void immersive(Activity activity) {

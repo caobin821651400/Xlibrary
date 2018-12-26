@@ -259,7 +259,7 @@ public class WheelPicker<T> extends View {
         }
 		TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.WheelPicker);
 		mTextSize = a.getDimensionPixelSize(R.styleable.WheelPicker_itemTextSize,
-				getResources().getDimensionPixelSize(R.dimen.WheelItemTextSize));
+				getResources().getDimensionPixelSize(R.dimen.WheelItemTextSize_cblibrary));
 		mTextColor = a.getColor(R.styleable.WheelPicker_itemTextColor,
 				Color.BLACK);
 		mIsTextGradual = a.getBoolean(R.styleable.WheelPicker_textGradual, true);
@@ -268,12 +268,12 @@ public class WheelPicker<T> extends View {
 		mItemMaximumWidthText = a.getString(R.styleable.WheelPicker_itemMaximumWidthText);
 		mSelectedItemTextColor = a.getColor(R.styleable.WheelPicker_selectedTextColor, Color.parseColor("#33aaff"));
         mSelectedItemTextSize = a.getDimensionPixelSize(R.styleable.WheelPicker_selectedTextSize,
-                getResources().getDimensionPixelSize(R.dimen.WheelSelectedItemTextSize));
+                getResources().getDimensionPixelSize(R.dimen.WheelSelectedItemTextSize_cblibrary));
         mCurrentPosition = a.getInteger(R.styleable.WheelPicker_currentItemPosition, 0);
         mItemWidthSpace = a.getDimensionPixelSize(R.styleable.WheelPicker_itemWidthSpace,
-                getResources().getDimensionPixelOffset(R.dimen.WheelItemWidthSpace));
+                getResources().getDimensionPixelOffset(R.dimen.WheelItemWidthSpace_cblibrary));
         mItemHeightSpace = a.getDimensionPixelSize(R.styleable.WheelPicker_itemHeightSpace,
-                getResources().getDimensionPixelOffset(R.dimen.WheelItemHeightSpace));
+                getResources().getDimensionPixelOffset(R.dimen.WheelItemHeightSpace_cblibrary));
         mIsZoomInSelectedItem = a.getBoolean(R.styleable.WheelPicker_zoomInSelectedItem, true);
         mIsShowCurtain = a.getBoolean(R.styleable.WheelPicker_wheelCurtain, true);
         mCurtainColor = a.getColor(R.styleable.WheelPicker_wheelCurtainColor,

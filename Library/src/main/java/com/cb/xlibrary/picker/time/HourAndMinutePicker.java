@@ -56,26 +56,26 @@ public class HourAndMinutePicker extends LinearLayout implements
         }
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.HourAndMinutePicker);
         int textSize = a.getDimensionPixelSize(R.styleable.HourAndMinutePicker_itemTextSize,
-                getResources().getDimensionPixelSize(R.dimen.WheelItemTextSize));
+                getResources().getDimensionPixelSize(R.dimen.WheelItemTextSize_cblibrary));
         int textColor = a.getColor(R.styleable.HourAndMinutePicker_itemTextColor,
                 Color.BLACK);
         boolean isTextGradual = a.getBoolean(R.styleable.HourAndMinutePicker_textGradual, true);
         boolean isCyclic = a.getBoolean(R.styleable.HourAndMinutePicker_wheelCyclic, true);
         int halfVisibleItemCount = a.getInteger(R.styleable.HourAndMinutePicker_halfVisibleItemCount, 2);
         int selectedItemTextColor = a.getColor(R.styleable.HourAndMinutePicker_selectedTextColor,
-                getResources().getColor(R.color.com_ycuwq_datepicker_selectedTextColor));
+                getResources().getColor(R.color.datepicker_selectedTextColor_cblibrary));
         int selectedItemTextSize = a.getDimensionPixelSize(R.styleable.HourAndMinutePicker_selectedTextSize,
-                getResources().getDimensionPixelSize(R.dimen.WheelSelectedItemTextSize));
+                getResources().getDimensionPixelSize(R.dimen.WheelSelectedItemTextSize_cblibrary));
         int itemWidthSpace = a.getDimensionPixelSize(R.styleable.HourAndMinutePicker_itemWidthSpace,
-                getResources().getDimensionPixelOffset(R.dimen.WheelItemWidthSpace));
+                getResources().getDimensionPixelOffset(R.dimen.WheelItemWidthSpace_cblibrary));
         int itemHeightSpace = a.getDimensionPixelSize(R.styleable.HourAndMinutePicker_itemHeightSpace,
-                getResources().getDimensionPixelOffset(R.dimen.WheelItemHeightSpace));
+                getResources().getDimensionPixelOffset(R.dimen.WheelItemHeightSpace_cblibrary));
         boolean isZoomInSelectedItem = a.getBoolean(R.styleable.HourAndMinutePicker_zoomInSelectedItem, true);
         boolean isShowCurtain = a.getBoolean(R.styleable.HourAndMinutePicker_wheelCurtain, true);
         int curtainColor = a.getColor(R.styleable.HourAndMinutePicker_wheelCurtainColor, Color.WHITE);
         boolean isShowCurtainBorder = a.getBoolean(R.styleable.HourAndMinutePicker_wheelCurtainBorder, true);
         int curtainBorderColor = a.getColor(R.styleable.HourAndMinutePicker_wheelCurtainBorderColor,
-                getResources().getColor(R.color.com_ycuwq_datepicker_divider));
+                getResources().getColor(R.color.datepicker_divider_cblibrary));
         a.recycle();
 
         setTextSize(textSize);
