@@ -72,9 +72,9 @@ public class XPermission {
      */
     public static void requestPermissions(Context context, int requestCode
             , String[] permissions, OnPermissionListener listener) {
+        mOnPermissionListener = listener;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {//6.0
             if (context instanceof Activity) {
-                mOnPermissionListener = listener;
                 List<String> deniedPermissions = getDeniedPermissions(context, permissions);
                 if (deniedPermissions.size() > 0) {
                     mRequestCode = requestCode;
