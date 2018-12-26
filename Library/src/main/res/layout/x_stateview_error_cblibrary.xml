@@ -8,7 +8,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/xloading_error" />
+        android:src="@drawable/xloading_error_view_cblibrary" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -23,7 +23,7 @@
         style="@style/xloading_padding_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/xloading_btn_selector"
+        android:background="@drawable/xloading_btn_selector_cblibrary"
         android:text="@string/xloading_retry_text"
         android:textColor="@color/XFrame_text_gray"
         android:textSize="@dimen/XFrame_text_size" />

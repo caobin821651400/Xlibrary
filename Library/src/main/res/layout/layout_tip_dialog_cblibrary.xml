@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
-        android:background="@drawable/shape_corners_5dp_bg"
+        android:background="@drawable/shape_corners_5dp_bg_cblibrary"
         android:clickable="true"
         android:orientation="vertical">
 
@@ -23,18 +23,17 @@
             android:textColor="#000000"
             android:textSize="17sp" />
 
-        <EditText
-            android:id="@+id/et_opinion"
+        <TextView
+            android:id="@+id/tv_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="25dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginLeft="17dp"
             android:layout_marginRight="17dp"
-            android:layout_marginTop="12dp"
             android:gravity="center"
-            android:paddingBottom="8dp"
-            android:paddingTop="8dp"
-            android:singleLine="true"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:textColor="#1c1c1c"
             android:textSize="14sp" />
 
         <View
@@ -49,12 +48,12 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btn_cancel"
+                android:id="@+id/btn_left"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:background="@drawable/selector_btn_left_bottom"
+                android:background="@drawable/selector_input_dialog_btn_left_bottom_cblibrary"
                 android:gravity="center"
                 android:minHeight="48dp"
                 android:padding="5dp"
@@ -66,17 +65,16 @@
                 android:background="#dddddd" />
 
             <Button
-                android:id="@+id/btn_save"
+                android:id="@+id/btn_right"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:background="@drawable/selector_btn_right_bottom"
+                android:background="@drawable/selector_input_dialog_btn_right_bottom_cblibrary"
                 android:gravity="center"
                 android:minHeight="48dp"
                 android:padding="5dp"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

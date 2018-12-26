@@ -86,7 +86,7 @@ public class XToast {
     public static Toast warning(@NonNull String message, int duration, boolean withIcon) {
         Drawable icon = null;
         if (withIcon) {
-            icon = XOutdatedUtils.getDrawable(context, R.drawable.xtoast_warning);
+            icon = XOutdatedUtils.getDrawable(context, R.drawable.ic_xtoast_warning_cblibrary);
         }
         return custom(message, icon, WARNING_COLOR, duration);
     }
@@ -102,7 +102,7 @@ public class XToast {
     public static Toast info(@NonNull String message, int duration, boolean withIcon) {
         Drawable icon = null;
         if (withIcon) {
-            icon = XOutdatedUtils.getDrawable(context, R.drawable.xtoast_info);
+            icon = XOutdatedUtils.getDrawable(context, R.drawable.ic_xtoast_info_cblibrary);
         }
         return custom(message, icon, INFO_COLOR, duration);
     }
@@ -118,7 +118,7 @@ public class XToast {
     public static Toast success(@NonNull String message, int duration, boolean withIcon) {
         Drawable icon = null;
         if (withIcon) {
-            icon = XOutdatedUtils.getDrawable(context, R.drawable.xtoast_success);
+            icon = XOutdatedUtils.getDrawable(context, R.drawable.ic_xtoast_success_cblibrary);
         }
         return custom(message, icon, SUCCESS_COLOR, duration);
     }
@@ -134,7 +134,7 @@ public class XToast {
     public static Toast error(@NonNull String message, int duration, boolean withIcon) {
         Drawable icon = null;
         if (withIcon) {
-            icon = XOutdatedUtils.getDrawable(context, R.drawable.xtoast_error);
+            icon = XOutdatedUtils.getDrawable(context, R.drawable.ic_xtoast_error_cblibrary);
         }
         return custom(message, icon, ERROR_COLOR, duration);
     }
@@ -172,11 +172,11 @@ public class XToast {
      */
     public static Toast custom(@NonNull String message, Drawable icon,
                                @ColorInt int textColor, @ColorInt int tintColor, int duration) {
-        View toastLayout = LayoutInflater.from(context).inflate(R.layout.xtoast_view, null);
+        View toastLayout = LayoutInflater.from(context).inflate(R.layout.xtoast_content_view_cblibrary, null);
         ImageView toastIcon = (ImageView) toastLayout.findViewById(R.id.xtoast_icon);
         TextView toastText = (TextView) toastLayout.findViewById(R.id.xtoast_text);
 
-        Drawable drawableFrame = XOutdatedUtils.getDrawable(context,R.drawable.xtoast_frame);
+        Drawable drawableFrame = XOutdatedUtils.getDrawable(context,R.drawable.ic_xtoast_frame_cblibrary);
         drawableFrame.setColorFilter(new PorterDuffColorFilter(tintColor, PorterDuff.Mode.SRC_IN));
         XOutdatedUtils.setBackground(toastLayout, drawableFrame);
 

@@ -61,7 +61,7 @@ public class DatePicker extends LinearLayout implements YearPicker.OnYearSelecte
 	public DatePicker(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 
-		LayoutInflater.from(context).inflate(R.layout.layout_date, this);
+		LayoutInflater.from(context).inflate(R.layout.layout_chose_date_cblibrary, this);
 		initChild();
 		initAttrs(context, attrs);
 	}

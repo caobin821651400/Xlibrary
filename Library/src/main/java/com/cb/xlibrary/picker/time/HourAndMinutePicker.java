@@ -34,7 +34,7 @@ public class HourAndMinutePicker extends LinearLayout implements
     public HourAndMinutePicker(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        LayoutInflater.from(context).inflate(R.layout.layout_time, this);
+        LayoutInflater.from(context).inflate(R.layout.layout_chose_time_cblibrary, this);
         initChild();
         initAttrs(context, attrs);
 

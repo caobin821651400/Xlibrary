@@ -39,7 +39,7 @@ public class DatePickerDialogFragment extends DialogFragment {
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.dialog_date, container);
+		View view = inflater.inflate(R.layout.dialog_chose_date_cblibrary, container);
 
 
 		mDatePicker = view.findViewById(R.id.dayPicker_dialog);
@@ -79,7 +79,7 @@ public class DatePickerDialogFragment extends DialogFragment {
 		Dialog dialog = new Dialog(getActivity(), R.style.DatePickerBottomDialog);
 		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // 设置Content前设定
 
-		dialog.setContentView(R.layout.dialog_date);
+		dialog.setContentView(R.layout.dialog_chose_date_cblibrary);
 		dialog.setCanceledOnTouchOutside(true); // 外部点击取消
 
 		Window window = dialog.getWindow();

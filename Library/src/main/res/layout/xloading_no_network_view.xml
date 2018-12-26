@@ -7,7 +7,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/xloading_no_network"/>
+        android:src="@drawable/ic_xstateview_no_network_cblibrary"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,6 +22,6 @@
         android:text="@string/xloading_retry_text"
         android:textColor="@color/XFrame_text_gray"
         android:textSize="@dimen/XFrame_text_size"
-        android:background="@drawable/xloading_btn_selector"
+        android:background="@drawable/xloading_btn_selector_cblibrary"
         style="@style/xloading_padding_style" />
 </LinearLayout>

@@ -158,7 +158,7 @@ public class XActionSheetDialog extends Dialog {
         private TextView content;
 
         public MyAdapter(@NonNull RecyclerView mRecyclerView) {
-            super(mRecyclerView, R.layout.layout_bottom_pop_items);
+            super(mRecyclerView, R.layout.item_layout_bottom_pop_cblibrary);
         }
 
         @Override

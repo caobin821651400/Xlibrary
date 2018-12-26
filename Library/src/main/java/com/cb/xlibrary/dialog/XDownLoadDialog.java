@@ -44,7 +44,7 @@ public class XDownLoadDialog extends Dialog {
      *
      */
     private void initView(Context context) {
-        mRootView = View.inflate(context, R.layout.down_loading_layout, null);
+        mRootView = View.inflate(context, R.layout.dialog_down_load_layout_cblibrary, null);
         mProgressBar = (ProgressBar) mRootView.findViewById(R.id.pb);
         tvProgress = (TextView) mRootView.findViewById(R.id.tv_progress);
     }

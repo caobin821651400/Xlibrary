@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/shape_corners_5dp_bg"
+    android:background="@drawable/shape_corners_5dp_bg_cblibrary"
     android:orientation="vertical"
     android:padding="20dp">
 
@@ -14,7 +14,7 @@
         android:layout_marginTop="5dp"
         android:maxHeight="11dp"
         android:minHeight="11dp"
-        android:progressDrawable="@drawable/progress_bar_bg" />
+        android:progressDrawable="@drawable/down_dialog_progress_bg_cblibrary" />
 
     <RelativeLayout
         android:layout_width="match_parent"

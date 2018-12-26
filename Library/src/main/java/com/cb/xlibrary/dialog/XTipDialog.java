@@ -50,7 +50,7 @@ public class XTipDialog extends Dialog {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tip_dialog);
+        setContentView(R.layout.layout_tip_dialog_cblibrary);
         tvTitle = (TextView) findViewById(R.id.tv_title);
         btnRight = (Button) findViewById(R.id.btn_right);
         btnLeft = (Button) findViewById(R.id.btn_left);

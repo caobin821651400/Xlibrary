@@ -47,13 +47,13 @@ public class XInputDialog extends Dialog {
 
     private XInputDialog(@NonNull Context context) {
         super(context, R.style.Dialog_cblibrary);
-        editBg = ContextCompat.getDrawable(context, R.drawable.shape_input_et_bg);
+        editBg = ContextCompat.getDrawable(context, R.drawable.shape_input_et_bg_cblibrary);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.input_dialog);
+        setContentView(R.layout.input_dialog_cblibrary);
         tvTitle = (TextView) findViewById(R.id.tv_title);
         btnSave = (Button) findViewById(R.id.btn_save);
         btnCancel = (Button) findViewById(R.id.btn_cancel);

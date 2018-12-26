@@ -33,7 +33,7 @@ public class FragmentTest extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         XLogUtils.d("onCreateView");
-        View view = inflater.inflate(R.layout.xloading_empty_view, null);
+        View view = inflater.inflate(R.layout.x_stateview_empty_cblibrary, null);
         return view;
     }
 

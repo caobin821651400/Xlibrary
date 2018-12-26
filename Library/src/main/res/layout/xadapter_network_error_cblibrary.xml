@@ -8,13 +8,13 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/xloading_empty" />
+        android:src="@drawable/icon_network_error_cblibrary" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="@string/xloading_empty_text"
+        android:text="@string/xloading_network_error"
         android:textColor="#8a8a8a"
-        android:textSize="15sp" />
+        android:textSize="16sp" />
 </LinearLayout>

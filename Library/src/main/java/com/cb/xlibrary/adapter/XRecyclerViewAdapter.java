@@ -104,23 +104,23 @@ public abstract class XRecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T,
             return new XViewHolder(mFooterViews.get(viewType));
         }
         if (viewType == TYPE_NO_MORE) {
-            mNoMoreView = inflater.inflate(R.layout.adapter_no_more, mRecyclerView, false);
+            mNoMoreView = inflater.inflate(R.layout.xadapter_no_more_cblibrary, mRecyclerView, false);
             return new XViewHolder(mNoMoreView);
         }
         if (viewType == TYPE_LOAD_MORE) {
-            mLoadMoreView = inflater.inflate(R.layout.adapter_loading, mRecyclerView, false);
+            mLoadMoreView = inflater.inflate(R.layout.xadapter_load_more_cblibrary, mRecyclerView, false);
             return new XViewHolder(mLoadMoreView);
         }
         if (viewType == TYPE_LOAD_FAILED) {
-            mLoadMoreFailedView = inflater.inflate(R.layout.adapter_loading_failed, mRecyclerView, false);
+            mLoadMoreFailedView = inflater.inflate(R.layout.xadapter_load_failed_cblibrary, mRecyclerView, false);
             return new XViewHolder(mLoadMoreFailedView);
         }
         if (viewType == TYPE_EMPTY) {//空数据
-            View view = inflater.inflate(R.layout.adapter_loading_empty, mRecyclerView, false);
+            View view = inflater.inflate(R.layout.xadapter_load_empty_cblibrary, mRecyclerView, false);
             return new XViewHolder(view);
         }
         if (viewType == TYPE_NETWORK_ERROR) {//网络出错
-            View view = inflater.inflate(R.layout.adapter_network_error, mRecyclerView, false);
+            View view = inflater.inflate(R.layout.xadapter_network_error_cblibrary, mRecyclerView, false);
             return new XViewHolder(view);
         }
         XLogUtils.d("onCreateViewHolder 111111111111111");

@@ -32,7 +32,7 @@ public class XLoadingDialog extends Dialog {
         super(context, R.style.loading_dialog);
         this.context = context;
         drawable = new XColorDrawable();
-        setContentView(R.layout.xloading_dialog);
+        setContentView(R.layout.xloading_dialog_cblibrary);
         loadingMessage = (TextView) findViewById(R.id.xframe_loading_message);
         progressBar = (ProgressBar) findViewById(R.id.xframe_loading_progressbar);
         loadingView = (LinearLayout) findViewById(R.id.xframe_loading_view);
