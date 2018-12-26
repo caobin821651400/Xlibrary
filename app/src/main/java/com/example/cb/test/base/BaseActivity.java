@@ -33,7 +33,7 @@ public class BaseActivity extends AppCompatActivity {
      */
     public void showImg(String path, ImageView mImageView) {
         Glide.with(getApplicationContext()).load(path)
-                .placeholder(R.drawable.ic_default_image)
+                .placeholder(R.drawable.ic_default_image_cblibrary)
                 .into(mImageView);
     }
 

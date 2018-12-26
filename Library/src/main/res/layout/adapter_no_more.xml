@@ -14,7 +14,7 @@
             android:id="@+id/adapter_no_more_image"
             android:layout_width="@dimen/XFrame_adapter_icon_size"
             android:layout_height="@dimen/XFrame_adapter_icon_size"
-            android:src="@drawable/adapter_loading_no_data" />
+            android:src="@drawable/icon_adapter_loading_no_data_cblibrary" />
 
         <TextView
             android:id="@+id/adapter_no_more_text"

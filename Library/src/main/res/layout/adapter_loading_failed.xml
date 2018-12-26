@@ -14,7 +14,7 @@
             android:id="@+id/adapter_loading_failed_image"
             android:layout_width="@dimen/XFrame_adapter_icon_size"
             android:layout_height="@dimen/XFrame_adapter_icon_size"
-            android:src="@drawable/adapter_loading_error"/>
+            android:src="@drawable/icon_xadapter_loading_error_cblibrary"/>
 
         <TextView
             android:id="@+id/adapter_loading_failed_text"

@@ -135,7 +135,6 @@ public class XCrashHandlerUtils implements Thread.UncaughtExceptionHandler {
                 infos.put("versionCode", versionCode);
             }
         } catch (PackageManager.NameNotFoundException e) {
-            XLogUtils.e("an adapter_loading_error occured when collect package info --> "+e);
         }
         Field[] fields = Build.class.getDeclaredFields();
         for (Field field : fields) {
@@ -144,7 +143,6 @@ public class XCrashHandlerUtils implements Thread.UncaughtExceptionHandler {
                 infos.put(field.getName(), field.get(null).toString());
                 XLogUtils.d(field.getName() + " : " + field.get(null));
             } catch (Exception e) {
-                XLogUtils.e("an adapter_loading_error occured when collect crash info --> "+e);
             }
         }
     }
@@ -191,7 +189,6 @@ public class XCrashHandlerUtils implements Thread.UncaughtExceptionHandler {
             }
             return fileName;
         } catch (Exception e) {
-            XLogUtils.e("an adapter_loading_error occured while writing file... --> "+e);
         }
         return null;
     }
