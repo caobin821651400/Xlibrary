@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.cb.xlibrary.utils.XPermission;
+import cb.xlibrary.utils.XPermission;
 import com.example.cb.test.MainActivity;
 import com.example.cb.test.R;
 

@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.cb.xlibrary.utils.XLogUtils;
+import cb.xlibrary.utils.XLogUtils;
 
 /**
  * 描述：

@@ -6,7 +6,7 @@
     android:background="#f7f7f7"
     android:orientation="horizontal">
 
-    <com.cb.xlibrary.picker.date.YearPicker
+    <cb.xlibrary.picker.date.YearPicker
         android:id="@+id/yearPicker_layout_date"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -14,7 +14,7 @@
         app:indicatorText="   年"
         app:halfVisibleItemCount="2" />
 
-    <com.cb.xlibrary.picker.date.MonthPicker
+    <cb.xlibrary.picker.date.MonthPicker
         android:id="@+id/monthPicker_layout_date"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -22,7 +22,7 @@
         app:indicatorText="   月"
         app:halfVisibleItemCount="2" />
 
-    <com.cb.xlibrary.picker.date.DayPicker
+    <cb.xlibrary.picker.date.DayPicker
         android:id="@+id/dayPicker_layout_date"
         android:layout_width="0dp"
         app:indicatorText="   日"

@@ -9,7 +9,9 @@ import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 
 import com.cb.qrcode.library.view.ZXingScannerView;
-import com.cb.xlibrary.utils.XLogUtils;
+
+import cb.xlibrary.utils.XDensityUtils;
+import cb.xlibrary.utils.XLogUtils;
 import com.example.cb.test.base.BaseActivity;
 import com.example.cb.test.R;
 import com.google.zxing.Result;
@@ -27,6 +29,16 @@ public class ScanCodeActivity extends BaseActivity implements ZXingScannerView.R
 
     private void initView() {
         mScannerView = findViewById(R.id.scan_view);
+
+        //布局里固定DP，计算扫描框的区域,
+        //也可以通过view.getTop getLeft..来获取,注意需要在view.post中获取
+        int screenWidth = XDensityUtils.getScreenWidth(this);
+        //220是布局里写死的 具体查看@layout/view_view_finder
+        int marginLeft = (screenWidth - XDensityUtils.dp2px(this, 200)) / 2;
+        int viewTop = XDensityUtils.dp2px(this, 180);
+        int viewRight = screenWidth - marginLeft;
+        int viewBottom = XDensityUtils.dp2px(this, 380);
+        mScannerView.setScanRect(marginLeft, viewTop, viewRight, viewBottom);
 
         initScanAnimation();
     }

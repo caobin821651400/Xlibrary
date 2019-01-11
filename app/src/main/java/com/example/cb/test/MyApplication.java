@@ -2,7 +2,7 @@ package com.example.cb.test;
 
 import android.app.Application;
 
-import com.cb.xlibrary.XLibrary;
+import cb.xlibrary.XLibrary;
 
 
 /**

@@ -13,7 +13,7 @@
         android:gravity="center"
         android:text="选择时间" />
 
-    <com.cb.xlibrary.picker.time.HourAndMinutePicker
+    <cb.xlibrary.picker.time.HourAndMinutePicker
         android:id="@+id/time_picker_dialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

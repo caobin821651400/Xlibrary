@@ -14,7 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.cb.xlibrary.dialog.XLoadingDialog;
+import cb.xlibrary.dialog.XLoadingDialog;
 
 
 /**

@@ -3,7 +3,7 @@ package com.example.cb.test.mvp;
 import android.view.View;
 import android.widget.TextView;
 
-import com.cb.xlibrary.utils.XLogUtils;
+import cb.xlibrary.utils.XLogUtils;
 import com.example.cb.test.R;
 import com.example.cb.test.base.BaseMvpFragment;
 import com.example.cb.test.mvp.presenter.MvpFragmentPresenter;

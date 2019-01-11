@@ -7,14 +7,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 
-import com.cb.xlibrary.utils.XActivityStack;
-import com.cb.xlibrary.utils.XLogUtils;
-import com.cb.xlibrary.utils.XPermission;
 import com.example.cb.test.base.BaseActivity;
-import com.example.cb.test.mvp.MvpActivity;
+import com.example.cb.test.ui.scan.ScanCodeActivity;
 
 import java.util.ArrayList;
 
+import cb.xlibrary.utils.XActivityStack;
+import cb.xlibrary.utils.XLogUtils;
+import cb.xlibrary.utils.XPermission;
 import library.cb.imagepicker.GlideImageLoader;
 import library.cb.imagepicker.ImagePicker;
 import library.cb.imagepicker.bean.ImageItem;
@@ -61,7 +61,8 @@ public class MainActivity extends BaseActivity {
         btnDownLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                launchActivity(MvpActivity.class, null);
+//                launchActivity(MvpActivity.class, null);
+                launchActivity(ScanCodeActivity.class, null);
             }
         });
 
@@ -88,9 +89,9 @@ public class MainActivity extends BaseActivity {
         ImagePicker imagePicker = ImagePicker.getInstance();
         imagePicker.setImageLoader(new GlideImageLoader());//设置图片加载器
         imagePicker.setShowCamera(true);//显示拍照按钮
-        imagePicker.setCrop(true);//允许裁剪（单选才有效）
+        imagePicker.setCrop(false);//允许裁剪（单选才有效）
         imagePicker.setSaveRectangle(true);//是否按矩形区域保存
-        imagePicker.setMultiMode(false);//单选 false 多选true
+        imagePicker.setMultiMode(true);//单选 false 多选true
         imagePicker.setSelectLimit(1);//最大选择张数
         imagePicker.setFocusWidth(800);//裁剪框的宽度。单位像素（圆形自动取宽高最小值）
         imagePicker.setFocusHeight(800);//裁剪框的高度。单位像素（圆形自动取宽高最小值）

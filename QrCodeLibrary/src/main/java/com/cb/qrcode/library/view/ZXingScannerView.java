@@ -158,7 +158,6 @@ public class ZXingScannerView extends BarcodeScannerView {
                     camera.setOneShotPreviewCallback(this);
             }
         } catch (RuntimeException e) {
-            // TODO: Terrible hack. It is possible that this method is invoked after camera is released.
             Log.e(TAG, e.toString(), e);
         }
     }

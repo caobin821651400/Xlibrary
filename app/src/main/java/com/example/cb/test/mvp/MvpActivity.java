@@ -4,7 +4,7 @@ package com.example.cb.test.mvp;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
-import com.cb.xlibrary.utils.XLogUtils;
+import cb.xlibrary.utils.XLogUtils;
 import com.example.cb.test.R;
 import com.example.cb.test.base.BaseMvpActivity;
 import com.example.cb.test.mvp.presenter.NewListPresenter;
