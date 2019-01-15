@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 
+import com.cb.filepicker.ui.FilePickerActivity;
 import com.example.cb.test.base.BaseActivity;
 import com.example.cb.test.ui.scan.ScanCodeActivity;
 
@@ -71,7 +72,7 @@ public class MainActivity extends BaseActivity {
         findViewById(R.id.btn_list).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showChoseHeadDialog();
+                launchActivity(FilePickerActivity.class, null);
             }
         });
 

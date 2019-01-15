@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="PickerTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#3CB264</item>
+        <item name="colorPrimaryDark">#3CB264</item>
+        <item name="colorAccent">#3CB264</item>
+    </style>
+
+</resources>

@@ -45,8 +45,9 @@
         <activity android:name=".ui.scan.ScanCodeActivity" />
         <activity android:name=".ui.scan.QRcodeEncoderActivity" />
         <activity android:name=".ui.scan.QRcodeDecoderActivity" />
-        <activity android:name=".rx.RxJavaTestActivity"></activity>
-        <activity android:name=".mvp.MvpActivity"></activity>
+        <activity android:name=".rx.RxJavaTestActivity" />
+        <activity android:name=".mvp.MvpActivity" />
+        <activity android:name="com.cb.filepicker.ui.FilePickerActivity"></activity>
     </application>
 
 </manifest>
