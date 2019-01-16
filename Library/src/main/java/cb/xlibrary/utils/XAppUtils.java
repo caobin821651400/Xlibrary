@@ -1,5 +1,7 @@
 package cb.xlibrary.utils;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -9,6 +11,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 
@@ -70,24 +73,47 @@ public class XAppUtils {
     }
 
     /**
-     * 安装APP
+     * 安装APP适配8.0
+     */
+    public static void installApk8(Activity context, File apkFile, String fileProviderName, int requestCode) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {//8.0
+            boolean b = context.getPackageManager().canRequestPackageInstalls();
+            if (b) {
+                //安装应用的逻辑
+                installApk7(context, fileProviderName, apkFile);
+            } else {
+                //请求安装未知应用来源的权限
+                ActivityCompat.requestPermissions(context, new String[]{android.Manifest.permission.REQUEST_INSTALL_PACKAGES}, requestCode);
+            }
+        } else {
+            installApk7(context, fileProviderName, apkFile);
+        }
+    }
+
+    /**
+     * 安装APP适配7.0
      *
      * @param fileProviderName 7.0适配
      * @param file             路径
      */
-    public static void installApk(Context context, String fileProviderName, File file) {
-        Intent intent = new Intent();
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.setAction(Intent.ACTION_VIEW);
-        Uri uri;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            uri = FileProvider.getUriForFile(context, fileProviderName, file);
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        } else {
-            uri = Uri.fromFile(file);
+    public static void installApk7(Activity context, String fileProviderName, File file) {
+        try {
+            Intent intent = new Intent();
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setAction(Intent.ACTION_VIEW);
+            Uri uri;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                uri = FileProvider.getUriForFile(context, fileProviderName, file);
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            } else {
+                uri = Uri.fromFile(file);
+            }
+            intent.setDataAndType(uri, "application/vnd.android.package-archive");
+            context.startActivity(intent);
+            context.finish();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        intent.setDataAndType(uri, "application/vnd.android.package-archive");
-        context.startActivity(intent);
     }
 
     /**
@@ -95,7 +121,7 @@ public class XAppUtils {
      *
      * @param packageName 包名
      */
-    public static void uninstallApk(Context context,String packageName) {
+    public static void uninstallApk(Context context, String packageName) {
         Intent intent = new Intent(Intent.ACTION_DELETE);
         Uri packageURI = Uri.parse("package:" + packageName);
         intent.setData(packageURI);
@@ -132,7 +158,7 @@ public class XAppUtils {
      * @param className 判断的服务名字 "com.xxx.xx..XXXService"
      * @return true 在运行 false 不在运行
      */
-    public static boolean isServiceRunning(Context context,String className) {
+    public static boolean isServiceRunning(Context context, String className) {
         boolean isRunning = false;
         ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.RunningServiceInfo> servicesList = activityManager.getRunningServices(Integer.MAX_VALUE);
@@ -152,7 +178,7 @@ public class XAppUtils {
      * @param className the class name
      * @return true, if successful
      */
-    public static boolean stopRunningService(Context context,String className) {
+    public static boolean stopRunningService(Context context, String className) {
         Intent intent = null;
         boolean ret = false;
         try {
@@ -189,7 +215,7 @@ public class XAppUtils {
      * @return 当前应用的版本名称
      */
     public static String getVersionName(Context context) {
-        return getPackageInfo( context).versionName;
+        return getPackageInfo(context).versionName;
     }
 
     /**
@@ -208,7 +234,7 @@ public class XAppUtils {
      * @param pkgName 包名
      * @return 返回应用的签名
      */
-    public static String getSign(Context context,String pkgName) {
+    public static String getSign(Context context, String pkgName) {
         try {
             PackageInfo pis = context.getPackageManager()
                     .getPackageInfo(pkgName,
@@ -273,6 +299,22 @@ public class XAppUtils {
         //如果已经分出大小，则直接返回，如果未分出大小，则再比较位数，有子版本的为大；
         diff = (diff != 0) ? diff : versionArray1.length - versionArray2.length;
         return diff;
+    }
+
+    /**
+     * 打电话
+     *
+     * @param context
+     * @param phoneNum
+     */
+    public static void callPhone(Context context, String phoneNum) {
+        //直接拨号
+        Uri uri = Uri.parse("tel:" + phoneNum);
+        Intent intent = new Intent(Intent.ACTION_CALL, uri);
+        //此处不判断就会报错
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+            context.startActivity(intent);
+        }
     }
 
 }
