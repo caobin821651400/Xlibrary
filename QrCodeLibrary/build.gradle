@@ -22,5 +22,5 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "com.android.support:appcompat-v7:$android_support_version"
     testImplementation 'junit:junit:4.12'
-    compile 'com.google.zxing:core:3.3.0'
+    api 'com.google.zxing:core:3.3.0'
 }
