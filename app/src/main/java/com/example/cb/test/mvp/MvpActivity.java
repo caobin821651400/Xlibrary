@@ -47,6 +47,8 @@ public class MvpActivity extends BaseMvpActivity<NewListPresenter> implements IN
 
     @Override
     public void initListener() {
+
+
     }
 
     @Override
