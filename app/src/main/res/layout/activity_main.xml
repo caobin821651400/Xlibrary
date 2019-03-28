@@ -17,4 +17,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="list" />
+
+
+    <com.example.cb.test.TrapezoidTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:paddingLeft="12dp"
+        android:paddingTop="5dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="5dp"
+        android:text="达到阿"
+        android:textColor="#000000" />
 </LinearLayout>
