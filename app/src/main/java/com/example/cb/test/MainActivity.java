@@ -9,8 +9,6 @@ import android.widget.Button;
 
 import com.example.cb.test.base.BaseActivity;
 import com.example.cb.test.dagger.DaggerTestActivity;
-import com.example.cb.test.mvp.MvpActivity;
-import com.example.cb.test.ui.scan.ScanCodeActivity;
 
 import java.util.ArrayList;
 
@@ -63,8 +61,9 @@ public class MainActivity extends BaseActivity {
         btnDownLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                launchActivity(MvpActivity.class, null);
+//                launchActivity(MvpActivity.class, null);
 //                launchActivity(ScanCodeActivity.class, null);
+                launchActivity(KotlinActivity.class, null);
             }
         });
 

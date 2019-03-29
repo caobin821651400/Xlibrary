@@ -48,7 +48,8 @@
         <activity android:name=".rx.RxJavaTestActivity" />
         <activity android:name=".mvp.MvpActivity" />
         <activity android:name="com.cb.filepicker.ui.FilePickerActivity" />
-        <activity android:name=".dagger.DaggerTestActivity"></activity>
+        <activity android:name=".dagger.DaggerTestActivity" />
+        <activity android:name=".KotlinActivity"></activity>
     </application>
 
 </manifest>
