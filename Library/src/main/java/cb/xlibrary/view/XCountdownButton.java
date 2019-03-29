@@ -16,7 +16,7 @@ import java.util.TimerTask;
  * time   : 2017/12/18
  * desc   :验证码倒计时按钮
  */
-public class XCountdownButton extends android.support.v7.widget.AppCompatButton {
+public class XCountdownButton extends androidx.appcompat.widget.AppCompatButton {
 
     private Handler handler = new Handler();
     private TimerTask mTimerTask;

@@ -27,7 +27,7 @@
         <attr name="unableBackgroundColor" format="color|reference" />
         <!--background radius-->
         <attr name="radius" format="dimension|reference" />
-        <attr name="round" format="boolean|reference" />
+        <attr name="xsb_round" format="boolean|reference" />
         <!--animation duration-->
         <attr name="animationDuration" format="integer|reference" />
 
@@ -44,7 +44,7 @@
     <!--带进度的圆形进度条-->
     <declare-styleable name="XRoundProgressBar">
         <attr name="max" format="integer" />
-        <attr name="progress" format="integer" />
+        <attr name="xpb_progress" format="integer" />
         <attr name="startAngle" format="integer" />
         <attr name="ringColor" format="color" />
         <attr name="ringProgressColor" format="color" />

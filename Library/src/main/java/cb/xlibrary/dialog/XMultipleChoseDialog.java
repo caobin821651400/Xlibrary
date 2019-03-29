@@ -3,7 +3,7 @@ package cb.xlibrary.dialog;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import android.view.Display;
 import android.view.WindowManager;
 import android.widget.ListView;

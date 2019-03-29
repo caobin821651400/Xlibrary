@@ -6,10 +6,10 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
-import android.support.annotation.ColorInt;
-import android.support.annotation.FloatRange;
-import android.support.annotation.IntRange;
-import android.support.v7.widget.AppCompatTextView;
+import androidx.annotation.ColorInt;
+import androidx.annotation.FloatRange;
+import androidx.annotation.IntRange;
+import androidx.appcompat.widget.AppCompatTextView;
 import android.util.AttributeSet;
 
 import com.cb.xlibrary.R;
@@ -110,7 +110,7 @@ public class XStateButton extends AppCompatTextView {
     }
 
     public XStateButton(Context context, AttributeSet attrs) {
-        this(context, attrs, android.support.v7.appcompat.R.attr.buttonStyle);
+        this(context, attrs, R.attr.buttonStyle);
     }
 
     public XStateButton(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -167,7 +167,7 @@ public class XStateButton extends AppCompatTextView {
 
         //set radius
         mRadius = a.getDimensionPixelSize(R.styleable.XStateButton_radius, 0);
-        mRound = a.getBoolean(R.styleable.XStateButton_round, false);
+        mRound = a.getBoolean(R.styleable.XStateButton_xsb_round, false);
         mNormalBackground.setCornerRadius(mRadius);
         mPressedBackground.setCornerRadius(mRadius);
         mUnableBackground.setCornerRadius(mRadius);

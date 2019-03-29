@@ -2,7 +2,7 @@ package com.cb.filepicker.utils;
 
 //import android.os.Bundle;
 
-import android.support.v4.app.FragmentActivity;
+import androidx.fragment.app.FragmentActivity;
 
 import com.cb.filepicker.callback.FileResultCallback;
 import com.cb.filepicker.cursors.DocScannerTask;

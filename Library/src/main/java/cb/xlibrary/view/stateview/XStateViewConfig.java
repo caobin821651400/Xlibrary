@@ -1,7 +1,7 @@
 package cb.xlibrary.view.stateview;
 
 
-import android.support.annotation.LayoutRes;
+import androidx.annotation.LayoutRes;
 
 import com.cb.xlibrary.R;
 

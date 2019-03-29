@@ -1,8 +1,8 @@
 package com.example.cb.test.mvp;
 
 
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import cb.xlibrary.utils.XLogUtils;
 import com.example.cb.test.R;

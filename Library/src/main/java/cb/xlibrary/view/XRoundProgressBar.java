@@ -9,7 +9,7 @@ import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.icu.text.DecimalFormat;
 import android.os.Build;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -84,7 +84,7 @@ public class XRoundProgressBar extends View {
         //最大进度
         maxProgress = mTypedArray.getInteger(R.styleable.XRoundProgressBar_max, 100);
         //当前进度
-        currentProgress = mTypedArray.getInt(R.styleable.XRoundProgressBar_progress, 0);
+        currentProgress = mTypedArray.getInt(R.styleable.XRoundProgressBar_xpb_progress, 0);
         //是否显示中间的进度
         isShowCenterTxt = mTypedArray.getBoolean(R.styleable.XRoundProgressBar_textIsDisplayable, true);
         //进度的风格，实心或者空心

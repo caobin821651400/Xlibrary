@@ -16,9 +16,9 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.support.annotation.ColorInt;
-import android.support.annotation.ColorRes;
-import android.support.annotation.DrawableRes;
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
 import android.util.AttributeSet;
 import com.cb.xlibrary.R;
 
@@ -26,7 +26,7 @@ import com.cb.xlibrary.R;
  * 可以描边的imagevuiew
  * Created by cb on 2017/12/8.
  */
-public class XCircleImageView extends android.support.v7.widget.AppCompatImageView {
+public class XCircleImageView extends androidx.appcompat.widget.AppCompatImageView {
 
     private static final ScaleType SCALE_TYPE = ScaleType.CENTER_CROP;
 

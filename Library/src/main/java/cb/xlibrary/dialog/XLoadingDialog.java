@@ -4,7 +4,7 @@ package cb.xlibrary.dialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
-import android.support.annotation.ColorInt;
+import androidx.annotation.ColorInt;
 import android.text.TextUtils;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
