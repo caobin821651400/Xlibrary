@@ -49,7 +49,9 @@
         <activity android:name=".mvp.MvpActivity" />
         <activity android:name="com.cb.filepicker.ui.FilePickerActivity" />
         <activity android:name=".dagger.DaggerTestActivity" />
-        <activity android:name=".KotlinActivity"></activity>
+        <activity android:name=".KotlinActivity" />
+        <activity android:name=".ui.db.DbTestActivity" />
+        <activity android:name=".ui.aidl.AidlTestActivity"></activity>
     </application>
 
 </manifest>
