@@ -51,7 +51,8 @@
         <activity android:name=".dagger.DaggerTestActivity" />
         <activity android:name=".KotlinActivity" />
         <activity android:name=".ui.db.DbTestActivity" />
-        <activity android:name=".ui.aidl.AidlTestActivity"></activity>
+        <activity android:name=".ui.aidl.AidlTestActivity" />
+        <activity android:name=".ui.anim.AnimTestActivity"></activity>
     </application>
 
 </manifest>
