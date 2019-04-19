@@ -3,18 +3,15 @@ package com.example.cb.test;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.recyclerview.widget.RecyclerView;
-import android.view.View;
 import android.widget.Button;
 
 import com.example.cb.test.base.BaseActivity;
 import com.example.cb.test.dagger.DaggerTestActivity;
 import com.example.cb.test.ui.aidl.AidlTestActivity;
-import com.example.cb.test.ui.anim.AnimTestActivity;
-import com.example.cb.test.ui.db.DbTestActivity;
 
 import java.util.ArrayList;
 
+import androidx.recyclerview.widget.RecyclerView;
 import cb.xlibrary.utils.XActivityStack;
 import cb.xlibrary.utils.XLogUtils;
 import cb.xlibrary.utils.XPermission;
