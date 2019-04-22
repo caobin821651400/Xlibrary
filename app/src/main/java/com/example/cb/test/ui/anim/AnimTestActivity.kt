@@ -3,6 +3,7 @@ package com.example.cb.test.ui.anim
 import android.animation.Animator
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.os.Bundle
 import android.view.animation.DecelerateInterpolator
 import cb.xlibrary.utils.XLogUtils
@@ -24,7 +25,7 @@ class AnimTestActivity : BaseActivity() {
 
     private fun initView() {
         button.setOnClickListener {
-            ainmList()
+            valueAnim()
         }
 
         //
@@ -96,7 +97,20 @@ class AnimTestActivity : BaseActivity() {
             override fun onAnimationRepeat(animation: Animator?) {
                 XLogUtils.d("onAnimationRepeat")
             }
-
         })
+    }
+
+    /**
+     *valueAnim
+     */
+    private fun valueAnim() {
+        var anim = ValueAnimator.ofInt(0, 400)
+        anim.duration = 4000
+        anim.start()
+
+        anim.addUpdateListener { animation ->
+            var value: Int = animation!!.animatedValue as Int
+            iv_image.layout(value, value, value + iv_image.width, value + iv_image.height)
+        }
     }
 }
