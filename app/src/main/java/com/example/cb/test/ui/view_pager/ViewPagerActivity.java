@@ -1,14 +1,15 @@
-package com.example.cb.test.ui;
+package com.example.cb.test.ui.view_pager;
 
 import android.os.Bundle;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.example.cb.test.base.BaseActivity;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
 import com.example.cb.test.R;
+import com.example.cb.test.base.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,7 +39,8 @@ public class ViewPagerActivity extends BaseActivity {
         imageLists.add(imageLists.get(1));
 
         //设置缓存的页面数量
-//        mViewPager.setOffscreenPageLimit(4);
+        mViewPager.setOffscreenPageLimit(5);
+        mViewPager.setPageMargin(20);
         mViewPager.setAdapter(new PagerAdapter() {
             @Override
             public int getCount() {
@@ -54,6 +56,7 @@ public class ViewPagerActivity extends BaseActivity {
             public Object instantiateItem(ViewGroup container, int position) {
                 ImageView imageView = new ImageView(ViewPagerActivity.this);
                 imageView.setImageResource(imageLists.get(position));
+                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
                 container.addView(imageView);
                 return imageView;
             }
@@ -65,7 +68,6 @@ public class ViewPagerActivity extends BaseActivity {
         });
 
         mViewPager.setCurrentItem(1, false);
-       // mViewPager.setPageTransformer(true, new StackTransformer());
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

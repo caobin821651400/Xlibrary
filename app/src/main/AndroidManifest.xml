@@ -21,6 +21,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ui.view_pager.Banner1Activity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,14 +29,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.ViewPagerActivity" />
+        <activity android:name=".ui.view_pager.ViewPagerActivity" />
 
         <service
             android:name=".service.IStudentService"
             android:exported="true"
-            android:process=":remote">
-        </service>
-
+            android:process=":remote"></service>
         <service android:name=".service.XService">
             <intent-filter>
                 <action android:name="cn.scu.finch" />
@@ -52,7 +51,7 @@
         <activity android:name=".KotlinActivity" />
         <activity android:name=".ui.db.DbTestActivity" />
         <activity android:name=".ui.aidl.AidlTestActivity" />
-        <activity android:name=".ui.anim.AnimTestActivity"></activity>
+        <activity android:name=".ui.anim.AnimTestActivity" />
     </application>
 
 </manifest>

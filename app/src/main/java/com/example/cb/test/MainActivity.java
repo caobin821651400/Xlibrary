@@ -7,8 +7,8 @@ import android.widget.Button;
 
 import com.example.cb.test.base.BaseActivity;
 import com.example.cb.test.dagger.DaggerTestActivity;
-import com.example.cb.test.ui.aidl.AidlTestActivity;
-import com.example.cb.test.ui.anim.AnimTestActivity;
+import com.example.cb.test.ui.view_pager.Banner1Activity;
+import com.example.cb.test.ui.view_pager.ViewPagerActivity;
 
 import java.util.ArrayList;
 
@@ -64,8 +64,9 @@ public class MainActivity extends BaseActivity {
 //                launchActivity(ScanCodeActivity.class, null);
 //                launchActivity(KotlinActivity.class, null);
 //            launchActivity(DbTestActivity.class, null);
-            launchActivity(AnimTestActivity.class, null);
+//            launchActivity(AnimTestActivity.class, null);
 //            launchActivity(AidlTestActivity.class, null);
+            launchActivity(Banner1Activity.class,null);
         });
 
 
