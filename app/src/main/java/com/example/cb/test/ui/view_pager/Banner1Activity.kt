@@ -36,7 +36,7 @@ class Banner1Activity : BaseActivity() {
         //每个pager之间的间距
         view_pager.pageMargin = 20
         //适配器
-        view_pager!!.adapter = object : PagerAdapter() {
+        view_pager.adapter = object : PagerAdapter() {
             override fun getCount(): Int {
                 return imageLists.size
             }
