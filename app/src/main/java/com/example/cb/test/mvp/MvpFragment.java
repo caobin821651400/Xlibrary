@@ -3,7 +3,6 @@ package com.example.cb.test.mvp;
 import android.view.View;
 import android.widget.TextView;
 
-import cb.xlibrary.utils.XLogUtils;
 import com.example.cb.test.R;
 import com.example.cb.test.base.BaseMvpFragment;
 import com.example.cb.test.mvp.presenter.MvpFragmentPresenter;
@@ -11,6 +10,7 @@ import com.example.cb.test.mvp.view.IMvpFragmentView;
 import com.example.cb.test.rx.http.NewsResp;
 
 import butterknife.BindView;
+import cb.xlibrary.utils.XLogUtils;
 
 /**
  * Created by bin on 2018/12/25.
