@@ -13,9 +13,9 @@ class MvpFragmentPresenter(view: IMvpFragmentView) : BasePresenter<IMvpFragmentV
         map["type"] = "top"
         map["key"] = "f323c09a114635eb935ed8dd19f7284e"
         MovieHttpRequest.getInstance().sendNewsRequest(map, object : XHttpCallback<NewsResp> {
-            override fun onSuccess(t: NewsResp?) {
-                if (t != null) {
-                    mView!!.onNewsSuccess(t)
+            override fun onSuccess(newBean: NewsResp?) {
+                if (newBean != null) {
+                    mView!!.onNewsSuccess(newBean)
                 }
             }
 

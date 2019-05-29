@@ -42,7 +42,7 @@ public class MovieHttpRequest extends BaseHttpRequest {
         return instance;
     }
 
-    public MovieHttpRequest() {
+    private MovieHttpRequest() {
     }
 
     private ApiService apiService = getRetrofit().create(ApiService.class);

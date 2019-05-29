@@ -50,4 +50,8 @@ class MvpActivity : BaseMvpActivity<NewListPresenter>(), INewListView {
     override fun onError(error: String) {
         toast(error)
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+    }
 }
