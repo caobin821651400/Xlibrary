@@ -2,7 +2,10 @@ package com.example.cb.test;
 
 import android.app.Application;
 
+import com.tencent.bugly.crashreport.CrashReport;
+
 import cb.xlibrary.XLibrary;
+import cb.xlibrary.utils.XCrashHandlerUtils;
 
 
 /**

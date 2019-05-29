@@ -8,6 +8,7 @@ import android.widget.Button;
 import com.example.cb.test.base.BaseActivity;
 import com.example.cb.test.dagger.DaggerTestActivity;
 import com.example.cb.test.mvp.MvpActivity;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.ArrayList;
 
@@ -34,7 +35,6 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        XLogUtils.d("activity onCreate");
         XActivityStack.getInstance().addActivity(this);
         initView();
     }
@@ -276,32 +276,27 @@ public class MainActivity extends BaseActivity {
 //    };
     @Override
     protected void onPause() {
-        XLogUtils.d("activity onPause");
         super.onPause();
     }
 
     @Override
     protected void onResume() {
-        XLogUtils.d("activity onResume");
         super.onResume();
     }
 
     @Override
     protected void onStop() {
-        XLogUtils.d("activity onStop");
         super.onStop();
     }
 
     @Override
     protected void onRestart() {
 
-        XLogUtils.d("activity onRestart");
         super.onRestart();
     }
 
     @Override
     public void onStart() {
-        XLogUtils.d("activity onStart");
         super.onStart();
 
     }
@@ -311,7 +306,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void onDestroy() {
-        XLogUtils.d("activity onDestroy");
         super.onDestroy();
         //Activity销毁时，取消网络请求
         // MovieHttpRequest.getInstance().dispose();
