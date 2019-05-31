@@ -8,6 +8,7 @@ import android.widget.Button;
 import com.example.cb.test.base.BaseActivity;
 import com.example.cb.test.dagger.DaggerTestActivity;
 import com.example.cb.test.mvp.MvpActivity;
+import com.example.cb.test.ui.db.DbTestActivity;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.ArrayList;
@@ -59,13 +60,13 @@ public class MainActivity extends BaseActivity {
             }
         });
         btnDownLoad.setOnClickListener(v -> {
-                launchActivity(MvpActivity.class, null);
-//                launchActivity(ScanCodeActivity.class, null);
+//                launchActivity(MvpActivity.class, null);
+//                launchActivity(ScanC  odeActivity.class, null);
 //                launchActivity(KotlinActivity.class, null);
-//            launchActivity(DbTestActivity.class, null);
+            launchActivity(DbTestActivity.class, null);
 //            launchActivity(AnimTestActivity.class, null);
 //            launchActivity(AidlTestActivity.class, null);
-//            launchActivity(Banner1Activity.class,null);
+//            launchActivity(BannerActivity.class,null);
         });
 
 

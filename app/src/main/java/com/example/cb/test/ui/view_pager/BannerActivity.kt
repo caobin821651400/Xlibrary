@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_view_pager.*
 import java.util.*
 
 
-class Banner1Activity : BaseActivity() {
+class BannerActivity : BaseActivity() {
 
     private val images = arrayOf(R.drawable.img_banner_one, R.drawable.img_banner_two,
             R.drawable.img_banner_three, R.drawable.img_banner_four, R.drawable.img_banner_five)
@@ -46,7 +46,7 @@ class Banner1Activity : BaseActivity() {
             }
 
             override fun instantiateItem(container: ViewGroup, position: Int): Any {
-                val imageView = ImageView(this@Banner1Activity)
+                val imageView = ImageView(this@BannerActivity)
                 imageView.setImageResource(imageLists[position])
                 imageView.scaleType = ImageView.ScaleType.FIT_XY
                 container.addView(imageView)

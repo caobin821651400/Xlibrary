@@ -5,8 +5,6 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.view.View
-import butterknife.ButterKnife
-import butterknife.Unbinder
 import cb.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
@@ -17,7 +15,6 @@ import kotlinx.android.synthetic.main.activity_db_test.*
  */
 class DbTestActivity : BaseActivity(), View.OnClickListener {
 
-    private var mUnbinder: Unbinder? = null
     private var dbHelper: DbHelper? = null
     private var db: SQLiteDatabase? = null
 
@@ -25,24 +22,24 @@ class DbTestActivity : BaseActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_db_test)
-        mUnbinder = ButterKnife.bind(this)
         initView()
     }
 
     private fun initView() {
-        btn_create.text = "创建"
-        btn_create!!.setOnClickListener(this)
-        btn_update!!.setOnClickListener(this)
-        btn_add!!.setOnClickListener(this)
-        btn_delete!!.setOnClickListener(this)
+        btn_create.text = "查询"
+        btn_create.setOnClickListener(this)
+        btn_update.setOnClickListener(this)
+        btn_add.setOnClickListener(this)
+        btn_delete.setOnClickListener(this)
 
         dbHelper = DbHelper(this, "student.db", null, 1)
         db = dbHelper!!.readableDatabase
+
     }
 
-    override fun onClick(v: View?) {
-        when (v!!.id) {
-            R.id.btn_create -> quary()
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.btn_create -> query()
             R.id.btn_update -> update()
             R.id.btn_add -> add()
             R.id.btn_delete -> delete()
@@ -50,7 +47,7 @@ class DbTestActivity : BaseActivity(), View.OnClickListener {
     }
 
     fun delete() {
-        db!!.delete("student", "age>=?", arrayOf("25"))
+        db!!.delete("student", "name=?", arrayOf("曹斌"))
     }
 
     fun add() {
@@ -62,13 +59,16 @@ class DbTestActivity : BaseActivity(), View.OnClickListener {
 
         value.clear()
 
-        value.put("name", "武历婷")
+        value.put("name", "曹斌1")
         value.put("age", "25")
         value.put("grade", "aa1")
         db!!.insert("student", null, value)
     }
 
-    fun quary() {
+    /**
+     *
+     */
+    private fun query() {
         var cursor: Cursor = db!!.query("student", null, null, null, null, null, null)
         while (cursor.moveToNext()) {
             var name: String = cursor.getString(cursor.getColumnIndex("name"))
@@ -92,6 +92,5 @@ class DbTestActivity : BaseActivity(), View.OnClickListener {
 
     override fun onDestroy() {
         super.onDestroy()
-        mUnbinder!!.unbind()
     }
 }
