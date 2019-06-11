@@ -21,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.view_pager.BannerActivity"></activity>
+        <activity android:name=".kotlin.KotlinFunActivity"></activity>
+        <activity android:name=".ui.view_pager.BannerActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,7 +34,7 @@
         <service
             android:name=".service.IStudentService"
             android:exported="true"
-            android:process=":remote"></service>
+            android:process=":remote" />
         <service android:name=".service.XService">
             <intent-filter>
                 <action android:name="cn.scu.finch" />

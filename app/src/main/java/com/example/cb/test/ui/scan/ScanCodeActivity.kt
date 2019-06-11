@@ -30,7 +30,6 @@ class ScanCodeActivity : BaseActivity(), ZXingScannerView.ResultHandler {
     }
 
     private fun initView() {
-
         val screenWidth = XDensityUtils.getScreenWidth(this)
         val marginLeft = (screenWidth - XDensityUtils.dp2px(this, 220F)) / 2
         val viewTop = XDensityUtils.dp2px(this, 180F)
