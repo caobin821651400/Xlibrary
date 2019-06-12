@@ -13,6 +13,7 @@ import com.example.cb.test.ui.scan.QRcodeDecoderActivity;
 import com.example.cb.test.ui.scan.ScanCodeActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
 import cb.xlibrary.utils.XActivityStack;
@@ -32,6 +33,7 @@ public class MainActivity extends BaseActivity {
     //
     private String apkUrl = "https://codeload.github.com/jeasonlzy/okhttp-OkGo/zip/master";
     //    private String apkUrl = "http://60.28.125.1/f4.market.mi-img.com/download/AppStore/06954949fcd48414c16f726620cf2d52200550f56/so.ofo.labofo.apk";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

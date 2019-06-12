@@ -54,17 +54,13 @@ public class MovieHttpRequest extends BaseHttpRequest {
         Observable<NewsResp> getNews(@FieldMap Map<String, String> map);
         //f323c09a114635eb935ed8dd19f7284e
 
-        @FormUrlEncoded
-        @POST("userInfor/queryUserInfor")
-        Observable<UserInfoResp> getUserInfo(@FieldMap Map<String, String> map);
-
         /**
          * 注意1：必须使用{@code @POST}注解为post请求<br>
          * 注意2：使用{@code @Body}注解参数，则不能使用{@code @Multipart}注解方法了<br>
          * 直接将所有的{@link MultipartBody.Part}合并到一个{@link MultipartBody}中
          */
         @Multipart
-        @POST("http://110.190.90.237:9091/server/upload")
+        @POST("xxx")
         Observable<UploadBean> uploadImg(@PartMap Map<String, RequestBody> map, @Part MultipartBody.Part part);
     }
 
@@ -93,39 +89,6 @@ public class MovieHttpRequest extends BaseHttpRequest {
 
                     @Override
                     public void onError(Throwable e) {
-                        xHttpCallback.onError(handleError(e));
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
-
-    public void getUesrInfo(Map<String, String> map, final XHttpCallback<UserInfoResp> xHttpCallback) {
-        Observable<UserInfoResp> observable = apiService.getUserInfo(map);
-        observable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<UserInfoResp>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        addDisposable(d);
-                    }
-
-                    @Override
-                    public void onNext(UserInfoResp value) {
-                        System.err.println("请求结果--》" + new Gson().toJson(value));
-                        if (value.getCode().equals("200")) {
-                            xHttpCallback.onSuccess(value);
-                        } else {
-                            xHttpCallback.onError(value.getMessage());
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        e.printStackTrace();
                         xHttpCallback.onError(handleError(e));
                     }
 

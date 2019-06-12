@@ -36,7 +36,6 @@ public class BaseHttpRequest {
 
     //服务器路径
     private static final String API_SERVER = "http://v.juhe.cn/";
-//    private static final String API_SERVER = "https://mo.sctel.com.cn/scportal_mh/";
 
     private static CompositeDisposable compositeDisposable = null;//统一管理所有的订阅生命周期
 
