@@ -92,20 +92,22 @@ class KotlinFunActivity : BaseActivity() {
 //        people.reverse()
 
         /***_____________________________________Map_______________________________________________***/
-        //1.mapOf返回不可变的map
+        //1.mapOf返回不可变的map，有序
 //        val courseMap = mapOf(1 to "数学", 2 to "语文", 3 to "物理", 4 to "化学")
 
-        //2.可变的map集合
-//        val courseMap= mutableMapOf(1 to "数学", 2 to "语文", 3 to "物理", 4 to "化学")
-//        val courseMap= linkedMapOf(1 to "数学", 2 to "语文", 3 to "物理", 4 to "化学")
-//        val courseMap = hashMapOf(1 to "数学", 2 to "语文", 3 to "物理", 4 to "化学")
-        val courseMap = sortedMapOf(1 to "数学", 2 to "语文", 3 to "物理", 4 to "化学")
+        //2.可变的map集合，
+//        val courseMap= mutableMapOf(1 to "数学", 2 to "语文", 3 to "物理", 4 to "化学")//有序
+//        val courseMap= linkedMapOf(1 to "数学", 2 to "语文", 3 to "物理", 4 to "化学")//有序
+//        val courseMap = hashMapOf(1 to "数学", 2 to "语文", 3 to "物理", 4 to "化学")//无序的
+        val courseMap = sortedMapOf(1 to "数学", 2 to "语文", 3 to "物理", 4 to "化学")//无序的
 
-        //3.
-        //map集合取最大值&最小值
+        //3.map集合取最大值&最小值
         val maxMap: Map.Entry<Int, String> = courseMap.maxBy { it.key }!!
         XLogUtils.d("最大值2->${courseMap[maxMap.key]} ")
         XLogUtils.i("最小值2->" + courseMap.minBy { it.key })
+
+        //4.map支持增删查改，方法与java差不多，就不一一说了
+
         //遍历map第一种方式
         courseMap.forEach {
             XLogUtils.d("遍历数组第一种方式->${it.key}   值：${it.value}")
