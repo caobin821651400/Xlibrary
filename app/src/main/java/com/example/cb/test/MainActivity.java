@@ -29,10 +29,8 @@ public class MainActivity extends BaseActivity {
 
     private Button btnDownLoad;
     private static final String WEATHRE_API_URL = "http://php.weather.sina.com.cn/xml.php?city=%s&password=DJOYnieT8234jlsK&day=0";
-
     //
     private String apkUrl = "https://codeload.github.com/jeasonlzy/okhttp-OkGo/zip/master";
-    //    private String apkUrl = "http://60.28.125.1/f4.market.mi-img.com/download/AppStore/06954949fcd48414c16f726620cf2d52200550f56/so.ofo.labofo.apk";
 
 
     @Override
@@ -165,13 +163,6 @@ public class MainActivity extends BaseActivity {
 //     * retrofit+okhttp实现图片上传
 //     */
 //    private void uploadImg() {
-//        Map<String, RequestBody> map = new HashMap<>();
-//        map.put("itvNum", convertRequestBody("DMT2015122206@ITVP"));
-//        map.put("contentType", convertRequestBody("1"));
-//        map.put("tag", convertRequestBody("曹斌测"));
-//        map.put("desp", convertRequestBody("12344321"));
-//        map.put("phone", convertRequestBody("15108460749"));
-//
 //        String filePath = "/storage/emulated/0/DCIM/Camera/IMG_20180301_163032.jpg";
 //        MovieHttpRequest.getInstance().uploadImage(new File(filePath), map, new XHttpCallback<UploadBean>() {
 //            @Override
@@ -237,20 +228,6 @@ public class MainActivity extends BaseActivity {
 //        });
 //    }
 //
-//    private void downLoad2() {
-//        Map<String, String> map = new HashMap<>();
-//        map.put("staffAccount", "gNwTv7GOKr+9tK+bHVlw5A==");
-//        MovieHttpRequest.getInstance().getUesrInfo(map, new XHttpCallback<UserInfoResp>() {
-//            @Override
-//            public void onSuccess(UserInfoResp userInfoResp) {
-//            }
-//
-//            @Override
-//            public void onError(String error) {
-//                Toast.makeText(MainActivity.this, error, Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
 
     /*****************************************服务开始**********************************/
     //启动服务
