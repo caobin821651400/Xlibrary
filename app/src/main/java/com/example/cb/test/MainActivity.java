@@ -7,13 +7,10 @@ import android.widget.Button;
 
 import com.example.cb.test.base.BaseActivity;
 import com.example.cb.test.dagger.DaggerTestActivity;
-import com.example.cb.test.kotlin.KotlinFunActivity;
-import com.example.cb.test.mvp.MvpActivity;
-import com.example.cb.test.ui.scan.QRcodeDecoderActivity;
-import com.example.cb.test.ui.scan.ScanCodeActivity;
+import com.example.cb.test.kotlin.KotlinSetActivity;
+import com.example.cb.test.kotlin.KotlinTestActivity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
 import cb.xlibrary.utils.XActivityStack;
@@ -62,7 +59,7 @@ public class MainActivity extends BaseActivity {
         });
         btnDownLoad.setOnClickListener(v -> {
 //                launchActivity(MvpActivity.class, null);
-                launchActivity(KotlinFunActivity.class, null);
+                launchActivity(KotlinSetActivity.class, null);
 //                launchActivity(KotlinActivity.class, null);
 //            launchActivity(DbTestActivity.class, null);
 //            launchActivity(AnimTestActivity.class, null);

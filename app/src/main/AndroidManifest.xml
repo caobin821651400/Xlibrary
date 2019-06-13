@@ -21,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".kotlin.KotlinFunActivity"></activity>
+        <activity android:name=".kotlin.KotlinTestActivity"></activity>
+        <activity android:name=".kotlin.KotlinSetActivity" />
         <activity android:name=".ui.view_pager.BannerActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

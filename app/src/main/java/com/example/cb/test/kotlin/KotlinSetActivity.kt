@@ -4,11 +4,13 @@ import android.os.Bundle
 import cb.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
+import com.example.cb.test.bean.Book
+import com.example.cb.test.bean.PersonBean
 
 /**
  * 记录一些好用的语句and方法
  */
-class KotlinFunActivity : BaseActivity() {
+class KotlinSetActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +40,7 @@ class KotlinFunActivity : BaseActivity() {
 //        }
         /***_____________________________________List_______________________________________________***/
         //1.创建不可变的list，可以包含空值.
-//        val people = listOf(PersonBean("汤姆", 23), PersonBean("杰瑞", 34))
+        val people = listOf(PersonBean("汤姆", 23), PersonBean("杰瑞", 34),PersonBean("酸奶", 34))
 
         //2.创建不可变list,不包含空值.
 //        val people = listOfNotNull(PersonBean("汤姆", 23), PersonBean("杰瑞", 34))
@@ -91,6 +93,16 @@ class KotlinFunActivity : BaseActivity() {
         //14.列表倒序
 //        people.reverse()
 
+        //15.取相同的元素划分新的分组(map),age作为map的key，value则是List<PersonBean>
+        //   相当于Map<Int,List<PersonBean>>
+//        XLogUtils.d(people.groupBy { it.age }.toString())
+
+        //16.遍历List中元素，取出元素对象中的值平铺成新的集合
+        val books= listOf(Book("第一行代码", listOf("郭霖","弘扬")),
+                Book("Android开发艺术探索", listOf("任玉刚","宝坚强")),
+                Book("Kotlin实战", listOf("Dmitry Jemerov","Svetlana Lsakova")))
+        XLogUtils.d(books.flatMap { it.authors }.toList().toString())
+
         /***_____________________________________Map_______________________________________________***/
         //1.mapOf返回不可变的map，有序
 //        val courseMap = mapOf(1 to "数学", 2 to "语文", 3 to "物理", 4 to "化学")
@@ -99,26 +111,26 @@ class KotlinFunActivity : BaseActivity() {
 //        val courseMap= mutableMapOf(1 to "数学", 2 to "语文", 3 to "物理", 4 to "化学")//有序
 //        val courseMap= linkedMapOf(1 to "数学", 2 to "语文", 3 to "物理", 4 to "化学")//有序
 //        val courseMap = hashMapOf(1 to "数学", 2 to "语文", 3 to "物理", 4 to "化学")//无序的
-        val courseMap = sortedMapOf(1 to "数学", 2 to "语文", 3 to "物理", 4 to "化学")//无序的
+//        val courseMap = sortedMapOf(1 to "数学", 2 to "语文", 3 to "物理", 4 to "化学")//无序的
 
         //3.map集合取最大值&最小值
-        val maxMap: Map.Entry<Int, String> = courseMap.maxBy { it.key }!!
-        XLogUtils.d("最大值2->${courseMap[maxMap.key]} ")
-        XLogUtils.i("最小值2->" + courseMap.minBy { it.key })
+//        val maxMap: Map.Entry<Int, String> = courseMap.maxBy { it.key }!!
+//        XLogUtils.d("最大值2->${courseMap[maxMap.key]} ")
+//        XLogUtils.i("最小值2->" + courseMap.minBy { it.key })
 
         //4.map支持增删查改，方法与java差不多，就不一一说了
 
         //遍历map第一种方式
-        courseMap.forEach {
-            XLogUtils.d("遍历数组第一种方式->${it.key}   值：${it.value}")
-        }
+//        courseMap.forEach {
+//            XLogUtils.d("遍历数组第一种方式->${it.key}   值：${it.value}")
+//        }
         //遍历map第二种方式
-        for (map in courseMap) {
-            XLogUtils.i("遍历数组第二种方式->${map.key}   值：${map.value}")
-        }
+//        for (map in courseMap) {
+//            XLogUtils.i("遍历数组第二种方式->${map.key}   值：${map.value}")
+//        }
         //遍历map第三种方式
-        for ((key, value) in courseMap) {
-            XLogUtils.e("遍历数组第三种方式->$key   值：$value")
-        }
+//        for ((key, value) in courseMap) {
+//            XLogUtils.e("遍历数组第三种方式->$key   值：$value")
+//        }
     }
 }
