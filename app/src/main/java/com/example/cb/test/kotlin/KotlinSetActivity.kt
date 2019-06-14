@@ -40,7 +40,7 @@ class KotlinSetActivity : BaseActivity() {
 //        }
         /***_____________________________________List_______________________________________________***/
         //1.创建不可变的list，可以包含空值.
-        val people = listOf(PersonBean("汤姆", 23), PersonBean("杰瑞", 34),PersonBean("酸奶", 34))
+        val people = listOf(PersonBean("汤姆", 23), PersonBean("杰瑞", 34), PersonBean("酸奶", 34))
 
         //2.创建不可变list,不包含空值.
 //        val people = listOfNotNull(PersonBean("汤姆", 23), PersonBean("杰瑞", 34))
@@ -97,12 +97,11 @@ class KotlinSetActivity : BaseActivity() {
         //   相当于Map<Int,List<PersonBean>>
 //        XLogUtils.d(people.groupBy { it.age }.toString())
 
-        //16.遍历List中元素，取出元素对象中的值平铺成新的集合
-        val books= listOf(Book("第一行代码", listOf("郭霖","弘扬")),
-                Book("Android开发艺术探索", listOf("任玉刚","宝坚强")),
-                Book("Kotlin实战", listOf("Dmitry Jemerov","Svetlana Lsakova")))
-        XLogUtils.d(books.flatMap { it.authors }.toList().toString())
-
+        //16.遍历List中元素，取出集合元素对象平铺成新的集合(toSet()去掉重复的;toList()不会去重)
+        val books = listOf(Book("第一行代码", listOf("郭霖", "弘扬")),
+                Book("Android开发艺术探索", listOf("任玉刚", "郭霖")),
+                Book("Kotlin实战", listOf("Dmitry Jemerov", "Svetlana Lsakova")))
+        XLogUtils.d(books.flatMap { it.authors }.toSet().toList().toString())
         /***_____________________________________Map_______________________________________________***/
         //1.mapOf返回不可变的map，有序
 //        val courseMap = mapOf(1 to "数学", 2 to "语文", 3 to "物理", 4 to "化学")
