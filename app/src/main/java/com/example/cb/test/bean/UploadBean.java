@@ -18,6 +18,15 @@ public class UploadBean {
     private String msg;
     private String data;
 
+    public UploadBean() {
+    }
+
+    public UploadBean(String code, String msg, String data) {
+        this.code = code;
+        this.msg = msg;
+        this.data = data;
+    }
+
     public String getCode() {
         return code;
     }
