@@ -4,7 +4,6 @@ import android.os.Bundle
 import cb.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
-import com.example.cb.test.bean.Book
 import com.example.cb.test.bean.PersonBean
 
 /**
@@ -98,10 +97,24 @@ class KotlinSetActivity : BaseActivity() {
 //        XLogUtils.d(people.groupBy { it.age }.toString())
 
         //16.遍历List中元素，取出集合元素对象平铺成新的集合(toSet()去掉重复的;toList()不会去重)
-        val books = listOf(Book("第一行代码", listOf("郭霖", "弘扬")),
-                Book("Android开发艺术探索", listOf("任玉刚", "郭霖")),
-                Book("Kotlin实战", listOf("Dmitry Jemerov", "Svetlana Lsakova")))
-        XLogUtils.d(books.flatMap { it.authors }.toSet().toList().toString())
+//        val books = listOf(Book("第一行代码", listOf("郭霖", "弘扬")),
+//                Book("Android开发艺术探索", listOf("任玉刚", "郭霖")),
+//                Book("Kotlin实战", listOf("Dmitry Jemerov", "Svetlana Lsakova")))
+//        XLogUtils.d(books.flatMap { it.authors }.toSet().toList().toString())
+
+        //17.惰性集合(asSequence),数据量小的时候用下面链式没有性能影响
+//        val list = people.map(PersonBean::name).filter { it.startsWith("汤") }
+        //但是当数据量非常大的时候，kotlin推荐使用惰性集合来处理，上下两种方式就是多了一个asSequence()
+        //序列，转换过程中没有创建任何中间集合。所以比第一种方式高效。结果是序列对象。
+//        val list = people.asSequence().map(PersonBean::name).filter { it.startsWith("汤") }.toList()
+//        XLogUtils.d(list.toString())
+
+        //18.惰性集合,找集合中元素平方大于4的元素。
+        var num:Int = listOf(1, 2, 3, 4).asSequence().map { it * it }.find { it > 3 } as Int
+        //如果不使用asSequence，首先会将map { it*it }结果计算出来（1,4,9,16），然后再去找大于3的。
+        //使用asSequence执行顺序1*1>3?->NO跳过，2*2>3-?YES 返回4，（也就是每个元素全部执行完所有的链式）
+        XLogUtils.d(num.toString())
+
         /***_____________________________________Map_______________________________________________***/
         //1.mapOf返回不可变的map，有序
 //        val courseMap = mapOf(1 to "数学", 2 to "语文", 3 to "物理", 4 to "化学")
