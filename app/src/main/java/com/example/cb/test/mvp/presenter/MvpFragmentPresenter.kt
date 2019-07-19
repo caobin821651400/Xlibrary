@@ -20,9 +20,7 @@ class MvpFragmentPresenter(view: IMvpFragmentView) : BasePresenter<IMvpFragmentV
             }
 
             override fun onError(error: String?) {
-                if (error != null) {
-                    mView!!.onNewsError(error)
-                }
+                error?.let { mView!!.onNewsError(it) }
             }
         })
     }

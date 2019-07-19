@@ -9,6 +9,7 @@ import com.example.cb.test.base.BaseActivity;
 import com.example.cb.test.dagger.DaggerTestActivity;
 import com.example.cb.test.kotlin.KotlinSetActivity;
 import com.example.cb.test.kotlin.KotlinTestActivity;
+import com.example.cb.test.mvvm.MvvmActivity;
 
 import java.util.ArrayList;
 
@@ -59,13 +60,15 @@ public class MainActivity extends BaseActivity {
         });
         btnDownLoad.setOnClickListener(v -> {
 //                launchActivity(MvpActivity.class, null);
-                launchActivity(KotlinSetActivity.class, null);
+//                launchActivity(KotlinSetActivity.class, null);
 //                launchActivity(KotlinActivity.class, null);
 //            launchActivity(DbTestActivity.class, null);
 //            launchActivity(AnimTestActivity.class, null);
 //            launchActivity(AidlTestActivity.class, null);
 //            launchActivity(BannerActivity.class,null);
 //            launchActivity(QRcodeDecoderActivity.class,null);
+//            showChoseHeadDialog();
+            launchActivity(MvvmActivity.class,null);
         });
 
 

@@ -23,7 +23,7 @@ class MvpFragment : BaseMvpFragment<MvpFragmentPresenter>(), IMvpFragmentView {
     }
 
     override fun initData() {
-        mPresenter!!.fetchData()
+        mPresenter?.fetchData()
     }
 
     override fun initListener() {

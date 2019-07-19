@@ -5,12 +5,10 @@ import cb.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
 import com.example.cb.test.bean.PersonBean
-import com.example.cb.test.bean.UploadBean
-import org.json.JSONObject
 
-open class KotlinTestActivity : BaseActivity() {
+class KotlinTestActivity : BaseActivity() {
 
-    open var s="111"
+    open var s = "111"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,11 +37,17 @@ open class KotlinTestActivity : BaseActivity() {
         //  D:生成copy()方法，用于完成复制
 
         //4.遍历JS对象，key不同的情况
-        val txt = """{"0":{"name":"汤姆","age":"24"},"1":{"name":"酸奶","age":"10"}}"""
-        val jsonObject = JSONObject(txt)
-        val keys = jsonObject.keys()
-        while (keys.hasNext()) {
-            XLogUtils.d(jsonObject.getJSONObject(keys.next()).toString())
-        }
+//        val txt = """{"0":{"name":"汤姆","age":"24"},"1":{"name":"酸奶","age":"10"}}"""
+//        val jsonObject = JSONObject(txt)
+//        val keys = jsonObject.keys()
+//        while (keys.hasNext()) {
+//            XLogUtils.d(jsonObject.getJSONObject(keys.next()).toString())
+//        }
+
+        //5.if(a>b)a else b
+        var a =null
+        var b = "ss"
+        var c = a?:b
+        XLogUtils.d(c)
     }
 }
