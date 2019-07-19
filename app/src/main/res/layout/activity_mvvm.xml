@@ -19,13 +19,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="50dp"
-            android:text="@={user.MName}" />
+            android:text="@={user.name}" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:minHeight="50dp"
-            android:text="@={user.MAge}" />
+            android:text="@{String.valueOf(user.age)}" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="change"
+            android:text="更改姓名" />
     </LinearLayout>
 </layout>
