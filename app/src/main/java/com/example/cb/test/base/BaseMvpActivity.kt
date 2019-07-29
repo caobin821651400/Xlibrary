@@ -32,7 +32,6 @@ abstract class BaseMvpActivity<T : BasePresenter<*>> : BaseActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        //及时销毁mvp的view
         mPresenter?.detachView()
     }
 }

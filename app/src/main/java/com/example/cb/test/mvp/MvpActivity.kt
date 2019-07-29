@@ -43,8 +43,7 @@ class MvpActivity : BaseMvpActivity<NewListPresenter>(), INewListView {
     }
 
     override fun onRequestSuccess(data: NewsResp) {
-        if (data != null)
-            toast(data!!.result.data[0].author_name)
+        toast(data.result.data[0].author_name)
     }
 
     override fun onError(error: String) {

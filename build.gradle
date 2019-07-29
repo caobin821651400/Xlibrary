@@ -29,4 +29,5 @@ ext {
     ext.min_sdk_version = 17
     ext.target_sdk_version = 28
     ext.android_support_version = "28.0.0"
+    ext.appcompat_version="1.0.2"
 }

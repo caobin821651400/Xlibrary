@@ -15,12 +15,12 @@ class MvpFragmentPresenter(view: IMvpFragmentView) : BasePresenter<IMvpFragmentV
         MovieHttpRequest.getInstance().sendNewsRequest(map, object : XHttpCallback<NewsResp> {
             override fun onSuccess(newBean: NewsResp?) {
                 if (newBean != null) {
-                    mView!!.onNewsSuccess(newBean)
+                    mView?.onNewsSuccess(newBean)
                 }
             }
 
             override fun onError(error: String?) {
-                error?.let { mView!!.onNewsError(it) }
+                error?.let { mView?.onNewsError(it) }
             }
         })
     }

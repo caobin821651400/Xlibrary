@@ -5,7 +5,10 @@ package com.example.cb.test.dagger;
  */
 public class BObject {
 
-    public String eat() {
-        return "哈哈 我是B";
+    public BObject() {
+    }
+
+    public void eat() {
+        System.err.println("哈哈 我是B");
     }
 }

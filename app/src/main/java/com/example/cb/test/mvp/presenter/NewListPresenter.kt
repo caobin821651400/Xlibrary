@@ -7,7 +7,11 @@ import com.example.cb.test.rx.http.NewsResp
 import com.example.cb.test.rx.http.XHttpCallback
 
 /**
- * 所有复杂的逻辑处理都可以放到这里
+ * ====================================================
+ * @User :caobin
+ * @Date :2019/7/29 10:49
+ * @Desc :逻辑处理类
+ * ====================================================
  */
 class NewListPresenter(view: INewListView) : BasePresenter<INewListView>(view) {
 
@@ -18,13 +22,13 @@ class NewListPresenter(view: INewListView) : BasePresenter<INewListView>(view) {
         MovieHttpRequest.getInstance().sendNewsRequest(map, object : XHttpCallback<NewsResp> {
             override fun onSuccess(t: NewsResp?) {
                 if (t != null) {
-                    mView!!.onRequestSuccess(t)
+                    mView?.onRequestSuccess(t)
                 }
             }
 
             override fun onError(error: String?) {
                 if (error != null) {
-                    mView!!.onError(error)
+                    mView?.onError(error)
                 }
             }
         })

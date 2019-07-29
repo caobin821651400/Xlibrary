@@ -5,15 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.cb.test.base.BaseActivity;
 import com.example.cb.test.dagger.DaggerTestActivity;
-import com.example.cb.test.kotlin.KotlinSetActivity;
-import com.example.cb.test.kotlin.KotlinTestActivity;
+import com.example.cb.test.mvp.MvpActivity;
 import com.example.cb.test.mvvm.MvvmActivity;
 
 import java.util.ArrayList;
 
-import androidx.recyclerview.widget.RecyclerView;
 import cb.xlibrary.utils.XActivityStack;
 import cb.xlibrary.utils.XLogUtils;
 import cb.xlibrary.utils.XPermission;
@@ -22,7 +22,11 @@ import library.cb.imagepicker.ImagePicker;
 import library.cb.imagepicker.bean.ImageItem;
 import library.cb.imagepicker.ui.ImageGridActivity;
 
-
+/**
+ * @author bin
+ * @desc 首页
+ * @time 2019年7月19日17:04:09
+ */
 public class MainActivity extends BaseActivity {
 
     private Button btnDownLoad;
@@ -46,18 +50,20 @@ public class MainActivity extends BaseActivity {
         recyclerView.setNestedScrollingEnabled(false);
 
 
-        XPermission.requestPermissions(MainActivity.this, 102, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, new XPermission.OnPermissionListener() {
-            @Override
-            public void onPermissionGranted() {
+        XPermission.requestPermissions(MainActivity.this, 102,
+                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA},
+                new XPermission.OnPermissionListener() {
+                    @Override
+                    public void onPermissionGranted() {
 
-            }
+                    }
 
-            @Override
-            public void onPermissionDenied() {
+                    @Override
+                    public void onPermissionDenied() {
 
-            }
-        });
+                    }
+                });
         btnDownLoad.setOnClickListener(v -> {
 //                launchActivity(MvpActivity.class, null);
 //                launchActivity(KotlinSetActivity.class, null);
@@ -68,7 +74,7 @@ public class MainActivity extends BaseActivity {
 //            launchActivity(BannerActivity.class,null);
 //            launchActivity(QRcodeDecoderActivity.class,null);
 //            showChoseHeadDialog();
-            launchActivity(MvvmActivity.class,null);
+            launchActivity(MvpActivity.class, null);
         });
 
 

@@ -19,4 +19,6 @@ class MvvmModule : AbstractMvvmViewModule<ActivityMvvmBinding> {
         user.age.set(28)
         return user
     }
+
+    /****99999999999999999999999999999999999999999999999**/
 }
