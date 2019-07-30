@@ -2,7 +2,10 @@ package com.example.cb.test;
 
 import android.Manifest;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.LruCache;
 import android.widget.Button;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -87,6 +90,7 @@ public class MainActivity extends BaseActivity {
 //        fragmentTransaction.add(R.id.test, fragmentTest);
 //        fragmentTransaction.commit();
     }
+
 
     /**
      * 选择用户头像
