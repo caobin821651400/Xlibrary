@@ -2,7 +2,6 @@ package com.example.cb.test.rx.http;
 
 import com.example.cb.test.bean.UploadBean;
 import com.example.cb.test.rx.body.ProgressListener;
-import com.google.gson.Gson;
 
 import java.io.File;
 import java.util.Map;

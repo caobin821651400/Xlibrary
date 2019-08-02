@@ -2,6 +2,7 @@ package com.example.cb.test.kotlin
 
 import android.os.Bundle
 import cb.xlibrary.utils.XLogUtils
+import com.example.cb.test.MainActivity
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
 import com.example.cb.test.bean.PersonBean

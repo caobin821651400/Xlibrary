@@ -34,7 +34,7 @@ class DiskCache : ImageCache {
         }
     }
 
-    override fun get(url: String): Bitmap {
+    override fun get(url: String): Bitmap? {
         return BitmapFactory.decodeFile(cacheDir)
     }
 }

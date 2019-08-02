@@ -77,7 +77,8 @@ public class MainActivity extends BaseActivity {
 //            launchActivity(BannerActivity.class,null);
 //            launchActivity(QRcodeDecoderActivity.class,null);
 //            showChoseHeadDialog();
-            launchActivity(MvpActivity.class, null);
+//            launchActivity(MvpActivity.class, null);
+            showChoseHeadDialog();
         });
 
 
@@ -98,10 +99,10 @@ public class MainActivity extends BaseActivity {
     private void showChoseHeadDialog() {
         ImagePicker imagePicker = ImagePicker.getInstance();
         imagePicker.setImageLoader(new GlideImageLoader());//设置图片加载器
-        imagePicker.setShowCamera(true);//显示拍照按钮
-        imagePicker.setCrop(false);//允许裁剪（单选才有效）
+        imagePicker.setShowCamera(false);//显示拍照按钮
+        imagePicker.setCrop(true);//允许裁剪（单选才有效）
         imagePicker.setSaveRectangle(true);//是否按矩形区域保存
-        imagePicker.setMultiMode(true);//单选 false 多选true
+        imagePicker.setMultiMode(false);//单选 false 多选true
         imagePicker.setSelectLimit(1);//最大选择张数
         imagePicker.setFocusWidth(800);//裁剪框的宽度。单位像素（圆形自动取宽高最小值）
         imagePicker.setFocusHeight(800);//裁剪框的高度。单位像素（圆形自动取宽高最小值）

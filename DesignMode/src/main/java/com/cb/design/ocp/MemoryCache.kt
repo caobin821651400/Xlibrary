@@ -32,8 +32,8 @@ class MemoryCache : ImageCache {
         }
     }
 
-    override fun get(url: String): Bitmap {
-        return mMemoryCache!!.get(url)
+    override fun get(url: String): Bitmap? {
+        return mMemoryCache?.get(url)
     }
 
     override fun put(url: String, bitmap: Bitmap) {
