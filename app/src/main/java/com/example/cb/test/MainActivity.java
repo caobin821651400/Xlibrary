@@ -1,21 +1,20 @@
 package com.example.cb.test;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Environment;
-import android.util.LruCache;
 import android.widget.Button;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cb.test.base.BaseActivity;
 import com.example.cb.test.dagger.DaggerTestActivity;
-import com.example.cb.test.mvp.MvpActivity;
-import com.example.cb.test.mvvm.MvvmActivity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import cb.xlibrary.utils.XActivityStack;
 import cb.xlibrary.utils.XLogUtils;
@@ -24,6 +23,8 @@ import library.cb.imagepicker.GlideImageLoader;
 import library.cb.imagepicker.ImagePicker;
 import library.cb.imagepicker.bean.ImageItem;
 import library.cb.imagepicker.ui.ImageGridActivity;
+import me.devilsen.czxing.Scanner;
+import me.devilsen.czxing.view.ScanActivityDelegate;
 
 /**
  * @author bin
@@ -78,7 +79,34 @@ public class MainActivity extends BaseActivity {
 //            launchActivity(QRcodeDecoderActivity.class,null);
 //            showChoseHeadDialog();
 //            launchActivity(MvpActivity.class, null);
-            showChoseHeadDialog();
+//            showChoseHeadDialog();
+            List<Integer> scanColors = Arrays.asList(
+                    Color.BLUE
+                    , Color.LTGRAY
+                    , Color.CYAN);
+
+//            ScanActivity
+
+
+
+            Scanner.with(this)
+//                    .setBorderColor(Color.GREEN)// 扫码框边框颜色
+//                    .setCornerColor(Color.RED)// 扫码框角颜色
+//                    .setScanLineColors(scanColors)// 扫描线颜色（这是一个渐变颜色）
+                    .setOnClickAlbumDelegate(new ScanActivityDelegate.OnClickAlbumDelegate() {
+                        @Override
+                        public void onClickAlbum(Activity activity) {
+                        }
+
+                        @Override
+                        public void onSelectData(int requestCode, Intent data) {
+
+                        }
+                    })
+                    .setOnScanResultDelegate(result -> {
+                        XLogUtils.d(result+"曹斌");
+                    })
+                    .start();
         });
 
 
@@ -91,7 +119,6 @@ public class MainActivity extends BaseActivity {
 //        fragmentTransaction.add(R.id.test, fragmentTest);
 //        fragmentTransaction.commit();
     }
-
 
     /**
      * 选择用户头像

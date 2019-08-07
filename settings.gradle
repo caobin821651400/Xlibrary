@@ -1,1 +1,1 @@
-include ':app', ':Library', ':QrCodeLibrary', ':ImagePicker', ':filepicker', ':DesignMode'
+include ':app', ':Library', ':ImagePicker', ':filepicker', ':DesignMode'

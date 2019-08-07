@@ -61,13 +61,13 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     // 支持Gson解析
     implementation 'com.google.code.gson:gson:2.8.1'
+    implementation(name: 'czxing1.1', ext: 'aar')
     /*================*/
     //butterknife
     implementation 'com.jakewharton:butterknife:10.1.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
     //butterknife
     implementation project(':Library')
-    implementation project(':QrCodeLibrary')
     implementation 'com.tencent.bugly:crashreport:2.6.6'
     implementation project(':ImagePicker')
     implementation project(':filepicker')

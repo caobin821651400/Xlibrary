@@ -20,7 +20,7 @@ class MemoryCache : ImageCache {
     /**
      * 构造
      */
-    constructor() {
+    init {
         //计算最大内存空间
         val maxMemory = (Runtime.getRuntime().maxMemory() / 1024).toInt()
         //取四分之一

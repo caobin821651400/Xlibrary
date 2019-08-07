@@ -11,20 +11,20 @@ import android.graphics.Bitmap
  */
 class DoubleCache : ImageCache {
 
-    val diskCache = DiskCache()
-    val memoryCache = MemoryCache()
-    var isEnableDiskCache = true//允许SD缓存
-    var isEnableMemoryCache = true//允许内存缓存
+    private val diskCache = DiskCache()
+    private val memoryCache = MemoryCache()
+    private var isEnableDiskCache = true//允许SD缓存
+    private var isEnableMemoryCache = true//允许内存缓存
 
     override fun get(url: String): Bitmap? {
-        if (isEnableDiskCache && isEnableMemoryCache) {
-            return doubleCache(url)
+        return if (isEnableDiskCache && isEnableMemoryCache) {
+            doubleCache(url)
         } else if (!isEnableDiskCache && isEnableMemoryCache) {
-            return memoryCache.get(url)
+            memoryCache.get(url)
         } else if (isEnableDiskCache && !isEnableMemoryCache) {
-            return diskCache.get(url)
+            diskCache.get(url)
         } else {
-            return null
+            null
         }
     }
 

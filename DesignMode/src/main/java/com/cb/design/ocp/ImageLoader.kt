@@ -18,12 +18,7 @@ class ImageLoader {
     val handler = Handler(Looper.getMainLooper())
 
     private fun updateImageImageView(imageView: ImageView, bitmap: Bitmap) {
-        handler.post(object : Runnable {
-            override fun run() {
-                imageView.setImageBitmap(bitmap)
-            }
-
-        })
+        handler.post { imageView.setImageBitmap(bitmap) }
     }
 
     /**
