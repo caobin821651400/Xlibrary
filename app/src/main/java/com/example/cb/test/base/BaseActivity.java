@@ -4,15 +4,17 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.bumptech.glide.Glide;
-import cb.xlibrary.utils.XPermission;
 import com.example.cb.test.MainActivity;
 import com.example.cb.test.R;
+
+import cb.xlibrary.utils.XPermission;
 
 /**
  * author : caobin
@@ -52,6 +54,7 @@ public class BaseActivity extends AppCompatActivity {
         }
         startActivity(intent);
     }
+
 
     /**
      * Toast任何类型的数据

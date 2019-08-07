@@ -78,33 +78,8 @@ public class MainActivity extends BaseActivity {
 //            showChoseHeadDialog();
 //            launchActivity(MvpActivity.class, null);
 //            showChoseHeadDialog();
-            List<Integer> scanColors = Arrays.asList(
-                    Color.BLUE
-                    , Color.LTGRAY
-                    , Color.CYAN);
+toast("");
 
-//            ScanActivity
-
-
-
-//            Scanner.with(this)
-////                    .setBorderColor(Color.GREEN)// 扫码框边框颜色
-////                    .setCornerColor(Color.RED)// 扫码框角颜色
-////                    .setScanLineColors(scanColors)// 扫描线颜色（这是一个渐变颜色）
-//                    .setOnClickAlbumDelegate(new ScanActivityDelegate.OnClickAlbumDelegate() {
-//                        @Override
-//                        public void onClickAlbum(Activity activity) {
-//                        }
-//
-//                        @Override
-//                        public void onSelectData(int requestCode, Intent data) {
-//
-//                        }
-//                    })
-//                    .setOnScanResultDelegate(result -> {
-//                        XLogUtils.d(result+"曹斌");
-//                    })
-//                    .start();
         });
 
 
