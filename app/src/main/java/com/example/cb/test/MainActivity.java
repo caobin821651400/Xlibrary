@@ -23,8 +23,6 @@ import library.cb.imagepicker.GlideImageLoader;
 import library.cb.imagepicker.ImagePicker;
 import library.cb.imagepicker.bean.ImageItem;
 import library.cb.imagepicker.ui.ImageGridActivity;
-import me.devilsen.czxing.Scanner;
-import me.devilsen.czxing.view.ScanActivityDelegate;
 
 /**
  * @author bin
@@ -89,24 +87,24 @@ public class MainActivity extends BaseActivity {
 
 
 
-            Scanner.with(this)
-//                    .setBorderColor(Color.GREEN)// 扫码框边框颜色
-//                    .setCornerColor(Color.RED)// 扫码框角颜色
-//                    .setScanLineColors(scanColors)// 扫描线颜色（这是一个渐变颜色）
-                    .setOnClickAlbumDelegate(new ScanActivityDelegate.OnClickAlbumDelegate() {
-                        @Override
-                        public void onClickAlbum(Activity activity) {
-                        }
-
-                        @Override
-                        public void onSelectData(int requestCode, Intent data) {
-
-                        }
-                    })
-                    .setOnScanResultDelegate(result -> {
-                        XLogUtils.d(result+"曹斌");
-                    })
-                    .start();
+//            Scanner.with(this)
+////                    .setBorderColor(Color.GREEN)// 扫码框边框颜色
+////                    .setCornerColor(Color.RED)// 扫码框角颜色
+////                    .setScanLineColors(scanColors)// 扫描线颜色（这是一个渐变颜色）
+//                    .setOnClickAlbumDelegate(new ScanActivityDelegate.OnClickAlbumDelegate() {
+//                        @Override
+//                        public void onClickAlbum(Activity activity) {
+//                        }
+//
+//                        @Override
+//                        public void onSelectData(int requestCode, Intent data) {
+//
+//                        }
+//                    })
+//                    .setOnScanResultDelegate(result -> {
+//                        XLogUtils.d(result+"曹斌");
+//                    })
+//                    .start();
         });
 
 

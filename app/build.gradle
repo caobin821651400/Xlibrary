@@ -61,7 +61,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     // 支持Gson解析
     implementation 'com.google.code.gson:gson:2.8.1'
-    implementation(name: 'czxing1.1', ext: 'aar')
+//    implementation(name: 'czxing1.1', ext: 'aar')
     /*================*/
     //butterknife
     implementation 'com.jakewharton:butterknife:10.1.0'
