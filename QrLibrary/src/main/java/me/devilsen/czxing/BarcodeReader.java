@@ -55,12 +55,29 @@ public class BarcodeReader {
         }
     }
 
-    public BarcodeReader(BarcodeFormat... formats) {
+    public void setBarcodeFormat(BarcodeFormat... formats) {
         int[] nativeFormats = new int[formats.length];
         for (int i = 0; i < formats.length; ++i) {
             nativeFormats[i] = formats[i].ordinal();
         }
         _nativePtr = createInstance(nativeFormats);
+    }
+
+    private static BarcodeReader instance;
+
+    public static BarcodeReader getInstance() {
+        if (instance == null) {
+            synchronized (BarcodeReader.class) {
+                if (instance == null) {
+                    instance = new BarcodeReader();
+                }
+            }
+        }
+        return instance;
+    }
+
+    private BarcodeReader() {
+        setBarcodeFormat(BarcodeFormat.QR_CODE);
     }
 
     public Result read(Bitmap bitmap) {
@@ -128,7 +145,7 @@ public class BarcodeReader {
     public static native boolean analysisBrightnessNative(byte[] bytes, int width, int height);
 
     static {
-       System.loadLibrary("czxing");
+        System.loadLibrary("czxing");
     }
 
 }

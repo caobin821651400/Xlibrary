@@ -22,7 +22,7 @@ public class ScannerManager {
     private ScanOption scanOption;
     private Class<?> mLunchAc = null;
 
-    ScannerManager(Context context) {
+    public ScannerManager(Context context) {
         this.context = context;
         scanOption = new ScanOption();
     }
