@@ -208,7 +208,7 @@ static float CrossCheckVertical(const BitMatrix& image, int startI, int centerJ,
 		stateCount[4]++;
 		i++;
 	}
-	if (stateCount[4] >= maxCount) {
+	if (stateCount[4] >= maxCount && stateCount[0] > maxCount) {
 		return std::numeric_limits<float>::quiet_NaN();
 	}
 
@@ -274,7 +274,7 @@ static float CrossCheckHorizontal(const BitMatrix& image, int startJ, int center
 		stateCount[4]++;
 		j++;
 	}
-	if (stateCount[4] >= maxCount) {
+	if (stateCount[4] >= maxCount && stateCount[0] > maxCount) {
 		return std::numeric_limits<float>::quiet_NaN();
 	}
 

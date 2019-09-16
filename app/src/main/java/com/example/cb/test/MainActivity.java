@@ -1,9 +1,7 @@
 package com.example.cb.test;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 
@@ -13,8 +11,6 @@ import com.example.cb.test.base.BaseActivity;
 import com.example.cb.test.dagger.DaggerTestActivity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import cb.xlibrary.utils.XActivityStack;
 import cb.xlibrary.utils.XLogUtils;
