@@ -1,18 +1,18 @@
 package cb.xlibrary.adapter;
 
 import android.content.Context;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
 import com.cb.xlibrary.R;
-import cb.xlibrary.utils.XLogUtils;
 
 import java.util.List;
 
@@ -44,6 +44,7 @@ public abstract class XRecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T,
     private boolean isLoadError = false;//标记是否加载出错
     private boolean isCanLoadMore = false;//是否有加载更多
     private boolean isFirst = false;//是否是第一次getCount
+    private boolean isEnableEmpty = true;//是否允许空数据显示
     private boolean isNetworkError = false;//网络出错
     private OnItemClickListener onItemClickListener;
     private OnItemLongClickListener onItemLongClickListener;
@@ -68,9 +69,9 @@ public abstract class XRecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T,
     @Override
     public int getItemCount() {
         if (isNetworkError) return 1;
-        if ((dataLists == null || dataLists.size() == 0) && !isFirst) {
-            //空数据返回1
-            return 1;
+        if ((dataLists == null || dataLists.size() == 0) && !isFirst && isEnableEmpty) {
+            //空数据返回1+getHeaderCount()
+            return getHeaderCount() + 1;
         }
         return getDataCount() + getHeaderCount() + getFooterCount() + (isCanLoadMore ? 1 : 0);
     }
@@ -78,11 +79,11 @@ public abstract class XRecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T,
     @Override
     public int getItemViewType(int position) {
         if (isNetworkError) return TYPE_NETWORK_ERROR;
-        if ((dataLists == null || dataLists.size() == 0) && !isFirst) {
-            return TYPE_EMPTY;
-        }
         if (isHeaderPosition(position)) {
             return mHeaderViews.keyAt(position);
+        }
+        if ((dataLists == null || dataLists.size() == 0) && !isFirst && isEnableEmpty) {
+            return TYPE_EMPTY;
         }
         if (isLoadPosition(position)) {
             return mLoadItemType;
@@ -95,6 +96,7 @@ public abstract class XRecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T,
         return getItemLayoutResId(getItem(position), position);
     }
 
+    @NonNull
     @Override
     public XViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (isHeaderViewType(viewType)) {
@@ -123,13 +125,11 @@ public abstract class XRecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T,
             View view = inflater.inflate(R.layout.xadapter_network_error_cblibrary, mRecyclerView, false);
             return new XViewHolder(view);
         }
-        XLogUtils.d("onCreateViewHolder 111111111111111");
         return new XViewHolder(inflater.inflate(viewType, parent, false));
     }
 
     @Override
     public void onBindViewHolder(final XViewHolder holder, int position) {
-        XLogUtils.v("onBindViewHolder 222222222222222222");
         if (holder.getItemViewType() == TYPE_EMPTY) return;
         if (holder.getItemViewType() == TYPE_NETWORK_ERROR) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -258,7 +258,7 @@ public abstract class XRecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T,
     public void setDataLists(List<T> datas) {
         isFirst = false;
         isNetworkError = false;
-        if (datas == null || datas.isEmpty() || datas.size() == 0) {
+        if (datas == null || datas.isEmpty() || datas.size() == 0 && isEnableEmpty) {
             mLoadItemType = TYPE_EMPTY;
         } else {
             mLoadItemType = TYPE_LOAD_MORE;
@@ -354,6 +354,15 @@ public abstract class XRecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T,
         if (index < 0) return;
         mHeaderViews.removeAt(index);
         notifyDataSetChanged();
+    }
+
+    /**
+     * 展示空数据
+     *
+     * @param b
+     */
+    public void setEnableEmpty(boolean b) {
+        this.isEnableEmpty = b;
     }
 
     /**

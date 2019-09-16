@@ -4,7 +4,7 @@ import android.os.Bundle
 
 abstract class BaseMvpActivity<T : BasePresenter<*>> : BaseActivity() {
 
-    protected var mPresenter: T? = null
+    protected lateinit var mPresenter: T
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

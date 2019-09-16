@@ -23,6 +23,7 @@ import library.cb.imagepicker.GlideImageLoader;
 import library.cb.imagepicker.ImagePicker;
 import library.cb.imagepicker.bean.ImageItem;
 import library.cb.imagepicker.ui.ImageGridActivity;
+import me.devilsen.czxing.ScanBaseActivity;
 
 /**
  * @author bin
@@ -69,7 +70,6 @@ public class MainActivity extends BaseActivity {
         btnDownLoad.setOnClickListener(v -> {
 //                launchActivity(MvpActivity.class, null);
 //                launchActivity(KotlinSetActivity.class, null);
-//                launchActivity(KotlinActivity.class, null);
 //            launchActivity(DbTestActivity.class, null);
 //            launchActivity(AnimTestActivity.class, null);
 //            launchActivity(AidlTestActivity.class, null);
@@ -77,14 +77,15 @@ public class MainActivity extends BaseActivity {
 //            launchActivity(QRcodeDecoderActivity.class,null);
 //            showChoseHeadDialog();
 //            launchActivity(MvpActivity.class, null);
+            launchActivity(ScanBaseActivity.class, null);
 //            showChoseHeadDialog();
-toast("");
 
         });
 
 
         //
-        findViewById(R.id.btn_list).setOnClickListener(view -> launchActivity(DaggerTestActivity.class, null));
+        findViewById(R.id.btn_list).setOnClickListener(view ->
+                launchActivity(DaggerTestActivity.class, null));
 
 //        fragmentManager = getSupportFragmentManager();
 //        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -100,7 +101,7 @@ toast("");
         ImagePicker imagePicker = ImagePicker.getInstance();
         imagePicker.setImageLoader(new GlideImageLoader());//设置图片加载器
         imagePicker.setShowCamera(false);//显示拍照按钮
-        imagePicker.setCrop(true);//允许裁剪（单选才有效）
+        imagePicker.setCrop(false);//允许裁剪（单选才有效）
         imagePicker.setSaveRectangle(true);//是否按矩形区域保存
         imagePicker.setMultiMode(false);//单选 false 多选true
         imagePicker.setSelectLimit(1);//最大选择张数
