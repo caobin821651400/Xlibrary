@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cb.test.base.BaseActivity;
 import com.example.cb.test.dagger.DaggerTestActivity;
+import com.example.cb.test.kotlin.KotlinTestActivity;
 import com.example.cb.test.ui.scan.QRcodeEncoderActivity;
 
 import java.util.ArrayList;
@@ -74,7 +75,8 @@ public class MainActivity extends BaseActivity {
 //            launchActivity(QRcodeDecoderActivity.class,null);
 //            showChoseHeadDialog();
 //            launchActivity(MvpActivity.class, null);
-            launchActivity(QRcodeEncoderActivity.class, null);
+//            launchActivity(QRcodeEncoderActivity.class, null);
+            launchActivity(KotlinTestActivity.class, null);
 //            showChoseHeadDialog();
 
         });
