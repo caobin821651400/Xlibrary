@@ -4,7 +4,6 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
-import android.os.Bundle
 import android.os.IBinder
 import android.util.Log
 import com.example.cb.test.R
@@ -15,16 +14,18 @@ import com.example.cb.test.service.IStudentService
 import kotlinx.android.synthetic.main.activity_aidl_test.*
 
 class AidlTestActivity : BaseActivity() {
+    override fun getLayoutId(): Int {
+        return R.layout.activity_aidl_test
+    }
+
+
+    override fun initEvent() {
+    }
 
     private var mIMyService: IMyService? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_aidl_test)
-        initView()
-    }
 
-    private fun initView() {
+    override fun initUI() {
         start.setOnClickListener {
             val intentService = Intent(this, IStudentService::class.java)
             bindService(intentService, mServiceConnection, Context.BIND_AUTO_CREATE)

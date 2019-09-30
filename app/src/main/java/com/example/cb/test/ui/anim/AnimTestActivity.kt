@@ -4,7 +4,6 @@ import android.animation.Animator
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
-import android.os.Bundle
 import android.view.animation.DecelerateInterpolator
 import cb.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
@@ -15,15 +14,16 @@ import kotlinx.android.synthetic.main.activity_anim_test.*
  * 属性动画练习
  */
 class AnimTestActivity : BaseActivity() {
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_anim_test)
-        initView()
+    override fun getLayoutId(): Int {
+        return R.layout.activity_anim_test
     }
 
-    private fun initView() {
+
+    override fun initEvent() {
+    }
+
+
+    override fun initUI() {
         button.setOnClickListener {
             valueAnim()
         }

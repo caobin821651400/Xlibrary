@@ -12,19 +12,20 @@ import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+
 import com.example.cb.test.BuildConfig;
 import com.example.cb.test.utils.DownloadUtil;
 
 import java.io.File;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import cb.xlibrary.dialog.XDownLoadDialog;
 import cb.xlibrary.utils.XAppUtils;
 
 
-public class BaseVersionActivity extends BaseActivity {
+public abstract class BaseVersionActivity extends BaseActivity {
 
 
     protected XDownLoadDialog mDownloadProgressDialog;

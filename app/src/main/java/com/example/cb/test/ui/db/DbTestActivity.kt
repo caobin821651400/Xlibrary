@@ -3,7 +3,6 @@ package com.example.cb.test.ui.db
 import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
-import android.os.Bundle
 import android.view.View
 import cb.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
@@ -14,18 +13,18 @@ import kotlinx.android.synthetic.main.activity_db_test.*
  * 数据库练习
  */
 class DbTestActivity : BaseActivity(), View.OnClickListener {
+    override fun getLayoutId(): Int {
+        return R.layout.activity_db_test
+    }
+
+    override fun initEvent() {
+    }
 
     private var dbHelper: DbHelper? = null
     private var db: SQLiteDatabase? = null
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_db_test)
-        initView()
-    }
-
-    private fun initView() {
+    override fun initUI() {
         btn_create.text = "查询"
         btn_create.setOnClickListener(this)
         btn_update.setOnClickListener(this)

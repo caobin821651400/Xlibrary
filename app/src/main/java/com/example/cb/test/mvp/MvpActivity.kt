@@ -12,18 +12,20 @@ import com.example.cb.test.rx.http.NewsResp
  */
 class MvpActivity : BaseMvpActivity<NewListPresenter>(), INewListView {
 
+
     private var fragmentManager: FragmentManager? = null
     private var mvpFragment: MvpFragment? = null
 
-    override fun getContentViewId(): Int {
-        return R.layout.activity_mvp
-    }
 
     override fun createPresenter(): NewListPresenter {
         return NewListPresenter(this)
     }
 
-    override fun initView() {
+    override fun getLayoutId(): Int {
+        return R.layout.activity_mvp
+    }
+
+    override fun initUI() {
         if (fragmentManager == null) {
             fragmentManager = supportFragmentManager
         }
@@ -33,13 +35,11 @@ class MvpActivity : BaseMvpActivity<NewListPresenter>(), INewListView {
         val transaction = fragmentManager!!.beginTransaction()
         transaction.add(R.id.content, mvpFragment!!, "MvpFragment")
         transaction.commit()
-    }
 
-    override fun initData() {
         mPresenter!!.fetchData()
     }
 
-    override fun initListener() {
+    override fun initEvent() {
     }
 
     override fun onRequestSuccess(data: NewsResp) {

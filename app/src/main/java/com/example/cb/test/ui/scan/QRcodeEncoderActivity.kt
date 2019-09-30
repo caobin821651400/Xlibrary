@@ -5,7 +5,6 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
-import android.os.Bundle
 import android.provider.MediaStore
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
@@ -19,17 +18,19 @@ import me.devilsen.czxing.view.ScanActivityDelegate
  * 生成二维码
  */
 class QRcodeEncoderActivity : BaseActivity() {
+    override fun getLayoutId(): Int {
+        return R.layout.activity_qrcode_decoder
+    }
+
+
+    override fun initEvent() {
+    }
 
     private var mColor: Int = Color.BLACK
     val manager = ScannerManager(this)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_qrcode_decoder)
-        initView()
-    }
 
-    private fun initView() {
+    override fun initUI() {
         qrcode_bt.setOnClickListener {
             manager.setOnClickAlbumDelegate(object : ScanActivityDelegate.OnClickAlbumDelegate {
                 override fun onClickAlbum(activity: Activity) {

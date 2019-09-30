@@ -1,14 +1,14 @@
 package com.example.cb.test.kotlin
 
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import cb.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
-import com.example.cb.test.base.BaseActivity
 import com.example.cb.test.bean.PersonBean
 import com.example.cb.test.kotlin.lambda.LambdaListener
 import com.example.cb.test.kotlin.lambda.LambdaListener2
 
-class KotlinTestActivity : BaseActivity() {
+class KotlinTestActivity : AppCompatActivity() {
 
     open var s = "111"
 

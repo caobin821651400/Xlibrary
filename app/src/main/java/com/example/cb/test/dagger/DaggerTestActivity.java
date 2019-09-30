@@ -2,8 +2,9 @@ package com.example.cb.test.dagger;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.cb.test.R;
-import com.example.cb.test.base.BaseActivity;
 
 import javax.inject.Inject;
 
@@ -15,7 +16,7 @@ import javax.inject.Inject;
  * @Desc :Dagger2测试Activity
  * ====================================================
  */
-public class DaggerTestActivity extends BaseActivity {
+public class DaggerTestActivity extends AppCompatActivity {
 
     @Inject
     AObject aObject;

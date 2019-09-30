@@ -1,6 +1,5 @@
 package com.example.cb.test.ui.view_pager
 
-import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -13,6 +12,12 @@ import java.util.*
 
 
 class BannerActivity : BaseActivity() {
+    override fun getLayoutId(): Int {
+        return R.layout.activity_view_pager;
+    }
+
+    override fun initEvent() {
+    }
 
     private val images = arrayOf(R.drawable.img_banner_one, R.drawable.img_banner_two,
             R.drawable.img_banner_three, R.drawable.img_banner_four, R.drawable.img_banner_five)
@@ -20,13 +25,7 @@ class BannerActivity : BaseActivity() {
     private var currentPosition: Int = 0
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_view_pager)
-        initView()
-    }
-
-    private fun initView() {
+    override fun initUI() {
         //array转list
         imageLists = images.toList() as ArrayList<Int>
         imageLists.add(0, imageLists[imageLists.size - 1])

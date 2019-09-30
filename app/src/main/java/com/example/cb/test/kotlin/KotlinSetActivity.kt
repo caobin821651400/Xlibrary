@@ -1,15 +1,15 @@
 package com.example.cb.test.kotlin
 
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import cb.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
-import com.example.cb.test.base.BaseActivity
 import com.example.cb.test.bean.PersonBean
 
 /**
  * 记录一些好用的语句and方法
  */
-class KotlinSetActivity : BaseActivity() {
+class KotlinSetActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -110,7 +110,7 @@ class KotlinSetActivity : BaseActivity() {
 //        XLogUtils.d(list.toString())
 
         //18.惰性集合,找集合中元素平方大于4的元素。
-        var num:Int = listOf(1, 2, 3, 4).asSequence().map { it * it }.find { it > 3 } as Int
+        var num: Int = listOf(1, 2, 3, 4).asSequence().map { it * it }.find { it > 3 } as Int
         //如果不使用asSequence，首先会将map { it*it }结果计算出来（1,4,9,16），然后再去找大于3的。
         //使用asSequence执行顺序1*1>3?->NO跳过，2*2>3-?YES 返回4，（也就是每个元素全部执行完所有的链式）
         XLogUtils.d(num.toString())

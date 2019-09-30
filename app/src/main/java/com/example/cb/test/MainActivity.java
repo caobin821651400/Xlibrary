@@ -2,7 +2,6 @@ package com.example.cb.test;
 
 import android.Manifest;
 import android.content.Intent;
-import android.os.Bundle;
 import android.widget.Button;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.cb.test.base.BaseActivity;
 import com.example.cb.test.dagger.DaggerTestActivity;
 import com.example.cb.test.kotlin.KotlinTestActivity;
-import com.example.cb.test.ui.scan.QRcodeEncoderActivity;
 
 import java.util.ArrayList;
 
@@ -21,7 +19,6 @@ import library.cb.imagepicker.GlideImageLoader;
 import library.cb.imagepicker.ImagePicker;
 import library.cb.imagepicker.bean.ImageItem;
 import library.cb.imagepicker.ui.ImageGridActivity;
-import me.devilsen.czxing.ScanBaseActivity;
 
 /**
  * @author bin
@@ -35,17 +32,14 @@ public class MainActivity extends BaseActivity {
     //
     private String apkUrl = "https://codeload.github.com/jeasonlzy/okhttp-OkGo/zip/master";
 
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        XActivityStack.getInstance().addActivity(this);
-        initView();
+    protected int getLayoutId() {
+        return R.layout.activity_main;
     }
 
-
-    private void initView() {
+    @Override
+    protected void initUI() {
+        XActivityStack.getInstance().addActivity(this);
         btnDownLoad = findViewById(R.id.btn_down_load);
         RecyclerView recyclerView = new RecyclerView(this);
         recyclerView.setNestedScrollingEnabled(false);
@@ -92,6 +86,12 @@ public class MainActivity extends BaseActivity {
 //        fragmentTransaction.add(R.id.test, fragmentTest);
 //        fragmentTransaction.commit();
     }
+
+    @Override
+    protected void initEvent() {
+
+    }
+
 
     /**
      * 选择用户头像

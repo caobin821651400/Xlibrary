@@ -10,24 +10,22 @@ import com.example.cb.test.rx.http.NewsResp
 import kotlinx.android.synthetic.main.fragment_mvp.*
 
 class MvpFragment : BaseMvpFragment<MvpFragmentPresenter>(), IMvpFragmentView {
+    override fun initUI(v: View?) {
+        mPresenter?.fetchData()
+    }
 
-    override fun getContentViewId(): Int {
+    override fun getLayoutId(): Int {
         return R.layout.fragment_mvp
     }
+
+    override fun initEvent(view: View?) {
+    }
+
 
     override fun createPresenter(): MvpFragmentPresenter {
         return MvpFragmentPresenter(this)
     }
 
-    override fun initView(v: View) {
-    }
-
-    override fun initData() {
-        mPresenter?.fetchData()
-    }
-
-    override fun initListener() {
-    }
 
     override fun onNewsError(error: String) {
         XLogUtils.e(error)
