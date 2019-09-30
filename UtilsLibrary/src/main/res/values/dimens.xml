@@ -1,0 +1,18 @@
+<resources>
+    <dimen name="XFrame_spacing_cblibrary">10dp</dimen>
+    <dimen name="XFrame_spacing_large_cblibrary">16dp</dimen>
+
+    <dimen name="XFrame_text_size_small_cblibrary">13sp</dimen>
+    <dimen name="XFrame_text_size_cblibrary">14sp</dimen>
+
+    <dimen name="XFrame_adapter_icon_size_cblibrary">24dp</dimen>
+    <dimen name="XFrame_progressbar_size_cblibrary">24dp</dimen>
+    <dimen name="XFrame_radius_cblibrary_cblibrary">6dp</dimen>
+
+
+    <dimen name="WheelItemTextSize_cblibrary">14sp</dimen>
+    <dimen name="WheelSelectedItemTextSize_cblibrary">20sp</dimen>
+    <dimen name="WheelItemHeightSpace_cblibrary">16dp</dimen>
+    <dimen name="WheelItemWidthSpace_cblibrary">32dp</dimen>
+
+</resources>

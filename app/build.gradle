@@ -50,7 +50,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha3'
     implementation 'com.google.android.material:material:1.1.0-alpha05'
     testImplementation 'junit:junit:4.12'
-    implementation 'com.github.bumptech.glide:glide:3.7.0'
+    implementation "com.github.bumptech.glide:glide:$glide_version"
     implementation 'org.greenrobot:eventbus:3.1.1'
     /*================*/
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'
@@ -67,7 +67,6 @@ dependencies {
     implementation 'com.jakewharton:butterknife:10.1.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
     //butterknife
-    implementation project(':Library')
     implementation 'com.tencent.bugly:crashreport:2.6.6'
     implementation project(':ImagePicker')
     implementation project(':filepicker')
@@ -77,4 +76,5 @@ dependencies {
     annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
     /*=======dagger   end=========*/
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation project(path: ':UtilsLibrary')
 }
