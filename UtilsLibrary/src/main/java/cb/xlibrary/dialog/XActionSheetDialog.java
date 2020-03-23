@@ -68,9 +68,9 @@ public class XActionSheetDialog extends Dialog {
         mRecyclerView = mRootView.findViewById(R.id.recycler_view);
         titleTv = mRootView.findViewById(R.id.tv_title);
         cancelTv = mRootView.findViewById(R.id.tv_cancel);
-        if (txtColor != -1) {
-            cancelTv.setTextColor(txtColor);
-        }
+//        if (txtColor != -1) {
+//            cancelTv.setTextColor(txtColor);
+//        }
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mAdapter = new MyAdapter(mRecyclerView);
         mRecyclerView.setAdapter(mAdapter);

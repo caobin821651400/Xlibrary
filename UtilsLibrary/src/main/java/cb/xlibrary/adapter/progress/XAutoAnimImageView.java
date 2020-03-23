@@ -38,12 +38,24 @@ public class XAutoAnimImageView extends AppCompatImageView {
         setImageDrawable(mProgressDrawable);
     }
 
+//    @Override
+//    protected void onAttachedToWindow() {
+//        super.onAttachedToWindow();
+//        Drawable drawable = getDrawable();
+//        if (drawable != null) {
+//            ((Animatable) drawable).start();
+//        }
+//    }
+
     @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
+    public void setVisibility(int visibility) {
+        super.setVisibility(visibility);
         Drawable drawable = getDrawable();
-        if (drawable != null) {
+        if (drawable == null) return;
+        if (visibility == VISIBLE) {
             ((Animatable) drawable).start();
+        } else {
+            ((Animatable) drawable).stop();
         }
     }
 

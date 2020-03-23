@@ -1,5 +1,7 @@
 package cb.xlibrary.utils;
 
+import android.text.TextUtils;
+
 import java.util.regex.Pattern;
 
 /**
@@ -19,6 +21,7 @@ public class XRegexUtils {
      * @return 星号替换的手机号
      */
     public static String phoneNoHide(String phone) {
+        if (TextUtils.isEmpty(phone))return "";
         // 括号表示组，被替换的部分$n表示第n组的内容
         // 正则表达式中，替换字符串，括号的意思是分组，在replace()方法中，
         // 参数二中可以使用$n(n为数字)来依次引用模式串中用括号定义的字串。

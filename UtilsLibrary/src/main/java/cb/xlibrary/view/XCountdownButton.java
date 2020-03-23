@@ -102,9 +102,9 @@ public class XCountdownButton extends androidx.appcompat.widget.AppCompatButton 
                         @Override
                         public void run() {
                             setText(endText);
+                            setClickable(true);
                         }
                     });
-                    setClickable(true);
                     isCountDowning = false;
                     return;
                 }
@@ -120,10 +120,27 @@ public class XCountdownButton extends androidx.appcompat.widget.AppCompatButton 
         mTimer.schedule(mTimerTask, 0, 1000);
     }
 
+
+    /**
+     * 初始化刚开始的状态
+     */
+    public void release() {
+        if (mTimer != null) mTimer.cancel();//取消定时器
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                setText(startText);
+                setClickable(true);
+            }
+        });
+        isCountDowning = false;
+    }
+
     /**
      * 结束mTimer
      */
     public void cancel() {
         if (handler != null) handler.removeCallbacksAndMessages(null);
+        if (mTimer != null) mTimer.cancel();
     }
 }

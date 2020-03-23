@@ -34,7 +34,7 @@
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
             android:textColor="#1c1c1c"
-            android:textSize="14sp" />
+            android:textSize="13sp" />
 
         <View
             android:layout_width="match_parent"

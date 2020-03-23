@@ -1,9 +1,7 @@
 package cb.xlibrary.adapter;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -12,12 +10,10 @@ public abstract class BaseRecyclerViewAdapter<T, VH extends RecyclerView.ViewHol
     protected List<T> dataLists;
 
     public BaseRecyclerViewAdapter() {
-        this(new ArrayList<T>());
     }
 
-    public BaseRecyclerViewAdapter(@NonNull List<T> dataLists) {
-        this.dataLists = dataLists;
-    }
+//    public BaseRecyclerViewAdapter() {
+//    }
 
     /**
      * 获取指定位置的数据
@@ -26,6 +22,7 @@ public abstract class BaseRecyclerViewAdapter<T, VH extends RecyclerView.ViewHol
      * @return
      */
     public T getItem(int position) {
+        if (dataLists == null) return null;
         return dataLists.get(position);
     }
 
@@ -44,11 +41,9 @@ public abstract class BaseRecyclerViewAdapter<T, VH extends RecyclerView.ViewHol
      * @param datas
      */
     public void setDataLists(List<T> datas) {
-        dataLists.clear();
-        if (datas != null && !datas.isEmpty()) {
-            dataLists.addAll(datas);
-        }
-        notifyDataSetChanged();
+        this.dataLists = datas;
+//        if (dataLists != null)
+            notifyDataSetChanged();
     }
 
     /**
@@ -57,8 +52,12 @@ public abstract class BaseRecyclerViewAdapter<T, VH extends RecyclerView.ViewHol
      * @param data
      */
     public void add(T data) {
-        add(dataLists.indexOf(data), data);
+        if (dataLists != null) {
+            dataLists.add(data);
+            notifyItemInserted(dataLists.size() - 1);
+        }
     }
+
 
     /**
      * 在指定位置添加数据条目
@@ -67,8 +66,10 @@ public abstract class BaseRecyclerViewAdapter<T, VH extends RecyclerView.ViewHol
      * @param data
      */
     public void add(int position, T data) {
-        dataLists.add(position, data);
-        notifyItemInserted(position);
+        if (dataLists != null) {
+            dataLists.add(position, data);
+            notifyItemInserted(position);
+        }
     }
 
     /**
@@ -77,8 +78,12 @@ public abstract class BaseRecyclerViewAdapter<T, VH extends RecyclerView.ViewHol
      * @param datas
      */
     public void addAll(List<T> datas) {
-        dataLists.addAll(datas);
-        notifyDataSetChanged();
+        if (dataLists != null) {
+            int position = dataLists.size();
+            dataLists.addAll(datas);
+//            notifyDataSetChanged();
+            notifyItemRangeChanged(position, datas.size() - position);
+        }
     }
 
     /**
@@ -88,8 +93,10 @@ public abstract class BaseRecyclerViewAdapter<T, VH extends RecyclerView.ViewHol
      * @param datas
      */
     public void addAll(int position, List<T> datas) {
-        dataLists.addAll(position, datas);
-        notifyDataSetChanged();
+        if (dataLists != null) {
+            dataLists.addAll(position, datas);
+            notifyDataSetChanged();
+        }
     }
 
     /**
@@ -98,8 +105,14 @@ public abstract class BaseRecyclerViewAdapter<T, VH extends RecyclerView.ViewHol
      * @param position
      */
     public void remove(int position) {
-        dataLists.remove(position);
-        notifyItemRemoved(position);
+        if (position < 0 || position > dataLists.size() - 1) {
+            return;
+        }
+        if (dataLists != null) {
+            dataLists.remove(position);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, dataLists.size() - position);
+        }
     }
 
     /**
@@ -108,7 +121,10 @@ public abstract class BaseRecyclerViewAdapter<T, VH extends RecyclerView.ViewHol
      * @param data
      */
     public void remove(T data) {
-        remove(dataLists.indexOf(data));
+        if (dataLists != null) {
+            if (!dataLists.contains(data)) return;
+            remove(dataLists.indexOf(data));
+        }
     }
 
 
@@ -119,8 +135,10 @@ public abstract class BaseRecyclerViewAdapter<T, VH extends RecyclerView.ViewHol
      * @param newData
      */
     public void replace(int position, T newData) {
-        dataLists.set(position, newData);
-        notifyItemChanged(position);
+        if (dataLists != null) {
+            dataLists.set(position, newData);
+            notifyItemChanged(position);
+        }
     }
 
     /**
@@ -130,7 +148,9 @@ public abstract class BaseRecyclerViewAdapter<T, VH extends RecyclerView.ViewHol
      * @param newData
      */
     public void replace(T oldData, T newData) {
-        replace(dataLists.indexOf(oldData), newData);
+        if (dataLists != null) {
+            replace(dataLists.indexOf(oldData), newData);
+        }
     }
 
     /**
@@ -140,17 +160,19 @@ public abstract class BaseRecyclerViewAdapter<T, VH extends RecyclerView.ViewHol
      * @param toPosition
      */
     public void move(int fromPosition, int toPosition) {
-        Collections.swap(dataLists, fromPosition, toPosition);
-        notifyItemMoved(fromPosition, toPosition);
+        if (dataLists != null) {
+            Collections.swap(dataLists, fromPosition, toPosition);
+            notifyItemMoved(fromPosition, toPosition);
+        }
     }
 
     /**
      * 清空
      */
     public void clear() {
-        dataLists.clear();
-        notifyDataSetChanged();
+        if (dataLists != null) {
+            dataLists.clear();
+            notifyDataSetChanged();
+        }
     }
-
-
 }

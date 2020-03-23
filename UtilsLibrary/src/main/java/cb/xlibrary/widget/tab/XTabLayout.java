@@ -12,24 +12,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import androidx.annotation.ColorInt;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.IntDef;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RestrictTo;
-import androidx.annotation.StringRes;
-import androidx.core.util.Pools;
-import androidx.core.view.GravityCompat;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.core.view.PointerIconCompat;
-import androidx.core.view.ViewCompat;
-import androidx.viewpager.widget.ViewPager;
-import androidx.core.widget.TextViewCompat;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.appcompat.widget.TooltipCompat;
 import android.text.Layout;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -48,6 +30,24 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.IntDef;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.appcompat.widget.TooltipCompat;
+import androidx.core.util.Pools;
+import androidx.core.view.GravityCompat;
+import androidx.core.view.PointerIconCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.widget.TextViewCompat;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.cb.xlibrary.R;
 import com.google.android.material.tabs.TabLayout;
@@ -242,7 +242,7 @@ public class XTabLayout extends HorizontalScrollView {
                 a.getDimensionPixelSize(R.styleable.XTabLayoutCbLibrary_x_tabIndicatorWidth, dpToPx(28)));
         mTabStrip.setSelectedIndicatorColor(a.getColor(R.styleable.XTabLayoutCbLibrary_x_tabIndicatorColor, 0));
 
-        mTabStrip.setIndicatorAnimationSupport(a.getBoolean(R.styleable.XTabLayoutCbLibrary_x_tabIndicatorAnimation,false));
+        mTabStrip.setIndicatorAnimationSupport(a.getBoolean(R.styleable.XTabLayoutCbLibrary_x_tabIndicatorAnimation, false));
 
         mTabPaddingStart = mTabPaddingTop = mTabPaddingEnd = mTabPaddingBottom = a
                 .getDimensionPixelSize(R.styleable.XTabLayoutCbLibrary_x_tabPadding, 0);
@@ -273,6 +273,9 @@ public class XTabLayout extends HorizontalScrollView {
         if (a.hasValue(R.styleable.XTabLayoutCbLibrary_x_tabTextColor)) {
             // If we have an explicit text color set, use it instead
             mTabTextColors = a.getColorStateList(R.styleable.XTabLayoutCbLibrary_x_tabTextColor);
+        }
+        if (a.hasValue(R.styleable.XTabLayoutCbLibrary_x_tabTextSize)) {
+            mTabTextSize = a.getDimensionPixelSize(R.styleable.XTabLayoutCbLibrary_x_tabTextSize, 14);
         }
 
         if (a.hasValue(R.styleable.XTabLayoutCbLibrary_x_tabSelectedTextColor)) {
@@ -1210,7 +1213,7 @@ public class XTabLayout extends HorizontalScrollView {
         }
 
         public TextView getView() {
-            return mView.mTextView ;
+            return mView.mTextView;
         }
 
 
@@ -1640,7 +1643,7 @@ public class XTabLayout extends HorizontalScrollView {
                 if (mTextView == null) {
                     TextView textView = (TextView) LayoutInflater.from(getContext())
                             .inflate(R.layout.design_layout_tab_text, this, false);
-                    textView.setPadding(dpToPx(6),0,dpToPx(6),0);
+                    textView.setPadding(dpToPx(6), 0, dpToPx(6), 0);
                     addView(textView);
                     mTextView = textView;
                     mDefaultMaxLines = TextViewCompat.getMaxLines(mTextView);
@@ -1783,8 +1786,8 @@ public class XTabLayout extends HorizontalScrollView {
 
             mSelectedPosition = position;
             mSelectionOffset = positionOffset;
-            if(mIsSupportIndicatorAnimation) {
-                if(mLastPosition > mSelectedPosition) {
+            if (mIsSupportIndicatorAnimation) {
+                if (mLastPosition > mSelectedPosition) {
                     updateIndicatorPosition2Left();
                 } else {
                     updateIndicatorPosition2Right();
@@ -1895,8 +1898,8 @@ public class XTabLayout extends HorizontalScrollView {
         private void updateIndicatorPosition2Left() {
             final View selectedTitle = getChildAt(mSelectedPosition);
             //TODO
-            if(mLastPosition == -1) mLastPosition = mSelectedPosition;
-            Log.d("gh","mLastPosition: " + mLastPosition);
+            if (mLastPosition == -1) mLastPosition = mSelectedPosition;
+            Log.d("gh", "mLastPosition: " + mLastPosition);
             final View lastSelectedTitle = getChildAt(mLastPosition);
             int left, right;
             if (selectedTitle != null && selectedTitle.getWidth() > 0) {
@@ -1908,7 +1911,7 @@ public class XTabLayout extends HorizontalScrollView {
                     View nextTitle = getChildAt(mSelectedPosition + 1);
                     left = (int) (mSelectionOffset * (nextTitle.getLeft() + (nextTitle.getWidth() - mSelectedIndicatorWidth) / 2)
                             + (1.0f - mSelectionOffset) * left);
-                    right = lastSelectedTitle.getLeft() + (lastSelectedTitle.getWidth() -mSelectedIndicatorWidth)/2 + mSelectedIndicatorWidth;
+                    right = lastSelectedTitle.getLeft() + (lastSelectedTitle.getWidth() - mSelectedIndicatorWidth) / 2 + mSelectedIndicatorWidth;
 
                 }
             } else {
@@ -1924,10 +1927,10 @@ public class XTabLayout extends HorizontalScrollView {
         private void updateIndicatorPosition2Right() {
             final View selectedTitle = getChildAt(mSelectedPosition);
             //avoid IndexOutOfRangeException
-            if(mLastPosition == -1) mLastPosition = mSelectedPosition;
-            Log.d("gh","mLastPosition: " + mLastPosition);
+            if (mLastPosition == -1) mLastPosition = mSelectedPosition;
+            Log.d("gh", "mLastPosition: " + mLastPosition);
             final View lastSelectedTitle = getChildAt(mLastPosition);
-            int left, right,tempRight;
+            int left, right, tempRight;
             if (selectedTitle != null && selectedTitle.getWidth() > 0) {
                 left = selectedTitle.getLeft() + (selectedTitle.getWidth() - mSelectedIndicatorWidth) / 2;
                 right = left + mSelectedIndicatorWidth;
@@ -1938,12 +1941,12 @@ public class XTabLayout extends HorizontalScrollView {
                     // Draw the selection partway between the tabs
                     View nextTitle = getChildAt(mSelectedPosition + 1);
 
-                    right =  (int) (mSelectionOffset * (nextTitle.getLeft() + (nextTitle.getWidth() - mSelectedIndicatorWidth) / 2 + mSelectedIndicatorWidth)
-                            + (1.0f - mSelectionOffset) * (left + (nextTitle.getWidth()-mSelectedIndicatorWidth)/2));
-                    left = lastSelectedTitle.getLeft() + (lastSelectedTitle.getWidth() -mSelectedIndicatorWidth)/2;
+                    right = (int) (mSelectionOffset * (nextTitle.getLeft() + (nextTitle.getWidth() - mSelectedIndicatorWidth) / 2 + mSelectedIndicatorWidth)
+                            + (1.0f - mSelectionOffset) * (left + (nextTitle.getWidth() - mSelectedIndicatorWidth) / 2));
+                    left = lastSelectedTitle.getLeft() + (lastSelectedTitle.getWidth() - mSelectedIndicatorWidth) / 2;
 
                     //临时方案，解决right偶尔比实际right小的问题
-                    if(right < tempRight) right = tempRight;
+                    if (right < tempRight) right = tempRight;
 
                 }
             } else {
@@ -1980,13 +1983,11 @@ public class XTabLayout extends HorizontalScrollView {
         }
 
 
-
-
         //indicator 更新的方法
         void setIndicatorPosition(int left, int right) {
             if (left != mIndicatorLeft || right != mIndicatorRight) {
                 // If the indicator's left/right has changed, invalidate
-                Log.d("gh","left : " + left + "right: " + right);
+                Log.d("gh", "left : " + left + "right: " + right);
                 mIndicatorLeft = left;
                 mIndicatorRight = right;
                 ViewCompat.postInvalidateOnAnimation(this);
@@ -2157,10 +2158,10 @@ public class XTabLayout extends HorizontalScrollView {
             mPreviousScrollState = mScrollState;
             mScrollState = state;
             XTabLayout tabLayout = mTabLayoutRef.get();
-            if(tabLayout == null) return;
+            if (tabLayout == null) return;
             ViewPager viewPager = tabLayout.mViewPager;
             SlidingTabStrip tabStrip = tabLayout.mTabStrip;
-            if(viewPager != null && tabStrip != null && state == SCROLL_STATE_SETTLING) {
+            if (viewPager != null && tabStrip != null && state == SCROLL_STATE_SETTLING) {
                 tabStrip.updateTabPosition(viewPager.getCurrentItem());
             }
 
@@ -2200,7 +2201,7 @@ public class XTabLayout extends HorizontalScrollView {
                 //fix 解决很慢的情况下滑动，Indicator从拉的很长的问题
                 ViewPager viewPager = tabLayout.mViewPager;
                 SlidingTabStrip tabStrip = tabLayout.mTabStrip;
-                if(viewPager != null && tabStrip != null) {
+                if (viewPager != null && tabStrip != null) {
                     tabStrip.updateTabPosition(viewPager.getCurrentItem());
                 }
 

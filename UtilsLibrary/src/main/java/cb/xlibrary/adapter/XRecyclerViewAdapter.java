@@ -5,7 +5,10 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -15,6 +18,8 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.cb.xlibrary.R;
 
 import java.util.List;
+
+import cb.xlibrary.adapter.progress.XAutoAnimImageView;
 
 
 public abstract class XRecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T, XViewHolder> {
@@ -37,6 +42,9 @@ public abstract class XRecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T,
     private View mLoadMoreFailedView;
     private View mNoMoreView;
     private int mLoadItemType = TYPE_NO_VIEW;//默认footer
+
+    private String mEmptyViewTxt = "暂无数据";
+    private int mEmptyViewImg = R.drawable.xloading_empty_view_cblibrary;
 
     private OnLoadMoreListener onLoadMoreListener;
     private LayoutInflater inflater;
@@ -131,7 +139,11 @@ public abstract class XRecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T,
 
     @Override
     public void onBindViewHolder(final XViewHolder holder, int position) {
-        if (holder.getItemViewType() == TYPE_EMPTY) return;
+        if (holder.getItemViewType() == TYPE_EMPTY) {
+            ((ImageView) holder.getView(R.id.iv_xadapter_empty_view)).setImageResource(mEmptyViewImg);
+            ((TextView) holder.getView(R.id.iv_xadapter_empty_txt)).setText(mEmptyViewTxt);
+            return;
+        }
         if (holder.getItemViewType() == TYPE_NETWORK_ERROR) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -154,16 +166,30 @@ public abstract class XRecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T,
             return;
         }
         if (holder.getItemViewType() == TYPE_LOAD_MORE) {
-            if (onLoadMoreListener != null && isCanLoadMore) {
-                if (!isLoadError) {
-                    holder.getConvertView().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            onLoadMoreListener.onLoadMore();
-                        }
-                    }, 2000);
+            final XAutoAnimImageView imageView = holder.getView(R.id.progress_view_cblibrary);
+            final TextView textView = holder.getView(R.id.load_txt_cblibrary);
+            textView.setText("点击加载更多");
+            imageView.setVisibility(View.GONE);
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onLoadMoreListener != null && isCanLoadMore) {
+                        textView.setText("努力加载中...");
+                        imageView.setVisibility(View.VISIBLE);
+                        onLoadMoreListener.onLoadMore();
+                    }
                 }
-            }
+            });
+//            if (onLoadMoreListener != null && isCanLoadMore) {
+//                if (!isLoadError) {
+//                    holder.getConvertView().postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            onLoadMoreListener.onLoadMore();
+//                        }
+//                    }, 2000);
+//                }
+//            }
             return;
         }
         if (isFooterPosition(position) || isHeaderPosition(position)) return;
@@ -204,7 +230,7 @@ public abstract class XRecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T,
     }
 
     public int getDataCount() {
-        return dataLists.size();
+        return dataLists == null ? 0 : dataLists.size();
     }
 
     public int getHeaderCount() {
@@ -369,6 +395,17 @@ public abstract class XRecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T,
      */
     public void setEnableEmpty(boolean b) {
         this.isEnableEmpty = b;
+    }
+
+    /**
+     * 设置空View图片和文字
+     *
+     * @param img
+     * @param txt
+     */
+    public void setEmptyStringAndImg(@DrawableRes int img, String txt) {
+        this.mEmptyViewImg = img;
+        this.mEmptyViewTxt = txt;
     }
 
     /**

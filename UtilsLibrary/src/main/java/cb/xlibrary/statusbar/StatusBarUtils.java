@@ -181,6 +181,20 @@ public class StatusBarUtils {
     }
 
 
+    /**
+     * 增加View的paddingTop,增加的值为状态栏高度 (智能判断，并设置高度)
+     */
+    public static void setPaddingSmart(Context context, View view) {
+        if (Build.VERSION.SDK_INT >= MIN_API) {
+            ViewGroup.LayoutParams lp = view.getLayoutParams();
+            if (lp != null && lp.height > 0) {
+                lp.height += getStatusBarHeight(context);//增高
+            }
+            view.setPadding(view.getPaddingLeft(), view.getPaddingTop() + getStatusBarHeight(context),
+                    view.getPaddingRight(), view.getPaddingBottom());
+        }
+    }
+
     /*******************************************状态栏黑色*****************************************************/
     private final static int STATUSBAR_TYPE_DEFAULT = 0;
     private final static int STATUSBAR_TYPE_MIUI = 1;

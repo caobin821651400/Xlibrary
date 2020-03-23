@@ -241,6 +241,7 @@
         <attr name="x_tabMaxWidth" format="dimension" />
         <attr name="x_tabTextAppearance" format="reference" />
         <attr name="x_tabTextColor" format="color" />
+        <attr name="x_tabTextSize" format="dimension" />
         <attr name="x_tabSelectedTextColor" format="color" />
         <attr name="x_tabPaddingStart" format="dimension" />
         <attr name="x_tabPaddingTop" format="dimension" />
@@ -248,5 +249,81 @@
         <attr name="x_tabPaddingBottom" format="dimension" />
         <attr name="x_tabPadding" format="dimension" />
         <attr name="x_indicatorMarginTop" format="dimension" />
+    </declare-styleable>
+
+    <!--角标上面图片下面文字的布局-->
+    <declare-styleable name="BadgeTxtImgLayout">
+        <attr name="badge_title_txt" format="string" />
+        <attr name="badge_count" format="integer" />
+        <attr name="badge_icon" format="reference" />
+        <attr name="badge_title_txt_color" format="color" />
+        <attr name="badge_title_txt_size" format="dimension" />
+        <attr name="badge_count_txt_color" format="color" />
+        <attr name="badge_count_txt_size" format="dimension" />
+        <attr name="badge_count_padding" format="dimension" />
+        <attr name="badge_count_bg" format="reference" />
+
+    </declare-styleable>
+
+    <!--侧滑删除-->
+    <declare-styleable name="SwipeMenuLayout">
+        <attr name="content_id" format="reference" />
+        <attr name="right_id" format="reference" />
+    </declare-styleable>
+
+    <!--前面带红色*号的TextView，标识必填-->
+    <declare-styleable name="AsteriskTextView">
+        <attr name="isMustInput" format="boolean" />
+        <attr name="txt" format="string" />
+    </declare-styleable>
+
+    <!--设置，个人中心左右显示文字布局-->
+    <declare-styleable name="XSettingView">
+        <attr name="item_title_txt" format="string" />
+        <attr name="item_title_txt_color" format="color" />
+        <attr name="item_title_txt_size" format="dimension" />
+
+        <attr name="item_end_show_arrow" format="boolean" />
+        <attr name="item_end_txt" format="string" />
+        <attr name="item_hint_txt" format="string" />
+        <attr name="item_end_txt_color" format="color" />
+        <attr name="item_end_txt_size" format="dimension" />
+        <attr name="item_end_txt_padding" format="dimension" />
+        <attr name="item_header_width" format="dimension" />
+        <attr name="item_end_txt_drawable_right" format="reference" />
+        <attr name="item_is_must_input" format="boolean" />
+        <attr name="item_is_show_hint" format="boolean" />
+        <attr name="item_end_txt_gravity">
+            <enum name="right" value="5" />
+            <enum name="left" value="3" />
+            <enum name="center" value="17" />
+        </attr>
+    </declare-styleable>
+
+    <!--设置，个人中心左右显示，可以输入-->
+    <declare-styleable name="XFormInputView">
+        <attr name="form_title_txt" format="string" />
+        <attr name="form_title_txt_color" format="color" />
+        <attr name="form_title_txt_size" format="dimension" />
+
+        <attr name="form_header_width" format="dimension" />
+        <attr name="form_end_txt" format="string" />
+        <attr name="form_hint_txt" format="string" />
+        <attr name="form_end_txt_color" format="color" />
+        <attr name="form_edit_hint_color" format="color" />
+        <attr name="form_end_txt_size" format="dimension" />
+        <attr name="form_is_must_input" format="boolean" />
+        <attr name="form_max_length" format="integer" />
+        <attr name="form_input_type">
+            <enum name="number" value="2" />
+            <enum name="normal" value="1" />
+            <enum name="textPassword" value="129" />
+            <enum name="numberDecimal" value="8194" />
+        </attr>
+        <attr name="form_end_txt_gravity">
+            <enum name="right" value="5" />
+            <enum name="left" value="3" />
+            <enum name="center" value="17" />
+        </attr>
     </declare-styleable>
 </resources>

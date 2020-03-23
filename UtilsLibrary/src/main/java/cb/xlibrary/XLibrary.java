@@ -8,7 +8,7 @@ public class XLibrary {
     private static Context context;
 
     // #log
-    public static String logTag = "TT";
+    public static String logTag = "KJXM";
     public static boolean isDebug = true;
 
 

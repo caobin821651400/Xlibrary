@@ -13,6 +13,10 @@ public abstract class XMarqueeViewAdapter<T> {
     protected List<T> mDatas;
     private OnDataChangedListener mOnDataChangedListener;
 
+    public XMarqueeViewAdapter() {
+
+    }
+
     public XMarqueeViewAdapter(List<T> datas) {
         this.mDatas = datas;
         if (datas == null || datas.isEmpty()) {

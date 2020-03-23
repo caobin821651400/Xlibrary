@@ -9,9 +9,11 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+
 import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.text.util.Linkify;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -37,6 +39,7 @@ public class XViewHolder extends RecyclerView.ViewHolder {
      */
     public XViewHolder(ViewGroup parent, @LayoutRes int resId) {
         super(LayoutInflater.from(parent.getContext()).inflate(resId, parent, false));
+//        View view = LayoutInflater.from(parent.getContext()).inflate(resId, parent, false);
     }
 
     /**
@@ -70,7 +73,7 @@ public class XViewHolder extends RecyclerView.ViewHolder {
      * @param cls    跳转的类
      * @param bundle 携带的数据
      */
-    public void launchActivity(Context context,Class<?> cls, Bundle bundle) {
+    public void launchActivity(Context context, Class<?> cls, Bundle bundle) {
         Intent intent = new Intent(context, cls);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         if (bundle != null) {

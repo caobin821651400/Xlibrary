@@ -5,8 +5,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -14,6 +12,9 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
 import com.cb.xlibrary.R;
 
@@ -35,19 +36,19 @@ public class XInputDialog extends Dialog {
     private TextView tvTitle;
     private InputDialogBtnClickListener inputDialogBtnClickListener;
 
-    private String title;
-    private String leftBtnTxt = "";
-    private String rightBtnTxt = "";
-    private Drawable editBg;
+    private String title = "";
+    private String leftBtnTxt = "取消";
+    private String rightBtnTxt = "确定";
+    private int editBg;
     private boolean isBgTrsnsparent = false;//背景半透明
     private int leftBtnTxtColor = Color.parseColor("#000000");
     private int rightBtnTxtColor = Color.parseColor("#FAC200");
-    private int inputType;
+    private int inputType = -100;
 
 
     private XInputDialog(@NonNull Context context) {
         super(context, R.style.Dialog_cblibrary);
-        editBg = ContextCompat.getDrawable(context, R.drawable.shape_input_et_bg_cblibrary);
+        editBg = R.drawable.shape_input_et_bg_cblibrary;
     }
 
     @Override
@@ -75,8 +76,9 @@ public class XInputDialog extends Dialog {
         btnSave.setTextColor(xInputDialog.rightBtnTxtColor);
         btnCancel.setText(xInputDialog.leftBtnTxt);
         btnCancel.setTextColor(xInputDialog.leftBtnTxtColor);
-        etContent.setBackgroundDrawable(editBg);
-        etContent.setInputType(xInputDialog.inputType);
+        etContent.setBackgroundResource(editBg);
+        if (xInputDialog.inputType != -100)
+            etContent.setInputType(xInputDialog.inputType);
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,7 +137,7 @@ public class XInputDialog extends Dialog {
          * @param editBg
          * @return
          */
-        public Builder strokeColor(Drawable editBg) {
+        public Builder strokeColor(int editBg) {
             xInputDialog.editBg = editBg;
             return this;
         }

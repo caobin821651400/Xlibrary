@@ -48,7 +48,6 @@
         <item name="x_tabBackground">?attr/selectableItemBackground</item>
         <item name="x_tabTextAppearance">@style/TextAppearance.Design.Tab</item>
         <item name="x_tabSelectedTextColor">?android:textColorPrimary</item>
-
         <item name="x_tabGravity">fill</item>
         <item name="x_tabMode">fixed</item>
 

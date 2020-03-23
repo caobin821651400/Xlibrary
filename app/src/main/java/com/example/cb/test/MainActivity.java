@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.cb.test.base.BaseActivity;
 import com.example.cb.test.dagger.DaggerTestActivity;
 import com.example.cb.test.kotlin.KotlinTestActivity;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 
@@ -30,6 +31,7 @@ public class MainActivity extends BaseActivity {
     private Button btnDownLoad;
     private static final String WEATHRE_API_URL = "http://php.weather.sina.com.cn/xml.php?city=%s&password=DJOYnieT8234jlsK&day=0";
     //
+    private TabLayout mTabLayout;
     private String apkUrl = "https://codeload.github.com/jeasonlzy/okhttp-OkGo/zip/master";
 
     @Override
@@ -41,9 +43,11 @@ public class MainActivity extends BaseActivity {
     protected void initUI() {
         XActivityStack.getInstance().addActivity(this);
         btnDownLoad = findViewById(R.id.btn_down_load);
+        mTabLayout = findViewById(R.id.tab_layout);
         RecyclerView recyclerView = new RecyclerView(this);
         recyclerView.setNestedScrollingEnabled(false);
 
+        mTabLayout.addTab(mTabLayout.newTab().setText("用车"));
 
         XPermission.requestPermissions(MainActivity.this, 102,
                 new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,

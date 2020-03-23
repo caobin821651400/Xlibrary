@@ -7,17 +7,20 @@
     android:padding="@dimen/XFrame_spacing_cblibrary">
 
     <cb.xlibrary.adapter.progress.XAutoAnimImageView
+        android:id="@+id/progress_view_cblibrary"
         android:layout_width="18dp"
         android:layout_height="18dp"
         android:scaleType="center"
+        android:visibility="gone"
         android:src="@android:drawable/stat_notify_sync" />
 
     <TextView
+        android:id="@+id/load_txt_cblibrary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/XFrame_spacing_cblibrary"
         android:paddingBottom="1dp"
-        android:text="努力加载中..."
+        android:text="点击加载更多"
         android:textColor="@color/XFrame_darker_gray_cblibrary"
         android:textSize="@dimen/XFrame_text_size_cblibrary" />
 

@@ -3,11 +3,12 @@ package cb.xlibrary.dialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import androidx.annotation.NonNull;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 
 import com.cb.xlibrary.R;
 
@@ -23,6 +24,7 @@ public class XDownLoadDialog extends Dialog {
     private View mRootView;
     private ProgressBar mProgressBar;
     private TextView tvProgress;
+    private TextView tvTitleTxt;
 
     public XDownLoadDialog(@NonNull Context context) {
         super(context, R.style.Dialog_cblibrary);
@@ -45,8 +47,9 @@ public class XDownLoadDialog extends Dialog {
      */
     private void initView(Context context) {
         mRootView = View.inflate(context, R.layout.dialog_down_load_layout_cblibrary, null);
-        mProgressBar = (ProgressBar) mRootView.findViewById(R.id.pb);
-        tvProgress = (TextView) mRootView.findViewById(R.id.tv_progress);
+        mProgressBar = mRootView.findViewById(R.id.pb);
+        tvTitleTxt = mRootView.findViewById(R.id.tv_dialog_txt_cblibrary);
+        tvProgress = mRootView.findViewById(R.id.tv_progress);
     }
 
     public ProgressBar getProgressBar() {
@@ -55,5 +58,13 @@ public class XDownLoadDialog extends Dialog {
 
     public TextView getProgressTextView() {
         return tvProgress;
+    }
+
+    public TextView getTitleTextView() {
+        return tvTitleTxt;
+    }
+
+    public void setTitle(String txt) {
+        tvTitleTxt.setText(txt);
     }
 }

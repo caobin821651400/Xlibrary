@@ -6,15 +6,19 @@
     android:orientation="vertical">
 
     <ImageView
+        android:id="@+id/iv_xadapter_empty_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/xloading_empty_view_cblibrary" />
 
     <TextView
+        android:id="@+id/iv_xadapter_empty_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:text="@string/xloading_empty_text_cblibrary"
+        android:lineSpacingExtra="3dp"
+        android:gravity="center"
         android:textColor="#8a8a8a"
         android:textSize="15sp" />
 </LinearLayout>

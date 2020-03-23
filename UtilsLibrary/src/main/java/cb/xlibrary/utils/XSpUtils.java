@@ -3,6 +3,8 @@ package cb.xlibrary.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import cb.xlibrary.XLibrary;
+
 /**
  * ====================================================
  *
@@ -15,7 +17,7 @@ public class XSpUtils {
     /**
      * 保存在手机里面的文件名
      */
-    private static final String FILE_NAME = "mofang_shared_preference_date";
+    private static final String FILE_NAME = "kjxh_shared_preference_date";
 
 
     /**
@@ -24,8 +26,8 @@ public class XSpUtils {
      * @param key   键
      * @param value 值
      */
-    public static void putString(Context context, String key, String value) {
-        SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+    public static void putString(String key, String value) {
+        SharedPreferences sp = XLibrary.getContext().getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.putString(key, value);
         editor.apply();
@@ -37,8 +39,8 @@ public class XSpUtils {
      * @param key 键
      * @return 存在返回对应值，不存在返回默认值{@code defaultValue}
      */
-    public static String getString(Context context, String key) {
-        SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+    public static String getString(String key) {
+        SharedPreferences sp = XLibrary.getContext().getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
         String value;
         value = sp.getString(key, "");
         return value;
@@ -50,8 +52,8 @@ public class XSpUtils {
      * @param key 键
      * @return 存在返回对应值，不存在返回默认值{@code defaultValue}
      */
-    public static String getString(Context context, String key, String defaultValue) {
-        SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+    public static String getString(String key, String defaultValue) {
+        SharedPreferences sp = XLibrary.getContext().getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
         String value;
         value = sp.getString(key, defaultValue);
         return value;
@@ -63,8 +65,8 @@ public class XSpUtils {
      * @param key   键
      * @param value 值
      */
-    public static void putInt(Context context, String key, int value) {
-        SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+    public static void putInt(String key, int value) {
+        SharedPreferences sp = XLibrary.getContext().getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.putInt(key, value);
         editor.apply();
@@ -76,8 +78,8 @@ public class XSpUtils {
      * @param key 键
      * @return 存在返回对应值，不存在返回默认值-1
      */
-    public static int getInt(Context context, String key) {
-        SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+    public static int getInt(String key) {
+        SharedPreferences sp = XLibrary.getContext().getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
         int value;
         value = sp.getInt(key, -1);
         return value;
@@ -89,8 +91,8 @@ public class XSpUtils {
      * @param key   键
      * @param value 值
      */
-    public static void putLong(Context context, String key, long value) {
-        SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+    public static void putLong(String key, long value) {
+        SharedPreferences sp = XLibrary.getContext().getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.putLong(key, value);
         editor.apply();
@@ -102,8 +104,8 @@ public class XSpUtils {
      * @param key 键
      * @return 存在返回对应值，不存在返回默认值-1
      */
-    public static long getLong(Context context, String key) {
-        SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+    public static long getLong(String key) {
+        SharedPreferences sp = XLibrary.getContext().getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
         long value;
         value = sp.getLong(key, -1L);
         return value;
@@ -115,8 +117,8 @@ public class XSpUtils {
      * @param key   键
      * @param value 值
      */
-    public static void putFloat(Context context, String key, float value) {
-        SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+    public static void putFloat(String key, float value) {
+        SharedPreferences sp = XLibrary.getContext().getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.putFloat(key, value);
         editor.apply();
@@ -128,8 +130,8 @@ public class XSpUtils {
      * @param key 键
      * @return 存在返回对应值，不存在返回默认值-1
      */
-    public static float getFloat(Context context, String key) {
-        SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+    public static float getFloat(String key) {
+        SharedPreferences sp = XLibrary.getContext().getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
         float value;
         value = sp.getFloat(key, -1F);
         return value;
@@ -141,8 +143,8 @@ public class XSpUtils {
      * @param key   键
      * @param value 值
      */
-    public static void putBoolean(Context context, String key, boolean value) {
-        SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+    public static void putBoolean(String key, boolean value) {
+        SharedPreferences sp = XLibrary.getContext().getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.putBoolean(key, value);
         editor.apply();
@@ -154,8 +156,8 @@ public class XSpUtils {
      * @param key 键
      * @return 存在返回对应值，不存在返回默认值{@code defaultValue}
      */
-    public static boolean getBoolean(Context context, String key) {
-        SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+    public static boolean getBoolean(String key) {
+        SharedPreferences sp = XLibrary.getContext().getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
         boolean value;
         value = sp.getBoolean(key, false);
         return value;
@@ -166,18 +168,16 @@ public class XSpUtils {
      *
      * @param key 键
      */
-    public static void remove(Context context, String key) {
-        SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+    public static void remove(String key) {
+        SharedPreferences sp = XLibrary.getContext().getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
         sp.edit().remove(key).apply();
     }
 
     /**
      * 清除所有数据
-     *
-     * @param context
      */
-    public static void clearAll(Context context) {
-        SharedPreferences sp = context.getSharedPreferences(FILE_NAME,
+    public static void clearAll() {
+        SharedPreferences sp = XLibrary.getContext().getSharedPreferences(FILE_NAME,
                 Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.clear().commit();

@@ -19,7 +19,7 @@ import com.cb.xlibrary.R;
  * author : caobin
  * e-mail : 821651400@qq.com
  * time   : 2017/12/15
- * desc   :输入框弹窗
+ * desc   : 提示弹窗
  */
 public class XTipDialog extends Dialog {
 
@@ -30,10 +30,11 @@ public class XTipDialog extends Dialog {
     private BtnClickListener btnClickListener;
     private BtnSureClickListener btnSureClickListener;
 
-    private String title;
+    private String title="温馨提示";
     private String leftBtnTxt = "取消";
     private String rightBtnTxt = "确定";
     private String message = "";
+    private int messageSize = 0;
     private boolean isBgTrsnsparent = false;//背景半透明
     private int leftBtnTxtColor = Color.parseColor("#666666");
     private int rightBtnTxtColor = Color.parseColor("#4077f6");
@@ -51,6 +52,7 @@ public class XTipDialog extends Dialog {
         btnRight = findViewById(R.id.btn_right);
         btnLeft = findViewById(R.id.btn_left);
         tvContent = findViewById(R.id.tv_content);
+        messageSize = 13;
     }
 
     @Override
@@ -69,6 +71,7 @@ public class XTipDialog extends Dialog {
         btnLeft.setText(xInputDialog.leftBtnTxt);
         btnLeft.setTextColor(xInputDialog.leftBtnTxtColor);
         tvContent.setText(xInputDialog.message);
+        tvContent.setTextSize(messageSize);
 
         btnRight.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -196,6 +199,16 @@ public class XTipDialog extends Dialog {
          */
         public Builder setMessage(String msg) {
             xInputDialog.message = msg;
+            return this;
+        }
+
+        /**
+         * 设置提示
+         *
+         * @param szie
+         */
+        public Builder setMessageTxtSize(int szie) {
+            xInputDialog.messageSize = szie;
             return this;
         }
 
