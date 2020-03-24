@@ -36,7 +36,6 @@ public class CarB {
      * 不管使用哪种方式注入，成员标量这里都要使用@Inject注解，告诉Dagger2这个标量需要提供依赖注入
      */
 
-
     @Named("provider1")
     @Inject
     EngineB mEngineB;
@@ -44,6 +43,16 @@ public class CarB {
     @Named("provider2")
     @Inject
     EngineB mEngineB2;
+
+    //*****************另一种实现******************//
+    @EngineB.QualifierA
+    @Inject
+    EngineB mEngineB3;
+
+    @EngineB.QualifierB
+    @Inject
+    EngineB mEngineB4;
+
 
     public CarB() {
         DaggerCarComponentB.builder()
@@ -59,10 +68,20 @@ public class CarB {
         return mEngineB2;
     }
 
+    private EngineB getEngine3() {
+        return mEngineB3;
+    }
+
+    private EngineB getEngine4() {
+        return mEngineB4;
+    }
+
     public static void main(String[] args) {
         CarB car = new CarB();
         car.getEngine().run();
         car.getEngine2().run();
+//        System.err.println("-----------另一种实现---------");
+        car.getEngine3().run();
+        car.getEngine4().run();
     }
-
 }

@@ -1,5 +1,10 @@
 package com.example.cb.test.dagger.b;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+import javax.inject.Qualifier;
+
 /**
  * ====================================================
  *
@@ -14,6 +19,18 @@ public class EngineB {
      * Dagger2通过@Inject注解在需要这个类的实例的时候，来找到这个类的构造方法并实例化出来
      * 以此来为被@Inject标记得变量提供依赖
      */
+
+    @Qualifier
+    @Retention(RetentionPolicy.RUNTIME)
+    public @interface QualifierA {
+    }
+
+    @Qualifier
+    @Retention(RetentionPolicy.RUNTIME)
+    public @interface QualifierB {
+    }
+
+
     public EngineB() {
     }
 

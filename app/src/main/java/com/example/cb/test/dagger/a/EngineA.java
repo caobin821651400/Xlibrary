@@ -14,7 +14,7 @@ public class EngineA {
 
     /**
      * Dagger2通过@Inject注解在需要这个类的实例的时候，来找到这个类的构造方法并实例化出来
-     * 以此来为被@Inject标记得变量提供依赖
+     * 以此来为被@Inject标记得变量提供依赖(这种方式构造方法不能有参数)
      */
     @Inject
     public EngineA() {

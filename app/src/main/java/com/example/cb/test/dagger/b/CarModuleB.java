@@ -35,4 +35,19 @@ public class CarModuleB {
     EngineB providerEngineB2() {
         return new EngineB();
     }
+
+
+    //*****************另一种实现******************//
+    @EngineB.QualifierA
+    @Provides
+    EngineB providerEngineB3() {
+        return new EngineB("我是参数-QualifierA");
+    }
+
+    @EngineB.QualifierB
+    @Provides
+    EngineB providerEngineB4() {
+        return new EngineB();
+    }
+
 }
