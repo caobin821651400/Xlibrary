@@ -53,6 +53,15 @@
         <activity android:name=".ui.scan.QRcodeEncoderActivity" />
         <activity android:name=".ui.scan.QRcodeDecoderActivity" />
         <activity android:name=".ui.scan.ScanCodeActivity" />
+        <activity android:name=".rx.rxjava.RxJavaMainActivity" />
+        <activity android:name=".rx.rxjava.RxBackPressureActivity" />
+        <activity android:name=".rx.rxjava.RxBaseOperatorActivity" />
+        <activity android:name=".rx.rxjava.RxBooleanActivity" />
+        <activity android:name=".rx.rxjava.RxChangeOperatorActivity" />
+        <activity android:name=".rx.rxjava.RxFilterActivity" />
+        <activity android:name=".rx.rxjava.RxFunctionActivity" />
+        <activity android:name=".rx.rxjava.RxMergeActivity" />
+        <activity android:name=".rx.rxjava.SimpleUseActivity" />
     </application>
 
 </manifest>

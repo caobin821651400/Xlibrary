@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.cb.test.R;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  * ====================================================
@@ -18,10 +19,18 @@ import javax.inject.Inject;
  */
 public class DaggerTestActivity extends AppCompatActivity {
 
+//    @Named("AAA")
     @Inject
     AObject aObject;
+
+//    @Named("bbb")
+//    @Inject
+//    AObject aaObject;
+
     @Inject
     BObject bObject;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,5 +50,7 @@ public class DaggerTestActivity extends AppCompatActivity {
                 .inject(this);
         aObject.eat();
         bObject.eat();
+
+//        aaObject.eat();
     }
 }

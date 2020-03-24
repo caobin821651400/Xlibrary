@@ -1,34 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.example.cb.test.MainActivity">
+    android:orientation="vertical">
 
     <Button
-        android:id="@+id/btn_down_load"
+        android:id="@+id/rxjava"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="开始下载" />
+        android:text="rxjava使用" />
 
     <Button
-        android:id="@+id/btn_list"
+        android:id="@+id/dagger2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="list" />
-
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_layout"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        app:tabIndicatorColor="#4273E1"
-        app:tabIndicatorHeight="2dp"
-        app:tabMode="fixed"
-        app:tabGravity="fill"
-        app:tabIndicatorFullWidth="true"
-        app:tabSelectedTextColor="#4273E1"
-        app:tabTextColor="#000000" />
-
+        android:text="dagger2使用" />
 </LinearLayout>

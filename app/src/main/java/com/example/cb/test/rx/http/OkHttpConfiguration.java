@@ -3,9 +3,6 @@ package com.example.cb.test.rx.http;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.example.cb.test.rx.body.ProgressListener;
-import com.example.cb.test.rx.body.ProgressRequestBody;
-
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
