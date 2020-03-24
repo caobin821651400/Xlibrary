@@ -234,6 +234,7 @@ public class SimpleUseActivity extends AppCompatActivity {
                     @Override
                     public void doOnSubscribe(Disposable d) {
                         mCutDownDisposable = d;
+
                     }
                 });
     }
