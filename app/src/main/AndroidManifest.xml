@@ -43,16 +43,12 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".rx.RxJavaTestActivity" />
-        <activity android:name="com.cb.filepicker.ui.FilePickerActivity" />
         <activity android:name=".dagger.DaggerTestActivity" />
         <activity android:name=".ui.db.DbTestActivity" />
         <activity android:name=".ui.aidl.AidlTestActivity" />
         <activity android:name=".ui.anim.AnimTestActivity" />
         <activity android:name=".mvp.MvpActivity" />
         <activity android:name=".ui.scan.QRcodeEncoderActivity" />
-        <activity android:name=".ui.scan.QRcodeDecoderActivity" />
-        <activity android:name=".ui.scan.ScanCodeActivity" />
         <activity android:name=".rx.rxjava.RxJavaMainActivity" />
         <activity android:name=".rx.rxjava.RxBackPressureActivity" />
         <activity android:name=".rx.rxjava.RxBaseOperatorActivity" />
