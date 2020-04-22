@@ -21,7 +21,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".mvvm.MvvmActivity"></activity>
+        <activity android:name=".jetpack.livedata.LiveDataActivity"></activity>
+        <activity android:name=".jetpack.lifecycles.LifeCyclesActivity" />
+        <activity android:name=".mvvm.MvvmActivity" />
         <activity android:name=".kotlin.KotlinTestActivity" />
         <activity android:name=".kotlin.KotlinSetActivity" />
         <activity android:name=".ui.view_pager.BannerActivity" />

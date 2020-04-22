@@ -4,15 +4,21 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/rxjava"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="rxjava使用" />
+<!--    <Button-->
+<!--        android:id="@+id/rxjava"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="rxjava使用" />-->
 
-    <Button
-        android:id="@+id/dagger2"
+<!--    <Button-->
+<!--        android:id="@+id/dagger2"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="dagger2使用" />-->
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="dagger2使用" />
+        android:layout_height="match_parent" />
 </LinearLayout>

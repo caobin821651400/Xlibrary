@@ -1,25 +1,24 @@
 package com.example.cb.test.mvvm
 
-import android.os.Bundle
-import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import com.example.cb.test.R
+import com.example.cb.test.databinding.ActivityMvvmBinding
+import com.example.cb.test.mvvm.viewmodule.MvvmBaseViewModule
 
 /**
+ * Mvvm练习
  * @author bin
  */
-class MvvmActivity : AppCompatActivity() {
+class MvvmActivity : MvvmBaseActivity<ActivityMvvmBinding, MvvmBaseViewModule>() {
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_mvvm)
+    override fun getLayoutId(): Int {
+        return R.layout.activity_mvvm
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun getBindingVariable(): Int {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    fun change(view: View) {
+    override fun getViewModule(): MvvmBaseViewModule {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
