@@ -41,4 +41,9 @@ public class LiveDataBus {
         }
         return (MutableLiveData<T>) liveDataMap.get(key);
     }
+
+    //new LiveData()->绑定observer->setValue()/postValue()  正常流程
+    //new LiveData()->setValue()/postValue()->绑定observer(界面显示)->setValue()/postValue()
+
+    //mLastVersion->ObserverWrapper observer->ObserverWrapper initiator-> private SafeIterableMap<Observer<? super T>, ObserverWrapper> mObservers
 }

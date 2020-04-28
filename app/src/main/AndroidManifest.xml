@@ -21,7 +21,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".jetpack.livedata.LiveDataActivity"></activity>
+        <activity android:name=".jetpack.livedata.LiveDataActivity2"></activity>
         <activity android:name=".jetpack.lifecycles.LifeCyclesActivity" />
         <activity android:name=".mvvm.MvvmActivity" />
         <activity android:name=".kotlin.KotlinTestActivity" />
@@ -60,6 +60,7 @@
         <activity android:name=".rx.rxjava.RxFunctionActivity" />
         <activity android:name=".rx.rxjava.RxMergeActivity" />
         <activity android:name=".rx.rxjava.SimpleUseActivity" />
+        <activity android:name=".jetpack.livedata.LiveDataActivity" />
     </application>
 
 </manifest>

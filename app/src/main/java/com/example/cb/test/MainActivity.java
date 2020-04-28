@@ -1,6 +1,5 @@
 package com.example.cb.test;
 
-import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,7 +10,6 @@ import com.example.cb.test.base.BaseActivity;
 import com.example.cb.test.bean.CommonMenuBean;
 import com.example.cb.test.jetpack.lifecycles.LifeCyclesActivity;
 import com.example.cb.test.jetpack.livedata.LiveDataActivity;
-import com.example.cb.test.jetpack.livedata.LiveDataBus;
 import com.example.cb.test.rx.rxjava.RxJavaMainActivity;
 
 import java.util.ArrayList;
@@ -59,7 +57,6 @@ public class MainActivity extends BaseActivity {
             CommonMenuBean bean = mList.get(position);
             if (bean.getaClass() != null) {
                 launchActivity(bean.getaClass(), null);
-                LiveDataBus.getInstance().with("caobin",String.class).setValue("哈哈哈哈");
             }
         });
 
