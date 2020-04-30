@@ -21,7 +21,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".jetpack.livedata.LiveDataActivity2"></activity>
+        <activity android:name=".jetpack.room.RoomActivity"></activity>
+        <activity android:name=".jetpack.viewmodule.ViewModuleActivity" />
+        <activity android:name=".jetpack.livedata.LiveDataActivity2" />
         <activity android:name=".jetpack.lifecycles.LifeCyclesActivity" />
         <activity android:name=".mvvm.MvvmActivity" />
         <activity android:name=".kotlin.KotlinTestActivity" />

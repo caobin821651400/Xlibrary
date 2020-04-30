@@ -11,6 +11,7 @@ android {
         targetSdkVersion target_sdk_version
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -18,9 +19,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-//    dataBinding {
-//        enabled false
-//    }
     dataBinding {
         enabled true
     }
@@ -37,8 +35,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    packagingOptions {
+        exclude 'META-INF/proguard/coroutines.pro'
+    }
 }
-
 repositories {
     flatDir {
         dirs 'libs'
@@ -86,4 +86,12 @@ dependencies {
 
     implementation 'com.kingja.loadsir:loadsir:1.3.8'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+
+
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    implementation "androidx.room:room-rxjava2:$room_version"
+    implementation "androidx.room:room-guava:$room_version"
+    testImplementation "androidx.room:room-testing:$room_version"
 }
