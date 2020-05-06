@@ -14,6 +14,12 @@
         android:text="查询" />
 
     <Button
+        android:id="@+id/btnInquireMore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="查询多个条件" />
+
+    <Button
         android:id="@+id/btnInsert"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

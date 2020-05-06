@@ -7,7 +7,6 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import java.util.List;
-
 @Dao
 public interface StudentDao {
 
@@ -26,4 +25,7 @@ public interface StudentDao {
 
     @Query("SELECT * FROM Student WHERE name LIKE :first")
     Student findByName(String first);
+
+    @Query("SELECT name,pwd FROM Student")
+    List<StudentMore> getTwo();
 }

@@ -40,6 +40,17 @@ class RoomActivity : AppCompatActivity() {
             }).start()
         }
 
+        //查询多条件必须新建一个实体类 子线程
+        btnInquireMore.setOnClickListener {
+
+            Thread(object : Runnable {
+                override fun run() {
+                    val list=studentDao.two
+                    studentDao?.let { XLogUtils.e(Gson().toJson(list)) }
+                }
+            }).start()
+        }
+
         //插入 子线程
         btnInsert.setOnClickListener {
             DbTest().start()
