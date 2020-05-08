@@ -30,6 +30,8 @@ public abstract class BaseFragment extends Fragment {
 
     private View mRootView;
     private XTipDialog mTipDialog;
+    // 是否调用了initUI方法
+    protected boolean isInitUi = false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,21 +49,19 @@ public abstract class BaseFragment extends Fragment {
         if (mViewGroup != null) {
             mViewGroup.removeView(mRootView);
         }
-        initUI(mRootView);
-        openInterface();
         return mRootView;
     }
+
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initEvent(view);
-    }
-
-    /**
-     * 为了方便其他类创建自己的抽象方法，而不会影响{@link BaseFragment}的抽象方法
-     */
-    protected void openInterface() {
+        if (!isInitUi) {
+            initUI(mRootView);
+            initEvent(mRootView);
+            isInitUi = true;
+        }
     }
 
     /**

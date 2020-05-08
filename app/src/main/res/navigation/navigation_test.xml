@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    app:startDestination="@id/page1Fragment"
+    android:layout_height="match_parent">
+
+
+    <fragment
+        android:id="@+id/page1Fragment"
+        android:name="com.example.cb.test.jetpack.navigation.NavigationFragment1"
+        android:label="page1Fragment"
+        tools:layout="@layout/fragment_navigation1">
+
+        <action
+            android:id="@+id/action_fragment1_to_fragment2"
+            app:destination="@id/page2Fragment" />
+        <action
+            android:id="@+id/action_fragment1_to_fragment3"
+            app:destination="@id/page3Fragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/page2Fragment"
+        android:name="com.example.cb.test.jetpack.navigation.NavigationFragment2"
+        android:label="page2Fragment"
+        tools:layout="@layout/fragment_navigation2">
+
+        <action
+            android:id="@+id/action_fragment2_to_fragment3"
+            app:destination="@id/page3Fragment" />
+
+        <action
+            android:id="@+id/action_fragment2_to_fragment1"
+            app:destination="@id/page1Fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/page3Fragment"
+        android:name="com.example.cb.test.jetpack.navigation.NavigationFragment3"
+        android:label="page3Fragment"
+        tools:layout="@layout/fragment_navigation3">
+
+        <action
+            android:id="@+id/action_fragment3_to_fragment2"
+            app:destination="@id/page2Fragment" />
+
+        <action
+            android:id="@+id/action_fragment3_to_fragment1"
+            app:destination="@id/page1Fragment" />
+
+    </fragment>
+</navigation>

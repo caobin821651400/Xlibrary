@@ -8,21 +8,21 @@ import androidx.room.PrimaryKey;
 public class Address {
 
     @PrimaryKey(autoGenerate =true)
-    private String id;
+    private int id;
 
     @ColumnInfo(name = "addressName")
     private String addressName;
 
-    public Address(String id, String addressName) {
+    public Address(int id, String addressName) {
         this.id = id;
         this.addressName = addressName;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

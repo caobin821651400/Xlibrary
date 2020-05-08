@@ -10,6 +10,7 @@ import com.example.cb.test.base.BaseActivity;
 import com.example.cb.test.bean.CommonMenuBean;
 import com.example.cb.test.jetpack.lifecycles.LifeCyclesActivity;
 import com.example.cb.test.jetpack.livedata.LiveDataActivity;
+import com.example.cb.test.jetpack.navigation.NavigationActivity;
 import com.example.cb.test.jetpack.room.RoomActivity;
 import com.example.cb.test.jetpack.viewmodule.ViewModuleActivity;
 import com.example.cb.test.rx.rxjava.RxJavaMainActivity;
@@ -51,6 +52,7 @@ public class MainActivity extends BaseActivity {
         mList.add(new CommonMenuBean("LiveData", LiveDataActivity.class));
         mList.add(new CommonMenuBean("ViewModule", ViewModuleActivity.class));
         mList.add(new CommonMenuBean("RoomActivity", RoomActivity.class));
+        mList.add(new CommonMenuBean("NavigationActivity", NavigationActivity.class));
 
         mAdapter.setDataLists(mList);
 
