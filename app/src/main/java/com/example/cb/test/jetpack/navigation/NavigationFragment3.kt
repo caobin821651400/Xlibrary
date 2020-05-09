@@ -24,8 +24,12 @@ class NavigationFragment3 : BaseFragment() {
         //跳转到fragment3
         btn2.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_fragment3_to_fragment2)
+
+            //一下三种都可以
+//            Fragment.findNavController()
+//            View.findNavController()
+//            Activity.findNavController(viewId: Int)
+//            findNavController().navigate(R.id.action_fragment3_to_fragment2)
         }
     }
-
-
 }

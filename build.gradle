@@ -36,5 +36,6 @@ ext {
     ext.material_version = "1.0.0"
     ext.room_version = "2.2.3"
     ext.nav_version = "2.3.0-alpha01"
+    ext.paging_version = "2.1.1"
 //    ext.nav_version = "1.0.0-alpha01"
 }

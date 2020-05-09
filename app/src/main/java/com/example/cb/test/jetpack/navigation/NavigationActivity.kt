@@ -24,9 +24,9 @@ class NavigationActivity : BaseActivity() {
     override fun initEvent() {
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        val fragment = supportFragmentManager.findFragmentById(R.id.my_nav_host_fragment)
-        return NavHostFragment.findNavController(fragment!!).navigateUp()
-    }
+//    override fun onSupportNavigateUp(): Boolean {
+//        val fragment = supportFragmentManager.findFragmentById(R.id.my_nav_host_fragment)
+//        return NavHostFragment.findNavController(fragment!!).navigateUp()
+//    }
 
 }
