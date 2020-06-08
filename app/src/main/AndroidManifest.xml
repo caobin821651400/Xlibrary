@@ -21,7 +21,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".jetpack.paging.PagingActivity"></activity>
+<!--        <activity android:name=".TestActivity"></activity>-->
+        <activity android:name=".jetpack.demo.MusicActivity" />
+        <activity android:name=".jetpack.workmanager.WorkManagerActivity" />
+        <activity android:name=".jetpack.paging.PagingActivity" />
         <activity android:name=".jetpack.navigation.NavigationActivity" />
         <activity android:name=".jetpack.room.RoomActivity" />
         <activity android:name=".jetpack.viewmodule.ViewModuleActivity" />

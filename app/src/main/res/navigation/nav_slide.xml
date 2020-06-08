@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 同学们这个就是，底部播放状态条 navigation -->
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_slide"
+    app:startDestination="@id/playerFragment">
+
+    <fragment
+        android:id="@+id/playerFragment"
+        android:name="com.example.cb.test.jetpack.demo.PlayerFragment"
+        android:label="fragment_player"
+        tools:layout="@layout/fragment_player" />
+
+</navigation>

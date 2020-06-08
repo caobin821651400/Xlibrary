@@ -95,4 +95,6 @@ dependencies {
     implementation "androidx.room:room-guava:$room_version"
     testImplementation "androidx.room:room-testing:$room_version"
     implementation "androidx.paging:paging-runtime:$paging_version"
+    implementation "androidx.work:work-runtime-ktx:$work_version"
+    implementation 'com.sothree.slidinguppanel:library:3.4.0'
 }

@@ -20,6 +20,10 @@ class AidlTestActivity : BaseActivity() {
 
 
     override fun initEvent() {
+        btnGet.setOnClickListener {
+            var student: Student = mIMyService!!.student[0]
+            Log.e("btnGet-> ", student.name)
+        }
     }
 
     private var mIMyService: IMyService? = null
@@ -58,5 +62,6 @@ class AidlTestActivity : BaseActivity() {
     override fun onDestroy() {
         super.onDestroy()
         unbindService(mServiceConnection)
+        stopService(Intent(this, IStudentService::class.java))
     }
 }

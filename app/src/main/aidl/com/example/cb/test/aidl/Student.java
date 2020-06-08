@@ -7,25 +7,6 @@ public class Student implements Parcelable {
 
     public String name;
 
-    protected Student(Parcel in) {
-        name = in.readString();
-    }
-
-    public Student() {
-    }
-
-    public static final Creator<Student> CREATOR = new Creator<Student>() {
-        @Override
-        public Student createFromParcel(Parcel in) {
-            return new Student(in);
-        }
-
-        @Override
-        public Student[] newArray(int size) {
-            return new Student[size];
-        }
-    };
-
     @Override
     public int describeContents() {
         return 0;
@@ -33,6 +14,25 @@ public class Student implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
+        dest.writeString(this.name);
     }
+
+    public Student() {
+    }
+
+    protected Student(Parcel in) {
+        this.name = in.readString();
+    }
+
+    public static final Parcelable.Creator<Student> CREATOR = new Parcelable.Creator<Student>() {
+        @Override
+        public Student createFromParcel(Parcel source) {
+            return new Student(source);
+        }
+
+        @Override
+        public Student[] newArray(int size) {
+            return new Student[size];
+        }
+    };
 }
