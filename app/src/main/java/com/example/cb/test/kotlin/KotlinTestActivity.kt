@@ -1,12 +1,15 @@
 package com.example.cb.test.kotlin
 
+import android.graphics.Color
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import cb.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.bean.PersonBean
 import com.example.cb.test.kotlin.lambda.LambdaListener
 import com.example.cb.test.kotlin.lambda.LambdaListener2
+import kotlinx.android.synthetic.main.activity_kotlin_test.*
 
 class KotlinTestActivity : AppCompatActivity() {
 
@@ -80,5 +83,17 @@ class KotlinTestActivity : AppCompatActivity() {
             500//返回值放到最后
         }
         lambda4.onClick3()
+
+
+        //9.扩展函数
+        tv.txt1("22")
+    }
+
+    /****
+     * 扩展函数
+     */
+    fun TextView.txt1(txt: String) {
+        text = txt
+        setTextColor(Color.parseColor("#000"))
     }
 }
