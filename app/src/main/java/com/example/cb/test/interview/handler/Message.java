@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 public class Message {
 
     Handler target;
-
     Object object;
 
     public Message(Object o) {
