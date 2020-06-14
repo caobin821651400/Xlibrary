@@ -3,7 +3,10 @@ package cb.xlibrary.utils;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.text.TextUtils;
 import android.util.Log;
+
+import androidx.appcompat.app.AlertDialog;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -29,7 +32,26 @@ public class XNoHookUtils {
      * @return
      */
     public static boolean isHook(Context context) {
+        return isHook(context, null);
+    }
+
+
+    /**
+     * 判断手机是否被HOOK
+     *
+     * @param context
+     * @param msg
+     * @return
+     */
+    public static boolean isHook(Context context, String msg) {
         if (findHookAppName(context) || findHookAppFile() || findHookStack()) {
+
+            if (!TextUtils.isEmpty(msg)) {
+                new AlertDialog.Builder(context)
+                        .setTitle("温馨提示")
+                        .setMessage(msg);
+            }
+
             return true;
         }
         return false;

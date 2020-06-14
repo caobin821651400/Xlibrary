@@ -18,7 +18,7 @@ public class Looper {
         mQueue = new MessageQueue();
     }
 
-    public static void perpare() {
+    public static void prepare() {
         if (sThreadLocal.get() != null) {
             throw new RuntimeException("Only one Looper may be created per thread");
         }
@@ -40,7 +40,7 @@ public class Looper {
     public static void loop() {
         final Looper me = myLooper();
         final MessageQueue queue = me.mQueue;
-        for (;;) {
+        for (; ; ) {
             Message msg = queue.next();
             if (msg != null) {
                 msg.target.dispatchMessage(msg);

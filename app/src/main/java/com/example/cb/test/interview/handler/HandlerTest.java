@@ -6,7 +6,7 @@ public class HandlerTest {
 
 
     public static void main(String[] args) {
-        Looper.perpare();
+        Looper.prepare();
         Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
