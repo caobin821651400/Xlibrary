@@ -33,6 +33,7 @@ public class Looper {
         return sThreadLocal.get();
     }
 
+
     /****
      *可以理解为调度器，让MessageQueue run起来
      */
