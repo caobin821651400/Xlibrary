@@ -1,7 +1,7 @@
 package com.example.cb.test.jetpack.livedata
 
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import cb.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
@@ -25,18 +25,13 @@ class LiveDataActivity2 : BaseActivity() {
     }
 
     override fun initUI() {
-        liveDataModule = ViewModelProviders.of(this).get(NameViewModule::class.java)
-
-        //需要一个观察者来观察变换
-        val observer = object : Observer<String> {
+        liveDataModule = ViewModelProvider(this).get(NameViewModule::class.java)
+        //订阅
+        liveDataModule!!.currentName!!.observe(this, object : Observer<String> {
             override fun onChanged(t: String) {
                 text.text = t
             }
-        }
-
-        //订阅
-        liveDataModule!!.currentName!!.observe(this, observer)
-
+        })
 
         //第1种传值方法,绑定后每次进来都会执行一次
         LiveDataBus.getInstance().with("caobin", String::class.java).observe(this, Observer {
@@ -51,6 +46,8 @@ class LiveDataActivity2 : BaseActivity() {
             text.text = "第2种 " + it
             toast("第2种 " + it)
         })
+
+
     }
 
     override fun initEvent() {
@@ -58,5 +55,10 @@ class LiveDataActivity2 : BaseActivity() {
             var ss = "点击 + ${i++}"
             liveDataModule!!.currentName!!.value = ss
         }
+    }
+
+    override fun onBackPressed() {
+        LiveDataBus.getInstance().with("caobin_back", String::class.java).value = "我回来了"
+        super.onBackPressed()
     }
 }

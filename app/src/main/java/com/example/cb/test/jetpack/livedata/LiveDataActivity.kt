@@ -1,5 +1,7 @@
 package com.example.cb.test.jetpack.livedata
 
+import androidx.lifecycle.Observer
+import cb.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_live_data.*
@@ -19,7 +21,11 @@ class LiveDataActivity : BaseActivity() {
     }
 
     override fun initUI() {
-
+        LiveDataBus.getInstance().with("caobin_back", String::class.java).observe(this,
+                Observer<String> {
+                    //
+                    XLogUtils.e("接收回传-->$it");
+                })
     }
 
     override fun initEvent() {
