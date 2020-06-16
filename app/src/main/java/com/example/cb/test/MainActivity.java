@@ -41,9 +41,6 @@ import cb.xlibrary.utils.XLogUtils;
  * @time 2019年7月19日17:04:09
  */
 public class MainActivity extends BaseActivity {
-    int i = 1;
-
-    Class[] mClass = {RxJavaMainActivity.class};
     private List<CommonMenuBean> mList = new ArrayList<>();
     RecyclerView mRecyclerView;
     MAdapter mAdapter;
@@ -74,10 +71,11 @@ public class MainActivity extends BaseActivity {
 
         mAdapter.setOnItemClickListener((v, position) -> {
 //            if (position == 0) {
+//                test22();
 //                hookIActivityManager();
-////                test();
-////                Intent intent = new Intent(this, com.zero.activityhookdemo.MainActivity.class);
-////                startActivity(intent);
+//                test();
+//                Intent intent = new Intent(this, com.zero.activityhookdemo.MainActivity.class);
+//                startActivity(intent);
 //                return;
 //            }
             CommonMenuBean bean = mList.get(position);
@@ -103,6 +101,7 @@ public class MainActivity extends BaseActivity {
 //        });
     }
 
+
     @Override
     protected void initEvent() {
     }
@@ -125,6 +124,29 @@ public class MainActivity extends BaseActivity {
         protected void bindData(XViewHolder holder, CommonMenuBean data, int position) {
             TextView textView = (TextView) holder.itemView;
             textView.setText(data.getName());
+        }
+    }
+
+    private void test22() {
+        MoreFunSDK moreFunSDK = new MoreFunSDK();
+        try {
+            Class<?> mfSdk = Class.forName("com.example.cb.test.MoreFunSDK");
+            Field mGroupFlagsField = mfSdk.getDeclaredField("mGroupFlags");
+            mGroupFlagsField.setAccessible(true);
+
+            //如果hook的对象是静态的可以不传，不是静态的就要传图该类的对象
+            int i = (int) mGroupFlagsField.get(null);
+//            int i = (int) mGroupFlagsField.get(moreFunSDK);
+
+            XLogUtils.e("获取到的值->>" + i);
+
+            mGroupFlagsField.set(null, 100);
+//            mGroupFlagsField.set(moreFunSDK, 100);
+
+            moreFunSDK.prlin();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -184,7 +206,7 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    public  void hookIActivityManager() {
+    public void hookIActivityManager() {
         //TODO:
 //        1. 找到了Hook的点
 //        2. hook点 动态代理 静态？
@@ -281,9 +303,11 @@ public class MainActivity extends BaseActivity {
             e.printStackTrace();
         }
     }
+
     private static final String TAG = "Zero";
 
     public static final String EXTRA_TARGET_INTENT = "extra_target_intent";
+
     public static void hookHandler() {
         //TODO:
         try {
@@ -332,7 +356,7 @@ public class MainActivity extends BaseActivity {
                             try {
                                 Field mActivityCallbacksField = obj.getClass().getDeclaredField("mActivityCallbacks");
                                 mActivityCallbacksField.setAccessible(true);
-                                List mActivityCallbacks = (List)mActivityCallbacksField.get(obj);
+                                List mActivityCallbacks = (List) mActivityCallbacksField.get(obj);
                                 Log.i(TAG, "handleMessage: mActivityCallbacks= " + mActivityCallbacks);
                                 //注意了 这里如果有同学debug调试会发现第一次size=0 原因如下
                                 //在Android O之前
@@ -366,12 +390,12 @@ public class MainActivity extends BaseActivity {
 //                                handleMessage: obj=android.app.servertransaction.ClientTransaction@9e98c6b
 //                                handleMessage: mActivityCallbacks= [LaunchActivityItem{intent=Intent { cmp=com.zero.activityhookdemo/.StubActivity (has extras) },ident=168243404,info=ActivityInfo{5b8d769 com.zero.activityhookdemo.StubActivity},curConfig={1.0 310mcc260mnc [en_US] ldltr sw411dp w411dp h659dp 420dpi nrml port finger qwerty/v/v -nav/h winConfig={ mBounds=Rect(0, 0 - 0, 0) mAppBounds=Rect(0, 0 - 1080, 1794) mWindowingMode=fullscreen mActivityType=undefined} s.6},overrideConfig={1.0 310mcc260mnc [en_US] ldltr sw411dp w411dp h659dp 420dpi nrml port finger qwerty/v/v -nav/h winConfig={ mBounds=Rect(0, 0 - 1080, 1794) mAppBounds=Rect(0, 0 - 1080, 1794) mWindowingMode=fullscreen mActivityType=standard} s.6},referrer=com.zero.activityhookdemo,procState=2,state=null,persistentState=null,pendingResults=null,pendingNewIntents=null,profilerInfo=null}]
 //                                handleMessage: size= 1
-                                if(mActivityCallbacks.size()>0){
+                                if (mActivityCallbacks.size() > 0) {
                                     Log.i(TAG, "handleMessage: size= " + mActivityCallbacks.size());
                                     String className = "android.app.servertransaction.LaunchActivityItem";
-                                    if(mActivityCallbacks.get(0).getClass().getCanonicalName().equals(className)){
+                                    if (mActivityCallbacks.get(0).getClass().getCanonicalName().equals(className)) {
                                         Object object = mActivityCallbacks.get(0);
-                                        Field intentField =object.getClass().getDeclaredField("mIntent");
+                                        Field intentField = object.getClass().getDeclaredField("mIntent");
                                         intentField.setAccessible(true);
                                         Intent intent = (Intent) intentField.get(object);
                                         Intent targetIntent = intent.getParcelableExtra(EXTRA_TARGET_INTENT);
