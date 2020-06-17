@@ -33,12 +33,17 @@ public class HookObject {
 
 
     private String hookMethod4(String s) {
-        XLogUtils.d("有参有返回值private方法调用了;  参数：(String类型)：" + s);
+        XLogUtils.d("有参有返回值private方法调用了;  参数(String类型)：" + s);
         return s + "~~";
     }
 
     private String hookMethod5() {
         XLogUtils.d("无参有返回值private方法调用了");
         return "我是返回值";
+    }
+
+    private String hookMethod5(int i, double d) {
+        XLogUtils.d("两个参数的方法执行了;  参数1：" + i + "   参数2：" + d);
+        return "相加结果：" + (i + d);
     }
 }

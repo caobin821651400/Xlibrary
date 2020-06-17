@@ -111,6 +111,13 @@ class HookDemoActivity : BaseActivity() {
             XLogUtils.e("-----------------------------分割线-----------------------------")
 
 
+            //第六种(有两个参数有返回值)
+            //这里注意 第五种和第六种 属于方法的重载
+            val method6 = hookClass.getDeclaredMethod("hookMethod5", Int::class.java, Double::class.java)
+            method6.isAccessible = true
+            val obj6 = method6.invoke(hookObject, 99, 1.toDouble())
+            XLogUtils.d("第六种结果-->$obj6")
+            XLogUtils.e("-----------------------------分割线-----------------------------")
         } catch (e: Exception) {
             e.printStackTrace()
         }
