@@ -127,6 +127,9 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    /**
+     * 简单的反射
+     */
     private void test22() {
         MoreFunSDK moreFunSDK = new MoreFunSDK();
         try {
