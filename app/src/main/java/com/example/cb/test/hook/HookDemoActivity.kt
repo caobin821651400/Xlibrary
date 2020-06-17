@@ -17,9 +17,11 @@ import kotlinx.android.synthetic.main.activity_hook.*
  */
 class HookDemoActivity : BaseActivity() {
 
+
     override fun getLayoutId(): Int {
         return R.layout.activity_hook
     }
+
 
     override fun initUI() {}
 
