@@ -21,19 +21,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-<!--        <activity android:name=".TestActivity"></activity>-->
-        <activity android:name=".jetpack.demo.MusicActivity" />
-        <activity android:name=".jetpack.workmanager.WorkManagerActivity" />
-        <activity android:name=".jetpack.paging.PagingActivity" />
-        <activity android:name=".jetpack.navigation.NavigationActivity" />
-        <activity android:name=".jetpack.room.RoomActivity" />
-        <activity android:name=".jetpack.viewmodule.ViewModuleActivity" />
-        <activity android:name=".jetpack.livedata.LiveDataActivity2" />
-        <activity android:name=".jetpack.lifecycles.LifeCyclesActivity" />
-        <activity android:name=".mvvm.MvvmActivity" />
-        <activity android:name=".kotlin.KotlinTestActivity" />
-        <activity android:name=".kotlin.KotlinSetActivity" />
-        <activity android:name=".ui.view_pager.BannerActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -68,6 +55,20 @@
         <activity android:name=".rx.rxjava.RxMergeActivity" />
         <activity android:name=".rx.rxjava.SimpleUseActivity" />
         <activity android:name=".jetpack.livedata.LiveDataActivity" />
+        <!--        <activity android:name=".TestActivity"></activity>-->
+        <activity android:name=".jetpack.demo.MusicActivity" />
+        <activity android:name=".jetpack.workmanager.WorkManagerActivity" />
+        <activity android:name=".jetpack.paging.PagingActivity" />
+        <activity android:name=".jetpack.navigation.NavigationActivity" />
+        <activity android:name=".jetpack.room.RoomActivity" />
+        <activity android:name=".jetpack.viewmodule.ViewModuleActivity" />
+        <activity android:name=".jetpack.livedata.LiveDataActivity2" />
+        <activity android:name=".jetpack.lifecycles.LifeCyclesActivity" />
+        <activity android:name=".mvvm.MvvmActivity" />
+        <activity android:name=".kotlin.KotlinTestActivity" />
+        <activity android:name=".kotlin.KotlinSetActivity" />
+        <activity android:name=".ui.view_pager.BannerActivity" />
+        <activity android:name=".hook.HookDemoActivity" />
     </application>
 
 </manifest>

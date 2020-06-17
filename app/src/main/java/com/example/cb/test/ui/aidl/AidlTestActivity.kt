@@ -61,7 +61,11 @@ class AidlTestActivity : BaseActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        unbindService(mServiceConnection)
-        stopService(Intent(this, IStudentService::class.java))
+        try {
+            mServiceConnection?.let { unbindService(mServiceConnection) }
+            stopService(Intent(this, IStudentService::class.java))
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 }
