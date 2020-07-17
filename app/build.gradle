@@ -68,7 +68,7 @@ dependencies {
     implementation 'com.trello.rxlifecycle3:rxlifecycle-components:3.0.0'
     // 支持Gson解析
     implementation 'com.google.code.gson:gson:2.8.1'
-    implementation(name: 'qr_library1.1', ext: 'aar')
+//    implementation(name: 'qr_library1.1', ext: 'aar')
     /*================*/
     implementation 'com.tencent.bugly:crashreport:2.6.6'
     implementation project(':ImagePicker')
@@ -97,4 +97,5 @@ dependencies {
     implementation "androidx.paging:paging-runtime:$paging_version"
     implementation "androidx.work:work-runtime-ktx:$work_version"
     implementation 'com.sothree.slidinguppanel:library:3.4.0'
+//    implementation project(path: ':QrLibrary')
 }

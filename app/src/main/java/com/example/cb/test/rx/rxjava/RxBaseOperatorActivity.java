@@ -18,6 +18,7 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 
 /**
@@ -93,6 +94,7 @@ public class RxBaseOperatorActivity extends AppCompatActivity {
                 return Observable.just(mI);
             }
         });
+
         mI = 15;//第二次赋值
         deferObservable.subscribe(new Consumer<Integer>() {
             @Override
@@ -108,7 +110,7 @@ public class RxBaseOperatorActivity extends AppCompatActivity {
                 .subscribe(new Consumer<Long>() {
                     @Override
                     public void accept(Long aLong) throws Exception {
-                        XLogUtils.v("timer-> " + aLong);
+                        XLogUtils.v("timer-> " + aLong+"     当前线程+"+Thread.currentThread().getName());
                     }
                 });
         //$$$$$$$$$$$$$$注意

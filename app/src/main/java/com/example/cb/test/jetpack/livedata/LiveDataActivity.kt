@@ -5,6 +5,7 @@ import cb.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_live_data.*
+import org.json.JSONObject
 
 /**
  * ====================================================
@@ -21,7 +22,7 @@ class LiveDataActivity : BaseActivity() {
     }
 
     override fun initUI() {
-        LiveDataBus.getInstance().with("caobin_back", String::class.java).observe(this,
+        LiveDataBus2.getInstance().with("caobin_back", String::class.java).observe(this,
                 Observer<String> {
                     //
                     XLogUtils.e("接收回传-->$it");
@@ -31,7 +32,7 @@ class LiveDataActivity : BaseActivity() {
     override fun initEvent() {
         btn.setOnClickListener {
             launchActivity(LiveDataActivity2::class.java, null)
-            LiveDataBus.getInstance().with("caobin", String::class.java).setValue("哈哈哈哈")
+            LiveDataBus2.getInstance().with("caobin", String::class.java).setValue("哈哈哈哈")
         }
 
         btn2.setOnClickListener {
@@ -46,6 +47,17 @@ class LiveDataActivity : BaseActivity() {
                     }
                 }
             }).start()
+        }
+
+        btn3.setOnClickListener {
+            launchActivity(LiveDataActivity2::class.java, null)
+
+//            btn3.postDelayed({
+
+                val jsonObject = JSONObject()
+                jsonObject.put("name", "1111")
+                LiveDataBusEvent.getFromData().postValue(jsonObject)
+//            },2000)
         }
     }
 }

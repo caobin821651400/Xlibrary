@@ -34,7 +34,7 @@ class LiveDataActivity2 : BaseActivity() {
         })
 
         //第1种传值方法,绑定后每次进来都会执行一次
-        LiveDataBus.getInstance().with("caobin", String::class.java).observe(this, Observer {
+        LiveDataBus2.getInstance().with("caobin", String::class.java).observe(this, Observer {
             XLogUtils.d("liveDta-->" + "第1种 " + it)
             text.text = "第1种 " + it
             toast("第1种 " + it)
@@ -48,6 +48,12 @@ class LiveDataActivity2 : BaseActivity() {
         })
 
 
+        //第三种
+        LiveDataBusEvent.getFromData().observeEvent(this){
+            text.text = "第3种 " + it
+            toast("第3种 " + it)
+        }
+
     }
 
     override fun initEvent() {
@@ -58,7 +64,7 @@ class LiveDataActivity2 : BaseActivity() {
     }
 
     override fun onBackPressed() {
-        LiveDataBus.getInstance().with("caobin_back", String::class.java).value = "我回来了"
+        LiveDataBus2.getInstance().with("caobin_back", String::class.java).value = "我回来了"
         super.onBackPressed()
     }
 }

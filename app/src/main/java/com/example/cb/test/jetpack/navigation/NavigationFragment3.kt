@@ -1,12 +1,20 @@
 package com.example.cb.test.jetpack.navigation
 
+import android.os.Bundle
 import android.view.View
 import androidx.navigation.Navigation
+import cb.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_navigation1.*
 
 class NavigationFragment3 : BaseFragment() {
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        XLogUtils.d("NavigationFragment3 onCreate")
+    }
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_navigation3

@@ -100,7 +100,7 @@ public class ScanBoxView extends View {
         mScanLineColor3 = resources.getColor(R.color.czxing_scan_3);
 
         mBoxSize = BarCodeUtil.dp2px(context, 200);
-        mTopOffset = -BarCodeUtil.dp2px(context, 10);
+        mTopOffset = -BarCodeUtil.dp2px(context, 60);
         mBoxSizeOffset = BarCodeUtil.dp2px(context, 40);
 
         mBorderColor = resources.getColor(R.color.czxing_line_border);
@@ -144,7 +144,7 @@ public class ScanBoxView extends View {
         drawScanLine(canvas);
 
         // 画提示文本
-        drawTipText(canvas);
+//        drawTipText(canvas);
 
         // 移动扫描线的位置
         moveScanLine();

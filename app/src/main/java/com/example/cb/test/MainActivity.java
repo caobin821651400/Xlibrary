@@ -1,5 +1,6 @@
 package com.example.cb.test;
 
+import android.os.Build;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,12 +18,14 @@ import com.example.cb.test.jetpack.viewmodule.ViewModuleActivity;
 import com.example.cb.test.jetpack.workmanager.WorkManagerActivity;
 import com.example.cb.test.rx.rxjava.RxJavaMainActivity;
 import com.example.cb.test.ui.aidl.AidlTestActivity;
+import com.example.cb.test.ui.scan.QRcodeEncoderActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import cb.xlibrary.adapter.XRecyclerViewAdapter;
 import cb.xlibrary.adapter.XViewHolder;
+//import me.devilsen.czxing.ScanBaseActivity;
 
 /**
  * @author bin
@@ -56,6 +59,8 @@ public class MainActivity extends BaseActivity {
         mList.add(new CommonMenuBean("NavigationActivity", NavigationActivity.class));
         mList.add(new CommonMenuBean("WorkManagerActivity", WorkManagerActivity.class));
         mList.add(new CommonMenuBean("HookDemoActivity", HookDemoActivity.class));
+//        mList.add(new CommonMenuBean("扫一扫", ScanBaseActivity.class));
+        mList.add(new CommonMenuBean("生成二维码", QRcodeEncoderActivity.class));
 
         mAdapter.setDataLists(mList);
 
@@ -80,7 +85,6 @@ public class MainActivity extends BaseActivity {
 //            launchActivity(AnimTestActivity.class, null);
 //            launchActivity(AidlTestActivity.class, null);
 //            launchActivity(BannerActivity.class,null);
-//            launchActivity(QRcodeDecoderActivity.class,null);
 //            showChoseHeadDialog();
 //            launchActivity(MvpActivity.class, null);
 //            launchActivity(QRcodeEncoderActivity.class, null);

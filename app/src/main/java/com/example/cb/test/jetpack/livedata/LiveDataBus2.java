@@ -13,18 +13,18 @@ import java.util.Map;
  * @Desc :事件总线
  * ====================================================
  */
-public class LiveDataBus {
+public class LiveDataBus2 {
 
     private Map<String, MutableLiveData<Object>> liveDataMap;
 
-    private LiveDataBus() {
+    private LiveDataBus2() {
         liveDataMap = new HashMap<>();
     }
 
-    private static LiveDataBus liveDataBus = new LiveDataBus();
+    private static LiveDataBus2 liveDataBus2 = new LiveDataBus2();
 
-    public static LiveDataBus getInstance() {
-        return liveDataBus;
+    public static LiveDataBus2 getInstance() {
+        return liveDataBus2;
     }
 
 
