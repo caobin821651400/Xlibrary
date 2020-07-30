@@ -11,6 +11,8 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_LOGS" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
     <application
         android:name=".MyApplication"
@@ -38,6 +40,7 @@
                 <action android:name="cn.scu.finch" />
             </intent-filter>
         </service>
+        <service android:name=".service.MyService" />
 
         <activity android:name=".dagger.DaggerTestActivity" />
         <activity android:name=".ui.db.DbTestActivity" />
@@ -69,6 +72,7 @@
         <activity android:name=".kotlin.KotlinSetActivity" />
         <activity android:name=".ui.view_pager.BannerActivity" />
         <activity android:name=".hook.HookDemoActivity" />
+        <activity android:name=".CommentWebViewActivity" />
     </application>
 
 </manifest>
