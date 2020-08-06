@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 import android.widget.TextView;
@@ -22,10 +24,15 @@ import com.example.cb.test.jetpack.navigation.NavigationActivity;
 import com.example.cb.test.jetpack.room.RoomActivity;
 import com.example.cb.test.jetpack.viewmodule.ViewModuleActivity;
 import com.example.cb.test.jetpack.workmanager.WorkManagerActivity;
+import com.example.cb.test.kotlin.KotlinSetActivity;
+import com.example.cb.test.kotlin.KotlinTestActivity;
+import com.example.cb.test.mvp.MvpActivity;
 import com.example.cb.test.rx.rxjava.RxJavaMainActivity;
 import com.example.cb.test.service.MyService;
 import com.example.cb.test.ui.aidl.AidlTestActivity;
+import com.example.cb.test.ui.anim.AnimTestActivity;
 import com.example.cb.test.ui.scan.QRcodeEncoderActivity;
+import com.example.cb.test.ui.view_pager.BannerActivity;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -33,6 +40,7 @@ import java.util.List;
 
 import cb.xlibrary.adapter.XRecyclerViewAdapter;
 import cb.xlibrary.adapter.XViewHolder;
+import cb.xlibrary.utils.PermissionPageUtils;
 //import me.devilsen.czxing.ScanBaseActivity;
 
 /**
@@ -72,39 +80,34 @@ public class MainActivity extends BaseActivity {
         mList.add(new CommonMenuBean("HookDemoActivity", HookDemoActivity.class));
 //        mList.add(new CommonMenuBean("扫一扫", ScanBaseActivity.class));
         mList.add(new CommonMenuBean("生成二维码", QRcodeEncoderActivity.class));
+        mList.add(new CommonMenuBean("MvpActivity", MvpActivity.class));
+        mList.add(new CommonMenuBean("KotlinSetActivity", KotlinSetActivity.class));
+        mList.add(new CommonMenuBean("AidlTestActivity", AidlTestActivity.class));
+        mList.add(new CommonMenuBean("BannerActivity", BannerActivity.class));
+        mList.add(new CommonMenuBean("KotlinTestActivity", KotlinTestActivity.class));
+        mList.add(new CommonMenuBean("AnimTestActivity", AnimTestActivity.class));
 
         mAdapter.setDataLists(mList);
 
         mAdapter.setOnItemClickListener((v, position) -> {
-            if (position == 0) {
+//            if (position == 0) {
 //                hookIActivityManager();
 //                test();
 //                Intent intent = new Intent(this, com.zero.activityhookdemo.MainActivity.class);
 //                startActivity(intent);
 //                return;
-                aaa();
-            }
+//                aaa();
+//                canBackgroundStart(this);
+//                PermissionPageUtils utils = new PermissionPageUtils(this);
+//                utils.jumpPermissionPage();
+
+//            }
             CommonMenuBean bean = mList.get(position);
             if (bean.getaClass() != null) {
-//                launchActivity(bean.getaClass(), null);
-                startForegroundService(new Intent(this, MyService.class));
+                launchActivity(bean.getaClass(), null);
+//                startForegroundService(new Intent(this, MyService.class));
             }
         });
-
-//        btnDownLoad.setOnClickListener(v -> {
-//                launchActivity(MvpActivity.class, null);
-//                launchActivity(KotlinSetActivity.class, null);
-//            launchActivity(DbTestActivity.class, null);
-//            launchActivity(AnimTestActivity.class, null);
-//            launchActivity(AidlTestActivity.class, null);
-//            launchActivity(BannerActivity.class,null);
-//            showChoseHeadDialog();
-//            launchActivity(MvpActivity.class, null);
-//            launchActivity(QRcodeEncoderActivity.class, null);
-//            launchActivity(KotlinTestActivity.class, null);
-//            showChoseHeadDialog();
-
-//        });
     }
 
     private void aaa() {
@@ -144,6 +147,36 @@ public class MainActivity extends BaseActivity {
         } catch (Exception e) {
         }
         return false;
+    }
+
+    /**
+     * 判断vivo后台弹出界面 1未开启 0开启
+     * @param context
+     * @return
+     */
+    public static int getvivoBgStartActivityPermissionStatus(Context context) {
+        String packageName = context.getPackageName();
+        Uri uri2 = Uri.parse("content://com.vivo.permissionmanager.provider.permission/start_bg_activity");
+        String selection = "pkgname = ?";
+        String[] selectionArgs = new String[]{packageName};
+        try {
+            Cursor cursor = context
+                    .getContentResolver()
+                    .query(uri2, null, selection, selectionArgs, null);
+            if (cursor != null) {
+                if (cursor.moveToFirst()) {
+                    int currentmode = cursor.getInt(cursor.getColumnIndex("currentstate"));
+                    cursor.close();
+                    return currentmode;
+                } else {
+                    cursor.close();
+                    return 1;
+                }
+            }
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+        return 1;
     }
 
     @Override
