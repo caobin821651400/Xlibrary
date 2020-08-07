@@ -88,7 +88,7 @@ public class XRoundProgressBar extends View {
         //是否显示中间的进度
         isShowCenterTxt = mTypedArray.getBoolean(R.styleable.XRoundProgressBar_textIsDisplayable, true);
         //进度的风格，实心或者空心
-        style = mTypedArray.getInt(R.styleable.XRoundProgressBar_style, 0);
+        style = mTypedArray.getInt(R.styleable.XRoundProgressBar_xrpb_style, 0);
         //进度开始的角度数
         startAngle = mTypedArray.getInt(R.styleable.XRoundProgressBar_startAngle, -90);
         //圆心背景颜色

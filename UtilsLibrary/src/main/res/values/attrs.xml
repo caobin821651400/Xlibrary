@@ -53,12 +53,22 @@
         <attr name="textColor" format="color" />
         <attr name="textSize" format="dimension" />
         <attr name="textIsDisplayable" format="boolean" />
-        <attr name="style">
+        <attr name="xrpb_style">
             <enum name="STROKE" value="0" />
             <enum name="FILL" value="1" />
         </attr>
     </declare-styleable>
 
+    <!--左右颜色不一样文字-->
+    <declare-styleable name="XDiffSizeTextView">
+        <attr name="xds_left_txt" format="string" />
+        <attr name="xds_right_txt" format="string" />
+        <attr name="xds_icon" format="reference" />
+        <attr name="xds_left_txt_color" format="color" />
+        <attr name="xds_right_txt_color" format="color" />
+        <attr name="xds_left_txt_size" format="dimension" />
+        <attr name="xds_right_txt_size" format="dimension" />
+    </declare-styleable>
     <!--可以描边的imageView-->
     <declare-styleable name="XCircleImageView">
         <attr name="civ_border_color" format="color" />
