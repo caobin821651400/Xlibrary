@@ -41,6 +41,7 @@ import java.util.List;
 import cb.xlibrary.adapter.XRecyclerViewAdapter;
 import cb.xlibrary.adapter.XViewHolder;
 import cb.xlibrary.utils.PermissionPageUtils;
+import cb.xlibrary.utils.XDeviceUtils;
 //import me.devilsen.czxing.ScanBaseActivity;
 
 /**
@@ -96,11 +97,6 @@ public class MainActivity extends BaseActivity {
 //                Intent intent = new Intent(this, com.zero.activityhookdemo.MainActivity.class);
 //                startActivity(intent);
 //                return;
-//                aaa();
-//                canBackgroundStart(this);
-//                PermissionPageUtils utils = new PermissionPageUtils(this);
-//                utils.jumpPermissionPage();
-
 //            }
             CommonMenuBean bean = mList.get(position);
             if (bean.getaClass() != null) {
@@ -108,75 +104,6 @@ public class MainActivity extends BaseActivity {
 //                startForegroundService(new Intent(this, MyService.class));
             }
         });
-    }
-
-    private void aaa() {
-        //判断当前系统版本
-        if (Build.VERSION.SDK_INT >= 23) {
-            //判断权限是否已经申请过了（加上这个判断，则使用的悬浮窗的时候；如果权限已经申请则不再跳转到权限开启界面）
-            if (!Settings.canDrawOverlays(this)) {
-                //申请权限
-                Intent intent2 = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
-                startActivityForResult(intent2, 1);
-            } else {
-
-            }
-        } else {
-
-        }
-        System.out.println("Build.VERSION.SDK_INT::::" + Build.VERSION.SDK_INT);
-
-    }
-
-    /**
-     * 小米后台弹出界面检测方法
-     *
-     * @param context
-     * @return
-     */
-    public static boolean canBackgroundStart(Context context) {
-        AppOpsManager ops = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-            ops = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
-        }
-        try {
-            int op = 10021;
-            Method method = ops.getClass().getMethod("checkOpNoThrow", new Class[]{int.class, int.class, String.class});
-            Integer result = (Integer) method.invoke(ops, op, android.os.Process.myUid(), context.getPackageName());
-            return result == AppOpsManager.MODE_ALLOWED;
-        } catch (Exception e) {
-        }
-        return false;
-    }
-
-    /**
-     * 判断vivo后台弹出界面 1未开启 0开启
-     * @param context
-     * @return
-     */
-    public static int getvivoBgStartActivityPermissionStatus(Context context) {
-        String packageName = context.getPackageName();
-        Uri uri2 = Uri.parse("content://com.vivo.permissionmanager.provider.permission/start_bg_activity");
-        String selection = "pkgname = ?";
-        String[] selectionArgs = new String[]{packageName};
-        try {
-            Cursor cursor = context
-                    .getContentResolver()
-                    .query(uri2, null, selection, selectionArgs, null);
-            if (cursor != null) {
-                if (cursor.moveToFirst()) {
-                    int currentmode = cursor.getInt(cursor.getColumnIndex("currentstate"));
-                    cursor.close();
-                    return currentmode;
-                } else {
-                    cursor.close();
-                    return 1;
-                }
-            }
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-        }
-        return 1;
     }
 
     @Override

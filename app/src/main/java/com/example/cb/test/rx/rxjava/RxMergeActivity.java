@@ -99,30 +99,32 @@ public class RxMergeActivity extends AppCompatActivity {
 
 
         //4. --> Zip() 合并多个被观察者发送的事件，生成一个新的序列，最终在发送
-        Observable.zip(Observable.create(new ObservableOnSubscribe<Integer>() {
-            @Override
-            public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
-                emitter.onNext(1);
-                emitter.onNext(2);
-                emitter.onNext(3);
-                emitter.onComplete();
-            }
-        }), Observable.create(new ObservableOnSubscribe<String>() {
-            @Override
-            public void subscribe(ObservableEmitter<String> emitter) throws Exception {
-                emitter.onNext("A");
-                emitter.onNext("B");
-                emitter.onNext("C");
-                XLogUtils.i("zip-> 发送事件D");
-                emitter.onNext("D");
-                emitter.onComplete();
-            }
-        }), new BiFunction<Integer, String, String>() {
-            @Override
-            public String apply(Integer integer, String s) throws Exception {
-                return integer + s;
-            }
-        }).subscribe(new Consumer<String>() {
+        Observable.zip(
+                Observable.create(new ObservableOnSubscribe<Integer>() {
+                    @Override
+                    public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
+                        emitter.onNext(1);
+                        emitter.onNext(2);
+                        emitter.onNext(3);
+                        emitter.onComplete();
+                    }
+                }),
+                Observable.create(new ObservableOnSubscribe<String>() {
+                    @Override
+                    public void subscribe(ObservableEmitter<String> emitter) throws Exception {
+                        emitter.onNext("A");
+                        emitter.onNext("B");
+                        emitter.onNext("C");
+                        XLogUtils.i("zip-> 发送事件D");
+                        emitter.onNext("D");
+                        emitter.onComplete();
+                    }
+                }), new BiFunction<Integer, String, String>() {
+                    @Override
+                    public String apply(Integer integer, String s) throws Exception {
+                        return integer + s;
+                    }
+                }).subscribe(new Consumer<String>() {
             @Override
             public void accept(String s) throws Exception {
                 XLogUtils.i("zip-> " + s);
