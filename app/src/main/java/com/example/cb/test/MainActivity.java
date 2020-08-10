@@ -104,9 +104,6 @@ public class MainActivity extends BaseActivity {
 //                startForegroundService(new Intent(this, MyService.class));
             }
         });
-
-        boolean isHas = XDeviceUtils.isHasBgStartActivityPermission(this);
-        boolean isHas1 = XDeviceUtils.isHasBgStartActivityPermission(this);
     }
 
     @Override
