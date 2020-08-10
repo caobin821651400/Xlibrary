@@ -22,7 +22,7 @@ public class XDeviceUtils {
 
     private static String deviceName = android.os.Build.BRAND;
 
-    enum DEVICE_NAME {
+   public enum DEVICE_NAME {
         HUAWEI,
         XIAOMI,
         VIVO,
