@@ -23,7 +23,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".kotlin.KotlinMainActivity"></activity>
+        <activity android:name=".jetpack.hilt.HiltMainActivity"></activity>
+        <activity android:name=".kotlin.KotlinMainActivity" />
         <activity android:name=".jetpack.JetPackActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

@@ -8,6 +8,7 @@ import cb.xlibrary.adapter.XViewHolder
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
 import com.example.cb.test.bean.CommonMenuBean
+import com.example.cb.test.jetpack.hilt.HiltMainActivity
 import com.example.cb.test.jetpack.lifecycles.LifeCyclesActivity
 import com.example.cb.test.jetpack.livedata.LiveDataActivity
 import com.example.cb.test.jetpack.navigation.NavigationActivity
@@ -41,9 +42,10 @@ class JetPackActivity : BaseActivity() {
         mList.add(CommonMenuBean("LifeCycles", LifeCyclesActivity::class.java))
         mList.add(CommonMenuBean("LiveData", LiveDataActivity::class.java))
         mList.add(CommonMenuBean("ViewModule", ViewModuleActivity::class.java))
-        mList.add(CommonMenuBean("RoomActivity", RoomActivity::class.java))
-        mList.add(CommonMenuBean("NavigationActivity", NavigationActivity::class.java))
-        mList.add(CommonMenuBean("WorkManagerActivity", WorkManagerActivity::class.java))
+        mList.add(CommonMenuBean("Room", RoomActivity::class.java))
+        mList.add(CommonMenuBean("Navigation", NavigationActivity::class.java))
+        mList.add(CommonMenuBean("WorkManager", WorkManagerActivity::class.java))
+        mList.add(CommonMenuBean("Hilt使用", HiltMainActivity::class.java))
 
         mAdapter.dataLists = mList
     }

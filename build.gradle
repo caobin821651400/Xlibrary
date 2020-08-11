@@ -4,10 +4,12 @@ buildscript {
     repositories {
         google()
         jcenter()
+        maven { url "https://androidx.dev/snapshots/builds/6543454/artifacts/repository/" }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.28-alpha'
     }
 }
 
@@ -16,6 +18,7 @@ allprojects {
         google()
         jcenter()
         maven { url "https://jitpack.io" }
+        maven { url "https://androidx.dev/snapshots/builds/6543454/artifacts/repository/" }
     }
 }
 

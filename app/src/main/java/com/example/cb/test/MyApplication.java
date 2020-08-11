@@ -8,12 +8,13 @@ import com.tencent.bugly.crashreport.CrashReport;
 
 import cb.xlibrary.XLibrary;
 import cb.xlibrary.utils.XCrashHandlerUtils;
+import dagger.hilt.android.HiltAndroidApp;
 
 
 /**
  * Created by cb on 2017/12/1.
  */
-
+@HiltAndroidApp
 public class MyApplication extends MultiDexApplication {
 
     @Override
