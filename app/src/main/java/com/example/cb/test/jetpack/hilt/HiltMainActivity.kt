@@ -6,6 +6,7 @@ import cb.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
 import com.example.cb.test.jetpack.hilt.other.HiltObject
+import com.example.cb.test.jetpack.hilt.other.HiltParamsObject
 import com.example.cb.test.jetpack.hilt.other.HiltTextView
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.scopes.ActivityScoped
@@ -39,6 +40,10 @@ class HiltMainActivity : BaseActivity() {
     @Inject
     lateinit var hiltObject: HiltObject
 
+    @Inject
+    @ActivityScoped
+    lateinit var hiltParamsObject: HiltParamsObject
+
 //    private val viewModule by viewModels<HiltViewModule>()
 
     override fun getLayoutId(): Int {
@@ -51,6 +56,8 @@ class HiltMainActivity : BaseActivity() {
         hiltObject?.let {
             XLogUtils.e(hiltObject.getName())
         }
+
+        XLogUtils.i("构造函数注入=${hiltParamsObject.getData()}")
 
 //        textView.text = "new one"
 //        rootView.addView(textView, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 100))

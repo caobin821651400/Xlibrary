@@ -1,6 +1,7 @@
 package com.example.cb.test.jetpack.hilt
 
 import com.example.cb.test.jetpack.hilt.other.HiltObject
+import com.example.cb.test.jetpack.hilt.other.HiltParamsObject
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -39,6 +40,11 @@ class ActivityModule {
     @Provides
     fun providersHiltTextView(): HiltObject {
         return HiltObject()
+    }
+
+    @Provides
+    fun providerHiltParams(s:String):HiltParamsObject{
+        return HiltParamsObject(s)
     }
 
     /**
