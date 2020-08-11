@@ -6,6 +6,7 @@
     android:orientation="vertical"
     tools:context=".jetpack.workmanager.WorkManagerActivity">
 
+    <include layout="@layout/comment_header_activity" />
 
     <Button
         android:id="@+id/btn1"

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".jetpack.room.RoomActivity">
-
+    <include layout="@layout/comment_header_activity" />
 
     <Button
         android:id="@+id/btnInquire"

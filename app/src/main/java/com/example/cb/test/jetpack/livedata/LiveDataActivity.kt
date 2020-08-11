@@ -22,6 +22,7 @@ class LiveDataActivity : BaseActivity() {
     }
 
     override fun initUI() {
+        setHeaderTitle("LiveData使用")
         LiveDataBus2.getInstance().with("caobin_back", String::class.java).observe(this,
                 Observer<String> {
                     //

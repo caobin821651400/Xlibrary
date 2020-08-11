@@ -52,6 +52,10 @@ public class RxJavaMainActivity extends AppCompatActivity {
         startActivity(new Intent(this, RxMergeActivity.class));
     }
 
+    /**
+     * 功能操作符
+     * @param view
+     */
     public void functionOperator(View view) {
         startActivity(new Intent(this, RxFunctionActivity.class));
     }

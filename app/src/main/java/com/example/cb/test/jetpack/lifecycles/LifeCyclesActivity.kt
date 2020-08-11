@@ -16,14 +16,12 @@ import com.example.cb.test.base.BaseActivity
  */
 class LifeCyclesActivity : BaseActivity() {
 
-
-
     override fun getLayoutId(): Int {
         return R.layout.activity_life_cycles
     }
 
-
     override fun initUI() {
+        setHeaderTitle("LifeCycles使用")
         val aa = LifeCyclesModule()
         val bb = LifeCyclesModule2()
 

@@ -1,6 +1,5 @@
 package com.example.cb.test.jetpack.navigation
 
-import androidx.navigation.fragment.NavHostFragment
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
 
@@ -9,16 +8,18 @@ import com.example.cb.test.base.BaseActivity
  * ====================================================
  * @User :caobin
  * @Date :2020/5/8 21:39
- * @Desc :
+ * @Desc :Navigation
  * ====================================================
  */
 class NavigationActivity : BaseActivity() {
-    override fun initUI() {
 
-    }
 
     override fun getLayoutId(): Int {
         return R.layout.activity_navigation
+    }
+
+    override fun initUI() {
+        setHeaderTitle("Navigation")
     }
 
     override fun initEvent() {

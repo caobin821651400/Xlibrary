@@ -19,7 +19,12 @@ class WorkManagerActivity : BaseActivity() {
 
     private lateinit var oneTimeWorkRequest: OneTimeWorkRequest
 
+    override fun getLayoutId(): Int {
+        return R.layout.activity_work_manager
+    }
+
     override fun initUI() {
+        setHeaderTitle("WorkManager使用")
         val data = Data.Builder().putString("data", "WorkManagerActivity传递的值").build()
         oneTimeWorkRequest = OneTimeWorkRequest.Builder(MainWorkManager::class.java)
                 .setInputData(data)
@@ -34,10 +39,6 @@ class WorkManagerActivity : BaseActivity() {
                     }
                 })
 
-    }
-
-    override fun getLayoutId(): Int {
-        return R.layout.activity_work_manager
     }
 
     override fun initEvent() {

@@ -53,13 +53,50 @@ public class RxMergeActivity extends AppCompatActivity {
 
 
         //2. -->merge()||mergeArray() 与concat类似，组合事件发布
-        Observable.merge(
-                Observable.intervalRange(0, 3, 0, 0, TimeUnit.SECONDS),
-                Observable.intervalRange(2, 3, 0, 0, TimeUnit.SECONDS))
-                .subscribe(new Consumer<Long>() {
+            Observable.mergeArrayDelayError(
+                Observable.create(new ObservableOnSubscribe<Long>() {
                     @Override
-                    public void accept(Long aLong) throws Exception {
+                    public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
+                        emitter.onError(new Throwable("sss"));
+                    }
+                }),
+                Observable.create(new ObservableOnSubscribe<Long>() {
+                    @Override
+                    public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
+                        emitter.onNext(2L);
+                    }
+                }),
+                Observable.create(new ObservableOnSubscribe<Long>() {
+                    @Override
+                    public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
+                        emitter.onNext(3L);
+                    }
+                }),
+                Observable.create(new ObservableOnSubscribe<Long>() {
+                    @Override
+                    public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
+                        emitter.onNext(4L);
+                    }
+                }))
+                .subscribe(new Observer<Long>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Long aLong) {
                         XLogUtils.d("merge-> " + aLong);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        XLogUtils.e("merge-> " + e.getLocalizedMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
                     }
                 });
         //$$$$$$$$$$$$$  merge()<=4   mergeArray()>4

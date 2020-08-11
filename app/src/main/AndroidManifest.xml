@@ -11,8 +11,8 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_LOGS" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT"/>
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:name=".MyApplication"
@@ -23,6 +23,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".jetpack.JetPackActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -57,8 +58,7 @@
         <activity android:name=".rx.rxjava.RxFunctionActivity" />
         <activity android:name=".rx.rxjava.RxMergeActivity" />
         <activity android:name=".rx.rxjava.SimpleUseActivity" />
-        <activity android:name=".jetpack.livedata.LiveDataActivity" />
-        <!--        <activity android:name=".TestActivity"></activity>-->
+        <activity android:name=".jetpack.livedata.LiveDataActivity" /> <!-- <activity android:name=".TestActivity"></activity> -->
         <activity android:name=".jetpack.demo.MusicActivity" />
         <activity android:name=".jetpack.workmanager.WorkManagerActivity" />
         <activity android:name=".jetpack.paging.PagingActivity" />

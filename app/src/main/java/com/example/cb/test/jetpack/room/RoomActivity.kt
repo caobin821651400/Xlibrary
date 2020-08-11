@@ -1,10 +1,9 @@
 package com.example.cb.test.jetpack.room
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import cb.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
+import com.example.cb.test.base.BaseActivity
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_room.*
 
@@ -15,19 +14,20 @@ import kotlinx.android.synthetic.main.activity_room.*
  * @Desc :
  * ====================================================
  */
-class RoomActivity : AppCompatActivity() {
-
+class RoomActivity : BaseActivity() {
 
     lateinit var studentDataBase: StudentDataBase
     lateinit var studentDao: StudentDao
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_room)
+    override fun getLayoutId(): Int {
+        return R.layout.activity_room
+    }
 
+    override fun initUI() {
+        setHeaderTitle("Room使用")
 
         studentDataBase = Room.databaseBuilder(applicationContext,
-                StudentDataBase::class.java, "studio").build()
+                StudentDataBase::class.java, "studio11").build()
         studentDao = studentDataBase.studentDao()
 
         //查询 子线程
@@ -45,7 +45,7 @@ class RoomActivity : AppCompatActivity() {
 
             Thread(object : Runnable {
                 override fun run() {
-                    val list=studentDao.two
+                    val list = studentDao.two
                     studentDao?.let { XLogUtils.e(Gson().toJson(list)) }
                 }
             }).start()
@@ -55,8 +55,12 @@ class RoomActivity : AppCompatActivity() {
         btnInsert.setOnClickListener {
             DbTest().start()
         }
-
     }
+
+
+    override fun initEvent() {
+    }
+
 
     public inner class DbTest : Thread() {
         override fun run() {

@@ -8,13 +8,14 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-
 import com.example.cb.test.MainActivity;
+import com.example.cb.test.R;
 
 import cb.xlibrary.dialog.XLoadingDialog;
 import cb.xlibrary.dialog.XTipDialog;
@@ -34,6 +35,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     private Activity mCurrentActivity;
     private static long mPreTime;
     private XTipDialog mTipDialog;
+    private XLoadingDialog mLoadingDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,20 +43,45 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(getLayoutId());
         initUI();
         initEvent();
+        backAction();
     }
 
-//    /**
-//     * 设置显示title
-//     *
-//     * @param title
-//     */
-//    protected void setHeaderTitle(String title) {
-//        if (TextUtils.isEmpty(title)) {
-//            return;
-//        }
-//        TextView textView = (TextView) findViewById(R.id.tv_common_title);
-//        textView.setText(title);
-//    }
+    /**
+     * 设置显示title
+     *
+     * @param title
+     */
+    protected void setHeaderTitle(String title) {
+        if (isNull(title)) return;
+        TextView textView = findViewById(R.id.title);
+        if (textView != null)
+            textView.setText(title);
+    }
+
+    /**
+     * 默认的返回
+     */
+    protected void backAction() {
+        View view = findViewById(R.id.iv_back);
+        if (view != null) {
+            view.setOnClickListener(v -> {
+                finish();
+            });
+        }
+    }
+
+    /**
+     * 标题右侧文字
+     *
+     * @param txt
+     */
+    protected void setRightTxt(String txt) {
+        if (isNull(txt)) return;
+        TextView view = findViewById(R.id.tvTitleRight);
+        if (view == null) return;
+        view.setText(txt);
+    }
+
 
     public void backAction(View view) {
         finish();
@@ -154,55 +181,58 @@ public abstract class BaseActivity extends AppCompatActivity {
 
 
     /**
-     * 显示进度提示
+     * 加载弹窗,点击外部可以取消
      */
     protected void showDLG() {
-        XLoadingDialog.with(this)
-                .setBackgroundColor(Color.parseColor("#ffffff"))
-                .setMessageColor(Color.BLACK)
-                .setMessage("努力加载中...")
-                .setOrientation(XLoadingDialog.VERTICAL)
-                .setCanceled(true)
-                .show();
+        showDLG(false);
     }
 
     /**
-     * 显示进度提示 外部不可取消
-     */
-    protected void showDLG1() {
-        XLoadingDialog.with(this)
-                .setBackgroundColor(Color.parseColor("#ffffff"))
-                .setMessageColor(Color.BLACK)
-                .setMessage("努力加载中...")
-                .setOrientation(XLoadingDialog.VERTICAL)
-                .setCanceled(false)
-                .show();
-    }
-
-    /**
-     * 显示进度提示
+     * 加载弹窗
      *
-     * @param msg
+     * @param isCancel 是否点击外部可以取消
+     */
+    protected void showDLG(boolean isCancel) {
+        showDlgWithMsg("努力加载中...", isCancel);
+    }
+
+    /**
+     * 加载自定义文字弹窗,点其他地方消失
      */
     protected void showDlgWithMsg(String msg) {
-        XLoadingDialog.with(this)
-                .setBackgroundColor(Color.parseColor("#ffffff"))
-                .setMessageColor(Color.BLACK)
-                .setMessage(msg.equals("") ? "努力加载中..." : msg)
-                .setOrientation(XLoadingDialog.VERTICAL)
-                .setCanceled(true)
-                .show();
+        showDlgWithMsg(msg, false);
     }
 
     /**
+     * 加载自定义文字弹窗
      *
+     * @param msg
+     * @param isCancel 是否点击外部可以取消
+     */
+    protected void showDlgWithMsg(String msg, boolean isCancel) {
+        try {
+            mLoadingDialog = new XLoadingDialog(this);
+            mLoadingDialog.setBackgroundColor(Color.parseColor("#333333"));
+            mLoadingDialog.setMessageColor(Color.parseColor("#DDDDDD"));
+            mLoadingDialog.setMessage(msg.equals("") ? "努力加载中..." : msg);
+            mLoadingDialog.setOrientation(XLoadingDialog.VERTICAL);
+            mLoadingDialog.setCanceled(isCancel);
+            mLoadingDialog.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 弹窗消失
      */
     protected void disMissDLG() {
         try {
-            XLoadingDialog.with(this).dismiss();
+            if (mLoadingDialog != null && mLoadingDialog.isShowing()) mLoadingDialog.dismiss();
         } catch (Exception e) {
         }
     }
+
 
     @Override
     protected void onDestroy() {
@@ -214,6 +244,10 @@ public abstract class BaseActivity extends AppCompatActivity {
             if (mTipDialog != null) {
                 mTipDialog.dismiss();
                 mTipDialog = null;
+            }
+            if (mLoadingDialog != null) {
+                mLoadingDialog.dismiss();
+                mLoadingDialog = null;
             }
         } catch (Exception e) {
         }
