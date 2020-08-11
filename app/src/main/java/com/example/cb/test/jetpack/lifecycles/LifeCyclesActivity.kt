@@ -25,6 +25,7 @@ class LifeCyclesActivity : BaseActivity() {
         val aa = LifeCyclesModule()
         val bb = LifeCyclesModule2()
 
+
         lifecycle.addObserver(aa)
         lifecycle.addObserver(bb)
     }
