@@ -30,6 +30,7 @@ class AidlTestActivity : BaseActivity() {
 
 
     override fun initUI() {
+        setHeaderTitle("AIDL")
         start.setOnClickListener {
             val intentService = Intent(this, IStudentService::class.java)
             bindService(intentService, mServiceConnection, Context.BIND_AUTO_CREATE)

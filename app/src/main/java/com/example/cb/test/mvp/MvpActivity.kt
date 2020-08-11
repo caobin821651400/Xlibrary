@@ -26,6 +26,7 @@ class MvpActivity : BaseMvpActivity<NewListPresenter>(), INewListView {
     }
 
     override fun initUI() {
+        setHeaderTitle("MVP")
         if (fragmentManager == null) {
             fragmentManager = supportFragmentManager
         }
@@ -36,7 +37,7 @@ class MvpActivity : BaseMvpActivity<NewListPresenter>(), INewListView {
         transaction.add(R.id.content, mvpFragment!!, "MvpFragment")
         transaction.commit()
 
-        mPresenter!!.fetchData()
+        mPresenter?.fetchData()
     }
 
     override fun initEvent() {

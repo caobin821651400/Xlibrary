@@ -21,7 +21,8 @@ class HookDemoActivity : BaseActivity() {
         return R.layout.activity_hook
     }
 
-    override fun initUI() {}
+    override fun initUI() {
+        setHeaderTitle("简单Hook使用")}
 
     override fun initEvent() {
         btnHook1.setOnClickListener { hookConstant() }

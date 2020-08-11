@@ -6,6 +6,7 @@
     android:orientation="vertical"
     tools:context=".ui.aidl.AidlTestActivity">
 
+    <include layout="@layout/comment_header_activity" />
     <Button
         android:id="@+id/start"
         android:layout_width="match_parent"

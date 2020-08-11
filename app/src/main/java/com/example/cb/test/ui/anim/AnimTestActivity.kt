@@ -24,6 +24,7 @@ class AnimTestActivity : BaseActivity() {
 
 
     override fun initUI() {
+        setHeaderTitle("属性动画")
         button.setOnClickListener {
             valueAnim()
         }

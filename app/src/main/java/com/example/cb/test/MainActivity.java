@@ -13,8 +13,7 @@ import com.example.cb.test.base.BaseActivity;
 import com.example.cb.test.bean.CommonMenuBean;
 import com.example.cb.test.hook.HookDemoActivity;
 import com.example.cb.test.jetpack.JetPackActivity;
-import com.example.cb.test.kotlin.KotlinSetActivity;
-import com.example.cb.test.kotlin.KotlinTestActivity;
+import com.example.cb.test.kotlin.KotlinMainActivity;
 import com.example.cb.test.mvp.MvpActivity;
 import com.example.cb.test.rx.rxjava.RxJavaMainActivity;
 import com.example.cb.test.ui.aidl.AidlTestActivity;
@@ -35,6 +34,7 @@ import cb.xlibrary.adapter.XViewHolder;
  * @time 2019年7月19日17:04:09
  */
 public class MainActivity extends BaseActivity {
+
     private List<CommonMenuBean> mList = new ArrayList<>();
     RecyclerView mRecyclerView;
     MAdapter mAdapter;
@@ -44,27 +44,25 @@ public class MainActivity extends BaseActivity {
         return R.layout.activity_main;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    @SuppressLint("CheckResult")
     @Override
     protected void initUI() {
+        setHeaderTitle("工具库");
+
         mRecyclerView = findViewById(R.id.mRecyclerView);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new MAdapter(mRecyclerView);
         mRecyclerView.setAdapter(mAdapter);
 
-        mList.add(new CommonMenuBean("RxJava", RxJavaMainActivity.class));
+        mList.add(new CommonMenuBean("RxJava使用", RxJavaMainActivity.class));
         mList.add(new CommonMenuBean("JetPack使用", JetPackActivity.class));
+        mList.add(new CommonMenuBean("Kotlin使用", KotlinMainActivity.class));
         mList.add(new CommonMenuBean("HookDemoActivity", HookDemoActivity.class));
         mList.add(new CommonMenuBean("AidlTestActivity", AidlTestActivity.class));
         mList.add(new CommonMenuBean("MvpActivity", MvpActivity.class));
-        mList.add(new CommonMenuBean("KotlinSetActivity", KotlinSetActivity.class));
-        mList.add(new CommonMenuBean("AidlTestActivity", AidlTestActivity.class));
         mList.add(new CommonMenuBean("BannerActivity", BannerActivity.class));
-        mList.add(new CommonMenuBean("KotlinTestActivity", KotlinTestActivity.class));
         mList.add(new CommonMenuBean("AnimTestActivity", AnimTestActivity.class));
-        mList.add(new CommonMenuBean("生成二维码", QRcodeEncoderActivity.class));
+//        mList.add(new CommonMenuBean("生成二维码", QRcodeEncoderActivity.class));
 //        mList.add(new CommonMenuBean("扫一扫", ScanBaseActivity.class));
 
         mAdapter.setDataLists(mList);

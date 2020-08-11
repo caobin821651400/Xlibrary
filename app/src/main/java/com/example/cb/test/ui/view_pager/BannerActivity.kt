@@ -26,6 +26,7 @@ class BannerActivity : BaseActivity() {
 
 
     override fun initUI() {
+        setHeaderTitle("Banner")
         //array转list
         imageLists = images.toList() as ArrayList<Int>
         imageLists.add(0, imageLists[imageLists.size - 1])

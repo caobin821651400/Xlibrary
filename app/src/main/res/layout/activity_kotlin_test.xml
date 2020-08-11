@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".kotlin.KotlinTestActivity">
-
+    <include layout="@layout/comment_header_activity" />
     <TextView
         android:id="@+id/tv"
         android:layout_width="match_parent"

@@ -1,23 +1,29 @@
 package com.example.cb.test.kotlin
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import cb.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
+import com.example.cb.test.base.BaseActivity
 import com.example.cb.test.bean.PersonBean
 
 /**
- * 记录一些好用的语句and方法
+ * ====================================================
+ * @User :caobin
+ * @Date :2020/8/11 11:32
+ * @Desc :Kotlin集合
+ * ====================================================
  */
-class KotlinSetActivity : AppCompatActivity() {
+class KotlinSetActivity : BaseActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_kotlin_fun)
-        initView()
+    override fun getLayoutId(): Int {
+        return R.layout.activity_kotlin_fun
     }
 
-    private fun initView() {
+
+    override fun initEvent() {
+    }
+
+    override fun initUI() {
+        setHeaderTitle("Kotlin基础")
         /***_____________________________________数组_______________________________________________***/
         //1.数组最简单创建方式，kotlin可以自动识别数据的类型
 //        val mArrays= arrayOf(1,2,3)

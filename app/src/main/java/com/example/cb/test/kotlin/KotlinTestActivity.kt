@@ -1,27 +1,37 @@
 package com.example.cb.test.kotlin
 
 import android.graphics.Color
-import android.os.Bundle
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import cb.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
+import com.example.cb.test.base.BaseActivity
 import com.example.cb.test.bean.PersonBean
 import com.example.cb.test.kotlin.lambda.LambdaListener
 import com.example.cb.test.kotlin.lambda.LambdaListener2
+import com.example.cb.test.utils.txt1
 import kotlinx.android.synthetic.main.activity_kotlin_test.*
 
-class KotlinTestActivity : AppCompatActivity() {
+/**
+ * ====================================================
+ * @User :caobin
+ * @Date :2020/8/11 11:29
+ * @Desc :
+ * ====================================================
+ */
+class KotlinTestActivity : BaseActivity() {
 
     open var s = "111"
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_kotlin_test)
-        initView()
+    override fun getLayoutId(): Int {
+        return R.layout.activity_kotlin_test
     }
 
-    private fun initView() {
+    override fun initEvent() {
+    }
+
+
+    override fun initUI() {
+        setHeaderTitle("Kotlin基础")
         val people = arrayListOf(PersonBean("汤姆", 23), PersonBean("杰瑞", 34))
 
         //1. -->意思是将PersonBean对象中的name单独取出来作为一个新的集合
@@ -84,16 +94,7 @@ class KotlinTestActivity : AppCompatActivity() {
         }
         lambda4.onClick3()
 
-
         //9.扩展函数
         tv.txt1("22")
-    }
-
-    /****
-     * 扩展函数
-     */
-    fun TextView.txt1(txt: String) {
-        text = txt
-        setTextColor(Color.parseColor("#000"))
     }
 }

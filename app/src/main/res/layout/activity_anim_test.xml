@@ -6,6 +6,8 @@
     android:orientation="vertical"
     tools:context=".ui.anim.AnimTestActivity">
 
+    <include layout="@layout/comment_header_activity" />
+
     <Button
         android:id="@+id/button"
         android:layout_width="match_parent"

@@ -1,19 +1,35 @@
 package com.example.cb.test.rx.rxjava;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.cb.test.R;
+import com.example.cb.test.base.BaseActivity;
 
-public class RxJavaMainActivity extends AppCompatActivity {
+/**
+ * ====================================================
+ *
+ * @User :caobin
+ * @Date :2020/8/11 11:40
+ * @Desc :RxJava
+ * ====================================================
+ */
+public class RxJavaMainActivity extends BaseActivity {
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rx_java_main);
+    protected int getLayoutId() {
+        return R.layout.activity_rx_java_main;
+    }
+
+    @Override
+    protected void initUI() {
+        setHeaderTitle("RxJava");
+    }
+
+    @Override
+    protected void initEvent() {
+
     }
 
     /**
@@ -54,6 +70,7 @@ public class RxJavaMainActivity extends AppCompatActivity {
 
     /**
      * 功能操作符
+     *
      * @param view
      */
     public void functionOperator(View view) {
