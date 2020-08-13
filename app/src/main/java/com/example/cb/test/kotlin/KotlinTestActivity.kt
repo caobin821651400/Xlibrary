@@ -6,8 +6,9 @@ import com.example.cb.test.base.BaseActivity
 import com.example.cb.test.bean.PersonBean
 import com.example.cb.test.kotlin.lambda.LambdaListener
 import com.example.cb.test.kotlin.lambda.LambdaListener2
-import com.example.cb.test.utils.txt1
+import com.example.cb.test.utils.*
 import kotlinx.android.synthetic.main.activity_kotlin_test.*
+import org.json.JSONArray
 
 /**
  * ====================================================
@@ -108,6 +109,38 @@ class KotlinTestActivity : BaseActivity() {
         val aaa: PersonBean? = null
         aaa?.run {
             XLogUtils.d("run函数->name=$name    age=$age")
+        }
+
+        //12.全局方法 & 常量
+        XLogUtils.d("token1=$TOKEM")
+        XLogUtils.e("token2=${getToken()}")
+
+        //13.require  false会抛异常
+        //require负责检查输入的参数，如果有问题，抛出IllegalArgumentException
+        //check负责检查自身是否万事俱备可以执行了，如果不是，抛出IllegalStateException
+        //assert负责确保程序执行完毕后的结果/内部状态是否符合预期，如果不是，抛出AssertionError
+//        require(TOKEM.isNullOrEmpty()){"TOKEM is no null"}
+//        check(TOKEM.isNullOrEmpty()){"TOKEM is no null"}
+//        assert(TOKEM.isNullOrEmpty()){"TOKEM is no null"}
+
+
+        //14.JSONArray遍历
+        val jsonArray = JSONArray()
+        jsonArray.put("1")
+        jsonArray.put("2")
+        jsonArray.put("3")
+
+        if (jsonArray.isNoEmpty()){
+
+        }
+        //第一种
+        jsonArray.forEach<String> {
+            XLogUtils.d("JSONArray forEach循环结果=$it")
+        }
+        //第二种
+        jsonArray.forEachIndex<String> { index, t ->
+            XLogUtils.d("JSONArray forEachIndex循环结果=$t   位置=$index")
+
         }
     }
 }

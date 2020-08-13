@@ -52,6 +52,7 @@ class CoroutinesMainActivity : BaseActivity() {
         //如果普通方法加上 suspend关键字，那么该方法只能在（协程中或者其他suspend方法中调用）调用
         //什么时候需要用到suspend:原则上耗时操作就可以用协程挂起
         //suspend方法怎么写: fun前面加suspend，用withContext或者其他的包裹整个方法
+        //而恢复这个功能是协程的，如果你不在协程里面调用，恢复这个功能没法实现，所以也就回答了这个问题：为什么挂起函数必须在协程或者另一个挂起函数里被调用
         button2.setOnClickListener {
             CoroutineScope(Dispatchers.Main).launch() {
                 val data = getImage3(imageUrl)
