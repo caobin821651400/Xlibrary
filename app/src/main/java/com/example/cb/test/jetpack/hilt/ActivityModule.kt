@@ -42,10 +42,6 @@ class ActivityModule {
         return HiltObject()
     }
 
-    @Provides
-    fun providerHiltParams(s:String):HiltParamsObject{
-        return HiltParamsObject(s)
-    }
 
     /**
      * 如果返回类型相同值不同需要定义两个自定义注解来区分

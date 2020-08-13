@@ -1,7 +1,5 @@
 package com.example.cb.test.kotlin
 
-import android.graphics.Color
-import android.widget.TextView
 import cb.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
@@ -96,5 +94,20 @@ class KotlinTestActivity : BaseActivity() {
 
         //9.扩展函数
         tv.txt1("22")
+
+        //10.with函数
+        val aa = PersonBean("汤姆", 23)
+//        val aa: PersonBean? = null
+        with(aa) {
+            XLogUtils.d("with函数->${this?.name}")
+            XLogUtils.d("with函数->${this?.age}")
+        }
+
+        //11.run函数：结合了let和with
+//        val aaa = PersonBean("汤姆", 23)
+        val aaa: PersonBean? = null
+        aaa?.run {
+            XLogUtils.d("run函数->name=$name    age=$age")
+        }
     }
 }

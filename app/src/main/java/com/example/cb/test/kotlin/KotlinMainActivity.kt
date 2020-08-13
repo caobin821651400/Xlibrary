@@ -14,6 +14,7 @@ import com.example.cb.test.jetpack.navigation.NavigationActivity
 import com.example.cb.test.jetpack.room.RoomActivity
 import com.example.cb.test.jetpack.viewmodule.ViewModuleActivity
 import com.example.cb.test.jetpack.workmanager.WorkManagerActivity
+import com.example.cb.test.kotlin.coroutines.CoroutinesMainActivity
 import kotlinx.android.synthetic.main.activity_jet_pack.*
 import java.util.ArrayList
 /**
@@ -39,6 +40,7 @@ class KotlinMainActivity : BaseActivity() {
 
         mList.add(CommonMenuBean("Kotlin集合", KotlinSetActivity::class.java))
         mList.add(CommonMenuBean("Kotlin测试", KotlinTestActivity::class.java))
+        mList.add(CommonMenuBean("协程", CoroutinesMainActivity::class.java))
 
         mAdapter.dataLists = mList
     }

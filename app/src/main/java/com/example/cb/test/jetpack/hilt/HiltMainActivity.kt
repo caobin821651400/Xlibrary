@@ -40,9 +40,9 @@ class HiltMainActivity : BaseActivity() {
     @Inject
     lateinit var hiltObject: HiltObject
 
-    @Inject
-    @ActivityScoped
-    lateinit var hiltParamsObject: HiltParamsObject
+//    @Inject
+//    @ActivityScoped
+//    lateinit var hiltParamsObject: HiltParamsObject
 
 //    private val viewModule by viewModels<HiltViewModule>()
 
@@ -57,7 +57,7 @@ class HiltMainActivity : BaseActivity() {
             XLogUtils.e(hiltObject.getName())
         }
 
-        XLogUtils.i("构造函数注入=${hiltParamsObject.getData()}")
+//        XLogUtils.i("构造函数注入=${hiltParamsObject.getData()}")
 
 //        textView.text = "new one"
 //        rootView.addView(textView, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 100))
