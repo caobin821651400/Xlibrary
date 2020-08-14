@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <cb.xlibrary.picker.date.DatePicker
+    <cn.sccl.xlibrary.picker.date.DatePicker
         android:id="@+id/dayPicker_dialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

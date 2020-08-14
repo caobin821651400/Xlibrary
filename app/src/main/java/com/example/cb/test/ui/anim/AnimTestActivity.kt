@@ -5,7 +5,7 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.view.animation.DecelerateInterpolator
-import cb.xlibrary.utils.XLogUtils
+import cn.sccl.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_anim_test.*

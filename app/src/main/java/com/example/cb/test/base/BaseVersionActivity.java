@@ -21,8 +21,8 @@ import com.example.cb.test.utils.DownloadUtil;
 
 import java.io.File;
 
-import cb.xlibrary.dialog.XDownLoadDialog;
-import cb.xlibrary.utils.XAppUtils;
+import cn.sccl.xlibrary.dialog.XDownLoadDialog;
+import cn.sccl.xlibrary.utils.XAppUtils;
 
 
 public abstract class BaseVersionActivity extends BaseActivity {

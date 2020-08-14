@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cb.test.R;
 
-import cb.xlibrary.utils.XLogUtils;
+import cn.sccl.xlibrary.utils.XLogUtils;
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Predicate;

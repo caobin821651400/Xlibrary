@@ -1,11 +1,8 @@
 package com.example.cb.test;
 
-import android.annotation.SuppressLint;
-import android.os.Build;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,14 +15,13 @@ import com.example.cb.test.mvp.MvpActivity;
 import com.example.cb.test.rx.rxjava.RxJavaMainActivity;
 import com.example.cb.test.ui.aidl.AidlTestActivity;
 import com.example.cb.test.ui.anim.AnimTestActivity;
-import com.example.cb.test.ui.scan.QRcodeEncoderActivity;
 import com.example.cb.test.ui.view_pager.BannerActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import cb.xlibrary.adapter.XRecyclerViewAdapter;
-import cb.xlibrary.adapter.XViewHolder;
+import cn.sccl.xlibrary.adapter.XRecyclerViewAdapter;
+import cn.sccl.xlibrary.adapter.XViewHolder;
 //import me.devilsen.czxing.ScanBaseActivity;
 
 /**

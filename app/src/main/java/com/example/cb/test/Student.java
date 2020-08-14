@@ -3,8 +3,6 @@ package com.example.cb.test;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import cb.xlibrary.utils.XLogUtils;
-
 public class Student implements Parcelable {
 
 public String name;

@@ -3,7 +3,7 @@ package com.example.cb.test.ui.db
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import cb.xlibrary.utils.XLogUtils
+import cn.sccl.xlibrary.utils.XLogUtils
 
 class DbHelper(context: Context?, name: String?, factory: SQLiteDatabase.CursorFactory?, version: Int) : SQLiteOpenHelper(context, name, factory, version) {
 

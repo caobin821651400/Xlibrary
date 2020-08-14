@@ -1,6 +1,6 @@
 package com.example.cb.test.hook;
 
-import cb.xlibrary.utils.XLogUtils;
+import cn.sccl.xlibrary.utils.XLogUtils;
 
 /**
  * ====================================================

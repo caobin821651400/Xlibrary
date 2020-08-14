@@ -13,17 +13,15 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
 import com.example.cb.test.R;
 import com.example.cb.test.rx.rxjava.RxJavaMainActivity;
-import com.example.cb.test.utils.NotificationUtils;
 
 import java.util.concurrent.TimeUnit;
 
-import cb.xlibrary.utils.XLogUtils;
+import cn.sccl.xlibrary.utils.XLogUtils;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;

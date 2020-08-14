@@ -1,7 +1,7 @@
 package com.example.cb.test.jetpack.room
 
 import androidx.room.Room
-import cb.xlibrary.utils.XLogUtils
+import cn.sccl.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
 import com.google.gson.Gson

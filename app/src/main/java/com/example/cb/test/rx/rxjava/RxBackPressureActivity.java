@@ -14,7 +14,7 @@ import org.reactivestreams.Subscription;
 
 import java.util.concurrent.TimeUnit;
 
-import cb.xlibrary.utils.XLogUtils;
+import cn.sccl.xlibrary.utils.XLogUtils;
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 import io.reactivex.FlowableEmitter;

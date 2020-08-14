@@ -7,7 +7,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cb.test.R;
-import cb.xlibrary.utils.XLogUtils;
+import cn.sccl.xlibrary.utils.XLogUtils;
 
 import java.util.ArrayList;
 import java.util.List;

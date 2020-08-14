@@ -3,7 +3,7 @@ package com.example.cb.test.jetpack.navigation
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.Navigation
-import cb.xlibrary.utils.XLogUtils
+import cn.sccl.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_navigation1.*

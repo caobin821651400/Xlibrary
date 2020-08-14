@@ -3,8 +3,7 @@ package com.example.cb.test.jetpack.lifecycles
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
-import cb.xlibrary.utils.XLogUtils
-import com.example.cb.test.base.BaseActivity
+import cn.sccl.xlibrary.utils.XLogUtils
 
 class LifeCyclesModule2:LifecycleObserver {
 

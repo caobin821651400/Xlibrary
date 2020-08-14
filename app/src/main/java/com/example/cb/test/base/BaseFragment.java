@@ -14,9 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import cb.xlibrary.dialog.XLoadingDialog;
-import cb.xlibrary.dialog.XTipDialog;
-import cb.xlibrary.widget.XToast;
+import cn.sccl.xlibrary.dialog.XLoadingDialog;
+import cn.sccl.xlibrary.dialog.XTipDialog;
+import cn.sccl.xlibrary.widget.XToast;
 
 /**
  * ====================================================

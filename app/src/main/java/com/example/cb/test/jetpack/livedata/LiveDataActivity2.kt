@@ -2,7 +2,7 @@ package com.example.cb.test.jetpack.livedata
 
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import cb.xlibrary.utils.XLogUtils
+import cn.sccl.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_live_data2.*

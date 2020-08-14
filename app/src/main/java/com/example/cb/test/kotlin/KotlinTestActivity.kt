@@ -1,12 +1,16 @@
 package com.example.cb.test.kotlin
 
-import cb.xlibrary.utils.XLogUtils
+import android.widget.TextView
+import cn.sccl.xlibrary.kotlin.*
+import cn.sccl.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
 import com.example.cb.test.bean.PersonBean
 import com.example.cb.test.kotlin.lambda.LambdaListener
 import com.example.cb.test.kotlin.lambda.LambdaListener2
-import com.example.cb.test.utils.*
+import com.example.cb.test.utils.TOKEM
+import com.example.cb.test.utils.getToken
+import com.example.cb.test.utils.txt1
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_kotlin_test.*
 import org.json.JSONArray
@@ -132,7 +136,7 @@ class KotlinTestActivity : BaseActivity() {
         jsonArray.put("3")
 
         if (jsonArray.isNoEmpty()) {
-
+            XLogUtils.i("JSONArray no null")
         }
         //第一种
         jsonArray.forEach<String> {
@@ -146,7 +150,7 @@ class KotlinTestActivity : BaseActivity() {
 
         //15.全局单例对象
         val str = """["123","456"]"""
-        val list = AppGson.fromJson<List<String>>(str, object : TypeToken<List<String>>() {}.type)
+        val list = AppGsonObject.fromJson<List<String>>(str, object : TypeToken<List<String>>() {}.type)
         if (!list.isNullOrEmpty()) {
             XLogUtils.e("列表数据=${list[0]}")
         }

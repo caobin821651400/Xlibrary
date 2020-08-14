@@ -1,13 +1,10 @@
 package com.example.cb.test.jetpack.hilt
 
 import android.annotation.SuppressLint
-import android.widget.LinearLayout
-import cb.xlibrary.utils.XLogUtils
+import cn.sccl.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
 import com.example.cb.test.jetpack.hilt.other.HiltObject
-import com.example.cb.test.jetpack.hilt.other.HiltParamsObject
-import com.example.cb.test.jetpack.hilt.other.HiltTextView
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.scopes.ActivityScoped
 import kotlinx.android.synthetic.main.activity_hilt_main.*

@@ -17,10 +17,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.cb.test.MainActivity;
 import com.example.cb.test.R;
 
-import cb.xlibrary.dialog.XLoadingDialog;
-import cb.xlibrary.dialog.XTipDialog;
-import cb.xlibrary.utils.XPermission;
-import cb.xlibrary.widget.XToast;
+import cn.sccl.xlibrary.dialog.XLoadingDialog;
+import cn.sccl.xlibrary.dialog.XTipDialog;
+import cn.sccl.xlibrary.utils.XPermission;
+import cn.sccl.xlibrary.widget.XToast;
 
 /**
  * ====================================================

@@ -6,7 +6,7 @@ import android.os.Binder;
 import android.os.IBinder;
 import androidx.annotation.Nullable;
 
-import cb.xlibrary.utils.XLogUtils;
+import cn.sccl.xlibrary.utils.XLogUtils;
 
 
 /**

@@ -2,7 +2,6 @@ package com.example.cb.test;
 
 import android.annotation.TargetApi;
 import android.os.Build;
-import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
@@ -13,7 +12,7 @@ import android.webkit.WebViewClient;
 
 import com.example.cb.test.base.BaseActivity;
 
-import cb.xlibrary.utils.XLogUtils;
+import cn.sccl.xlibrary.utils.XLogUtils;
 
 
 /**

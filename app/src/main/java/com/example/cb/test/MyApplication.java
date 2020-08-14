@@ -2,7 +2,7 @@ package com.example.cb.test;
 
 import android.app.Application;
 
-import cb.xlibrary.XLibrary;
+import cn.sccl.xlibrary.XLibrary;
 import dagger.hilt.android.HiltAndroidApp;
 
 

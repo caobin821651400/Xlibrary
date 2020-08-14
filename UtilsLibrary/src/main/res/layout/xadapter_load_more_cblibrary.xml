@@ -6,7 +6,7 @@
     android:orientation="horizontal"
     android:padding="@dimen/XFrame_spacing_cblibrary">
 
-    <cb.xlibrary.adapter.progress.XAutoAnimImageView
+    <cn.sccl.xlibrary.adapter.progress.XAutoAnimImageView
         android:id="@+id/progress_view_cblibrary"
         android:layout_width="18dp"
         android:layout_height="18dp"

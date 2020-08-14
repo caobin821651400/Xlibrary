@@ -3,8 +3,8 @@ package com.example.cb.test.jetpack
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import cb.xlibrary.adapter.XRecyclerViewAdapter
-import cb.xlibrary.adapter.XViewHolder
+import cn.sccl.xlibrary.adapter.XRecyclerViewAdapter
+import cn.sccl.xlibrary.adapter.XViewHolder
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
 import com.example.cb.test.bean.CommonMenuBean

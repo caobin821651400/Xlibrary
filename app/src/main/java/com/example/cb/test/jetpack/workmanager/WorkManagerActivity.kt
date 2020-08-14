@@ -2,7 +2,7 @@ package com.example.cb.test.jetpack.workmanager
 
 import androidx.lifecycle.Observer
 import androidx.work.*
-import cb.xlibrary.utils.XLogUtils
+import cn.sccl.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_work_manager.*

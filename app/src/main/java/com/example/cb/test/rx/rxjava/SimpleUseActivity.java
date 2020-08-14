@@ -15,7 +15,7 @@ import com.jakewharton.rxbinding3.widget.RxTextView;
 
 import java.util.concurrent.TimeUnit;
 
-import cb.xlibrary.utils.XLogUtils;
+import cn.sccl.xlibrary.utils.XLogUtils;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;

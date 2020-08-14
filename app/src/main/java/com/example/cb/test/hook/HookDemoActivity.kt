@@ -1,7 +1,7 @@
 package com.example.cb.test.hook
 
 import android.content.Intent
-import cb.xlibrary.utils.XLogUtils
+import cn.sccl.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.TestActivity
 import com.example.cb.test.base.BaseActivity

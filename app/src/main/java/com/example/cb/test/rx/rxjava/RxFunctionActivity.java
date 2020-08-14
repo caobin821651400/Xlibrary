@@ -10,7 +10,7 @@ import com.example.cb.test.R;
 
 import java.util.concurrent.TimeUnit;
 
-import cb.xlibrary.utils.XLogUtils;
+import cn.sccl.xlibrary.utils.XLogUtils;
 import io.reactivex.Notification;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
