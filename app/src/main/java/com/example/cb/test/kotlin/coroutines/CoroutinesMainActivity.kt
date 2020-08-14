@@ -44,6 +44,7 @@ class CoroutinesMainActivity : BaseActivity() {
             }
         }
 
+
         //suspend关键字
         //【挂起】&【暂停】;非阻塞式
         //挂起的是协程，也就是launch或者async包裹的代码块;比如当前在Main线程，挂起在IO线程，那么包裹的代码块就从Main脱离，在IO线程运行
@@ -59,6 +60,8 @@ class CoroutinesMainActivity : BaseActivity() {
                 imageView.setImageBitmap(data)
             }
         }
+
+
         //async关键字
         //与launch比较：
         //相同点：都可以开启一个协程
@@ -69,6 +72,11 @@ class CoroutinesMainActivity : BaseActivity() {
                 val data = async(Dispatchers.IO) { getImage(imageUrl) }
                 imageView.setImageBitmap(data.await())
             }
+        }
+
+
+        //
+        button4.setOnClickListener {
         }
     }
 

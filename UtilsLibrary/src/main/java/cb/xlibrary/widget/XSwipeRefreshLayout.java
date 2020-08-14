@@ -1,10 +1,11 @@
 package cb.xlibrary.widget;
 
 import android.content.Context;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
+
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 /**
  * 解决SwipeRefreshLayout和viewpager滑动冲突

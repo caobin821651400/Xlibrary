@@ -1,5 +1,6 @@
 package com.example.cb.test.utils
 
+import com.google.gson.Gson
 import org.json.JSONArray
 
 /**
@@ -9,6 +10,8 @@ import org.json.JSONArray
  * @Desc :Kotlin 扩展方法
  * ====================================================
  */
+
+val AppGson=Gson()
 
 /**
  * 全局共享方法
