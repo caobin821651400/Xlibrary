@@ -1,1 +1,2 @@
+include ':HttpModule'
 include ':app', ':ImagePicker', ':DesignMode', ':UtilsLibrary'//, ':QrLibrary'

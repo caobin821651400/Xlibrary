@@ -27,18 +27,6 @@
     </style>
 
 
-    <style name="DatePickerBottomDialog_cblibrary" parent="android:Theme.Light">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:windowIsFloating">true</item>
-        <item name="android:backgroundDimEnabled">false</item>
-    </style>
-
-    <style name="DatePickerDialogAnim_cblibrary" mce_bogus="1" parent="android:Animation">
-        <item name="android:windowEnterAnimation">@anim/datepicker_dialog_in_cblibrary</item>
-        <item name="android:windowExitAnimation">@anim/datepicker_dialog_out_cblibrary</item>
-    </style>
-
     <style name="XTabLayout_Default_Style_cblibrary" parent="Base.Widget.Design.TabLayout">
         <item name="x_tabMaxWidth">264dp</item>
         <item name="x_tabIndicatorColor">?attr/colorAccent</item>

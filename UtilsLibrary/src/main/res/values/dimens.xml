@@ -10,9 +10,4 @@
     <dimen name="XFrame_radius_cblibrary_cblibrary">6dp</dimen>
 
 
-    <dimen name="WheelItemTextSize_cblibrary">14sp</dimen>
-    <dimen name="WheelSelectedItemTextSize_cblibrary">20sp</dimen>
-    <dimen name="WheelItemHeightSpace_cblibrary">16dp</dimen>
-    <dimen name="WheelItemWidthSpace_cblibrary">32dp</dimen>
-
 </resources>

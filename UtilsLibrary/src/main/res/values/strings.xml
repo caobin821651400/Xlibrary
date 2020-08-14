@@ -6,7 +6,4 @@
     <string name="xloading_empty_text_cblibrary">暂时无数据!</string>
     <string name="xloading_retry_text_cblibrary">点击重试</string>
 
-    <string name="datepicker_decide_cblibrary">确认</string>
-    <string name="datepicker_hour_cblibrary">&#160;&#160;&#160;时</string>
-    <string name="datepicker_minute_cblibrary">&#160;&#160;&#160;分</string>
 </resources>

@@ -50,42 +50,36 @@
         android:text="" />
 
     <Button
-        android:id="@+id/button5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAllCaps="false"
         android:text="" />
 
     <Button
-        android:id="@+id/button6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAllCaps="false"
         android:text="" />
 
     <Button
-        android:id="@+id/button7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAllCaps="false"
         android:text="" />
 
     <Button
-        android:id="@+id/button8"
         android:layout_width="match_parent"
         android:textAllCaps="false"
         android:layout_height="wrap_content"
         android:text="" />
 
     <Button
-        android:id="@+id/button9"
         android:layout_width="match_parent"
         android:textAllCaps="false"
         android:layout_height="wrap_content"
         android:text="" />
 
     <Button
-        android:id="@+id/button10"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAllCaps="false"
