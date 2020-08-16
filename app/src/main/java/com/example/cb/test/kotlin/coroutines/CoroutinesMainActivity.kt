@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
+import com.example.cb.test.kotlin.coroutines.net.HttpCoroutinesActivity
 import kotlinx.android.synthetic.main.activity_coroutine_main.*
 import kotlinx.coroutines.*
 import java.net.HttpURLConnection
@@ -75,8 +76,9 @@ class CoroutinesMainActivity : BaseActivity() {
         }
 
 
-        //
+        //协程网络请求
         button4.setOnClickListener {
+            launchActivity(HttpCoroutinesActivity::class.java, null)
         }
     }
 
