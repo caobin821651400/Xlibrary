@@ -11,6 +11,7 @@ sealed class HttpResponse<out T : Any> {
 
     data class Success<out T : Any>(val data: T) : HttpResponse<T>()
     data class Error(val code: Int, val msg: String) : HttpResponse<Nothing>()
+    data class Loading(val msg: String) : HttpResponse<Nothing>()
 
 
     /**
@@ -23,6 +24,9 @@ sealed class HttpResponse<out T : Any> {
             is Success -> {
                 success(data)
             }
+//            is Loading -> {
+//
+//            }
             is Error -> {
                 error(code, msg)
             }
