@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import cn.sccl.xlibrary.kotlin.AppGsonObject
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseFragment
+import kotlinx.android.synthetic.main.activity_http.*
 import kotlinx.android.synthetic.main.fragment_kotlin_http.*
 
 /**
@@ -19,7 +20,6 @@ import kotlinx.android.synthetic.main.fragment_kotlin_http.*
  */
 class HttpCoroutinesFragment : BaseFragment() {
 
-//    lateinit var netViewModule: NetViewModule
     private val netViewModule by activityViewModels<NetViewModule>()
 
     override fun getLayoutId(): Int {
@@ -28,7 +28,6 @@ class HttpCoroutinesFragment : BaseFragment() {
 
     override fun initUI(v: View?) {
 
-//        netViewModule = ViewModelProvider(activity!!).get(NetViewModule::class.java)
         val aa = netViewModule.dataModule
         netViewModule.dataModule.observe(this, Observer {
             tvContent.text = AppGsonObject.toJson(it)

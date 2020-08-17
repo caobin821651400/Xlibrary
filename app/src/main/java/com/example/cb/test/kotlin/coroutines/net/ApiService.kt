@@ -10,7 +10,7 @@ interface ApiService {
 
     @FormUrlEncoded
     @POST("appio2/app/service/appHomeFX")
-    suspend fun getDara(@Field("pageNo") pageNo: Int,
+    suspend fun getData(@Field("pageNo") pageNo: Int,
                         @Field("pageSize") pageSize: Int
     ): BaseResp<ZnsListBean>
 

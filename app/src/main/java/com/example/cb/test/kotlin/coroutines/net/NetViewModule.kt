@@ -25,12 +25,11 @@ class NetViewModule : ViewModel() {
         viewModelScope.launch() {
             try {
                 dataModule.value = withContext(Dispatchers.IO) {
-                    RetrofitFactory.instance.getService(ApiService::class.java).getDara(1, 2).dataConvert()
+                    RetrofitFactory.instance.getService(ApiService::class.java).getData(1, 2).dataConvert()
                 }
             } catch (e: Exception) {
                 XLogUtils.e("请求错误->" + e.message)
             }
         }
     }
-
 }

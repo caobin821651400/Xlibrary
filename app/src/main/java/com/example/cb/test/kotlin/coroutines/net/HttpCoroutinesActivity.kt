@@ -21,8 +21,6 @@ class HttpCoroutinesActivity : BaseActivity() {
 
     private val netViewModule by viewModels<NetViewModule>()
 
-//    lateinit var netViewModule:NetViewModule
-
     override fun getLayoutId(): Int {
         return R.layout.activity_http
     }
@@ -32,7 +30,6 @@ class HttpCoroutinesActivity : BaseActivity() {
 
         supportFragmentManager.beginTransaction().add(R.id.content, HttpCoroutinesFragment()).commit()
 
-//        netViewModule = ViewModelProvider(this).get(NetViewModule::class.java)
         val aa = netViewModule.dataModule
         netViewModule.dataModule.observe(this, Observer { v ->
             tvResult.text = AppGsonObject.toJson(v)
