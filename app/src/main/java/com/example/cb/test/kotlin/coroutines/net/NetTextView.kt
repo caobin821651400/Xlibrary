@@ -15,13 +15,13 @@ internal class NetTextView @JvmOverloads constructor(
         defStyleAttr: Int = 0) :
         AppCompatTextView(context, attrs, defStyleAttr) {
 
-    private var netViewModule: NetViewModule =
-            ViewModelProvider(context as AppCompatActivity).get(NetViewModule::class.java)
+//    private var netViewModule: NetViewModule =
+//            ViewModelProvider(context as AppCompatActivity).get(NetViewModule::class.java)
 
-    init {
-        val aa = netViewModule.dataModule
-        netViewModule.dataModule.observe(context as AppCompatActivity, Observer {
-            text = AppGsonObject.toJson(it.arr[0].propaganda_name)
-        })
-    }
+//    init {
+//        val aa = netViewModule.dataModule
+//        netViewModule.dataModule.observe(context as AppCompatActivity, Observer {
+//            text = AppGsonObject.toJson(it.arr[0].propaganda_name)
+//        })
+//    }
 }

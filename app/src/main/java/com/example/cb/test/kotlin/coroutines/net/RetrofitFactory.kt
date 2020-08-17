@@ -1,6 +1,7 @@
 package com.example.cb.test.kotlin.coroutines.net
 
 import cn.sccl.xlibrary.kotlin.AppGsonObject
+import cn.sccl.xlibrary.utils.XLogUtils
 import com.example.cb.test.utils.SSLUtils
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

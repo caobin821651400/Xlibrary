@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_kotlin_http.*
  */
 class HttpCoroutinesFragment : BaseFragment() {
 
-    private val netViewModule by activityViewModels<NetViewModule>()
+//    private val netViewModule by activityViewModels<NetViewModule>()
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_kotlin_http
@@ -28,10 +28,10 @@ class HttpCoroutinesFragment : BaseFragment() {
 
     override fun initUI(v: View?) {
 
-        val aa = netViewModule.dataModule
-        netViewModule.dataModule.observe(this, Observer {
-            tvContent.text = AppGsonObject.toJson(it)
-        })
+//        val aa = netViewModule.dataModule
+//        netViewModule.dataModule.observe(this, Observer {
+//            tvContent.text = AppGsonObject.toJson(it)
+//        })
     }
 
 

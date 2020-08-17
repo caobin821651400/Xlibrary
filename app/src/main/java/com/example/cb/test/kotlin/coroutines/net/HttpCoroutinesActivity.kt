@@ -2,12 +2,10 @@ package com.example.cb.test.kotlin.coroutines.net
 
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import cn.sccl.xlibrary.kotlin.AppGsonObject
 import cn.sccl.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_http.*
 
 /**
@@ -31,8 +29,15 @@ class HttpCoroutinesActivity : BaseActivity() {
         supportFragmentManager.beginTransaction().add(R.id.content, HttpCoroutinesFragment()).commit()
 
         val aa = netViewModule.dataModule
-        netViewModule.dataModule.observe(this, Observer { v ->
-            tvResult.text = AppGsonObject.toJson(v)
+        netViewModule.dataModule.observe(this, Observer {
+            XLogUtils.d("当前线程4->${Thread.currentThread().name}")
+            it.result(
+                    { result ->
+                        tvResult.text = AppGsonObject.toJson(result)
+                    },
+                    { _, msg ->
+                        toast(msg)
+                    })
         })
     }
 
