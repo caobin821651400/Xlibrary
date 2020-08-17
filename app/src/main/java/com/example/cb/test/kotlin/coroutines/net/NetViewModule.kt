@@ -7,6 +7,7 @@ import cn.sccl.net.library.response.HttpResponse
 import cn.sccl.xlibrary.kotlin.AppGsonObject
 import cn.sccl.xlibrary.utils.XLogUtils
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONObject

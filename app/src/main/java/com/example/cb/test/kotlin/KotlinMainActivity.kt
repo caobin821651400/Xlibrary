@@ -23,9 +23,7 @@ class KotlinMainActivity : BaseActivity() {
     private lateinit var mAdapter: MAdapter
     private var mList: ArrayList<CommonMenuBean> = ArrayList()
 
-    override fun getLayoutId(): Int {
-        return R.layout.activity_kotlin_main
-    }
+    override fun getLayoutId()= R.layout.activity_kotlin_main
 
     override fun initUI() {
         setHeaderTitle("Kotlin使用")
