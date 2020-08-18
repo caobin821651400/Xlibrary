@@ -1,10 +1,9 @@
 package com.example.cb.test.kotlin.coroutines.net
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import cn.sccl.net.library.response.HttpResponse
-import kotlinx.coroutines.launch
+import cn.sccl.xlibrary.utils.XLogUtils
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 /**
  * ====================================================
@@ -13,65 +12,47 @@ import kotlinx.coroutines.launch
  * @Desc :
  * ====================================================
  */
-class NetViewModule2 : ViewModel() {
+class NetViewModule2 : BaseViewModule() {
 
     //这个类单例
-    val dataModule by lazy { MutableLiveData<HttpResponse<ZnsListBean>>() }
+    val dataModule by lazy { MutableLiveData<ZnsListBean>() }
 
     fun getData() {
-//        viewModelScope.launch() {
-//            XLogUtils.d("当前线程2->${Thread.currentThread().name}")
-//            dataModule.value = withContext(Dispatchers.IO) {
-//                executeResponse({
-//                    RetrofitFactory.instance
-//                            .getService(ApiService::class.java)
-//                            .getData(1, 2)
-//                            .body()?.string() ?: ""
-//                }, ZnsListBean::class.java)
+//        request({
+//            withContext(Dispatchers.IO) {
+//                XLogUtils.d("当前线程1->${Thread.currentThread().name}")
+//                RetrofitFactory.instance
+//                        .getService(ApiService::class.java).getData2(1, 2)
 //            }
-//        }
-    }
+//        }, {
+//            //请求成功
+//            dataModule.value = it
+//            XLogUtils.d("成功->" + it.arr[0].propaganda_name)
+//            XLogUtils.d("当前线程2->${Thread.currentThread().name}")
+//        }, {
+//            //请求失败
+//            XLogUtils.d("失败")
+//            XLogUtils.d("当前线程3->${Thread.currentThread().name}")
+//        })
 
-
-    /**
-     * 发送请求
-     */
-    private suspend fun <T : Any> request(
-            block: suspend () -> String?,
-            liveData: MutableLiveData<HttpResponse<T>>,
-            isShowLoading: Boolean = false,
-            loadingMsg: String = "努力加载中..."
-    ) {
-        //相当于java的try/catch
-        viewModelScope.launch {
-            kotlin.runCatching {
-                //执行代码块，也就是网络请求的代码
-                block()
-            }.onSuccess {
-//                if ()
-//                liveData
-            }.onFailure {
-
-            }
-        }
-
-
-//        try {
-//            call()?.let { result ->
-//                val jsonObject = JSONObject(result)
-//                val code = jsonObject.optInt("code")
-//                val msg = jsonObject.optString("msg")
-//
-//                return if (jsonObject.optInt("code") == 1000) {
-//                    val dataObject = jsonObject.optJSONObject("data")
-//                    HttpResponse.Success(AppGsonObject.fromJson(dataObject?.toString(), tClass))
-//                } else {
-//                    HttpResponse.Error(code, msg)
-//                }
-//            } ?: return HttpResponse.Error(8888, "response is null")
-//        } catch (e: Exception) {
-//            //这里可以处理自己的异常
-//            return HttpResponse.Error(8888, "response is null")
-//        }
+        requestString(
+                {
+                    withContext(Dispatchers.IO) {
+                        XLogUtils.d("当前线程1->${Thread.currentThread().name}")
+                        RetrofitFactory.instance.getService(ApiService::class.java).getDataString(1, 2).body()?.string()
+                                ?: ""
+                    }
+                },
+                {
+                    //请求成功
+                    XLogUtils.d("成功->$it")
+                    XLogUtils.d("当前线程2->${Thread.currentThread().name}")
+                },
+                {
+                    //请求失败
+                    XLogUtils.d("失败->" + it.errCode + "   msg->${it.errorMsg}")
+                    XLogUtils.d("当前线程3->${Thread.currentThread().name}")
+                }
+        )
     }
 }

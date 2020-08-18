@@ -15,4 +15,15 @@ interface ApiService {
     ): Response<ResponseBody>
 
 
+    @FormUrlEncoded
+    @POST("appio2/app/service/appHomeFX")
+    suspend fun getData2(@Field("pageNo") pageNo: Int,
+                         @Field("pageSize") pageSize: Int
+    ): ApiResponse<ZnsListBean>
+
+    @FormUrlEncoded
+    @POST("appio2/app/service/appHomeFX")
+    suspend fun getDataString(@Field("pageNo") pageNo: Int,
+                         @Field("pageSize") pageSize: Int
+    ): Response<ResponseBody>
 }

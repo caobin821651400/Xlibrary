@@ -19,6 +19,8 @@ class HttpCoroutinesActivity : BaseActivity() {
 
     private val netViewModule by viewModels<NetViewModule>()
 
+    private val netViewModule2 by viewModels<NetViewModule2>()
+
     override fun getLayoutId(): Int {
         return R.layout.activity_http
     }
@@ -39,12 +41,19 @@ class HttpCoroutinesActivity : BaseActivity() {
                         toast(msg)
                     })
         })
+
+
+        netViewModule2.dataModule.observe(this, Observer {
+            XLogUtils.d("当前线程4->${Thread.currentThread().name}")
+            tvResult.text = AppGsonObject.toJson(it)
+        })
     }
 
 
     override fun initEvent() {
         btnRequest.setOnClickListener {
-            netViewModule.getData()
+//            netViewModule.getData()
+            netViewModule2.getData()
         }
     }
 }
