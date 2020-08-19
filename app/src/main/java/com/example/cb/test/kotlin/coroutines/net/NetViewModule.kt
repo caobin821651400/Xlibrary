@@ -1,16 +1,12 @@
 package com.example.cb.test.kotlin.coroutines.net
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import cn.sccl.net.library.response.HttpResponse
+import cn.sccl.net.library.XHttp
+import cn.sccl.net.library.core.BaseViewModule
+import cn.sccl.net.library.core.request
+import cn.sccl.net.library.core.requestNoCheck
 import cn.sccl.xlibrary.kotlin.AppGsonObject
 import cn.sccl.xlibrary.utils.XLogUtils
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import org.json.JSONObject
 
 /**
  * ====================================================
@@ -19,49 +15,58 @@ import org.json.JSONObject
  * @Desc :
  * ====================================================
  */
-class NetViewModule : ViewModel() {
+class NetViewModule : BaseViewModule() {
 
     //这个类单例
-    val dataModule by lazy { MutableLiveData<HttpResponse<ZnsListBean>>() }
+    val dataModule by lazy { MutableLiveData<ZnsListBean>() }
 
     fun getData() {
-        viewModelScope.launch() {
-            XLogUtils.d("当前线程2->${Thread.currentThread().name}")
-            dataModule.value = withContext(Dispatchers.IO) {
-                executeResponse({
-                    RetrofitFactory.instance
-                            .getService(ApiService::class.java)
-                            .getData(1, 2)
-                            .body()?.string() ?: ""
-                }, ZnsListBean::class.java)
-            }
-        }
+        request(
+                {
+                    XHttp.getService(ApiService::class.java).getData2(1, 2)
+                },
+                {
+                    //请求成功
+                    dataModule.value = it
+                    XLogUtils.d("成功->" + it.arr[0].propaganda_name)
+                },
+                {
+                    //请求失败
+                    XLogUtils.d("失败")
+                }, isShowDialog = true)
+
+//        requestString(
+//                {
+//                    XLogUtils.d("当前线程1->${Thread.currentThread().name}")
+//                    RetrofitFactory.instance.getService(ApiService::class.java).getDataString(1, 2).body()?.string()
+//                            ?: ""
+//                },
+//                {
+//                    //请求成功
+//                    XLogUtils.d("成功->$it")
+//                    XLogUtils.d("当前线程2->${Thread.currentThread().name}")
+//                },
+//                {
+//                    //请求失败
+//                    XLogUtils.d("失败->" + it.errCode + "   msg->${it.errorMsg}")
+//                    XLogUtils.d("当前线程3->${Thread.currentThread().name}")
+//                }
+//        )
     }
 
-
-    /**
-     * 处理请求结果
-     */
-    private suspend fun <T : Any> executeResponse(
-            call: suspend () -> String?,
-            tClass: Class<T>
-    ): HttpResponse<T> {
-        try {
-            call()?.let { result ->
-                val jsonObject = JSONObject(result)
-                val code = jsonObject.optInt("code")
-                val msg = jsonObject.optString("msg")
-
-                return if (jsonObject.optInt("code") == 1000) {
-                    val dataObject = jsonObject.optJSONObject("data")
-                    HttpResponse.Success(AppGsonObject.fromJson(dataObject?.toString(), tClass))
-                } else {
-                    HttpResponse.Error(code, msg)
-                }
-            } ?: return HttpResponse.Error(8888, "response is null")
-        } catch (e: Exception) {
-            //这里可以处理自己的异常
-            return HttpResponse.Error(8888, "response is null")
-        }
+    fun getData2() {
+        requestNoCheck(
+                {
+                    XHttp.getService(ApiService::class.java).getScenesData(1, 1,
+                            "1019047515184193536",
+                            "993460313977020416",
+                            "6F18E5779FFD4417967791C452A3E27F")
+                },
+                {
+                    XLogUtils.d("成功->" + AppGsonObject.toJson(it.data))
+                },
+                {
+                    XLogUtils.d("失败->" + it.errorMsg)
+                })
     }
 }

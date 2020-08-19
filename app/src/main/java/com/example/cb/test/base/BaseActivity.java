@@ -41,9 +41,16 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
+        beforeInitUI();
         initUI();
         initEvent();
         backAction();
+    }
+
+    /**
+     * 提供一个方法，让子类可以在initUI之前初始化一些东西
+     */
+    public void beforeInitUI() {
     }
 
     /**

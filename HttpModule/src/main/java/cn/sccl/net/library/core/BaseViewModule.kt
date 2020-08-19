@@ -1,13 +1,14 @@
-package com.example.cb.test.kotlin.coroutines.net
+package cn.sccl.net.library.core
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import cn.sccl.net.library.response.network.BaseResponse
-import cn.sccl.net.library.response.network.Error
-import cn.sccl.net.library.response.network.ExceptionHandle
-import cn.sccl.net.library.response.network.NetException
-import cn.sccl.xlibrary.utils.XLogUtils
+import cn.sccl.net.library.event.EventLiveData
+import cn.sccl.net.library.exception.ExceptionHandle
+import cn.sccl.net.library.exception.HttpError
+import cn.sccl.net.library.exception.HttpException
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * ====================================================
@@ -18,9 +19,20 @@ import kotlinx.coroutines.launch
  */
 open class BaseViewModule : ViewModel() {
 
+    val defaultLoadingMsg = "努力加载中..."
+
+
+    /**
+     * 显示dialog
+     */
+    val showDialogLiveData by lazy { EventLiveData<String>() }
+
+    /**
+     * 隐藏dialog
+     */
+    val dismissDialogLiveData by lazy { EventLiveData<String>() }
 
 }
-
 
 /**
  * 发送请求并过滤服务器code，只取成功的data数据,失败提示服务器errorMsg
@@ -32,23 +44,25 @@ open class BaseViewModule : ViewModel() {
 fun <T> BaseViewModule.request(
         block: suspend () -> BaseResponse<T>,
         success: (T) -> Unit,
-        error: (NetException) -> Unit = {}
+        error: (HttpException) -> Unit = {},
+        isShowDialog: Boolean = false,
+        loadingMsg: String = defaultLoadingMsg
 ) {
     viewModelScope.launch {
         //相当于java的try/catch
         runCatching {
             //执行代码块，也就是网络请求的代码
-            XLogUtils.d("当前线程4->${Thread.currentThread().name}")
-            block()
+            if (isShowDialog) showDialogLiveData.value = loadingMsg
+            withContext(Dispatchers.IO) { block() }
         }.onSuccess {
-            XLogUtils.d("当前线程5->${Thread.currentThread().name}")
+            if (isShowDialog) dismissDialogLiveData.value = ""
             if (it.isSuccess()) {
                 success(it.getResponseData())
             } else {
-                error(NetException(it.getResponseCode(), it.getResponseMsg(), ""))
+                error(HttpException(it.getResponseCode(), it.getResponseMsg(), ""))
             }
         }.onFailure {
-            XLogUtils.d("当前线程6->${Thread.currentThread().name}")
+            if (isShowDialog) dismissDialogLiveData.value = ""
             error(ExceptionHandle.handleException(it))
         }
     }
@@ -65,19 +79,21 @@ fun <T> BaseViewModule.request(
 fun <T> BaseViewModule.requestNoCheck(
         block: suspend () -> T,
         success: (T) -> Unit,
-        error: (NetException) -> Unit = {}
+        error: (HttpException) -> Unit = {},
+        isShowDialog: Boolean = false,
+        loadingMsg: String = defaultLoadingMsg
 ) {
     viewModelScope.launch {
         //相当于java的try/catch
         runCatching {
             //执行代码块，也就是网络请求的代码
-            XLogUtils.d("当前线程4->${Thread.currentThread().name}")
-            block()
+            if (isShowDialog) showDialogLiveData.value = loadingMsg
+            withContext(Dispatchers.IO) { block() }
         }.onSuccess {
-            XLogUtils.d("当前线程5->${Thread.currentThread().name}")
+            if (isShowDialog) dismissDialogLiveData.value = ""
             success(it)
         }.onFailure {
-            XLogUtils.d("当前线程6->${Thread.currentThread().name}")
+            if (isShowDialog) dismissDialogLiveData.value = ""
             error(ExceptionHandle.handleException(it))
         }
     }
@@ -94,23 +110,25 @@ fun <T> BaseViewModule.requestNoCheck(
 fun BaseViewModule.requestString(
         block: suspend () -> String,
         success: (String) -> Unit,
-        error: (NetException) -> Unit = {}
+        error: (HttpException) -> Unit = {},
+        isShowDialog: Boolean = false,
+        loadingMsg: String = defaultLoadingMsg
 ) {
     viewModelScope.launch {
         //相当于java的try/catch
         runCatching {
-            //执行代码块，也就是网络请求的代码
-            XLogUtils.d("当前线程4->${Thread.currentThread().name}")
-            block()
+            //执行代码块，也就是网络请求的代码;
+            if (isShowDialog) showDialogLiveData.value = loadingMsg
+            withContext(Dispatchers.IO) { block() }
         }.onSuccess {
-            XLogUtils.d("当前线程5->${Thread.currentThread().name}")
+            if (isShowDialog) dismissDialogLiveData.value = ""
             if (it.isNotEmpty()) {
                 success(it)
             } else {
-                error(NetException(Error.UNKNOWN, null))
+                error(HttpException(HttpError.UNKNOWN, null))
             }
         }.onFailure {
-            XLogUtils.d("当前线程6->${Thread.currentThread().name}")
+            if (isShowDialog) dismissDialogLiveData.value = ""
             error(ExceptionHandle.handleException(it))
         }
     }

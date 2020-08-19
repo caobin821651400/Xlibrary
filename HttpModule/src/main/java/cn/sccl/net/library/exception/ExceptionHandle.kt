@@ -1,4 +1,4 @@
-package cn.sccl.net.library.response.network
+package cn.sccl.net.library.exception
 
 import android.net.ParseException
 import com.google.gson.JsonParseException
@@ -16,38 +16,36 @@ import java.net.ConnectException
  */
 object ExceptionHandle {
 
-    /**
-     *
-     */
-    fun handleException(throwable: Throwable?): NetException {
+
+    fun handleException(throwable: Throwable?): cn.sccl.net.library.exception.HttpException {
         throwable?.let {
             when (it) {
                 is HttpException -> {
-                    return NetException(Error.NETWORK_ERROR, throwable)
+                    return HttpException(HttpError.NETWORK_ERROR, throwable)
                 }
                 is JsonParseException, is JSONException, is ParseException, is MalformedJsonException -> {
-                    NetException(Error.PARSE_ERROR, throwable)
+                    HttpException(HttpError.PARSE_ERROR, throwable)
                 }
                 is ConnectException -> {
-                    return NetException(Error.NETWORK_ERROR, throwable)
+                    return HttpException(HttpError.NETWORK_ERROR, throwable)
                 }
                 is javax.net.ssl.SSLException -> {
-                    return NetException(Error.SSL_ERROR, throwable)
+                    return HttpException(HttpError.SSL_ERROR, throwable)
                 }
                 is java.net.SocketTimeoutException -> {
-                    return NetException(Error.TIMEOUT_ERROR, throwable)
+                    return HttpException(HttpError.TIMEOUT_ERROR, throwable)
                 }
                 is java.net.UnknownHostException -> {
-                    return NetException(Error.TIMEOUT_ERROR, throwable)
+                    return HttpException(HttpError.TIMEOUT_ERROR, throwable)
                 }
-                is NetException -> {
+                is cn.sccl.net.library.exception.HttpException -> {
                     return it
                 }
                 else -> {
-                    NetException(Error.UNKNOWN, throwable)
+                    HttpException(HttpError.UNKNOWN, throwable)
                 }
             }
         }
-        return NetException(Error.UNKNOWN, throwable)
+        return HttpException(HttpError.UNKNOWN, throwable)
     }
 }

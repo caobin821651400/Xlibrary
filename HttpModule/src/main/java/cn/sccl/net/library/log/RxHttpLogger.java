@@ -1,8 +1,8 @@
-package com.example.cb.test.kotlin.coroutines.net;
+package cn.sccl.net.library.log;
 
 import android.util.Log;
 
-import com.example.cb.test.BuildConfig;
+import cn.sccl.net.library.BuildConfig;
 
 
 /**

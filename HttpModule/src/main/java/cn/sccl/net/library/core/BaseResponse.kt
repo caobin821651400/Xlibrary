@@ -1,4 +1,4 @@
-package cn.sccl.net.library.response.network
+package cn.sccl.net.library.core
 
 /**
  * ====================================================

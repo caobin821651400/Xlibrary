@@ -1,4 +1,4 @@
-package cn.sccl.net.library.response.network
+package cn.sccl.net.library.exception
 
 /**
  * ====================================================
@@ -7,7 +7,7 @@ package cn.sccl.net.library.response.network
  * @Desc :错误状态码 枚举类
  * ====================================================
  */
-enum class Error(private val code: Int, private val errorMsg: String) {
+enum class HttpError(private val code: Int, private val errorMsg: String) {
 
     /**
      * 未知错误

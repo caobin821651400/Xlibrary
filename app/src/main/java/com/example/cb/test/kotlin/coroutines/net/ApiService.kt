@@ -24,6 +24,13 @@ interface ApiService {
     @FormUrlEncoded
     @POST("appio2/app/service/appHomeFX")
     suspend fun getDataString(@Field("pageNo") pageNo: Int,
-                         @Field("pageSize") pageSize: Int
+                              @Field("pageSize") pageSize: Int
     ): Response<ResponseBody>
+
+    @FormUrlEncoded
+    @POST("appio2/app/service/queryFamilyScenario")
+    suspend fun getScenesData(@Field("pageNo") pageNo: Int,
+                              @Field("pageSize") pageSize: Int, @Field("familyId") familyId: String,
+                              @Field("memberId") memberId: String, @Field("tocken") tocken: String
+    ): ScenesBean
 }

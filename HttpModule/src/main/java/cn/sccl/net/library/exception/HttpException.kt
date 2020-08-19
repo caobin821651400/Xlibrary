@@ -1,4 +1,4 @@
-package cn.sccl.net.library.response.network
+package cn.sccl.net.library.exception
 
 /**
  * ====================================================
@@ -7,7 +7,7 @@ package cn.sccl.net.library.response.network
  * @Desc :自定义错误信息异常
  * ====================================================
  */
-class NetException : Exception {
+class HttpException : Exception {
 
     var errorMsg: String //错误消息
     var errCode: Int = 0 //错误码
@@ -19,7 +19,7 @@ class NetException : Exception {
         this.errorLog = errorLog ?: this.errorMsg
     }
 
-    constructor(error: Error, e: Throwable?) {
+    constructor(error: HttpError, e: Throwable?) {
         errCode = error.getCode()
         errorMsg = error.getErrorMsg()
         errorLog = e?.message
