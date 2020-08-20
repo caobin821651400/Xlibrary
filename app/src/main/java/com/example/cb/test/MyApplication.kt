@@ -1,11 +1,16 @@
 package com.example.cb.test
 
 import android.app.Application
+import cn.sccl.net.library.XHttp
+import cn.sccl.net.library.log.RxLogInterceptor
 import cn.sccl.xlibrary.XLibrary
 import cn.sccl.xlibrary.kotlin.AppGsonObject
-import cn.sccl.net.library.log.RxLogInterceptor
-import cn.sccl.net.library.XHttp
 import com.example.cb.test.utils.SSLUtils
+import com.example.cb.test.weight.loadCallBack.EmptyCallback
+import com.example.cb.test.weight.loadCallBack.ErrorCallback
+import com.example.cb.test.weight.loadCallBack.LoadingCallback
+import com.kingja.loadsir.callback.SuccessCallback
+import com.kingja.loadsir.core.LoadSir
 import dagger.hilt.android.HiltAndroidApp
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -26,6 +31,7 @@ class MyApplication : Application() {
         XLibrary.isDebug = true
 
         initHttp()
+        initLoadSir()
 
 //        CrashReport.initCrashReport(getApplicationContext(), "c4163937f8", true);
     }
@@ -42,10 +48,21 @@ class MyApplication : Application() {
 
         XHttp.setRetrofit(
                 Retrofit.Builder()
-                        .baseUrl("https://iot.sctel.com.cn/")
+//                        .baseUrl("https://iot.sctel.com.cn/")
+                        .baseUrl("https://www.wanandroid.com/")
                         .client(client)
                         .addConverterFactory(GsonConverterFactory.create(AppGsonObject))
                         .build()
         )
+    }
+
+    private fun initLoadSir() {
+        //界面加载管理 初始化
+        LoadSir.beginBuilder()
+                .addCallback(LoadingCallback())//加载
+                .addCallback(ErrorCallback())//错误
+                .addCallback(EmptyCallback())//空
+                .setDefaultCallback(SuccessCallback::class.java)//设置默认加载状态页
+                .commit()
     }
 }

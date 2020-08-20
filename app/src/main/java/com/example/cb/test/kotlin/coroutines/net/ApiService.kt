@@ -1,36 +1,14 @@
 package com.example.cb.test.kotlin.coroutines.net
 
-import okhttp3.ResponseBody
-import retrofit2.Response
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.http.GET
+import retrofit2.http.Path
 
 interface ApiService {
 
-    @FormUrlEncoded
-    @POST("appio2/app/service/appHomeFX")
-    suspend fun getData(@Field("pageNo") pageNo: Int,
-                        @Field("pageSize") pageSize: Int
-    ): Response<ResponseBody>
+    /**
+     * 获取首页文章数据
+     */
+    @GET("article/list/{page}/json")
+    suspend fun getArticleList(@Path("page") pageNo: Int): ApiCodeResponse<ApiListResponse<WanAndroidBean>>
 
-
-    @FormUrlEncoded
-    @POST("appio2/app/service/appHomeFX")
-    suspend fun getData2(@Field("pageNo") pageNo: Int,
-                         @Field("pageSize") pageSize: Int
-    ): ApiResponse<ZnsListBean>
-
-    @FormUrlEncoded
-    @POST("appio2/app/service/appHomeFX")
-    suspend fun getDataString(@Field("pageNo") pageNo: Int,
-                              @Field("pageSize") pageSize: Int
-    ): Response<ResponseBody>
-
-    @FormUrlEncoded
-    @POST("appio2/app/service/queryFamilyScenario")
-    suspend fun getScenesData(@Field("pageNo") pageNo: Int,
-                              @Field("pageSize") pageSize: Int, @Field("familyId") familyId: String,
-                              @Field("memberId") memberId: String, @Field("tocken") tocken: String
-    ): ScenesBean
 }

@@ -11,9 +11,4 @@
         android:gravity="center_horizontal"
         android:text="...."
         android:textColor="#ff00" />
-
-    <com.example.cb.test.kotlin.coroutines.net.NetTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
 </LinearLayout>

@@ -10,13 +10,13 @@ import cn.sccl.net.library.core.BaseViewModule
  * @Desc :BaseViewModule Activity
  * ====================================================
  */
-abstract class BaseViewModuleActivity<VM : BaseViewModule> : BaseActivity() {
+abstract class BaseViewModuleFragment<VM : BaseViewModule> : BaseFragment() {
 
     lateinit var mViewModule: VM
 
     override fun beforeInitUI() {
         mViewModule = createViewModel()
-
+        
         mViewModule.showDialogLiveData.observe(this, Observer { showDlgWithMsg(it) })
         mViewModule.dismissDialogLiveData.observe(this, Observer { disMissDLG() })
     }
@@ -24,5 +24,5 @@ abstract class BaseViewModuleActivity<VM : BaseViewModule> : BaseActivity() {
     /**
      * 创建viewModel
      */
-    abstract fun createViewModel(): VM
+    public abstract fun createViewModel(): VM
 }

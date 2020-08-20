@@ -70,7 +70,7 @@ fun <T> BaseViewModule.request(
 
 
 /**
- * 发送请求不关心服务器的状态码，HttpCode=200
+ * 发送请求不关心服务器的状态码，解析完全交给调用者自己处理，这里不做json解析
  *
  * @param block 网络请求的方法块
  * @param success 成功回调  返回泛型{@ T}

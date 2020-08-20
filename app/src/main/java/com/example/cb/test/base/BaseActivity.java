@@ -191,7 +191,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 加载弹窗,点击外部可以取消
      */
     protected void showDLG() {
-        showDLG(false);
+        showDLG(true);
     }
 
     /**
@@ -207,7 +207,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 加载自定义文字弹窗,点其他地方消失
      */
     protected void showDlgWithMsg(String msg) {
-        showDlgWithMsg(msg, false);
+        showDlgWithMsg(msg, true);
     }
 
     /**

@@ -1,11 +1,18 @@
 package com.example.cb.test.kotlin.coroutines.net
 
+import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import cn.sccl.xlibrary.kotlin.AppGsonObject
-import cn.sccl.xlibrary.utils.XLogUtils
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.RecyclerView
+import cn.sccl.xlibrary.adapter.XRecyclerViewAdapter
+import cn.sccl.xlibrary.adapter.XViewHolder
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseViewModuleActivity
+import com.example.cb.test.kotlin.coroutines.loadListData
+import com.example.cb.test.kotlin.coroutines.loadServiceInit
+import com.example.cb.test.kotlin.coroutines.showLoading
+import com.kingja.loadsir.core.LoadService
 import kotlinx.android.synthetic.main.activity_http.*
 
 /**
@@ -17,27 +24,54 @@ import kotlinx.android.synthetic.main.activity_http.*
  */
 class HttpCoroutinesActivity : BaseViewModuleActivity<NetViewModule>() {
 
+    private lateinit var mAdapter: Adapter
+    private lateinit var loadsir: LoadService<Any>
+
     override fun getLayoutId() = R.layout.activity_http
 
     override fun createViewModel() = ViewModelProvider(this).get(NetViewModule::class.java)
 
     override fun initUI() {
         setHeaderTitle("协程请求")
+        loadsir = loadServiceInit(mRefreshLayout) {
+            //点击重试时触发的操作
+            loadsir.showLoading()
+            mViewModule.getData(true)
+        }
 
-        supportFragmentManager.beginTransaction().add(R.id.content, HttpCoroutinesFragment()).commit()
+//        supportFragmentManager.beginTransaction().add(R.id.content, HttpCoroutinesFragment()).commit()
+
+        mAdapter = Adapter(mRecyclerView)
+        mRecyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL))
+        mRecyclerView.adapter = mAdapter
+
+
+        loadsir.showLoading()
+        mViewModule.getData(true)
+
 
         mViewModule.dataModule.observe(this, Observer {
-            XLogUtils.d("当前线程44->${Thread.currentThread().name}")
-            tvResult.text = AppGsonObject.toJson(it)
+            loadListData(it, mAdapter, loadsir, mRefreshLayout)
         })
     }
 
     override fun initEvent() {
-        btnRequest.setOnClickListener {
-            mViewModule.getData()
-            mViewModule.getData2()
+        mRefreshLayout.setOnRefreshListener {
+            mViewModule.getData(true)
+        }
+
+        mAdapter.setOnLoadMoreListener {
+            mViewModule.getData(false)
         }
     }
 
 
+    inner class Adapter(rv: RecyclerView) : XRecyclerViewAdapter<WanAndroidBean>(rv, R.layout.item_list_zns) {
+
+        override fun bindData(holder: XViewHolder, data: WanAndroidBean, position: Int) {
+
+            (holder.convertView as TextView).text = data.title
+
+        }
+    }
 }

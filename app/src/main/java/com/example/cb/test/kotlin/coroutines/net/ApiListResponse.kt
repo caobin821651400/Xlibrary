@@ -1,7 +1,5 @@
 package com.example.cb.test.kotlin.coroutines.net
 
-import cn.sccl.net.library.core.BaseResponse
-
 
 /**
  * ====================================================
@@ -14,15 +12,24 @@ import cn.sccl.net.library.core.BaseResponse
  * 3.重写 getResponseCode、getResponseData、getResponseMsg方法，传入你的 code data msg
  * ====================================================
  */
-data class ApiResponse<T>(var code: Int, var msg: String, var data: T) : BaseResponse<T>() {
+data class ApiListResponse<T>(
+        var datas: ArrayList<T>,
+        var curPage: Int,
+        var offset: Int,
+        var over: Boolean,
+        var pageCount: Int,
+        var size: Int,
+        var total: Int
+) {
 
+    /**
+     * 是否是空数据
+     */
+    fun isEmpty() = datas.isNullOrEmpty()
 
-    override fun getResponseCode() = code
-
-    override fun getResponseData() = data
-
-    override fun getResponseMsg() = msg
-
-    override fun isSuccess(): Boolean = code == 1000
+    /**
+     * 是否有更多
+     */
+    fun isLoadMore() = (curPage * size)< total
 
 }

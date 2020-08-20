@@ -53,7 +53,6 @@ public abstract class BaseFragment extends Fragment {
     }
 
 
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -62,6 +61,13 @@ public abstract class BaseFragment extends Fragment {
             initEvent(mRootView);
             isInitUi = true;
         }
+    }
+
+    /**
+     * 开放一个入口，在initUI做初始化工作
+     */
+    public void beforeInitUI() {
+
     }
 
     /**
