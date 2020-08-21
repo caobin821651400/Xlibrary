@@ -99,6 +99,4 @@ fun <T> loadListData(
             adapter.showLoadError()
         }
     }
-
-
 }

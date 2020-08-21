@@ -496,7 +496,7 @@ public abstract class XRecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T,
      * @param networkErrorListener
      * @return
      */
-    public XRecyclerViewAdapter<T> setNerworkErrorListener(OnNetworkErrorListener networkErrorListener) {
+    public XRecyclerViewAdapter<T> setNetworkErrorListener(OnNetworkErrorListener networkErrorListener) {
         this.networkErrorListener = networkErrorListener;
         return this;
     }

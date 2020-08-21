@@ -27,13 +27,13 @@ class NetViewModule : BaseViewModule() {
      * @param isRefresh 是否是刷新。第一次加载相当于是刷新
      * @param isLoadError 加载更多出错
      */
-    fun getData(isRefresh: Boolean, isLoadError: Boolean = false) {
+    fun getData(isRefresh: Boolean) {
         if (isRefresh) {
             pageNo = 0
         }
         request({ XHttp.getService(ApiService::class.java).getArticleList(pageNo) }, {
             //请求成功
-            if (!isLoadError) pageNo++
+            pageNo++
             dataModule.value = XListPageDataUi(
                     isSuccess = true,
                     isEmpty = it.isEmpty(),

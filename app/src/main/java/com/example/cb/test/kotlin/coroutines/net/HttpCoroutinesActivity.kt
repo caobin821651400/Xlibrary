@@ -63,6 +63,10 @@ class HttpCoroutinesActivity : BaseViewModuleActivity<NetViewModule>() {
         mAdapter.setOnLoadMoreListener {
             mViewModule.getData(false)
         }
+
+        mAdapter.setOnLoadMoreErrorListener {
+            mViewModule.getData(false)
+        }
     }
 
 
