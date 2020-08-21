@@ -5,7 +5,7 @@ package com.example.cb.test.kotlin.coroutines.net
  * ====================================================
  * @User :caobin
  * @Date :2020/8/19 12:52
- * @Desc :分页数据
+ * @Desc :分页数据,要根据自己服务器的返回json格式来
  * ====================================================
  */
 data class ApiListResponse<T>(

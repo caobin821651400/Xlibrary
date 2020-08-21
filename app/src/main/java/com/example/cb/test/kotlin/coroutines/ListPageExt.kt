@@ -65,7 +65,7 @@ fun loadServiceInit(view: View, callBack: () -> Unit): LoadService<Any> {
  * 分页数据加载
  */
 fun <T> loadListData(
-        data: XListPageDataUi<T>,
+        data: PageListDataUiState<T>,
         adapter: XRecyclerViewAdapter<T>,
         loadService: LoadService<*>,
         swipeRefreshLayout: SwipeRefreshLayout

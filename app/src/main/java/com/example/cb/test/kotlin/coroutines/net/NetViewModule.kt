@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import cn.sccl.net.library.XHttp
 import cn.sccl.net.library.core.BaseViewModule
 import cn.sccl.net.library.core.request
-import com.example.cb.test.kotlin.coroutines.XListPageDataUi
+import com.example.cb.test.kotlin.coroutines.PageListDataUiState
 
 /**
  * ====================================================
@@ -18,9 +18,7 @@ class NetViewModule : BaseViewModule() {
     //页码 首页数据页码从0开始
     var pageNo = 0
 
-    //这个类单例
-    val dataModule by lazy { MutableLiveData<XListPageDataUi<WanAndroidBean>>() }
-
+    val dataModule: MutableLiveData<PageListDataUiState<WanAndroidBean>> = MutableLiveData()
 
     /**
      * 加载列表数据
@@ -34,7 +32,7 @@ class NetViewModule : BaseViewModule() {
         request({ XHttp.getService(ApiService::class.java).getArticleList(pageNo) }, {
             //请求成功
             pageNo++
-            dataModule.value = XListPageDataUi(
+            dataModule.value = PageListDataUiState(
                     isSuccess = true,
                     isEmpty = it.isEmpty(),
                     isRefresh = isRefresh,
@@ -45,7 +43,7 @@ class NetViewModule : BaseViewModule() {
             )
         }, {
             //请求失败
-            dataModule.value = XListPageDataUi(
+            dataModule.value = PageListDataUiState(
                     isSuccess = false,
                     errMsg = it.errorMsg,
                     isRefresh = isRefresh

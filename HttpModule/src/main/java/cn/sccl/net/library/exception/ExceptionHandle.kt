@@ -17,35 +17,35 @@ import java.net.ConnectException
 object ExceptionHandle {
 
 
-    fun handleException(throwable: Throwable?): cn.sccl.net.library.exception.HttpException {
+    fun handleException(throwable: Throwable?): NetException {
         throwable?.let {
             when (it) {
                 is HttpException -> {
-                    return HttpException(HttpError.NETWORK_ERROR, throwable)
+                    return NetException(NetException.UNKNOWN, throwable.message)
                 }
                 is JsonParseException, is JSONException, is ParseException, is MalformedJsonException -> {
-                    HttpException(HttpError.PARSE_ERROR, throwable)
+                    return NetException(NetException.PARSE_ERROR, throwable.message)
                 }
                 is ConnectException -> {
-                    return HttpException(HttpError.NETWORK_ERROR, throwable)
+                    return NetException(NetException.NETWORK_ERROR, throwable?.message)
                 }
                 is javax.net.ssl.SSLException -> {
-                    return HttpException(HttpError.SSL_ERROR, throwable)
+                    return NetException(NetException.SSL_ERROR, throwable.message)
                 }
                 is java.net.SocketTimeoutException -> {
-                    return HttpException(HttpError.TIMEOUT_ERROR, throwable)
+                    return NetException(NetException.TIMEOUT_ERROR, throwable.message)
                 }
                 is java.net.UnknownHostException -> {
-                    return HttpException(HttpError.TIMEOUT_ERROR, throwable)
+                    return NetException(NetException.TIMEOUT_ERROR, throwable.message)
                 }
-                is cn.sccl.net.library.exception.HttpException -> {
+                is NetException -> {
                     return it
                 }
                 else -> {
-                    HttpException(HttpError.UNKNOWN, throwable)
+                    return NetException(NetException.UNKNOWN, throwable.message)
                 }
             }
         }
-        return HttpException(HttpError.UNKNOWN, throwable)
+        return NetException(NetException.UNKNOWN, throwable?.message ?: "")
     }
 }

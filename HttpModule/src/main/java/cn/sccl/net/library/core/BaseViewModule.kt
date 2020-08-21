@@ -4,8 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cn.sccl.net.library.event.EventLiveData
 import cn.sccl.net.library.exception.ExceptionHandle
-import cn.sccl.net.library.exception.HttpError
-import cn.sccl.net.library.exception.HttpException
+import cn.sccl.net.library.exception.NetException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -20,7 +19,6 @@ import kotlinx.coroutines.withContext
 open class BaseViewModule : ViewModel() {
 
     val defaultLoadingMsg = "努力加载中..."
-
 
     /**
      * 显示dialog
@@ -44,7 +42,7 @@ open class BaseViewModule : ViewModel() {
 fun <T> BaseViewModule.request(
         block: suspend () -> BaseResponse<T>,
         success: (T) -> Unit,
-        error: (HttpException) -> Unit = {},
+        error: (NetException) -> Unit = {},
         isShowDialog: Boolean = false,
         loadingMsg: String = defaultLoadingMsg
 ) {
@@ -59,7 +57,7 @@ fun <T> BaseViewModule.request(
             if (it.isSuccess()) {
                 success(it.getResponseData())
             } else {
-                error(HttpException(it.getResponseCode(), it.getResponseMsg(), ""))
+                error(NetException(it.getResponseCode(), it.getResponseMsg(), ""))
             }
         }.onFailure {
             if (isShowDialog) dismissDialogLiveData.value = ""
@@ -79,7 +77,7 @@ fun <T> BaseViewModule.request(
 fun <T> BaseViewModule.requestNoCheck(
         block: suspend () -> T,
         success: (T) -> Unit,
-        error: (HttpException) -> Unit = {},
+        error: (NetException) -> Unit = {},
         isShowDialog: Boolean = false,
         loadingMsg: String = defaultLoadingMsg
 ) {
@@ -110,7 +108,7 @@ fun <T> BaseViewModule.requestNoCheck(
 fun BaseViewModule.requestString(
         block: suspend () -> String,
         success: (String) -> Unit,
-        error: (HttpException) -> Unit = {},
+        error: (NetException) -> Unit = {},
         isShowDialog: Boolean = false,
         loadingMsg: String = defaultLoadingMsg
 ) {
@@ -125,7 +123,7 @@ fun BaseViewModule.requestString(
             if (it.isNotEmpty()) {
                 success(it)
             } else {
-                error(HttpException(HttpError.UNKNOWN, null))
+                error(NetException(NetException.UNKNOWN, null))
             }
         }.onFailure {
             if (isShowDialog) dismissDialogLiveData.value = ""
