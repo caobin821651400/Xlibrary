@@ -5,12 +5,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import cn.sccl.xlibrary.adapter.XRecyclerViewAdapter
 import cn.sccl.xlibrary.adapter.XViewHolder
+import cn.sccl.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
 import com.example.cb.test.bean.CommonMenuBean
 import com.example.cb.test.kotlin.coroutines.CoroutinesMainActivity
 import kotlinx.android.synthetic.main.activity_jet_pack.*
-import java.util.ArrayList
+import java.util.*
+
 /**
  * ====================================================
  * @User :caobin
@@ -23,7 +25,7 @@ class KotlinMainActivity : BaseActivity() {
     private lateinit var mAdapter: MAdapter
     private var mList: ArrayList<CommonMenuBean> = ArrayList()
 
-    override fun getLayoutId()= R.layout.activity_kotlin_main
+    override fun getLayoutId() = R.layout.activity_kotlin_main
 
     override fun initUI() {
         setHeaderTitle("Kotlin使用")
@@ -45,7 +47,23 @@ class KotlinMainActivity : BaseActivity() {
             }
         }
     }
-
+//    get({
+//        XLogUtils.d("第一个方法执行")
+//    }, {
+//        XLogUtils.d(it)
+//    }, {
+//        "第三个方法执行$it"
+//    })
+//
+//    fun get(
+//            block: () -> Unit,
+//            block2: (String) -> Unit,
+//            block3: (Int) -> String) {
+//
+//        block()
+//        block2("第二个方法执行")
+//        XLogUtils.d(block3(3))
+//    }
 
     /****
      *

@@ -39,7 +39,6 @@ class NetViewModule : BaseViewModule() {
                     isHasMore = it.isLoadMore(),
                     isFirstEmpty = isRefresh && it.isEmpty(),
                     listData = it.datas
-
             )
         }, {
             //请求失败

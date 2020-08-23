@@ -73,9 +73,7 @@ class HttpCoroutinesActivity : BaseViewModuleActivity<NetViewModule>() {
     inner class Adapter(rv: RecyclerView) : XRecyclerViewAdapter<WanAndroidBean>(rv, R.layout.item_list_zns) {
 
         override fun bindData(holder: XViewHolder, data: WanAndroidBean, position: Int) {
-
             (holder.convertView as TextView).text = data.title
-
         }
     }
 }
