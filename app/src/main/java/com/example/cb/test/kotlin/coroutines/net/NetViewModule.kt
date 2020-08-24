@@ -23,7 +23,6 @@ class NetViewModule : BaseViewModule() {
     /**
      * 加载列表数据
      * @param isRefresh 是否是刷新。第一次加载相当于是刷新
-     * @param isLoadError 加载更多出错
      */
     fun getData(isRefresh: Boolean) {
         if (isRefresh) {
