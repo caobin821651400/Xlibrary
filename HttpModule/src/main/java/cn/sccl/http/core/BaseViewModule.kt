@@ -1,10 +1,10 @@
-package cn.sccl.net.library.core
+package cn.sccl.http.core
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import cn.sccl.net.library.event.EventLiveData
-import cn.sccl.net.library.exception.ExceptionHandle
-import cn.sccl.net.library.exception.NetException
+import cn.sccl.http.event.EventLiveData
+import cn.sccl.http.exception.ExceptionHandle
+import cn.sccl.http.exception.NetException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

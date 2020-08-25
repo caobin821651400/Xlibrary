@@ -1,7 +1,7 @@
 package com.example.cb.test.base
 
 import androidx.lifecycle.Observer
-import cn.sccl.net.library.core.BaseViewModule
+import cn.sccl.http.core.BaseViewModule
 
 /**
  * ====================================================

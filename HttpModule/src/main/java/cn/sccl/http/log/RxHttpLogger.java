@@ -1,8 +1,8 @@
-package cn.sccl.net.library.log;
+package cn.sccl.http.log;
 
 import android.util.Log;
 
-import cn.sccl.net.library.BuildConfig;
+import cn.sccl.http.library.BuildConfig;
 
 
 /**

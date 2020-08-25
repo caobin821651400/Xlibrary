@@ -1,4 +1,4 @@
-package cn.sccl.net.library.exception
+package cn.sccl.http.exception
 
 import android.net.ParseException
 import com.google.gson.JsonParseException
@@ -46,6 +46,7 @@ object ExceptionHandle {
                 }
             }
         }
-        return NetException(NetException.UNKNOWN, throwable?.message ?: "")
+        return NetException(NetException.UNKNOWN, throwable?.message
+                ?: "")
     }
 }

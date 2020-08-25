@@ -47,6 +47,4 @@ dependencies {
     api "com.squareup.retrofit2:retrofit:2.6.1"
     api "com.squareup.okhttp3:logging-interceptor:4.2.0"
     api "com.squareup.retrofit2:converter-gson:2.6.1"
-    //动态替换BaseUrl库 使用可参考 https://github.com/JessYanCoding/RetrofitUrlManager
-    api 'me.jessyan:retrofit-url-manager:1.4.0'
 }

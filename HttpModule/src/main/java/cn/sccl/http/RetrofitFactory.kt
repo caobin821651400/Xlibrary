@@ -1,4 +1,4 @@
-package cn.sccl.net.library
+package cn.sccl.http
 
 import retrofit2.Retrofit
 
@@ -24,7 +24,7 @@ class RetrofitFactory {
     private lateinit var retrofit: Retrofit
 
     /**
-     * retrofit一般在Application传入
+     * Retrofit一般在Application传入
      */
     fun setRetrofit(retrofit: Retrofit) {
         this.retrofit = retrofit

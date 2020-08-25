@@ -1,4 +1,4 @@
-package cn.sccl.net.library.core
+package cn.sccl.http.core
 
 /**
  * ====================================================

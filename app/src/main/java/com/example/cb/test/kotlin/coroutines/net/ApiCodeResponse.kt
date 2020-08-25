@@ -1,6 +1,6 @@
 package com.example.cb.test.kotlin.coroutines.net
 
-import cn.sccl.net.library.core.BaseResponse
+import cn.sccl.http.core.BaseResponse
 
 
 /**

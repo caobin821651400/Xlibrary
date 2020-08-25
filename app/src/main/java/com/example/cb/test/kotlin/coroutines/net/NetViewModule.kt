@@ -1,9 +1,9 @@
 package com.example.cb.test.kotlin.coroutines.net
 
 import androidx.lifecycle.MutableLiveData
-import cn.sccl.net.library.XHttp
-import cn.sccl.net.library.core.BaseViewModule
-import cn.sccl.net.library.core.request
+import cn.sccl.http.XHttp
+import cn.sccl.http.core.BaseViewModule
+import cn.sccl.http.core.request
 import com.example.cb.test.kotlin.coroutines.PageListDataUiState
 
 /**

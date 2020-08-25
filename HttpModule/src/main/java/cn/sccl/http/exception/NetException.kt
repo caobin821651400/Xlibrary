@@ -1,4 +1,4 @@
-package cn.sccl.net.library.exception
+package cn.sccl.http.exception
 
 /**
  * ====================================================
