@@ -2,6 +2,7 @@ package com.example.cb.test
 
 import android.app.Application
 import cn.sccl.http.XHttp
+import cn.sccl.http.interceptor.BaseUrlInterceptor
 import cn.sccl.http.log.RxLogInterceptor
 import cn.sccl.xlibrary.XLibrary
 import cn.sccl.xlibrary.kotlin.AppGsonObject
@@ -41,6 +42,7 @@ class MyApplication : Application() {
         val client = OkHttpClient.Builder()
                 .connectTimeout(5, TimeUnit.SECONDS)
                 .readTimeout(5, TimeUnit.SECONDS)
+                .addInterceptor(BaseUrlInterceptor())
                 .addInterceptor(RxLogInterceptor())
                 .sslSocketFactory(sslParams.sSLSocketFactory, sslParams.trustManager)
                 .hostnameVerifier(HostnameVerifier { _, _ -> true })
@@ -48,8 +50,8 @@ class MyApplication : Application() {
 
         XHttp.setRetrofit(
                 Retrofit.Builder()
-//                        .baseUrl("https://iot.sctel.com.cn/")
-                        .baseUrl("https://www.wanandroid.com/")
+                        .baseUrl("https://iot.sctel.com.cn/")
+//                        .baseUrl("https://www.wanandroid.com/")
                         .client(client)
                         .addConverterFactory(GsonConverterFactory.create(AppGsonObject))
                         .build()

@@ -21,32 +21,32 @@ object ExceptionHandle {
         throwable?.let {
             when (it) {
                 is HttpException -> {
-                    return NetException(NetException.UNKNOWN, throwable.message)
+                    return NetException(NetException.UNKNOWN, errLog = throwable.message)
                 }
                 is JsonParseException, is JSONException, is ParseException, is MalformedJsonException -> {
-                    return NetException(NetException.PARSE_ERROR, throwable.message)
+                    return NetException(NetException.PARSE_ERROR, errLog = throwable.message)
                 }
                 is ConnectException -> {
-                    return NetException(NetException.NETWORK_ERROR, throwable?.message)
+                    return NetException(NetException.NETWORK_ERROR, errLog = throwable?.message)
                 }
                 is javax.net.ssl.SSLException -> {
-                    return NetException(NetException.SSL_ERROR, throwable.message)
+                    return NetException(NetException.SSL_ERROR, errLog = throwable.message)
                 }
                 is java.net.SocketTimeoutException -> {
-                    return NetException(NetException.TIMEOUT_ERROR, throwable.message)
+                    return NetException(NetException.TIMEOUT_ERROR, errLog = throwable.message)
                 }
                 is java.net.UnknownHostException -> {
-                    return NetException(NetException.TIMEOUT_ERROR, throwable.message)
+                    return NetException(NetException.TIMEOUT_ERROR, errLog = throwable.message)
                 }
                 is NetException -> {
                     return it
                 }
                 else -> {
-                    return NetException(NetException.UNKNOWN, throwable.message)
+                    return NetException(NetException.UNKNOWN, errLog = throwable.message)
                 }
             }
         }
-        return NetException(NetException.UNKNOWN, throwable?.message
+        return NetException(NetException.UNKNOWN, errLog = throwable?.message
                 ?: "")
     }
 }

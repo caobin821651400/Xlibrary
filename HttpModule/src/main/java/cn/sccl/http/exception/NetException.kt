@@ -21,7 +21,7 @@ class NetException : Exception {
     var errCode: Int = 0 //错误码
     var errLog: String? //错误日志
 
-    constructor(errCode: Int, error: String?, errLog: String? = "") : super(error) {
+    constructor(errCode: Int, error: String? = null, errLog: String? = "") : super(error) {
         this.errorMsg = error ?: when (errCode) {
             UNKNOWN -> "请求失败，请稍后再试"
             PARSE_ERROR -> "解析错误，请稍后再试"
