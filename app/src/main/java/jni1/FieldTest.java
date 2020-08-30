@@ -1,4 +1,4 @@
-package com.example.cb.test.native1;
+package jni1;
 
 public class FieldTest {
 
@@ -20,7 +20,7 @@ public class FieldTest {
         fieldTest.testField();
         fieldTest.testStaticField();
 
-        System.err.println("1->" + fieldTest.a);
-        System.err.println("2->" + fieldTest.b);
+        System.err.println("a=" + fieldTest.a);
+        System.err.println("b=" + fieldTest.b);
     }
 }

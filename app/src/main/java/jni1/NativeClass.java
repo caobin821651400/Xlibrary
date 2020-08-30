@@ -1,4 +1,4 @@
-package com.example.cb.test.native1;
+package jni1;
 
 public class NativeClass {
 
