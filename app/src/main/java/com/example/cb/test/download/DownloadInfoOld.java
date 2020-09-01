@@ -6,7 +6,7 @@ package com.example.cb.test.download;
  * time   : 2018/01/19
  * desc   :
  */
-public class DownloadInfo {
+public class DownloadInfoOld {
 
     public static final long TOTAL_ERROR = -1;//获取进度失败
     private String url;

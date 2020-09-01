@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cb.test.base.BaseActivity;
 import com.example.cb.test.bean.CommonMenuBean;
+import com.example.cb.test.download.DownLoadActivity;
 import com.example.cb.test.hook.HookDemoActivity;
 import com.example.cb.test.jetpack.JetPackActivity;
 import com.example.cb.test.kotlin.KotlinMainActivity;
@@ -58,6 +59,7 @@ public class MainActivity extends BaseActivity {
         mList.add(new CommonMenuBean("MvpActivity", MvpActivity.class));
         mList.add(new CommonMenuBean("BannerActivity", BannerActivity.class));
         mList.add(new CommonMenuBean("AnimTestActivity", AnimTestActivity.class));
+        mList.add(new CommonMenuBean("downLoad", DownLoadActivity.class));
 //        mList.add(new CommonMenuBean("生成二维码", QRcodeEncoderActivity.class));
 //        mList.add(new CommonMenuBean("扫一扫", ScanBaseActivity.class));
 

@@ -24,7 +24,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".kotlin.coroutines.net.HttpCoroutinesActivity"></activity>
+        <activity android:name=".download.DownLoadActivity"></activity>
+        <activity android:name=".kotlin.coroutines.net.HttpCoroutinesActivity" />
         <activity android:name=".kotlin.coroutines.CoroutinesMainActivity" />
         <activity android:name=".jetpack.hilt.HiltMainActivity" />
         <activity android:name=".kotlin.KotlinMainActivity" />

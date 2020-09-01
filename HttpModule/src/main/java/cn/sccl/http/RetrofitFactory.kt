@@ -1,5 +1,6 @@
 package cn.sccl.http
 
+import android.content.Context
 import retrofit2.Retrofit
 
 /**
@@ -18,10 +19,17 @@ val XHttp: RetrofitFactory by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) { R
 
 class RetrofitFactory {
 
+    lateinit var mContext: Context
+
     /**
-     * Retrofit,
+     * 普通接口的Retrofit,
      */
     private lateinit var retrofit: Retrofit
+
+    /**
+     * 用于下载的 Retrofit
+     */
+    private lateinit var downLoadRetrofit: Retrofit
 
     /**
      * Retrofit一般在Application传入
@@ -31,9 +39,30 @@ class RetrofitFactory {
     }
 
     /**
+     * Retrofit一般在Application传入
+     */
+    fun setDownLoadRetrofit(retrofit: Retrofit) {
+        this.downLoadRetrofit = retrofit
+    }
+
+    /**
      * 获取具体的Service
      */
     fun <T> getService(service: Class<T>): T {
         return retrofit.create(service)
+    }
+
+    /**
+     * 获取具体的Service
+     */
+    fun <T> getDownLoadService(service: Class<T>): T {
+        return downLoadRetrofit.create(service)
+    }
+
+    /**
+     *
+     */
+    fun init(context: Context) {
+        mContext = context
     }
 }
