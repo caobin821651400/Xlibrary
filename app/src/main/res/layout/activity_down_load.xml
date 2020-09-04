@@ -10,6 +10,12 @@
     <include layout="@layout/comment_header_activity" />
 
 
+    <Button
+        android:id="@+id/btnDownLoad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="单独下载" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mRecyclerView"
         android:layout_width="match_parent"

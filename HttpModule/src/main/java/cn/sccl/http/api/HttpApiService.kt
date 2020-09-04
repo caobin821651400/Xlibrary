@@ -16,15 +16,21 @@ import retrofit2.http.Url
 interface HttpApiService {
 
 
-    /**
-     * 下载文件
-     */
+//    /**
+//     * 下载文件
+//     */
+//    @Streaming
+//    @GET
+//    suspend fun downLoadFile(
+//            @Header("RANGE") start: String,
+//            @Url url: String
+//    ): Response<ResponseBody>
+
     @Streaming
     @GET
-    suspend fun downLoadFile(
+    suspend fun downloadFile(
             @Header("RANGE") start: String,
             @Url url: String
     ): Response<ResponseBody>
-
 
 }

@@ -23,9 +23,9 @@ import javax.net.ssl.HostnameVerifier
  * Created by cb on 2017/12/1.
  */
 @HiltAndroidApp
- class MyApplication : Application() {
+class MyApplication : Application() {
 
-    companion object{
+    companion object {
         lateinit var app: MyApplication
     }
 
@@ -46,30 +46,20 @@ import javax.net.ssl.HostnameVerifier
     private fun initHttp() {
         XHttp.init(this)
         val sslParams = SSLUtils.getSslSocketFactory()
-        val client =
-                OkHttpClient.Builder()
-                        .connectTimeout(5, TimeUnit.SECONDS)
-                        .readTimeout(5, TimeUnit.SECONDS)
-                        .addInterceptor(BaseUrlInterceptor())
-                        .addInterceptor(RxLogInterceptor())
-                        .sslSocketFactory(sslParams.sSLSocketFactory, sslParams.trustManager)
-                        .hostnameVerifier(HostnameVerifier { _, _ -> true })
-                        .build()
-        XHttp.setRetrofit(
-                Retrofit.Builder()
-                        .baseUrl("https://iot.sctel.com.cn/")
+        val client = OkHttpClient.Builder()
+                .connectTimeout(5, TimeUnit.SECONDS)
+                .readTimeout(5, TimeUnit.SECONDS)
+                .addInterceptor(BaseUrlInterceptor())
+                .addInterceptor(RxLogInterceptor())
+                .sslSocketFactory(sslParams.sSLSocketFactory, sslParams.trustManager)
+                .hostnameVerifier(HostnameVerifier { _, _ -> true })
+                .build()
+        XHttp.setRetrofit(Retrofit.Builder()
+                .baseUrl("https://iot.sctel.com.cn/")
 //                        .baseUrl("https://www.wanandroid.com/")
-                        .client(client)
-                        .addConverterFactory(GsonConverterFactory.create(AppGsonObject))
-                        .build()
-        )
-
-        XHttp.setDownLoadRetrofit(
-                Retrofit.Builder()
-                        .baseUrl("https://iot.sctel.com.cn/")
-                        .client(client)
-                        .addConverterFactory(GsonConverterFactory.create(AppGsonObject))
-                        .build()
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create(AppGsonObject))
+                .build()
         )
     }
 

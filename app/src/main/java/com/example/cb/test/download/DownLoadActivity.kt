@@ -2,9 +2,14 @@ package com.example.cb.test.download
 
 import android.Manifest
 import android.os.Environment
+import android.util.Log
+import cn.sccl.http.XHttp
 import cn.sccl.http.download.DownLadProgressListener
 import cn.sccl.http.download.DownLoadManager
 import cn.sccl.http.exception.NetException
+import cn.sccl.http.interceptor.BaseUrlInterceptor
+import cn.sccl.http.log.RxLogInterceptor
+import cn.sccl.xlibrary.kotlin.AppGsonObject
 import cn.sccl.xlibrary.utils.XLogUtils
 import cn.sccl.xlibrary.utils.XPermission
 import com.example.cb.test.MyApplication
@@ -13,7 +18,12 @@ import com.example.cb.test.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_down_load.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 /**
  * ====================================================
@@ -22,11 +32,15 @@ import kotlinx.coroutines.launch
  * @Desc :
  * ====================================================
  */
-class DownLoadActivity : BaseActivity(), DownLadProgressListener.OnDownLoadListener {
+class DownLoadActivity : BaseActivity(), CoroutineScope by MainScope(), DownLadProgressListener.OnDownLoadListener {
 
     private val url1 = "http://update.9158.com/miaolive/Miaolive.apk"
     private val url2 = "https://o8g2z2sa4.qnssl.com/android/momo_8.18.5_c1.apk"
     private val url3 = "https://o8g2z2sa4.qnssl.com/android/momo_8.18.5_c1.apk"
+
+    companion object {
+        const val TAG2 = "aaaaa->"
+    }
 
     data class DownLoadInfo(val url: String, val taskId: String, val saveName: String)
 
@@ -48,32 +62,43 @@ class DownLoadActivity : BaseActivity(), DownLadProgressListener.OnDownLoadListe
                     }
                 })
 
-        mAdapter = DownLoadAdapter(mRecyclerView)
-        mRecyclerView.adapter = mAdapter
+        val client = OkHttpClient.Builder().build()
 
-        mList.add(DownLoadInfo(url1, url1, "111.apk"))
-        mList.add(DownLoadInfo(url2, url2, "222.apk"))
-        mList.add(DownLoadInfo(url3, url3, "333.apk"))
-        mAdapter.dataLists = mList
+        XHttp.setDownLoadRetrofit(
+                Retrofit.Builder()
+                        .baseUrl("https://iot.sctel.com.cn/")
+                        .client(client)
+                        .build()
+        )
+
+//        mAdapter = DownLoadAdapter(mRecyclerView)
+//        mRecyclerView.adapter = mAdapter
+//
+//        mList.add(DownLoadInfo(url1, url1, "111.apk"))
+//        mList.add(DownLoadInfo(url2, url2, "222.apk"))
+//        mList.add(DownLoadInfo(url3, url3, "333.apk"))
+//        mAdapter.dataLists = mList
     }
 
     override fun initEvent() {
-        mAdapter.setListener(
-                { startDownLoad(it.url, it.saveName) },
-                { pauseDownLoad(it.taskId) }
-        )
+        btnDownLoad.setOnClickListener {
+            launch {
+                startDownLoad()
+            }
+        }
+
+
+//        mAdapter.setListener(
+//                { startDownLoad(it.url, it.saveName) },
+//                { pauseDownLoad(it.taskId) }
+//        )
     }
 
-    /**
-     * 开始下载
-     */
-    private fun startDownLoad(url: String, saveName: String) {
-        CoroutineScope(Dispatchers.Main).launch {
-            DownLoadManager.downLoad(
-                    url, url,
-                    getBasePath(), saveName, this@DownLoadActivity
-            )
-        }
+    private suspend fun startDownLoad() {
+        DownLoadManager.downLoad(
+                url1, url1,
+                getBasePath(), "111.apk", this
+        )
     }
 
     /**
@@ -93,7 +118,7 @@ class DownLoadActivity : BaseActivity(), DownLadProgressListener.OnDownLoadListe
 
     override fun onPrepare(tag: String) {
         XLogUtils.v("准备下载 $tag  thread ${Thread.currentThread().name}")
-        mAdapter.setDownLoadPrepare(tag)
+//        mAdapter.setDownLoadPrepare(tag)
     }
 
     override fun onProgress(tag: String, progress: Int) {
@@ -101,19 +126,19 @@ class DownLoadActivity : BaseActivity(), DownLadProgressListener.OnDownLoadListe
     }
 
     override fun onError(tag: String, e: NetException) {
-        mAdapter.setDownLoadError(tag, e)
+//        mAdapter.setDownLoadError(tag, e)
     }
 
     override fun onSuccess(tag: String, path: String) {
-        mAdapter.setDownLoadSuccess(tag, path)
+//        mAdapter.setDownLoadSuccess(tag, path)
     }
 
     override fun onPause(tag: String) {
-        mAdapter.setDownLoadPause(tag)
+//        mAdapter.setDownLoadPause(tag)
     }
 
     override fun onCancel(tag: String) {
-        mAdapter.setDownLoadCancel(tag)
+//        mAdapter.setDownLoadCancel(tag)
     }
 
     override fun onUpdate(tag: String, progress: Int, loadedLength: Long, totalLength: Long, isDone: Boolean) {
@@ -121,13 +146,13 @@ class DownLoadActivity : BaseActivity(), DownLadProgressListener.OnDownLoadListe
                 "下载进度 $tag  loadedLength= $loadedLength  totalLength= $totalLength" +
                         "  isDone $isDone thread ${Thread.currentThread().name}"
         )
-        mAdapter.setDownLoadProgress(
-                tag,
-                progress,
-                DownLoadManager.bytes2kb(loadedLength),
-                DownLoadManager.bytes2kb(totalLength),
-                isDone
-        )
+//        mAdapter.setDownLoadProgress(
+//                tag,
+//                progress,
+//                DownLoadManager.bytes2kb(loadedLength),
+//                DownLoadManager.bytes2kb(totalLength),
+//                isDone
+//        )
     }
 
 }

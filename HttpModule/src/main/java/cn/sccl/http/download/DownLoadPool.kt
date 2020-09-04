@@ -1,6 +1,7 @@
 package cn.sccl.http.download
 
 import cn.sccl.http.download.DownLadProgressListener.OnDownLoadListener
+import cn.sccl.http.download.utils.ShareDownLoadUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.isActive
@@ -42,6 +43,7 @@ object DownLoadPool {
             scopeMap.remove(key)
             listenerMap.remove(key)
             pathMap.remove(key)
+            ShareDownLoadUtil.remove(key)
         } catch (e: Exception) {
 
         }

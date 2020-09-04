@@ -64,3 +64,10 @@ fun <T> JSONArray.forEachIndex(action: (index: Int, T) -> Unit): Unit {
     }
 }
 
+/**
+ * inline 修饰符影响函数本身和传给它的 lambda 表达式：所有这些都将内联到调用处。
+ * 我的理解就是 带inline修饰符的方法 在调用的时候回将方法内的代码原封不动的搬到调用处执行
+ */
+inline fun < reified T> Gson.fromGson(jsonString: String) {
+    fromJson(jsonString, T::class.java)
+}

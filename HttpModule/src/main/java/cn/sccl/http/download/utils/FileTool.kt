@@ -28,11 +28,40 @@ object FileTool {
     private const val KB = 1024
 
 
-    /**
-     * 下载文件
-     */
+//    /**
+//     * 下载文件
+//     */
+//    suspend fun downToFile(
+//            tag: String,
+//            savePath: String,
+//            saveName: String,
+//            currentLength: Long,
+//            responseBody: ResponseBody,
+//            loadListener: OnDownLoadListener
+//    ) {
+//        val filePath = getFilePath(savePath, saveName)
+//
+//        kotlin.runCatching {
+//            if (filePath == null) {
+//                withContext(Dispatchers.Main) {
+//                    loadListener.onError(tag, NetException(DOWN_LOAD_PATH_ERROR))
+//                }
+//                DownLoadPool.remove(tag)
+//                return
+//            }
+//            //保存到文件
+//            saveToFile(currentLength, responseBody, filePath, tag, loadListener)
+//        }.onFailure {
+//            withContext(Dispatchers.Main) {
+//                loadListener.onError(tag, NetException(DOWN_LOAD_ERROR))
+//            }
+//            DownLoadPool.remove(tag)
+//        }
+//    }
+
+
     suspend fun downToFile(
-            tag: String,
+            key: String,
             savePath: String,
             saveName: String,
             currentLength: Long,
@@ -40,42 +69,37 @@ object FileTool {
             loadListener: OnDownLoadListener
     ) {
         val filePath = getFilePath(savePath, saveName)
-
-        kotlin.runCatching {
+        try {
             if (filePath == null) {
                 withContext(Dispatchers.Main) {
-                    loadListener.onError(tag, NetException(DOWN_LOAD_PATH_ERROR))
+                    loadListener.onError(key, NetException(DOWN_LOAD_PATH_ERROR))
                 }
-                DownLoadPool.remove(tag)
+                DownLoadPool.remove(key)
                 return
             }
             //保存到文件
-            saveToFile(currentLength, responseBody, filePath, tag, loadListener)
-        }.onFailure {
+            saveToFile(currentLength, responseBody, filePath, key, loadListener)
+        } catch (throwable: Throwable) {
             withContext(Dispatchers.Main) {
-                loadListener.onError(tag, NetException(DOWN_LOAD_ERROR))
+                loadListener.onError(key, NetException(DOWN_LOAD_PATH_ERROR))
             }
-            DownLoadPool.remove(tag)
+            DownLoadPool.remove(key)
         }
     }
 
-
-    /**
-     * 保存文件
-     */
     private suspend fun saveToFile(
             currentLength: Long,
             responseBody: ResponseBody,
             filePath: String,
-            tag: String,
+            key: String,
             loadListener: OnDownLoadListener
     ) {
-
-        val fileLength = getFileLength(currentLength, responseBody)
+        val fileLength =
+                getFileLength(currentLength, responseBody)
         val inputStream = responseBody.byteStream()
         val accessFile = RandomAccessFile(File(filePath), "rwd")
         val channel = accessFile.channel
-        val mapBuffer = channel.map(
+        val mappedBuffer = channel.map(
                 FileChannel.MapMode.READ_WRITE,
                 currentLength,
                 fileLength - currentLength
@@ -86,19 +110,19 @@ object FileTool {
         var currentSaveLength = currentLength //当前的长度
 
         while (inputStream.read(buffer).also { len = it } != -1) {
-            mapBuffer.put(buffer, 0, len)
+            mappedBuffer.put(buffer, 0, len)
             currentSaveLength += len
 
             val progress = (currentSaveLength.toFloat() / fileLength * 100).toInt() // 计算百分比
             if (lastProgress != progress) {
                 lastProgress = progress
                 //记录已经下载的长度
-                ShareDownLoadUtil.putLong(tag, currentSaveLength)
+                ShareDownLoadUtil.putLong(key, currentSaveLength)
 
                 withContext(Dispatchers.Main) {
-                    loadListener.onProgress(tag, progress)
+                    loadListener.onProgress(key, progress)
                     loadListener.onUpdate(
-                            tag,
+                            key,
                             progress,
                             currentSaveLength,
                             fileLength,
@@ -108,22 +132,83 @@ object FileTool {
 
                 if (currentSaveLength == fileLength) {
                     withContext(Dispatchers.Main) {
-                        loadListener.onSuccess(tag, filePath)
+                        loadListener.onSuccess(key, filePath)
                     }
-                    DownLoadPool.remove(tag)
+                    DownLoadPool.remove(key)
                 }
             }
         }
 
-        //阻塞的线程不应该放到主线程
-        withContext(Dispatchers.IO) {
-            kotlin.runCatching {
-                inputStream.close()
-                accessFile.close()
-                channel.close()
-            }
-        }
+        inputStream.close()
+        accessFile.close()
+        channel.close()
     }
+
+
+//    /**
+//     * 保存文件
+//     */
+//    private suspend fun saveToFile(
+//            currentLength: Long,
+//            responseBody: ResponseBody,
+//            filePath: String,
+//            tag: String,
+//            loadListener: OnDownLoadListener
+//    ) {
+//
+//        val fileLength = getFileLength(currentLength, responseBody)
+//        val inputStream = responseBody.byteStream()
+//        val accessFile = RandomAccessFile(File(filePath), "rwd")
+//        val channel = accessFile.channel
+//        val mapBuffer = channel.map(
+//                FileChannel.MapMode.READ_WRITE,
+//                currentLength,
+//                fileLength - currentLength
+//        )
+//        val buffer = ByteArray(1024 * 4)
+//        var len = 0
+//        var lastProgress = 0
+//        var currentSaveLength = currentLength //当前的长度
+//
+//        while (inputStream.read(buffer).also { len = it } != -1) {
+//            mapBuffer.put(buffer, 0, len)
+//            currentSaveLength += len
+//
+//            val progress = (currentSaveLength.toFloat() / fileLength * 100).toInt() // 计算百分比
+//            if (lastProgress != progress) {
+//                lastProgress = progress
+//                //记录已经下载的长度
+//                ShareDownLoadUtil.putLong(tag, currentSaveLength)
+//
+//                withContext(Dispatchers.Main) {
+//                    loadListener.onProgress(tag, progress)
+//                    loadListener.onUpdate(
+//                            tag,
+//                            progress,
+//                            currentSaveLength,
+//                            fileLength,
+//                            currentSaveLength == fileLength
+//                    )
+//                }
+//
+//                if (currentSaveLength == fileLength) {
+//                    withContext(Dispatchers.Main) {
+//                        loadListener.onSuccess(tag, filePath)
+//                    }
+//                    DownLoadPool.remove(tag)
+//                }
+//            }
+//        }
+//
+//        //阻塞的线程不应该放到主线程
+//        withContext(Dispatchers.IO) {
+//            kotlin.runCatching {
+//                inputStream.close()
+//                accessFile.close()
+//                channel.close()
+//            }
+//        }
+//    }
 
 
     /**

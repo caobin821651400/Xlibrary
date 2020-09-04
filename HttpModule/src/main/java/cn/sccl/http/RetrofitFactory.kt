@@ -53,7 +53,7 @@ class RetrofitFactory {
     }
 
     /**
-     * 获取具体的Service
+     * 获取下载具体的Service
      */
     fun <T> getDownLoadService(service: Class<T>): T {
         return downLoadRetrofit.create(service)
