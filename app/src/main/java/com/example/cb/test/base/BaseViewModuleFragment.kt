@@ -24,5 +24,5 @@ abstract class BaseViewModuleFragment<VM : BaseViewModule> : BaseFragment() {
     /**
      * 创建viewModel
      */
-    public abstract fun createViewModel(): VM
+     abstract fun createViewModel(): VM
 }

@@ -2,28 +2,22 @@ package com.example.cb.test.download
 
 import android.Manifest
 import android.os.Environment
-import android.util.Log
 import cn.sccl.http.XHttp
 import cn.sccl.http.download.DownLadProgressListener
 import cn.sccl.http.download.DownLoadManager
 import cn.sccl.http.exception.NetException
-import cn.sccl.http.interceptor.BaseUrlInterceptor
-import cn.sccl.http.log.RxLogInterceptor
-import cn.sccl.xlibrary.kotlin.AppGsonObject
 import cn.sccl.xlibrary.utils.XLogUtils
 import cn.sccl.xlibrary.utils.XPermission
 import com.example.cb.test.MyApplication
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
+import kotlinx.android.synthetic.main.activity_aidl_test.*
 import kotlinx.android.synthetic.main.activity_down_load.*
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
 
 /**
  * ====================================================
@@ -83,7 +77,8 @@ class DownLoadActivity : BaseActivity(), CoroutineScope by MainScope(), DownLadP
     override fun initEvent() {
         btnDownLoad.setOnClickListener {
             launch {
-                startDownLoad()
+//                startDownLoad2()
+                if (!isRun) startDownLoad() else pauseDownLoad(url1)
             }
         }
 
@@ -94,20 +89,31 @@ class DownLoadActivity : BaseActivity(), CoroutineScope by MainScope(), DownLadP
 //        )
     }
 
+    private var isRun = false
+
     private suspend fun startDownLoad() {
+        isRun = true
+        btnDownLoad.text = "暂停"
         DownLoadManager.downLoad(
                 url1, url1,
                 getBasePath(), "111.apk", this
         )
     }
 
+    private suspend fun startDownLoad2() {
+        DownLoadManager.downLoad(
+                url2, url2,
+                getBasePath(), "222.apk", this
+        )
+    }
+
     /**
      * 暂停
      */
-    private fun pauseDownLoad(tag: String) {
-        CoroutineScope(Dispatchers.Main).launch {
-            DownLoadManager.pause(tag)
-        }
+    private suspend fun pauseDownLoad(tag: String) {
+        isRun = false
+        btnDownLoad.text = "下载"
+        DownLoadManager.pause(tag)
     }
 
     //获取更路径
@@ -146,6 +152,7 @@ class DownLoadActivity : BaseActivity(), CoroutineScope by MainScope(), DownLadP
                 "下载进度 $tag  loadedLength= $loadedLength  totalLength= $totalLength" +
                         "  isDone $isDone thread ${Thread.currentThread().name}"
         )
+        tvInfo.text="进度=$progress"
 //        mAdapter.setDownLoadProgress(
 //                tag,
 //                progress,

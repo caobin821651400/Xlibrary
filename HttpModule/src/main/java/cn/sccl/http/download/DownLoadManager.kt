@@ -7,7 +7,9 @@ import cn.sccl.http.download.DownLadProgressListener.OnDownLoadListener
 import cn.sccl.http.download.utils.FileTool
 import cn.sccl.http.download.utils.ShareDownLoadUtil
 import cn.sccl.http.exception.NetException
+import cn.sccl.http.exception.NetException.Companion.DOWN_LOAD_ERROR
 import cn.sccl.http.exception.NetException.Companion.DOWN_LOAD_PATH_ERROR
+import cn.sccl.http.exception.NetException.Companion.DOWN_URL_ERROR
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.isActive
@@ -35,12 +37,9 @@ object DownLoadManager {
             saveName: String,
             listener: OnDownLoadListener
     ) {
-//        //下载放到IO线程
-//        withContext(Dispatchers.IO) {
-//            doDownLoad(tag, url, savePath, saveName, listener, this)
-//        }
+        //下载放到IO线程
         withContext(Dispatchers.IO) {
-            doDownLoad(tag, url, savePath, saveName, listener, this)
+            doDownLoad2(tag, url, savePath, saveName, listener, this)
         }
     }
 
@@ -132,72 +131,80 @@ object DownLoadManager {
         }
     }
 
-//    private suspend fun doDownLoad(
-//            tag: String,
-//            url: String,
-//            savePath: String,
-//            saveName: String,
-//            loadListener: OnDownLoadListener,
-//            coroutineScope: CoroutineScope
-//    ) {
+    private suspend fun doDownLoad2(
+            tag: String,
+            url: String,
+            savePath: String,
+            saveName: String,
+            loadListener: OnDownLoadListener,
+            coroutineScope: CoroutineScope
+    ) {
+        val scope = DownLoadPool.scopeMap[tag]
+        scope?.apply {
+            if (isActive) {
+                return
+            } else {
+                DownLoadPool.scopeMap.remove(tag)
+            }
+        }
 //        val scope = DownLoadPool.scopeMap[tag]
-//        scope?.apply {
-//            if (isActive) {
-//                return
-//            } else {
-//                DownLoadPool.remove(tag)
-//            }
-//        }
-//
-//        if (saveName.isEmpty()) {
-//            withContext(Dispatchers.Main) {
-//                loadListener.onError(tag, NetException(DOWN_LOAD_PATH_ERROR))
-//            }
+//        if (scope != null && scope.isActive) {
 //            return
+//        } else if (scope != null && !scope.isActive) {
+//            DownLoadPool.scopeMap.remove(tag)
 //        }
-//
-//        //获取历史进度
-//        val file = File("$savePath/$saveName")
-//        val downLoadedLength = if (!file.exists()) {
-//            0L
-//        } else {
-//            ShareDownLoadUtil.getLong(tag, 0)
-//        }
-//
-//        runCatching {
-//            //添加任务
-//            DownLoadPool.addJob(tag, coroutineScope, savePath, loadListener)
-//
-//            withContext(Dispatchers.Main) {
-//                loadListener.onPrepare(tag)
-//            }
-//
-//            val responseBody = XHttp.getDownLoadService(HttpApiService::class.java)
-//                    .downLoadFile("bytes=$downLoadedLength-", url).body()
-//
-//            if (responseBody == null) {
-//                withContext(Dispatchers.Main) {
-//                    loadListener.onError(tag, NetException(DOWN_URL_ERROR))
-//                }
-//                return
-//            }
-//
-//            FileTool.downToFile(
-//                    tag,
-//                    savePath,
-//                    saveName,
-//                    downLoadedLength,
-//                    responseBody,
-//                    loadListener
-//            )
-//
-//        }.onFailure {
-//            withContext(Dispatchers.Main) {
-//                loadListener.onError(tag, NetException(DOWN_LOAD_ERROR))
-//            }
-//            DownLoadPool.remove(tag)
-//        }
-//    }
+
+        if (saveName.isEmpty()) {
+            withContext(Dispatchers.Main) {
+                loadListener.onError(tag, NetException(DOWN_LOAD_PATH_ERROR))
+            }
+            return
+        }
+
+
+
+        //获取历史进度
+        val file = File("$savePath/$saveName")
+        val downLoadedLength = if (!file.exists()) {
+            0L
+        } else {
+            ShareDownLoadUtil.getLong(tag, 0)
+        }
+
+        runCatching {
+            //添加任务
+            DownLoadPool.addJob(tag, coroutineScope, savePath, loadListener)
+
+            withContext(Dispatchers.Main) {
+                loadListener.onPrepare(tag)
+            }
+
+            val responseBody = XHttp.getDownLoadService(HttpApiService::class.java)
+                    .downloadFile("bytes=$downLoadedLength-", url).body()
+            if (responseBody == null) {
+                withContext(Dispatchers.Main) {
+                    loadListener.onError(tag, NetException(DOWN_URL_ERROR))
+                }
+                DownLoadPool.remove(tag)
+                return
+            }
+
+            FileTool.downToFile(
+                    tag,
+                    savePath,
+                    saveName,
+                    downLoadedLength,
+                    responseBody,
+                    loadListener
+            )
+
+        }.onFailure {
+            withContext(Dispatchers.Main) {
+                loadListener.onError(tag, NetException(DOWN_LOAD_ERROR))
+            }
+            DownLoadPool.remove(tag)
+        }
+    }
 
     //格式化小数
     fun bytes2kb(bytes: Long): String {

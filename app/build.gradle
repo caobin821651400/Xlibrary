@@ -76,7 +76,6 @@ dependencies {
     implementation 'com.trello.rxlifecycle3:rxlifecycle-components:3.0.0'
 //    implementation(name: 'qr_library1.1', ext: 'aar')
     /*================*/
-    implementation 'com.tencent.bugly:crashreport:2.6.6'
 //    implementation project(':ImagePicker')
     implementation project(':HttpModule')
     //    implementation project(':QrLibrary')

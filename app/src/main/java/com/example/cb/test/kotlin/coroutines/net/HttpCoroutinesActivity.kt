@@ -36,7 +36,7 @@ class HttpCoroutinesActivity : BaseViewModuleActivity<NetViewModule>() {
         loadsir = loadServiceInit(mRefreshLayout) {
             //点击重试时触发的操作
             loadsir.showLoading()
-            mViewModule.getData2(true)
+            mViewModule.getData(true)
         }
 
 //        supportFragmentManager.beginTransaction().add(R.id.content, HttpCoroutinesFragment()).commit()

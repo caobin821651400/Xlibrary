@@ -65,7 +65,7 @@ class KotlinTestActivity : BaseActivity() {
 //            XLogUtils.d(jsonObject.getJSONObject(keys.next()).toString())
 //        }
 
-        //5. --> if(a>b)a else b
+        //5. --> if(a!=null)a else b
         var a = null
         var b = "ss"
         var c = a ?: b
@@ -155,16 +155,6 @@ class KotlinTestActivity : BaseActivity() {
         val list = AppGsonObject.fromJson<List<String>>(str, object : TypeToken<List<String>>() {}.type)
         if (!list.isNullOrEmpty()) {
             XLogUtils.e("列表数据=${list[0]}")
-        }
-
-        //16.条件检查 ()条件不满足=false;则跑出异常
-        require(2 > 1) {
-            "1234"
-        }
-        //为null 则抛异常
-        var strNull: String? = "123"
-        checkNotNull(strNull) {
-            "strNull is null"
         }
     }
 }

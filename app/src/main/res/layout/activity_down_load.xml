@@ -9,6 +9,11 @@
 
     <include layout="@layout/comment_header_activity" />
 
+    <TextView
+        android:id="@+id/tvInfo"
+        android:layout_width="match_parent"
+        android:text="等待下载"
+        android:layout_height="wrap_content"/>
 
     <Button
         android:id="@+id/btnDownLoad"

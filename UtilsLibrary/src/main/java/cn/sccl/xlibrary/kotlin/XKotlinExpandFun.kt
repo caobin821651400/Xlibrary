@@ -19,6 +19,21 @@ import org.json.JSONArray
 val AppGsonObject = Gson()
 
 /**
+ * 获取1dp的px
+ */
+val dp1 = XDensityUtils.dp2px(XLibrary.getContext(), 1f)
+
+/**
+ * 获取屏幕的宽度
+ */
+val screenWidth = XDensityUtils.getScreenWidth(XLibrary.getContext())
+
+/**
+ * 获取屏幕的高度
+ */
+val screenHeight = XDensityUtils.getStatusHeight(XLibrary.getContext())
+
+/**
  * dp2px
  */
 fun dp2px(dp: Float) {
@@ -67,7 +82,8 @@ fun <T> JSONArray.forEachIndex(action: (index: Int, T) -> Unit): Unit {
 /**
  * inline 修饰符影响函数本身和传给它的 lambda 表达式：所有这些都将内联到调用处。
  * 我的理解就是 带inline修饰符的方法 在调用的时候回将方法内的代码原封不动的搬到调用处执行
+ * 在编译的时候把代码copy过去一份
  */
-inline fun < reified T> Gson.fromGson(jsonString: String) {
+inline fun <reified T> Gson.fromGson(jsonString: String) {
     fromJson(jsonString, T::class.java)
 }

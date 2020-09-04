@@ -32,15 +32,12 @@ class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         app = this
-        //        XCrashHandlerUtils.getInstance().init(this);
         XLibrary.init(this)
         XLibrary.logTag = "ME日志"
         XLibrary.isDebug = true
 
         initHttp()
         initLoadSir()
-
-//        CrashReport.initCrashReport(getApplicationContext(), "c4163937f8", true);
     }
 
     private fun initHttp() {

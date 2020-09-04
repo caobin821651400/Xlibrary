@@ -47,7 +47,7 @@ class NetViewModule : BaseViewModule() {
                     isRefresh = isRefresh
 
             )
-        })
+        },isShowDialog = true)
 
 //        requestString(
 //                {
