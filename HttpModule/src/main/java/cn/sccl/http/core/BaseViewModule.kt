@@ -39,10 +39,10 @@ open class BaseViewModule : ViewModel() {
  * @param success 成功回调  返回服务器data对象,也就是泛型{@ T}
  * @param error 失败回调    返回自定义的异常类{@ NetException}
  */
-fun <T> BaseViewModule.request(
-        block: suspend () -> BaseResponse<T>,
-        success: (T) -> Unit,
-        error: (NetException) -> Unit = {},
+inline fun <T> BaseViewModule.request(
+        crossinline block: suspend () -> BaseResponse<T>,
+        crossinline success: (T) -> Unit,
+        crossinline error: (NetException) -> Unit = {},
         isShowDialog: Boolean = false,
         loadingMsg: String = defaultLoadingMsg
 ) {
@@ -74,10 +74,10 @@ fun <T> BaseViewModule.request(
  * @param success 成功回调  返回泛型{@ T}
  * @param error 失败回调    返回自定义的异常类{@ NetException}
  */
-fun <T> BaseViewModule.requestNoCheck(
-        block: suspend () -> T,
-        success: (T) -> Unit,
-        error: (NetException) -> Unit = {},
+inline fun <T> BaseViewModule.requestNoCheck(
+        crossinline block: suspend () -> T,
+        crossinline success: (T) -> Unit,
+        crossinline error: (NetException) -> Unit = {},
         isShowDialog: Boolean = false,
         loadingMsg: String = defaultLoadingMsg
 ) {
@@ -105,10 +105,10 @@ fun <T> BaseViewModule.requestNoCheck(
  * @param success 成功回调  返回泛型{@ T}
  * @param error 失败回调    返回自定义的异常类{@ NetException}
  */
-fun BaseViewModule.requestString(
-        block: suspend () -> String,
-        success: (String) -> Unit,
-        error: (NetException) -> Unit = {},
+inline fun BaseViewModule.requestString(
+        crossinline block: suspend () -> String,
+        crossinline success: (String) -> Unit,
+        crossinline error: (NetException) -> Unit = {},
         isShowDialog: Boolean = false,
         loadingMsg: String = defaultLoadingMsg
 ) {
@@ -131,3 +131,8 @@ fun BaseViewModule.requestString(
         }
     }
 }
+
+//如果你写的是高阶函数，会有函数类型的参数，加上 inline 就对了。
+//crossinline  只会跳出当前lambda中的return对整个流程没有影响，只会跳出当前lambda;
+//函数类型的参数，它本质上是个对象
+//inline 会让函数类型的参数的返回值失效   block: suspend () -> String, --->  也就是return block失效
