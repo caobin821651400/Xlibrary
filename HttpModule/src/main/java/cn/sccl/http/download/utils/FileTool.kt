@@ -17,7 +17,6 @@ val deFormat = DecimalFormat("###.0")
 
 object FileTool {
 
-
     //定义GB的计算常量
     private const val GB = 1024 * 1024 * 1024
 
@@ -28,40 +27,11 @@ object FileTool {
     private const val KB = 1024
 
 
-//    /**
-//     * 下载文件
-//     */
-//    suspend fun downToFile(
-//            tag: String,
-//            savePath: String,
-//            saveName: String,
-//            currentLength: Long,
-//            responseBody: ResponseBody,
-//            loadListener: OnDownLoadListener
-//    ) {
-//        val filePath = getFilePath(savePath, saveName)
-//
-//        kotlin.runCatching {
-//            if (filePath == null) {
-//                withContext(Dispatchers.Main) {
-//                    loadListener.onError(tag, NetException(DOWN_LOAD_PATH_ERROR))
-//                }
-//                DownLoadPool.remove(tag)
-//                return
-//            }
-//            //保存到文件
-//            saveToFile(currentLength, responseBody, filePath, tag, loadListener)
-//        }.onFailure {
-//            withContext(Dispatchers.Main) {
-//                loadListener.onError(tag, NetException(DOWN_LOAD_ERROR))
-//            }
-//            DownLoadPool.remove(tag)
-//        }
-//    }
-
-
+    /**
+     * 下载文件
+     */
     suspend fun downToFile(
-            key: String,
+            tag: String,
             savePath: String,
             saveName: String,
             currentLength: Long,
@@ -69,37 +39,41 @@ object FileTool {
             loadListener: OnDownLoadListener
     ) {
         val filePath = getFilePath(savePath, saveName)
-        try {
+
+        kotlin.runCatching {
             if (filePath == null) {
                 withContext(Dispatchers.Main) {
-                    loadListener.onError(key, NetException(DOWN_LOAD_PATH_ERROR))
+                    loadListener.onError(tag, NetException(DOWN_LOAD_PATH_ERROR))
                 }
-                DownLoadPool.remove(key)
+                DownLoadPool.remove(tag)
                 return
             }
             //保存到文件
-            saveToFile(currentLength, responseBody, filePath, key, loadListener)
-        } catch (throwable: Throwable) {
+            saveToFile(currentLength, responseBody, filePath, tag, loadListener)
+        }.onFailure {
             withContext(Dispatchers.Main) {
-                loadListener.onError(key, NetException(DOWN_LOAD_PATH_ERROR))
+                loadListener.onError(tag, NetException(DOWN_LOAD_ERROR))
             }
-            DownLoadPool.remove(key)
+            DownLoadPool.remove(tag)
         }
     }
 
+    /**
+     * 保存文件
+     */
     private suspend fun saveToFile(
             currentLength: Long,
             responseBody: ResponseBody,
             filePath: String,
-            key: String,
+            tag: String,
             loadListener: OnDownLoadListener
     ) {
-        val fileLength =
-                getFileLength(currentLength, responseBody)
+
+        val fileLength = getFileLength(currentLength, responseBody)
         val inputStream = responseBody.byteStream()
         val accessFile = RandomAccessFile(File(filePath), "rwd")
         val channel = accessFile.channel
-        val mappedBuffer = channel.map(
+        val mapBuffer = channel.map(
                 FileChannel.MapMode.READ_WRITE,
                 currentLength,
                 fileLength - currentLength
@@ -110,19 +84,19 @@ object FileTool {
         var currentSaveLength = currentLength //当前的长度
 
         while (inputStream.read(buffer).also { len = it } != -1) {
-            mappedBuffer.put(buffer, 0, len)
+            mapBuffer.put(buffer, 0, len)
             currentSaveLength += len
 
             val progress = (currentSaveLength.toFloat() / fileLength * 100).toInt() // 计算百分比
             if (lastProgress != progress) {
                 lastProgress = progress
                 //记录已经下载的长度
-                ShareDownLoadUtil.putLong(key, currentSaveLength)
+                ShareDownLoadUtil.putLong(tag, currentSaveLength)
 
                 withContext(Dispatchers.Main) {
-                    loadListener.onProgress(key, progress)
+                    loadListener.onProgress(tag, progress)
                     loadListener.onUpdate(
-                            key,
+                            tag,
                             progress,
                             currentSaveLength,
                             fileLength,
@@ -132,83 +106,19 @@ object FileTool {
 
                 if (currentSaveLength == fileLength) {
                     withContext(Dispatchers.Main) {
-                        loadListener.onSuccess(key, filePath)
+                        loadListener.onSuccess(tag, filePath)
                     }
-                    DownLoadPool.remove(key)
+                    DownLoadPool.remove(tag)
                 }
             }
         }
 
-        inputStream.close()
-        accessFile.close()
-        channel.close()
+        runCatching {
+            inputStream.close()
+            accessFile.close()
+            channel.close()
+        }
     }
-
-
-//    /**
-//     * 保存文件
-//     */
-//    private suspend fun saveToFile(
-//            currentLength: Long,
-//            responseBody: ResponseBody,
-//            filePath: String,
-//            tag: String,
-//            loadListener: OnDownLoadListener
-//    ) {
-//
-//        val fileLength = getFileLength(currentLength, responseBody)
-//        val inputStream = responseBody.byteStream()
-//        val accessFile = RandomAccessFile(File(filePath), "rwd")
-//        val channel = accessFile.channel
-//        val mapBuffer = channel.map(
-//                FileChannel.MapMode.READ_WRITE,
-//                currentLength,
-//                fileLength - currentLength
-//        )
-//        val buffer = ByteArray(1024 * 4)
-//        var len = 0
-//        var lastProgress = 0
-//        var currentSaveLength = currentLength //当前的长度
-//
-//        while (inputStream.read(buffer).also { len = it } != -1) {
-//            mapBuffer.put(buffer, 0, len)
-//            currentSaveLength += len
-//
-//            val progress = (currentSaveLength.toFloat() / fileLength * 100).toInt() // 计算百分比
-//            if (lastProgress != progress) {
-//                lastProgress = progress
-//                //记录已经下载的长度
-//                ShareDownLoadUtil.putLong(tag, currentSaveLength)
-//
-//                withContext(Dispatchers.Main) {
-//                    loadListener.onProgress(tag, progress)
-//                    loadListener.onUpdate(
-//                            tag,
-//                            progress,
-//                            currentSaveLength,
-//                            fileLength,
-//                            currentSaveLength == fileLength
-//                    )
-//                }
-//
-//                if (currentSaveLength == fileLength) {
-//                    withContext(Dispatchers.Main) {
-//                        loadListener.onSuccess(tag, filePath)
-//                    }
-//                    DownLoadPool.remove(tag)
-//                }
-//            }
-//        }
-//
-//        //阻塞的线程不应该放到主线程
-//        withContext(Dispatchers.IO) {
-//            kotlin.runCatching {
-//                inputStream.close()
-//                accessFile.close()
-//                channel.close()
-//            }
-//        }
-//    }
 
 
     /**

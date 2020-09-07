@@ -11,7 +11,6 @@ import cn.sccl.xlibrary.utils.XPermission
 import com.example.cb.test.MyApplication
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
-import kotlinx.android.synthetic.main.activity_aidl_test.*
 import kotlinx.android.synthetic.main.activity_down_load.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
@@ -36,10 +35,8 @@ class DownLoadActivity : BaseActivity(), CoroutineScope by MainScope(), DownLadP
         const val TAG2 = "aaaaa->"
     }
 
-    data class DownLoadInfo(val url: String, val taskId: String, val saveName: String)
-
     private lateinit var mAdapter: DownLoadAdapter
-    private val mList = ArrayList<DownLoadInfo>()
+    private val mList = ArrayList<DownloadTask>()
 
     override fun getLayoutId() = R.layout.activity_down_load
 
@@ -65,13 +62,17 @@ class DownLoadActivity : BaseActivity(), CoroutineScope by MainScope(), DownLadP
                         .build()
         )
 
-//        mAdapter = DownLoadAdapter(mRecyclerView)
-//        mRecyclerView.adapter = mAdapter
-//
-//        mList.add(DownLoadInfo(url1, url1, "111.apk"))
-//        mList.add(DownLoadInfo(url2, url2, "222.apk"))
-//        mList.add(DownLoadInfo(url3, url3, "333.apk"))
-//        mAdapter.dataLists = mList
+//        mAdapter2=DownLoadAdapter2()
+//        mAdapter2.mList=mList
+
+
+        mAdapter = DownLoadAdapter(mRecyclerView)
+        mRecyclerView.adapter = mAdapter
+
+        mList.add(DownloadTask(url1, url1, "111.apk"))
+        mList.add(DownloadTask(url2, url2, "222.apk"))
+        mList.add(DownloadTask(url3, url3, "333.apk"))
+        mAdapter.dataLists = mList
     }
 
     override fun initEvent() {
@@ -81,12 +82,6 @@ class DownLoadActivity : BaseActivity(), CoroutineScope by MainScope(), DownLadP
                 if (!isRun) startDownLoad() else pauseDownLoad(url1)
             }
         }
-
-
-//        mAdapter.setListener(
-//                { startDownLoad(it.url, it.saveName) },
-//                { pauseDownLoad(it.taskId) }
-//        )
     }
 
     private var isRun = false
@@ -116,7 +111,7 @@ class DownLoadActivity : BaseActivity(), CoroutineScope by MainScope(), DownLadP
         DownLoadManager.pause(tag)
     }
 
-    //获取更路径
+    //获取路径
     private fun getBasePath(): String {
         val file = MyApplication.app.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
         return file?.absolutePath ?: ""
@@ -124,7 +119,6 @@ class DownLoadActivity : BaseActivity(), CoroutineScope by MainScope(), DownLadP
 
     override fun onPrepare(tag: String) {
         XLogUtils.v("准备下载 $tag  thread ${Thread.currentThread().name}")
-//        mAdapter.setDownLoadPrepare(tag)
     }
 
     override fun onProgress(tag: String, progress: Int) {
@@ -132,19 +126,15 @@ class DownLoadActivity : BaseActivity(), CoroutineScope by MainScope(), DownLadP
     }
 
     override fun onError(tag: String, e: NetException) {
-//        mAdapter.setDownLoadError(tag, e)
     }
 
     override fun onSuccess(tag: String, path: String) {
-//        mAdapter.setDownLoadSuccess(tag, path)
     }
 
     override fun onPause(tag: String) {
-//        mAdapter.setDownLoadPause(tag)
     }
 
     override fun onCancel(tag: String) {
-//        mAdapter.setDownLoadCancel(tag)
     }
 
     override fun onUpdate(tag: String, progress: Int, loadedLength: Long, totalLength: Long, isDone: Boolean) {
@@ -152,14 +142,6 @@ class DownLoadActivity : BaseActivity(), CoroutineScope by MainScope(), DownLadP
                 "下载进度 $tag  loadedLength= $loadedLength  totalLength= $totalLength" +
                         "  isDone $isDone thread ${Thread.currentThread().name}"
         )
-        tvInfo.text="进度=$progress"
-//        mAdapter.setDownLoadProgress(
-//                tag,
-//                progress,
-//                DownLoadManager.bytes2kb(loadedLength),
-//                DownLoadManager.bytes2kb(totalLength),
-//                isDone
-//        )
+        tvInfo.text = "进度=$progress"
     }
-
 }

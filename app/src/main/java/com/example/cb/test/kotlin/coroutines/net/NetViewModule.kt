@@ -68,32 +68,6 @@ class NetViewModule : BaseViewModule() {
 //        )
     }
 
-    fun getData2(isRefresh: Boolean) {
-
-        if (isRefresh) {
-            pageNo = 0
-        }
-        request({ XHttp.getService(ApiService::class.java).getArticleList2(pageNo) }, {
-            //请求成功
-            pageNo++
-            dataModule.value = PageListDataUiState(
-                    isSuccess = true,
-                    isEmpty = it.isEmpty(),
-                    isRefresh = isRefresh,
-                    isHasMore = it.isLoadMore(),
-                    isFirstEmpty = isRefresh && it.isEmpty(),
-                    listData = it.datas
-            )
-        }, {
-            //请求失败
-            dataModule.value = PageListDataUiState(
-                    isSuccess = false,
-                    errMsg = it.errorMsg,
-                    isRefresh = isRefresh
-
-            )
-        })
-
 //        requestNoCheck(
 //                {
 //                    XHttp.getService(ApiService::class.java).getScenesData(1, 1,
@@ -107,5 +81,4 @@ class NetViewModule : BaseViewModule() {
 //                {
 //                    XLogUtils.d("失败->" + it.errorMsg)
 //                })
-    }
 }

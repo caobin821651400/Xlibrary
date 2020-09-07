@@ -1,6 +1,5 @@
 package cn.sccl.http.download
 
-import android.os.Looper
 import cn.sccl.http.XHttp
 import cn.sccl.http.api.HttpApiService
 import cn.sccl.http.download.DownLadProgressListener.OnDownLoadListener
@@ -39,7 +38,7 @@ object DownLoadManager {
     ) {
         //下载放到IO线程
         withContext(Dispatchers.IO) {
-            doDownLoad2(tag, url, savePath, saveName, listener, this)
+            doDownLoad(tag, url, savePath, saveName, listener, this)
         }
     }
 
@@ -48,90 +47,8 @@ object DownLoadManager {
         DownLoadPool.pause(tag)
     }
 
+
     private suspend fun doDownLoad(
-            tag: String,
-            url: String,
-            savePath: String,
-            saveName: String,
-            loadListener: OnDownLoadListener,
-            coroutineScope: CoroutineScope
-    ) {
-        //判断是否已经在队列中
-        val scope = DownLoadPool.scopeMap[tag]
-        if (scope != null && scope.isActive) {
-            return
-        } else if (scope != null && !scope.isActive) {
-            DownLoadPool.scopeMap.remove(tag)
-        }
-
-        if (saveName.isEmpty()) {
-            withContext(Dispatchers.Main) {
-                loadListener.onError(tag, NetException(DOWN_LOAD_PATH_ERROR))
-            }
-            return
-        }
-
-        if (Looper.getMainLooper().thread == Thread.currentThread()) {
-            withContext(Dispatchers.Main) {
-                loadListener.onError(tag, NetException(DOWN_LOAD_PATH_ERROR))
-            }
-            return
-        }
-
-        val file = File("$savePath/$saveName")
-        val currentLength = if (!file.exists()) {
-            0L
-        } else {
-            ShareDownLoadUtil.getLong(tag, 0)
-        }
-
-        try {
-            //添加到pool
-            DownLoadPool.addJob(tag, coroutineScope, "$savePath/$saveName", loadListener)
-
-            withContext(Dispatchers.Main) {
-                loadListener.onPrepare(tag)
-            }
-
-//            val client = OkHttpClient.Builder()
-////                    .addInterceptor(RxLogInterceptor())
-//                    .build()
-//
-//            val retrofit = Retrofit.Builder().client(client).baseUrl("https://www.wanandroid.com/").build()
-
-//            val response = retrofit.create(HttpApiService::class.java)
-//                    .downloadFile("bytes=$currentLength-", url)
-
-            val response = XHttp.getDownLoadService(HttpApiService::class.java)
-                    .downloadFile("bytes=$currentLength-", url)
-            val responseBody = response.body()
-            if (responseBody == null) {
-                withContext(Dispatchers.Main) {
-                    loadListener.onError(tag, NetException(DOWN_LOAD_PATH_ERROR))
-                }
-                DownLoadPool.remove(tag)
-                return
-            }
-
-
-            FileTool.downToFile(
-                    tag,
-                    savePath,
-                    saveName,
-                    currentLength,
-                    responseBody,
-                    loadListener
-            )
-        } catch (throwable: Throwable) {
-            throwable.printStackTrace()
-            withContext(Dispatchers.Main) {
-                loadListener.onError(tag, NetException(DOWN_LOAD_PATH_ERROR))
-            }
-            DownLoadPool.remove(tag)
-        }
-    }
-
-    private suspend fun doDownLoad2(
             tag: String,
             url: String,
             savePath: String,
@@ -147,12 +64,6 @@ object DownLoadManager {
                 DownLoadPool.scopeMap.remove(tag)
             }
         }
-//        val scope = DownLoadPool.scopeMap[tag]
-//        if (scope != null && scope.isActive) {
-//            return
-//        } else if (scope != null && !scope.isActive) {
-//            DownLoadPool.scopeMap.remove(tag)
-//        }
 
         if (saveName.isEmpty()) {
             withContext(Dispatchers.Main) {
@@ -160,8 +71,6 @@ object DownLoadManager {
             }
             return
         }
-
-
 
         //获取历史进度
         val file = File("$savePath/$saveName")
