@@ -12,7 +12,6 @@ import com.example.cb.test.weight.loadCallBack.ErrorCallback
 import com.example.cb.test.weight.loadCallBack.LoadingCallback
 import com.kingja.loadsir.callback.SuccessCallback
 import com.kingja.loadsir.core.LoadSir
-import dagger.hilt.android.HiltAndroidApp
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -22,7 +21,6 @@ import javax.net.ssl.HostnameVerifier
 /**
  * Created by cb on 2017/12/1.
  */
-@HiltAndroidApp
 class MyApplication : Application() {
 
     companion object {

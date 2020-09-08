@@ -32,6 +32,11 @@ class RetrofitFactory {
     private lateinit var downLoadRetrofit: Retrofit
 
     /**
+     * 用于上传的 Retrofit
+     */
+    private lateinit var upLoadRetrofit: Retrofit
+
+    /**
      * Retrofit一般在Application传入
      */
     fun setRetrofit(retrofit: Retrofit) {
@@ -46,6 +51,13 @@ class RetrofitFactory {
     }
 
     /**
+     * Retrofit一般在Application传入
+     */
+    fun setUploadRetrofit(retrofit: Retrofit) {
+        this.upLoadRetrofit = retrofit
+    }
+
+    /**
      * 获取具体的Service
      */
     fun <T> getService(service: Class<T>): T {
@@ -57,6 +69,13 @@ class RetrofitFactory {
      */
     fun <T> getDownLoadService(service: Class<T>): T {
         return downLoadRetrofit.create(service)
+    }
+
+    /**
+     * 获取上传具体的Service
+     */
+    fun <T> getUpLoadService(service: Class<T>): T {
+        return upLoadRetrofit.create(service)
     }
 
     /**

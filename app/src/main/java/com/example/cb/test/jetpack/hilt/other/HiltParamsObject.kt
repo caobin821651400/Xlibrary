@@ -1,6 +1,6 @@
 package com.example.cb.test.jetpack.hilt.other
 
-import javax.inject.Inject
+//import javax.inject.Inject
 /**
  * ====================================================
  * @User :caobin
@@ -8,10 +8,10 @@ import javax.inject.Inject
  * @Desc :
  * ====================================================
  */
-class HiltParamsObject @Inject constructor(private val name: String) {
+class HiltParamsObject /*@Inject constructor(private val name: String)*/ {
 
-    fun getData(): String {
-        return name
-    }
+//    fun getData(): String {
+//        return name
+//    }
 
 }

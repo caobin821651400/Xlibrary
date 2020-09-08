@@ -17,6 +17,7 @@ import com.example.cb.test.rx.rxjava.RxJavaMainActivity;
 import com.example.cb.test.ui.aidl.AidlTestActivity;
 import com.example.cb.test.ui.anim.AnimTestActivity;
 import com.example.cb.test.ui.view_pager.BannerActivity;
+import com.example.cb.test.upload.UploadActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +61,7 @@ public class MainActivity extends BaseActivity {
         mList.add(new CommonMenuBean("BannerActivity", BannerActivity.class));
         mList.add(new CommonMenuBean("AnimTestActivity", AnimTestActivity.class));
         mList.add(new CommonMenuBean("downLoad", DownLoadActivity.class));
+        mList.add(new CommonMenuBean("Upload", UploadActivity.class));
 //        mList.add(new CommonMenuBean("生成二维码", QRcodeEncoderActivity.class));
 //        mList.add(new CommonMenuBean("扫一扫", ScanBaseActivity.class));
 

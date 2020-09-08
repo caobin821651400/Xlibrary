@@ -17,7 +17,8 @@ class NetException : Exception {
         const val TIMEOUT_ERROR = 84//网络连接超时，请稍后重试
         const val DOWN_URL_ERROR = 4001//下载地址有误
         const val DOWN_LOAD_ERROR = 4002//下载失败
-        const val DOWN_LOAD_PATH_ERROR = 4003//保存路径错误
+        const val UP_LOAD_ERROR = 4003//上传失败
+        const val DOWN_LOAD_PATH_ERROR = 4004//保存路径错误
     }
 
     var errorMsg: String //错误消息
@@ -33,6 +34,7 @@ class NetException : Exception {
             TIMEOUT_ERROR -> "网络连接超时，请稍后重试"
             DOWN_URL_ERROR -> "下载地址有误"
             DOWN_LOAD_ERROR -> "下载失败请重试"
+            UP_LOAD_ERROR -> "上传失败请重试"
             DOWN_LOAD_PATH_ERROR -> "文件保存路径为空"
             else -> "请求失败，请稍后再试"
         }

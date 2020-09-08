@@ -13,7 +13,7 @@ import retrofit2.http.Url
  * @Desc :
  * ====================================================
  */
-interface HttpApiService {
+interface DownloadApiService {
 
 
 //    /**

@@ -1,7 +1,7 @@
 package cn.sccl.http.download
 
 import cn.sccl.http.XHttp
-import cn.sccl.http.api.HttpApiService
+import cn.sccl.http.api.DownloadApiService
 import cn.sccl.http.download.DownLadProgressListener.OnDownLoadListener
 import cn.sccl.http.download.utils.FileTool
 import cn.sccl.http.download.utils.ShareDownLoadUtil
@@ -88,7 +88,7 @@ object DownLoadManager {
                 loadListener.onPrepare(tag)
             }
 
-            val responseBody = XHttp.getDownLoadService(HttpApiService::class.java)
+            val responseBody = XHttp.getDownLoadService(DownloadApiService::class.java)
                     .downloadFile("bytes=$downLoadedLength-", url).body()
             if (responseBody == null) {
                 withContext(Dispatchers.Main) {
