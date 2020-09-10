@@ -14,7 +14,7 @@ import java.util.concurrent.ConcurrentHashMap
  */
 object UpLoadPool {
 
-    val scopeMap = ConcurrentHashMap<String, CoroutineScope>()
+    private val scopeMap = ConcurrentHashMap<String, CoroutineScope>()
 
     /**
      * 加入

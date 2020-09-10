@@ -3,7 +3,6 @@ package com.example.cb.test.upload
 import android.Manifest
 import android.os.Environment
 import cn.sccl.http.XHttp
-import cn.sccl.http.upload.OnUpLoadListener
 import cn.sccl.http.upload.UploadManager
 import cn.sccl.http.upload.listener.ProgressInfo
 import cn.sccl.http.upload.listener.UploadInterceptor
@@ -16,13 +15,9 @@ import kotlinx.android.synthetic.main.activity_upload.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
-import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.Retrofit
 import java.io.File
-import java.lang.Exception
 
 /**
  * ====================================================
@@ -46,7 +41,8 @@ class UploadActivity : BaseActivity(), UploadProgressListener, CoroutineScope by
                     override fun onPermissionGranted() {
 
                         pathFile = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
-                        file = File(pathFile?.absolutePath + "/111.jpg")
+//                        file = File(pathFile?.absolutePath + "/111.jpg")
+                        file = File(pathFile?.absolutePath + "/222.jpg")
                         XLogUtils.d("")
                     }
 
@@ -74,17 +70,20 @@ class UploadActivity : BaseActivity(), UploadProgressListener, CoroutineScope by
 
     private suspend fun start() {
         if (!file.exists()) return
-        val body = file.asRequestBody("multipart/form-data".toMediaTypeOrNull())
-        val parts = MultipartBody.Builder().setType(MultipartBody.FORM)
-                .addFormDataPart("images[1]", "111.jpg", body)
-                .addFormDataPart("title", "1214")
-                .addFormDataPart("content", "1214")
-                .addFormDataPart("area", "成都1")
-                .build().parts
-        UploadManager.doUpload(
-                "1111",
+        val fileMap = hashMapOf("images[1]" to file)
+        val paramsMap = hashMapOf<String, Any>(
+                "title" to "1214",
+                "content" to "1214",
+                "area" to "成都")
+        UploadManager.doUpload<UploadDataBean>(
+                paramsMap, fileMap, "1111",
                 "https://api.holapets.cn/api/articles/create",
-                parts
+                {
+                    XLogUtils.e("哈哈 "+it.content)
+                },
+                {
+                    XLogUtils.e(it.errorMsg)
+                }
         )
     }
 
