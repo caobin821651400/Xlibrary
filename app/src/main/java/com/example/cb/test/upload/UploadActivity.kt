@@ -79,7 +79,7 @@ class UploadActivity : BaseActivity(), UploadProgressListener, CoroutineScope by
                 paramsMap, fileMap, "1111",
                 "https://api.holapets.cn/api/articles/create",
                 {
-                    XLogUtils.e("哈哈 "+it.content)
+                    XLogUtils.e("哈哈 " + it.content)
                 },
                 {
                     XLogUtils.e(it.errorMsg)
@@ -89,10 +89,9 @@ class UploadActivity : BaseActivity(), UploadProgressListener, CoroutineScope by
 
 
     override fun onProgress(progressInfo: ProgressInfo) {
-        XLogUtils.d("onProgress ${progressInfo.percent}")
+        tvInfo.text="上传中 ${progressInfo.percent}"
     }
 
     override fun onError(id: Long, e: Exception) {
-        XLogUtils.d("onError ${e.message}")
     }
 }

@@ -80,6 +80,15 @@ object UploadManager {
     }
 
 
+    fun cancel(tag: String) {
+        UpLoadPool.remove(tag)
+    }
+
+    fun cancelAll() {
+        UpLoadPool.removeAll()
+    }
+
+
     /**
      *
      */

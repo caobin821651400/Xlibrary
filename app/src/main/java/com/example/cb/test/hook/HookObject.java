@@ -19,6 +19,10 @@ public class HookObject {
     }
 
 
+    public int plus() {
+        return 77 + mGroupFlags;
+    }
+
     public void hookMethod() {
         XLogUtils.d("无参数public方法调用了");
     }

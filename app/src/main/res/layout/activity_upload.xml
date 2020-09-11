@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".download.DownLoadActivity">
 
     <include layout="@layout/comment_header_activity" />
@@ -12,12 +13,12 @@
         android:id="@+id/tvInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="等待下载" />
+        android:text="等待上传" />
 
     <Button
         android:id="@+id/btnStart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="单独下载" />
+        android:text="开始上传" />
 
 </LinearLayout>

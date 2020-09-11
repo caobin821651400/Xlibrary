@@ -38,4 +38,15 @@ object UpLoadPool {
         scopeMap.remove(key)
     }
 
+    /**
+     * 移除全部
+     */
+    fun removeAll() {
+        scopeMap.forEach {
+            if (it.value.isActive) {
+                it.value.cancel()
+            }
+        }
+        scopeMap.clear()
+    }
 }

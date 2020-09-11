@@ -58,6 +58,7 @@ class HookDemoActivity : BaseActivity() {
             XLogUtils.e("Hook结束获取到的值通过对象获取->>${hookObject.constant}")
 //            XLogUtils.e("Hook结束获取到的值，通过hook获取->>${mGroupFlagsField.get(null) as Int}")
             XLogUtils.e("Hook结束获取到的值，通过hook获取->>${mGroupFlagsField.get(hookObject) as Int}")
+            XLogUtils.e("加法操作->>${hookObject.plus()}")
         } catch (e: Exception) {
             e.printStackTrace()
         }
