@@ -1,10 +1,9 @@
 package com.example.cb.test.ui.material
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import cn.sccl.xlibrary.statusbar.StatusBarUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
+
 /**
  * ====================================================
  * @User :caobin
@@ -19,7 +18,7 @@ class MaterialActivity : BaseActivity() {
         StatusBarUtils.immersive(this)
     }
 
-    override fun getLayoutId()=R.layout.activity_material2
+    override fun getLayoutId() = R.layout.activity_material
 
     override fun initEvent() {
     }
