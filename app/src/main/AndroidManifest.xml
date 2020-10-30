@@ -25,7 +25,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.material.MaterialActivity"></activity>
+        <activity android:name=".kotlin.flow.KotlinFlowActivity"></activity>
+        <activity android:name=".ui.material.MaterialActivity" />
         <activity android:name=".upload.UploadActivity" />
         <activity android:name=".download.DownLoadActivity" />
         <activity android:name=".kotlin.coroutines.net.HttpCoroutinesActivity" />

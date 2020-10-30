@@ -5,11 +5,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import cn.sccl.xlibrary.adapter.XRecyclerViewAdapter
 import cn.sccl.xlibrary.adapter.XViewHolder
-import cn.sccl.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
 import com.example.cb.test.bean.CommonMenuBean
 import com.example.cb.test.kotlin.coroutines.CoroutinesMainActivity
+import com.example.cb.test.kotlin.flow.KotlinFlowActivity
 import kotlinx.android.synthetic.main.activity_jet_pack.*
 import java.util.*
 
@@ -35,6 +35,7 @@ class KotlinMainActivity : BaseActivity() {
         mList.add(CommonMenuBean("Kotlin集合", KotlinSetActivity::class.java))
         mList.add(CommonMenuBean("Kotlin测试", KotlinTestActivity::class.java))
         mList.add(CommonMenuBean("协程", CoroutinesMainActivity::class.java))
+        mList.add(CommonMenuBean("Flow", KotlinFlowActivity::class.java))
 
         mAdapter.dataLists = mList
     }
