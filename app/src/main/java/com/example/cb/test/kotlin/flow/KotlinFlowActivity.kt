@@ -19,7 +19,7 @@ import kotlin.system.measureTimeMillis
  * ====================================================
  * @User :caobin
  * @Date :2020/10/30 10:14
- * @Desc :
+ * @Desc : https://www.jianshu.com/p/f2203227dabf
  * ====================================================
  */
 class KotlinFlowActivity : BaseActivity(), CoroutineScope by MainScope() {
@@ -40,6 +40,7 @@ class KotlinFlowActivity : BaseActivity(), CoroutineScope by MainScope() {
         mList.add(CommonMenuBean("切换线程", null))
         mList.add(CommonMenuBean("flow取消", null))
         mList.add(CommonMenuBean("flow结束", null))
+        mList.add(CommonMenuBean("flow重试机制", null))
 
         mAdapter.dataLists = mList
     }
@@ -53,6 +54,7 @@ class KotlinFlowActivity : BaseActivity(), CoroutineScope by MainScope() {
                 3 -> launch { demo4() }
                 4 -> launch { demo5() }
                 5 -> launch { demo6() }
+                6 -> launch { demo7() }
             }
         }
     }
@@ -162,6 +164,26 @@ class KotlinFlowActivity : BaseActivity(), CoroutineScope by MainScope() {
                 .collect {
                     XLogUtils.d("collect value= $it")
                 }
+    }
+
+    private var retryCount = 0
+
+    /**
+     * 重试机制
+     */
+    private suspend fun demo7() {
+        (1..5).asFlow().onEach {
+            if (it == 3 && retryCount == 0) throw  RuntimeException("出错啦")
+        }.retry(2) {//重试两次都失败的情况 会抛出异常
+            retryCount++;
+            if (it is RuntimeException) {
+                return@retry true
+            }
+            return@retry false
+        }
+                .onEach { XLogUtils.d("数据 $it") }
+                .catch { it.printStackTrace() }
+                .collect()
     }
 
     inner class MAdapter(mRecyclerView: RecyclerView) : XRecyclerViewAdapter<CommonMenuBean>(mRecyclerView, R.layout.item_main) {
