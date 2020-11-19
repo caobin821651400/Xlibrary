@@ -16,6 +16,7 @@ import com.example.cb.test.mvp.MvpActivity
 import com.example.cb.test.rx.rxjava.RxJavaMainActivity
 import com.example.cb.test.ui.aidl.AidlTestActivity
 import com.example.cb.test.ui.anim.AnimTestActivity
+import com.example.cb.test.ui.constrain.MotionLayoutActivity
 import com.example.cb.test.ui.material.MaterialActivity
 import com.example.cb.test.ui.view_pager.BannerActivity
 import com.example.cb.test.upload.UploadActivity
@@ -52,6 +53,7 @@ class MainActivity : BaseActivity() {
         mList.add(CommonMenuBean("downLoad", DownLoadActivity::class.java))
         mList.add(CommonMenuBean("Upload", UploadActivity::class.java))
         mList.add(CommonMenuBean("Material", MaterialActivity::class.java))
+        mList.add(CommonMenuBean("MotionLayout", MotionLayoutActivity::class.java))
 //        mList.add(new CommonMenuBean("生成二维码", QRcodeEncoderActivity.class));
 //        mList.add(new CommonMenuBean("扫一扫", ScanBaseActivity.class));
         mAdapter.dataLists = mList

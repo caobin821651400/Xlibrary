@@ -1,6 +1,7 @@
 package com.example.cb.test.hook;
 
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Build;
