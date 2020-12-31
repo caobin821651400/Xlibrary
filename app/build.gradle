@@ -20,7 +20,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    kotlinOptions{
+    kotlinOptions {
         jvmTarget = "1.8"
     }
     dataBinding {
@@ -73,11 +73,9 @@ dependencies {
     implementation 'com.trello.rxlifecycle3:rxlifecycle:3.0.0'
     implementation 'com.trello.rxlifecycle3:rxlifecycle-android:3.0.0'
     implementation 'com.trello.rxlifecycle3:rxlifecycle-components:3.0.0'
-//    implementation(name: 'qr_library1.1', ext: 'aar')
     /*================*/
-//    implementation project(':ImagePicker')
     implementation project(':HttpModule')
-    //    implementation project(':QrLibrary')
+//    implementation project(':QrLibrary')
     implementation project(path: ':UtilsLibrary')
 
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
