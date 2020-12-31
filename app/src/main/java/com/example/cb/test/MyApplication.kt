@@ -3,7 +3,7 @@ package com.example.cb.test
 import android.app.Application
 import cn.sccl.http.XHttp
 import cn.sccl.http.interceptor.BaseUrlInterceptor
-import cn.sccl.http.log.RxLogInterceptor
+import cn.sccl.http.interceptor.HttpLoggingInterceptor
 import cn.sccl.xlibrary.XLibrary
 import cn.sccl.xlibrary.kotlin.AppGsonObject
 import com.example.cb.test.utils.SSLUtils
@@ -16,6 +16,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import java.util.logging.Level
 import javax.net.ssl.HostnameVerifier
 
 /**
@@ -41,17 +42,24 @@ class MyApplication : Application() {
     private fun initHttp() {
         XHttp.init(this)
         val sslParams = SSLUtils.getSslSocketFactory()
+        //log相关
+        val loggingInterceptor = HttpLoggingInterceptor("XHttp")
+        loggingInterceptor.setPrintLevel(if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY
+        else HttpLoggingInterceptor.Level.NONE) //log打印级别，决定了log显示的详细程度
+        loggingInterceptor.setColorLevel(Level.INFO) //log颜色级别，决定了log在控制台显示的颜色
+
         val client = OkHttpClient.Builder()
                 .connectTimeout(5, TimeUnit.SECONDS)
                 .readTimeout(5, TimeUnit.SECONDS)
                 .addInterceptor(BaseUrlInterceptor())
-                .addInterceptor(RxLogInterceptor())
+//                .addInterceptor(RxLogInterceptor())
+                .addInterceptor(loggingInterceptor)
                 .sslSocketFactory(sslParams.sSLSocketFactory, sslParams.trustManager)
                 .hostnameVerifier(HostnameVerifier { _, _ -> true })
                 .build()
         XHttp.setRetrofit(Retrofit.Builder()
 //                .baseUrl("https://iot.sctel.com.cn/")
-                        .baseUrl("https://www.wanandroid.com/")
+                .baseUrl("https://www.wanandroid.com/")
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create(AppGsonObject))
                 .build()
