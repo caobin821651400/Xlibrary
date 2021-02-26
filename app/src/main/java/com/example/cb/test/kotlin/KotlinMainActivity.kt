@@ -10,6 +10,7 @@ import com.example.cb.test.base.BaseActivity
 import com.example.cb.test.bean.CommonMenuBean
 import com.example.cb.test.kotlin.coroutines.CoroutinesMainActivity
 import com.example.cb.test.kotlin.flow.KotlinFlowActivity
+import com.example.cb.test.kotlin.function.FunctionInlineActivity
 import kotlinx.android.synthetic.main.activity_jet_pack.*
 import java.util.*
 
@@ -36,6 +37,7 @@ class KotlinMainActivity : BaseActivity() {
         mList.add(CommonMenuBean("Kotlin测试", KotlinTestActivity::class.java))
         mList.add(CommonMenuBean("协程", CoroutinesMainActivity::class.java))
         mList.add(CommonMenuBean("Flow", KotlinFlowActivity::class.java))
+        mList.add(CommonMenuBean("函数相关", FunctionInlineActivity::class.java))
 
         mAdapter.dataLists = mList
     }

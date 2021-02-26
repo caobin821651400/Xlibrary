@@ -21,6 +21,8 @@ import com.example.cb.test.ui.material.MaterialActivity
 import com.example.cb.test.ui.view_pager.BannerActivity
 import com.example.cb.test.upload.UploadActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import java.AnnotationTestActivity
+
 //import me.devilsen.czxing.ScanBaseActivity
 
 //import me.devilsen.czxing.ScanBaseActivity;
@@ -55,6 +57,7 @@ class MainActivity : BaseActivity() {
         mList.add(CommonMenuBean("Upload", UploadActivity::class.java))
         mList.add(CommonMenuBean("Material", MaterialActivity::class.java))
         mList.add(CommonMenuBean("MotionLayout", MotionLayoutActivity::class.java))
+        mList.add(CommonMenuBean("注解", AnnotationTestActivity::class.java))
 //        mList.add(new CommonMenuBean("生成二维码", QRcodeEncoderActivity.class));
 //        mList.add( CommonMenuBean("扫一扫", ScanBaseActivity::class.java))
         mAdapter.dataLists = mList

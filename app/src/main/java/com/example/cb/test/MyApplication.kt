@@ -3,7 +3,7 @@ package com.example.cb.test
 import android.app.Application
 import cn.sccl.http.XHttp
 import cn.sccl.http.interceptor.BaseUrlInterceptor
-import cn.sccl.http.interceptor.HttpLoggingInterceptor
+import cn.sccl.http.log.HttpLoggingInterceptor
 import cn.sccl.xlibrary.XLibrary
 import cn.sccl.xlibrary.kotlin.AppGsonObject
 import com.example.cb.test.utils.SSLUtils

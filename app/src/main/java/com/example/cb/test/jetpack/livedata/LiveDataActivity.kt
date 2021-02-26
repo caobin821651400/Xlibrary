@@ -28,6 +28,12 @@ class LiveDataActivity : BaseActivity() {
                     //
                     XLogUtils.e("接收回传-->$it");
                 })
+
+
+        LiveDataBusX.getInstance().with("caobin", String::class.java)
+                .observe(this, Observer<String> {
+                 XLogUtils.v("测试生命周期 $it")
+                })
     }
 
     override fun initEvent() {
@@ -55,9 +61,9 @@ class LiveDataActivity : BaseActivity() {
 
 //            btn3.postDelayed({
 
-                val jsonObject = JSONObject()
-                jsonObject.put("name", "1111")
-                LiveDataBusEvent.getFromData().postValue(jsonObject)
+            val jsonObject = JSONObject()
+            jsonObject.put("name", "1111")
+            LiveDataBusEvent.getFromData().postValue(jsonObject)
 //            },2000)
         }
     }

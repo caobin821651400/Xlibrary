@@ -38,7 +38,6 @@ ext {
     ext.rv_version = "1.1.0"
     ext.glide_version = "4.9.0"
     ext.material_version = "1.2.0"
-    ext.room_version = "2.2.3"
     ext.nav_version = "2.3.0-alpha01"
     ext.paging_version = "2.1.1"
     ext.work_version = "2.3.1"

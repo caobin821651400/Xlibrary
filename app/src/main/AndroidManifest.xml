@@ -25,7 +25,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.constrain.MotionLayoutActivity"></activity>
+        <activity android:name=".kotlin.function.FunctionInlineActivity"></activity>
+        <activity android:name=".ui.constrain.MotionLayoutActivity" />
         <activity android:name=".kotlin.flow.KotlinFlowActivity" />
         <activity android:name=".ui.material.MaterialActivity" />
         <activity android:name=".upload.UploadActivity" />
@@ -83,6 +84,7 @@
         <activity android:name=".ui.view_pager.BannerActivity" />
         <activity android:name=".hook.HookDemoActivity" />
         <activity android:name=".CommentWebViewActivity" />
+        <activity android:name="java.AnnotationTestActivity" />
     </application>
 
 </manifest>
