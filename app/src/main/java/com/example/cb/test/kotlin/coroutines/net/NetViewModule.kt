@@ -4,7 +4,12 @@ import androidx.lifecycle.MutableLiveData
 import cn.sccl.http.XHttp
 import cn.sccl.http.core.BaseViewModule
 import cn.sccl.http.core.request
+import cn.sccl.xlibrary.utils.XLogUtils
 import com.example.cb.test.kotlin.coroutines.PageListDataUiState
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 
 /**
  * ====================================================
@@ -28,7 +33,10 @@ class NetViewModule : BaseViewModule() {
         if (isRefresh) {
             pageNo = 0
         }
-        request({ XHttp.getService(ApiService::class.java).getArticleList(pageNo) }, {
+        request({
+            XHttp.getService(ApiService::class.java)
+                    .getArticleList(pageNo)
+        }, {
             //请求成功
             pageNo++
             dataModule.value = PageListDataUiState(
@@ -47,7 +55,7 @@ class NetViewModule : BaseViewModule() {
                     isRefresh = isRefresh
 
             )
-        },isShowDialog = false)
+        }, isShowDialog = false)
 
 //        requestString(
 //                {
@@ -67,6 +75,7 @@ class NetViewModule : BaseViewModule() {
 //                }
 //        )
     }
+
 
 //        requestNoCheck(
 //                {

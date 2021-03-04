@@ -1,6 +1,8 @@
 package com.example.cb.test.kotlin.coroutines.net
 
 import cn.sccl.http.interceptor.BaseUrlInterceptor.Companion.CHANGE_URL_HEADER
+import okhttp3.Response
+import okhttp3.ResponseBody
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Path
