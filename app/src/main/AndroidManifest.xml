@@ -85,6 +85,7 @@
         <activity android:name=".hook.HookDemoActivity" />
         <activity android:name=".CommentWebViewActivity" />
         <activity android:name="java.AnnotationTestActivity" />
+        <activity android:name=".skin.SkinActivity" />
     </application>
 
 </manifest>

@@ -14,6 +14,7 @@ import com.example.cb.test.jetpack.JetPackActivity
 import com.example.cb.test.kotlin.KotlinMainActivity
 import com.example.cb.test.mvp.MvpActivity
 import com.example.cb.test.rx.rxjava.RxJavaMainActivity
+import com.example.cb.test.skin.SkinActivity
 import com.example.cb.test.ui.aidl.AidlTestActivity
 import com.example.cb.test.ui.anim.AnimTestActivity
 import com.example.cb.test.ui.constrain.MotionLayoutActivity
@@ -58,6 +59,7 @@ class MainActivity : BaseActivity() {
         mList.add(CommonMenuBean("Material", MaterialActivity::class.java))
         mList.add(CommonMenuBean("MotionLayout", MotionLayoutActivity::class.java))
         mList.add(CommonMenuBean("注解", AnnotationTestActivity::class.java))
+        mList.add(CommonMenuBean("插件化换肤", SkinActivity::class.java))
 //        mList.add(new CommonMenuBean("生成二维码", QRcodeEncoderActivity.class));
 //        mList.add( CommonMenuBean("扫一扫", ScanBaseActivity::class.java))
         mAdapter.dataLists = mList
