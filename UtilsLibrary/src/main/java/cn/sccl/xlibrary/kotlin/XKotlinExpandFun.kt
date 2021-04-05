@@ -19,21 +19,6 @@ import org.json.JSONArray
 val AppGsonObject = Gson()
 
 /**
- * 获取1dp的px
- */
-val dp1 = XDensityUtils.dp2px(XLibrary.getContext(), 1f)
-
-/**
- * 获取屏幕的宽度
- */
-val screenWidth = XDensityUtils.getScreenWidth(XLibrary.getContext())
-
-/**
- * 获取屏幕的高度
- */
-val screenHeight = XDensityUtils.getStatusHeight(XLibrary.getContext())
-
-/**
  * dp2px
  */
 fun dp2px(dp: Float) {

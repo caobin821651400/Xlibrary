@@ -8,10 +8,19 @@ import cn.sccl.xlibrary.adapter.XViewHolder
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
 import com.example.cb.test.bean.CommonMenuBean
+import com.example.cb.test.jetpack.paging.PagingActivity
 import com.example.cb.test.kotlin.coroutines.CoroutinesMainActivity
+import com.example.cb.test.kotlin.coroutines.net.ApiService
 import com.example.cb.test.kotlin.flow.KotlinFlowActivity
 import com.example.cb.test.kotlin.function.FunctionInlineActivity
 import kotlinx.android.synthetic.main.activity_jet_pack.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.*
+import retrofit2.Retrofit
+import java.io.IOException
 import java.util.*
 
 /**
@@ -38,11 +47,43 @@ class KotlinMainActivity : BaseActivity() {
         mList.add(CommonMenuBean("协程", CoroutinesMainActivity::class.java))
         mList.add(CommonMenuBean("Flow", KotlinFlowActivity::class.java))
         mList.add(CommonMenuBean("函数相关", FunctionInlineActivity::class.java))
+        mList.add(CommonMenuBean("Paging相关", PagingActivity::class.java))
+
 
         mAdapter.dataLists = mList
     }
 
     override fun initEvent() {
+//        val client = OkHttpClient.Builder()
+//                .build()
+//
+//        val request = Request.Builder().url("")
+//                .get()
+//                .build()
+//        val response = client.newCall(request).execute()
+//        client.newCall(request).enqueue(object : Callback {
+//            override fun onFailure(call: Call, e: IOException) {
+//
+//            }
+//
+//            override fun onResponse(call: Call, response: Response) {
+//
+//            }
+//        })
+//
+//
+//        val retrofit = Retrofit.Builder().baseUrl("").build()
+//        val service = retrofit.create(ApiService::class.java)
+//
+//        CoroutineScope(Dispatchers.Main).launch {
+//            withContext(Dispatchers.IO) {
+//                val call = service.getGitHubData(1, 2)
+//            }
+//        }
+
+
+
+
         mAdapter.setOnItemClickListener { v: View?, position: Int ->
             val bean: CommonMenuBean = mList.get(position)
             if (bean.getaClass() != null) {

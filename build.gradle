@@ -39,6 +39,6 @@ ext {
     ext.glide_version = "4.9.0"
     ext.material_version = "1.2.0"
     ext.nav_version = "2.3.0-alpha01"
-    ext.paging_version = "2.1.1"
+    ext.paging_version = "3.0.0-beta01"
     ext.work_version = "2.3.1"
 }

@@ -1,11 +1,11 @@
 package com.example.cb.test.kotlin.coroutines.net
 
 import cn.sccl.http.interceptor.BaseUrlInterceptor.Companion.CHANGE_URL_HEADER
-import okhttp3.Response
-import okhttp3.ResponseBody
+import com.example.cb.test.jetpack.paging.RepoResponse
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ApiService {
 
@@ -25,4 +25,8 @@ interface ApiService {
     )
     @GET("article/list/{page}/json")
     suspend fun getArticleList2(@Path("page") pageNo: Int): ApiCodeResponse<ApiListResponse<WanAndroidBean>>
+
+    @Headers("${CHANGE_URL_HEADER}:https://api.github.com/")
+    @GET("search/repositories?sort=stars&q=Android")
+    suspend fun getGitHubData(@Query("page") page: Int, @Query("per_page") perPage: Int): RepoResponse
 }

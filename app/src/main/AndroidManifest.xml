@@ -25,7 +25,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".kotlin.function.FunctionInlineActivity"></activity>
+        <activity android:name=".ui.custom_view.CustomViewActivity"></activity>
+        <activity android:name=".kotlin.function.FunctionInlineActivity" />
         <activity android:name=".ui.constrain.MotionLayoutActivity" />
         <activity android:name=".kotlin.flow.KotlinFlowActivity" />
         <activity android:name=".ui.material.MaterialActivity" />

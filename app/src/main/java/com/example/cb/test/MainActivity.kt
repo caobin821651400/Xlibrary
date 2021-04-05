@@ -14,10 +14,10 @@ import com.example.cb.test.jetpack.JetPackActivity
 import com.example.cb.test.kotlin.KotlinMainActivity
 import com.example.cb.test.mvp.MvpActivity
 import com.example.cb.test.rx.rxjava.RxJavaMainActivity
-import com.example.cb.test.skin.SkinActivity
 import com.example.cb.test.ui.aidl.AidlTestActivity
 import com.example.cb.test.ui.anim.AnimTestActivity
 import com.example.cb.test.ui.constrain.MotionLayoutActivity
+import com.example.cb.test.ui.custom_view.CustomViewActivity
 import com.example.cb.test.ui.material.MaterialActivity
 import com.example.cb.test.ui.view_pager.BannerActivity
 import com.example.cb.test.upload.UploadActivity
@@ -46,6 +46,7 @@ class MainActivity : BaseActivity() {
         mAdapter = MAdapter(mRecyclerView)
         mRecyclerView.adapter = mAdapter
 
+
         mList.add(CommonMenuBean("RxJava使用", RxJavaMainActivity::class.java))
         mList.add(CommonMenuBean("JetPack使用", JetPackActivity::class.java))
         mList.add(CommonMenuBean("Kotlin使用", KotlinMainActivity::class.java))
@@ -59,11 +60,10 @@ class MainActivity : BaseActivity() {
         mList.add(CommonMenuBean("Material", MaterialActivity::class.java))
         mList.add(CommonMenuBean("MotionLayout", MotionLayoutActivity::class.java))
         mList.add(CommonMenuBean("注解", AnnotationTestActivity::class.java))
-        mList.add(CommonMenuBean("插件化换肤", SkinActivity::class.java))
+        mList.add(CommonMenuBean("自定义View学习", CustomViewActivity::class.java))
 //        mList.add(new CommonMenuBean("生成二维码", QRcodeEncoderActivity.class));
 //        mList.add( CommonMenuBean("扫一扫", ScanBaseActivity::class.java))
         mAdapter.dataLists = mList
-
     }
 
     override fun initEvent() {
