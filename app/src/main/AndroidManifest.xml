@@ -53,8 +53,8 @@
                 <action android:name="cn.scu.finch" />
             </intent-filter>
         </service>
-        <service android:name=".service.MyService" />
         <service android:name=".ui.service.BackgroundService" />
+        <service android:name=".service.TestService" />
 
         <activity android:name=".ui.db.DbTestActivity" />
         <activity android:name=".ui.aidl.AidlTestActivity" />

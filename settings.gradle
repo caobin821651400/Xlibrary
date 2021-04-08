@@ -1,2 +1,3 @@
+include ':javalibrary'
 include ':HttpModule'
 include ':app', ':UtilsLibrary'//, ':DesignMode',
