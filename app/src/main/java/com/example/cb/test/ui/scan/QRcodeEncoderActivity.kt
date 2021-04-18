@@ -42,7 +42,7 @@ class QRcodeEncoderActivity : BaseActivity() {
 //
 //                override fun onSelectData(requestCode: Int, data: Intent?) {
 //                    val path = UriUtils.INSTANCE.getImagePath(this@QRcodeEncoderActivity, data)
-//                    val bitmap = compressBitmap(path)
+//                    val bitmap = Bitmap(path)
 //                    var result = BarcodeReader.getInstance().read(bitmap)
 //                    toast(result.text)
 ////                            val reader= BarcodeReader()

@@ -12,6 +12,8 @@ import com.example.cb.test.aidl.Student
 import com.example.cb.test.base.BaseActivity
 import com.example.cb.test.service.IStudentService
 import kotlinx.android.synthetic.main.activity_aidl_test.*
+import okhttp3.*
+import java.io.IOException
 
 class AidlTestActivity : BaseActivity() {
     override fun getLayoutId(): Int {
@@ -35,6 +37,18 @@ class AidlTestActivity : BaseActivity() {
             val intentService = Intent(this, IStudentService::class.java)
             bindService(intentService, mServiceConnection, Context.BIND_AUTO_CREATE)
         }
+
+        val client=OkHttpClient.Builder().build()
+        val result = Request.Builder().build()
+
+
+        val call=client.newCall(result).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+            }
+        })
     }
 
     /**
