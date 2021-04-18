@@ -9,4 +9,5 @@ public class ProxyTest {
         HttpProxy proxy2 = new HttpProxy(okHttp);
         System.err.println(proxy2.get());
     }
+
 }
