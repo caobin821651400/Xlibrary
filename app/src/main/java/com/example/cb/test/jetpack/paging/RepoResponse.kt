@@ -2,7 +2,7 @@ package com.example.cb.test.jetpack.paging
 
 import com.google.gson.annotations.SerializedName
 
-class RepoResponse {
+  class RepoResponse {
 
     @SerializedName("items")
     val items: List<Repo> = emptyList()

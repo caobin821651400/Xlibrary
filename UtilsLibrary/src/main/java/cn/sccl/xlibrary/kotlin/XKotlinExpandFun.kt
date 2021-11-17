@@ -21,8 +21,8 @@ val AppGsonObject = Gson()
 /**
  * dp2px
  */
-fun dp2px(dp: Float) {
-    XDensityUtils.dp2px(XLibrary.getContext(), dp)
+fun dp2px(dp: Float):Int {
+   return XDensityUtils.dp2px(XLibrary.getContext(), dp)
 }
 
 /**

@@ -5,11 +5,13 @@ import androidx.activity.viewModels
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import cn.sccl.xlibrary.kotlin.AppGsonObject
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseFragment
 import kotlinx.android.synthetic.main.activity_http.*
 import kotlinx.android.synthetic.main.fragment_kotlin_http.*
+import kotlinx.coroutines.launch
 
 /**
  * ====================================================
@@ -27,11 +29,12 @@ class HttpCoroutinesFragment : BaseFragment() {
     }
 
     override fun initUI(v: View?) {
-
+        lifecycleScope.launch {  }
 //        val aa = netViewModule.dataModule
 //        netViewModule.dataModule.observe(this, Observer {
 //            tvContent.text = AppGsonObject.toJson(it)
 //        })
+
     }
 
 

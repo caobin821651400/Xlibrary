@@ -2,11 +2,13 @@ package com.example.cb.test.jetpack.navigation
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import cn.sccl.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_navigation1.*
+import kotlinx.coroutines.launch
 
 /**
  * ====================================================
@@ -15,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_navigation1.*
  * @Desc :
  * ====================================================
  */
-class NavigationFragment1 : BaseFragment() {
+class NavigationFragment1 : BaseFragment()  {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +30,7 @@ class NavigationFragment1 : BaseFragment() {
     }
 
     override fun initUI(v: View?) {
+        viewLifecycleOwner.lifecycleScope.launch {  }
     }
 
     override fun initEvent(view: View?) {
