@@ -50,16 +50,18 @@
         android:text="协程网络请求" />
 
     <Button
+        android:id="@+id/button5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAllCaps="false"
-        android:text="" />
+        android:text="开始协程" />
 
     <Button
+        android:id="@+id/button6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAllCaps="false"
-        android:text="" />
+        android:text="停止协程" />
 
     <Button
         android:layout_width="match_parent"

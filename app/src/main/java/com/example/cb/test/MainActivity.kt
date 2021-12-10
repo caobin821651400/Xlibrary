@@ -1,9 +1,5 @@
 package com.example.cb.test
 
-import android.graphics.Color
-import android.graphics.drawable.LayerDrawable
-import android.graphics.drawable.ShapeDrawable
-import android.graphics.drawable.shapes.RoundRectShape
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -69,39 +65,6 @@ class MainActivity : BaseActivity() {
 //        mList.add(new CommonMenuBean("生成二维码", QRcodeEncoderActivity.class));
 //        mList.add( CommonMenuBean("扫一扫", ScanBaseActivity::class.java))
         mAdapter.dataLists = mList
-
-
-        test.post {
-            val aa = ShapeDrawable().apply {
-                val roundedCorners = floatArrayOf(12f, 12f, 12f, 12f, 12f, 12f, 12f, 12f)
-                shape = RoundRectShape(roundedCorners, null, null)
-                setPadding(0,0,0,2)
-                paint.setColor(Color.parseColor("#a660698d"))
-            }
-
-            val bb = ShapeDrawable().apply {
-                val roundedCorners = floatArrayOf(12f, 12f, 12f, 12f, 12f, 12f, 12f, 12f)
-                shape = RoundRectShape(roundedCorners, null, null)
-                paint.setColor(Color.WHITE)
-            }
-            val drawables = arrayOf(aa,bb)
-            val list = LayerDrawable(drawables)
-            test.background = list
-
-//            val shadowDrawable = ShadowDrawable()
-//            shadowDrawable.setColor( Color.RED) //shadowcolor
-//                .setOffsetY(8) //阴影下偏移--offset of the shadow
-//                .setRadius(12) //四角半径--concern of the rectangle
-//                .setEdgeShadowWidth(8) //四周阴影半径-- the shadow of each edge of the rectangle
-//                .setFilterColor(0x56ffffff) //中间值，越大阴影越接近设置的值-- the slot to said how close to the shadowcolor
-//                .setTopMargin(3) //上间距--top margin
-//                .setParentHeight(dp2px(100f)) //设置要依附的View的高度 -- the height of parent view
-//                .attach(test) //要在哪个View上面加阴影-- the shadow parent.※
-//                .build() //显示，必调-- to show the shadow.※
-//            test.background=shadowDrawable
-        }
-
-
     }
 
 

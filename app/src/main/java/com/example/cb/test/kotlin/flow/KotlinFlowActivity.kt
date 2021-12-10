@@ -2,6 +2,8 @@ package com.example.cb.test.kotlin.flow
 
 import android.view.View
 import android.widget.TextView
+import androidx.activity.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import cn.sccl.xlibrary.adapter.XRecyclerViewAdapter
 import cn.sccl.xlibrary.adapter.XViewHolder
@@ -27,6 +29,8 @@ class KotlinFlowActivity : BaseActivity(), CoroutineScope by MainScope() {
     private lateinit var mAdapter: MAdapter
     private var mList: ArrayList<CommonMenuBean> = ArrayList()
 
+    private val viewModel by viewModels<KotlinFlowViewModel>()
+
     override fun getLayoutId() = R.layout.activity_kotlin_flow
 
     override fun initUI() {
@@ -41,6 +45,7 @@ class KotlinFlowActivity : BaseActivity(), CoroutineScope by MainScope() {
         mList.add(CommonMenuBean("flow取消", null))
         mList.add(CommonMenuBean("flow结束", null))
         mList.add(CommonMenuBean("flow重试机制", null))
+        mList.add(CommonMenuBean("普通flow冷流", null))
 
         mAdapter.dataLists = mList
     }
@@ -55,6 +60,7 @@ class KotlinFlowActivity : BaseActivity(), CoroutineScope by MainScope() {
                 4 -> launch { demo5() }
                 5 -> launch { demo6() }
                 6 -> launch { demo7() }
+                7 -> launch { demo8() }
             }
         }
     }
@@ -118,18 +124,18 @@ class KotlinFlowActivity : BaseActivity(), CoroutineScope by MainScope() {
      */
     private suspend fun demo4() {
         listOf(1, 2, 3, 4, 5, 6, 7, 8, 9).asFlow()
-                .onEach {
-                    delay(1000)
-                }
-                .map {
-                    XLogUtils.d("map->${Thread.currentThread().name}")
-                    it * it
-                }
-                .flowOn(Dispatchers.IO)//对map进行线程切换，在线程池中切换
-                .collect {
-                    //collect 执行的线程取决于 整个方法所在的线程
-                    XLogUtils.d("${Thread.currentThread().name}: $it")
-                }
+            .onEach {
+                delay(1000)
+            }
+            .map {
+                XLogUtils.d("map->${Thread.currentThread().name}")
+                it * it
+            }
+            .flowOn(Dispatchers.IO)//对map进行线程切换，在线程池中切换
+            .collect {
+                //collect 执行的线程取决于 整个方法所在的线程
+                XLogUtils.d("${Thread.currentThread().name}: $it")
+            }
     }
 
     /**
@@ -158,12 +164,12 @@ class KotlinFlowActivity : BaseActivity(), CoroutineScope by MainScope() {
             emit(2)
             throw RuntimeException("发生异常")
         }
-                .onCompleted { XLogUtils.i("执行完毕") }
+            .onCompleted { XLogUtils.i("执行完毕") }
 //                .onCompletion { XLogUtils.i("执行完毕") }
-                .catch { XLogUtils.e("异常= ${it.printStackTrace()}") }
-                .collect {
-                    XLogUtils.d("collect value= $it")
-                }
+            .catch { XLogUtils.e("异常= ${it.printStackTrace()}") }
+            .collect {
+                XLogUtils.d("collect value= $it")
+            }
     }
 
     private var retryCount = 0
@@ -181,12 +187,37 @@ class KotlinFlowActivity : BaseActivity(), CoroutineScope by MainScope() {
             }
             return@retry false
         }
-                .onEach { XLogUtils.d("数据 $it") }
-                .catch { it.printStackTrace() }
-                .collect()
+            .onEach { XLogUtils.d("数据 $it") }
+            .catch { it.printStackTrace() }
+            .collect()
     }
 
-    inner class MAdapter(mRecyclerView: RecyclerView) : XRecyclerViewAdapter<CommonMenuBean>(mRecyclerView, R.layout.item_main) {
+    private var demo8IsStart = false
+
+    private suspend fun demo8() {
+        if (!demo8IsStart) {
+            lifecycleScope.launchWhenResumed {
+                viewModel.mEffect.collect {
+                    when (it) {
+                        is KotlinFlowViewModel.Effect.ShowToast -> {
+                            XLogUtils.d(it.text)
+//                            Toast.makeText(this@KotlinFlowActivity, it.text,Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
+            demo8IsStart = true
+            XLogUtils.d("观察成功")
+        } else {
+            (1..50).forEach {
+                delay(1000)
+                viewModel.showToast("$it")
+            }
+        }
+    }
+
+    inner class MAdapter(mRecyclerView: RecyclerView) :
+        XRecyclerViewAdapter<CommonMenuBean>(mRecyclerView, R.layout.item_main) {
         override fun bindData(holder: XViewHolder, data: CommonMenuBean, position: Int) {
             val textView = holder.itemView as TextView
             textView.text = data.name

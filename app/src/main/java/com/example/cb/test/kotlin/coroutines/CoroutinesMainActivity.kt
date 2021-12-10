@@ -2,6 +2,7 @@ package com.example.cb.test.kotlin.coroutines
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import cn.sccl.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
 import com.example.cb.test.kotlin.coroutines.net.HttpCoroutinesActivity
@@ -80,6 +81,23 @@ class CoroutinesMainActivity : BaseActivity() {
         button4.setOnClickListener {
             launchActivity(HttpCoroutinesActivity::class.java, null)
         }
+
+        var testJob: Job? = null
+
+        button5.setOnClickListener {
+            testJob = CoroutineScope(Dispatchers.Main).launch {
+                XLogUtils.d("delay start !")
+                delay(5000)
+                XLogUtils.d("delay end !")
+            }
+
+        }
+
+        button6.setOnClickListener {
+            XLogUtils.d("stop testJob !")
+            testJob?.cancel()
+        }
+
     }
 
 
@@ -107,21 +125,21 @@ class CoroutinesMainActivity : BaseActivity() {
      * suspend 网络获取一张图片
      */
     private suspend fun getImage2(imageUrl: String) =
-            withContext(Dispatchers.IO) {
-                var bitmap: Bitmap?
-                try {
-                    val url = URL(imageUrl)
-                    val conn = url.openConnection() as HttpURLConnection
-                    conn.requestMethod = "GET"
-                    conn.connect()
-                    val inputStream = conn.inputStream
-                    bitmap = BitmapFactory.decodeStream(inputStream)
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                    bitmap = null
-                }
-                bitmap
+        withContext(Dispatchers.IO) {
+            var bitmap: Bitmap?
+            try {
+                val url = URL(imageUrl)
+                val conn = url.openConnection() as HttpURLConnection
+                conn.requestMethod = "GET"
+                conn.connect()
+                val inputStream = conn.inputStream
+                bitmap = BitmapFactory.decodeStream(inputStream)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                bitmap = null
             }
+            bitmap
+        }
 
     /**
      * suspend 网络获取一张图片

@@ -7,34 +7,9 @@
 
     <include layout="@layout/comment_header_activity" />
 
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="52dp">
-
-        <TextView
-            android:id="@+id/test"
-            android:layout_width="100dp"
-            android:layout_height="100dp" />
-    </FrameLayout>
-
-
-    <TextView
-        android:id="@+id/tv_2"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_centerHorizontal="true"
-        android:text="elevation"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:background="#fff"
-        android:elevation="10dp"/>
-
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mRecyclerView"
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp" />
 </LinearLayout>
