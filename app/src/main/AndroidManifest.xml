@@ -53,7 +53,6 @@
                 <action android:name="cn.scu.finch" />
             </intent-filter>
         </service>
-        <service android:name=".ui.service.BackgroundService" />
         <service android:name=".service.TestService" />
 
         <activity android:name=".ui.db.DbTestActivity" />
@@ -70,23 +69,18 @@
         <activity android:name=".rx.rxjava.RxFunctionActivity" />
         <activity android:name=".rx.rxjava.RxMergeActivity" />
         <activity android:name=".rx.rxjava.SimpleUseActivity" />
-        <activity android:name=".jetpack.livedata.LiveDataActivity" /> <!-- <activity android:name=".TestActivity"></activity> -->
-        <activity android:name=".jetpack.demo.MusicActivity" />
         <activity android:name=".jetpack.workmanager.WorkManagerActivity" />
         <activity android:name=".jetpack.paging.PagingActivity" />
         <activity android:name=".jetpack.navigation.NavigationActivity" />
-        <activity android:name=".jetpack.room.RoomActivity" />
         <activity android:name=".jetpack.viewmodule.ViewModuleActivity" />
-        <activity android:name=".jetpack.livedata.LiveDataActivity2" />
         <activity android:name=".jetpack.lifecycles.LifeCyclesActivity" />
-        <activity android:name=".mvvm.MvvmActivity" />
         <activity android:name=".kotlin.KotlinTestActivity" />
         <activity android:name=".kotlin.KotlinSetActivity" />
         <activity android:name=".ui.view_pager.BannerActivity" />
         <activity android:name=".hook.HookDemoActivity" />
         <activity android:name=".CommentWebViewActivity" />
         <activity android:name="java.AnnotationTestActivity" />
-        <activity android:name=".skin.SkinActivity" />
+        <activity android:name=".kotlin.flow.FlowHotClodActivity" />
     </application>
 
 </manifest>
