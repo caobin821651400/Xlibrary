@@ -1,27 +1,19 @@
-apply plugin: 'com.android.library'
-
+plugins {
+    kotlin("jvm")
+}
 android {
-    compileSdkVersion  compile_sdk_version
+    compileSdkVersion(ProjectVersions.compileSdkVersion)
+    buildToolsVersion(ProjectVersions.buildToolsVersion)
     defaultConfig {
-        minSdkVersion min_sdk_version
-        targetSdkVersion target_sdk_version
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
+        minSdkVersion(ProjectVersions.minSdkVersion)
+        targetSdkVersion(ProjectVersions.targetSdkVersion)
+        applicationId = ProjectVersions.applicationId
+        versionCode = ProjectVersions.versionCode
+        versionName = ProjectVersions.versionName
+        multiDexEnabled = true
     }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation(Libs.appcompat)
 }
