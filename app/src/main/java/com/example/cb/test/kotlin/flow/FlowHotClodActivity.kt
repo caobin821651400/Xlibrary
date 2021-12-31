@@ -137,7 +137,7 @@ class FlowHotClodActivity : BaseActivity() {
     }
 
 
-    private fun go(black: suspend () -> Unit) {
+    private inline fun go(crossinline black: suspend () -> Unit) {
         this.lifecycleScope.launchWhenStarted {
             black()
         }
