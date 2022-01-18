@@ -26,6 +26,7 @@ object Libs {
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofitVersion}"
     const val retrofitConverterGson = "com.squareup.retrofit2:converter-gson:${Versions.retrofitConverterGsonVersion}"
     const val okhttp = "com.squareup.okhttp3:okhttp:${Versions.okhttpVersion}"
+    const val okhttpLogging = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttpVersion}"
 
     //Rx
     const val rxbinding = "com.jakewharton.rxbinding3:rxbinding:${Versions.rxbindingVersion}"
@@ -43,12 +44,15 @@ object Libs {
     const val navigationFeatures = "androidx.navigation:navigation-dynamic-features-fragment:${Versions.navigationVersion}"
 
     //Jetpack
-    const val paging = "androidx.paging:paging-runtime:${Versions.navigationVersion}"
-
-    //     const val navigation ="androidx.work:work-runtime-ktx:${Versions.navigationVersion}"
+    const val paging = "androidx.paging:paging-runtime:${Versions.pagingVersion}"
+    //     const val navigation ="androidx.work:work-runtime-ktx:${Versions.workVersion}"
     const val viewmodelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.viewmodelKtxVersion}"
     const val lifecycleExt = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycleExtVersion}"
     const val fragmentKtx = "androidx.fragment:fragment-ktx:${Versions.fragmentKtxVersion}"
+    const val lifecycleRuntimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycleRuntimeVersion}"
+    const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime:${Versions.lifecycleRuntimeVersion}"
+    const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.liveDataVersion}"
+
 
     //Other
     const val loadsir = "com.kingja.loadsir:loadsir:${Versions.loadsirVersion}"

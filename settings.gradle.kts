@@ -1,6 +1,6 @@
 include(":javalibrary")
-include(":HttpModule'")
+include(":HttpModule")
 include(":app")
 include(":UtilsLibrary")
-include(":DesignMode")
+//include(":DesignMode")
 rootProject.buildFileName = "build.gradle.kts"

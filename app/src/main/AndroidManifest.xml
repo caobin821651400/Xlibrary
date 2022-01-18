@@ -69,10 +69,8 @@
         <activity android:name=".rx.rxjava.RxFunctionActivity" />
         <activity android:name=".rx.rxjava.RxMergeActivity" />
         <activity android:name=".rx.rxjava.SimpleUseActivity" />
-        <activity android:name=".jetpack.workmanager.WorkManagerActivity" />
         <activity android:name=".jetpack.paging.PagingActivity" />
         <activity android:name=".jetpack.navigation.NavigationActivity" />
-        <activity android:name=".jetpack.viewmodule.ViewModuleActivity" />
         <activity android:name=".jetpack.lifecycles.LifeCyclesActivity" />
         <activity android:name=".kotlin.KotlinTestActivity" />
         <activity android:name=".kotlin.KotlinSetActivity" />

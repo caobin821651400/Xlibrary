@@ -27,7 +27,7 @@ android {
     }
     sourceSets {
         getByName("main") {
-            java.srcDirs("src/main/java","src/main/aidl")
+            java.srcDirs("src/main/java", "src/main/aidl")
         }
     }
     lintOptions {
@@ -60,6 +60,7 @@ dependencies {
     implementation(Libs.recyclerview)
     implementation(Libs.material)
     implementation(Libs.constraintlayout)
+    implementation(Libs.refreshLayout)
 
     implementation(Libs.retrofit)
     implementation(Libs.retrofitConverterGson)
@@ -84,7 +85,7 @@ dependencies {
 
     implementation(Libs.loadsir)
 
-    implementation{ project(":HttpModule") }
-    implementation{ project(":UtilsLibrary") }
-    implementation{ project(":QrLibrary") }
+    implementation(project(":HttpModule"))
+    implementation(project(":UtilsLibrary"))
+//    implementation(project(":QrLibrary"))
 }
