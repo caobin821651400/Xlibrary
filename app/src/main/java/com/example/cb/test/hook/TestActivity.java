@@ -1,8 +1,10 @@
-package com.example.cb.test;
+package com.example.cb.test.hook;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.cb.test.R;
 
 public class TestActivity extends AppCompatActivity {
 

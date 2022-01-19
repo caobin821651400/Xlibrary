@@ -1,15 +1,12 @@
 package com.example.cb.test.hook;
 
 import android.annotation.SuppressLint;
-import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-
-import com.example.cb.test.TestActivity;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;

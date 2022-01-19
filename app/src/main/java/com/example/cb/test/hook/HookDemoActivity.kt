@@ -3,7 +3,6 @@ package com.example.cb.test.hook
 import android.content.Intent
 import cn.sccl.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
-import com.example.cb.test.TestActivity
 import com.example.cb.test.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_hook.*
 

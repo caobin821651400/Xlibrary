@@ -23,12 +23,12 @@ open class BaseViewModule : ViewModel() {
     /**
      * 显示dialog
      */
-    val showDialogLiveData by lazy { EventLiveData<String>() }
+    val showDialogLiveData by lazy(LazyThreadSafetyMode.NONE) { EventLiveData<String>() }
 
     /**
      * 隐藏dialog
      */
-    val dismissDialogLiveData by lazy { EventLiveData<String>() }
+    val dismissDialogLiveData by lazy(LazyThreadSafetyMode.NONE) { EventLiveData<String>() }
 
 }
 
