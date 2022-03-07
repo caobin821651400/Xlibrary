@@ -345,4 +345,22 @@
         <attr name="xrv_progress_width" format="dimension" />
 
     </declare-styleable>
+
+
+    <declare-styleable name="MutlColorLoadingView">
+        <!--The color of the first progress-->
+        <attr name="mclv_first_color" format="color" />
+        <!--The color of the second progress-->
+        <attr name="mclv_second_color" format="color" />
+        <!--The color of the three progress-->
+        <attr name="mclv_three_color" format="color" />
+        <!--A round of time-->
+        <attr name="mclv_duration" format="integer" />
+        <!--Angle of progress-->
+        <attr name="mclv_start_angle" format="integer" />
+        <!--The thickness of the progress bar-->
+        <attr name="mclv_stroke_width" format="integer|dimension"/>
+        <!--The ratio of the first color progress to the total progress-->
+        <attr name="mclv_rate_first_round" format="float" />
+    </declare-styleable>
 </resources>

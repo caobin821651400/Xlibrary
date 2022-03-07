@@ -56,4 +56,26 @@
         <item name="cornerFamilyBottomRight">cut</item>
         <item name="cornerSizeBottomRight">50%</item>
     </style>
+
+    <declare-styleable name="MagicTextView">
+        <attr name="mt_innerShadowColor" format="color"/>
+        <attr name="mt_innerShadowRadius" format="dimension"/>
+        <attr name="mt_innerShadowDx" format="dimension"/>
+        <attr name="mt_innerShadowDy" format="dimension"/>
+        <attr name="mt_outerShadowColor" format="color"/>
+        <attr name="mt_outerShadowRadius" format="dimension"/>
+        <attr name="mt_outerShadowDx" format="dimension"/>
+        <attr name="mt_outerShadowDy" format="dimension"/>
+        <attr name="mt_typeface" format="string" />
+        <attr name="mt_foreground" format="reference|color"/>
+        <attr name="mt_background" format="reference|color"/>
+        <attr name="mt_strokeWidth" format="dimension" />
+        <attr name="mt_strokeMiter" format="dimension" />
+        <attr name="mt_strokeColor" format="color" />
+        <attr name="mt_strokeJoinStyle">
+            <enum name="miter" value="0" />
+            <enum name="bevel" value="1" />
+            <enum name="round" value="2" />
+        </attr>
+    </declare-styleable>
 </resources>
