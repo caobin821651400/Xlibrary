@@ -10,6 +10,7 @@ buildscript {
     }
     dependencies {
         classpath("com.android.tools.build:gradle:4.2.1")
+//        classpath("com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.10")
         classpath(kotlin("gradle-plugin", version = Versions.kotlinVersion))
     }
 }
