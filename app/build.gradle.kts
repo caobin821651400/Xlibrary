@@ -88,5 +88,6 @@ dependencies {
 
     implementation(project(":HttpModule"))
     implementation(project(":UtilsLibrary"))
+    implementation(project(":ComposeModule"))
 //    implementation(project(":QrLibrary"))
 }
