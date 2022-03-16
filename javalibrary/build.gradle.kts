@@ -4,26 +4,26 @@ plugins {
     id("kotlin-android-extensions")
 }
 
-android {
+android(Action {
     compileSdkVersion(ProjectVersions.compileSdkVersion)
     buildToolsVersion(ProjectVersions.buildToolsVersion)
-    defaultConfig {
+    defaultConfig(Action {
         minSdkVersion(ProjectVersions.minSdkVersion)
         targetSdkVersion(ProjectVersions.targetSdkVersion)
         versionCode = ProjectVersions.versionCode
         versionName = ProjectVersions.versionName
         multiDexEnabled = true
-    }
-    buildTypes {
+    })
+    buildTypes(Action {
         getByName("release") {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
-    }
+    })
     lintOptions {
         isAbortOnError = false
     }
-}
+})
 
 dependencies {
     implementation(Libs.kotlinCore)

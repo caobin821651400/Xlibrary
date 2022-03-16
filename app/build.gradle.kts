@@ -6,26 +6,25 @@ plugins {
     kotlin("kapt")
 }
 
-android {
+android(Action {
     compileSdkVersion(ProjectVersions.compileSdkVersion)
     buildToolsVersion(ProjectVersions.buildToolsVersion)
-    defaultConfig {
+    defaultConfig(Action {
         minSdkVersion(ProjectVersions.minSdkVersion)
         targetSdkVersion(ProjectVersions.targetSdkVersion)
         applicationId = ProjectVersions.applicationId
         versionCode = ProjectVersions.versionCode
         versionName = ProjectVersions.versionName
         multiDexEnabled = true
-    }
-    buildTypes {
+    })
+    buildTypes(Action {
         getByName("release") {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
+    })
+    kotlinOptions(Action { jvmTarget = "1.8" })
+
     sourceSets {
         getByName("main") {
             java.srcDirs("src/main/java", "src/main/aidl")
@@ -42,7 +41,9 @@ android {
     packagingOptions {
         exclude("META-INF/proguard/coroutines.pro")
     }
-}
+})
+
+
 repositories {
     flatDir {
         dirs("libs")
