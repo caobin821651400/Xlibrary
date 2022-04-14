@@ -1,5 +1,6 @@
 package com.example.cb.test.kotlin
 
+import android.os.Bundle
 import cn.sccl.xlibrary.kotlin.AppGsonObject
 import cn.sccl.xlibrary.kotlin.forEach
 import cn.sccl.xlibrary.kotlin.forEachIndex
@@ -155,6 +156,31 @@ class KotlinTestActivity : BaseActivity() {
         val list = AppGsonObject.fromJson<List<String>>(str, object : TypeToken<List<String>>() {}.type)
         if (!list.isNullOrEmpty()) {
             XLogUtils.e("列表数据=${list[0]}")
+        }
+
+        //let,with,run,apply,also区别
+        var strNull: String? = null
+
+        //let可以判空 it代表当前对象,最后一行是返回值(闭包)
+        val result = strNull?.let {
+            "1211"
+        }
+        //also可以判空 it代表当前对象,返回对象本身
+        strNull?.also {
+
+        }
+        //with的对象在括号内 this代表当前对象，可省略,最后一行是返回值(闭包)
+        val result2 = with(strNull) {
+            this?.length
+        }
+        //run 相当于let和with的结合体 this代表当前对象，可省略,最后一行是返回值(闭包)
+        val result3 = strNull?.run {
+            "111"
+        }
+//        result3.split()
+        //apply 返回对象本身,this代表当前对象，可省略
+        val bundle = Bundle().apply {
+            putString("11", "11")
         }
     }
 }

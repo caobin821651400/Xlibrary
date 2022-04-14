@@ -46,7 +46,9 @@ object ExceptionHandle {
                 }
             }
         }
-        return NetException(NetException.UNKNOWN, errLog = throwable?.message
-                ?: "")
+        return NetException(
+            NetException.UNKNOWN, errLog = throwable?.message
+                    ?: ""
+        )
     }
 }

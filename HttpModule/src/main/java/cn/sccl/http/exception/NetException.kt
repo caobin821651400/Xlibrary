@@ -7,7 +7,11 @@ package cn.sccl.http.exception
  * @Desc :自定义错误信息异常
  * ====================================================
  */
-class NetException : Exception {
+class NetException(
+        errCode: Int,
+        error: String? = null,
+        errLog: String? = ""
+) : Exception(error) {
 
     companion object {
         const val UNKNOWN = 80//请求失败，请稍后再试
@@ -22,10 +26,9 @@ class NetException : Exception {
     }
 
     var errorMsg: String //错误消息
-    var errCode: Int = 0 //错误码
     var errLog: String? //错误日志
 
-    constructor(errCode: Int, error: String? = null, errLog: String? = "") : super(error) {
+    init {
         this.errorMsg = error ?: when (errCode) {
             UNKNOWN -> "请求失败，请稍后再试"
             PARSE_ERROR -> "解析错误，请稍后再试"
@@ -38,7 +41,6 @@ class NetException : Exception {
             DOWN_LOAD_PATH_ERROR -> "文件保存路径为空"
             else -> "请求失败，请稍后再试"
         }
-        this.errCode = errCode
         this.errLog = errLog ?: this.errorMsg
     }
 }

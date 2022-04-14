@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.sccl.xlibrary.adapter.XRecyclerViewAdapter
 import cn.sccl.xlibrary.adapter.XViewHolder
-import com.cb.test.composemodule.ComposeMainActivity
 import com.example.cb.test.base.BaseActivity
 import com.example.cb.test.bean.CommonMenuBean
 import com.example.cb.test.download.DownLoadActivity
@@ -63,7 +62,6 @@ class MainActivity : BaseActivity() {
         mList.add(CommonMenuBean("MotionLayout", MotionLayoutActivity::class.java))
         mList.add(CommonMenuBean("注解", AnnotationTestActivity::class.java))
         mList.add(CommonMenuBean("自定义View学习", CustomViewActivity::class.java))
-        mList.add(CommonMenuBean("Compose学习", ComposeMainActivity::class.java))
 //        mList.add(new CommonMenuBean("生成二维码", QRcodeEncoderActivity.class));
 //        mList.add( CommonMenuBean("扫一扫", ScanBaseActivity::class.java))
         mAdapter.dataLists = mList

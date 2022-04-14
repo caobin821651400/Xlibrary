@@ -2,6 +2,9 @@ package com.example.cb.test.kotlin.coroutines.net
 
 import cn.sccl.http.interceptor.BaseUrlInterceptor.Companion.CHANGE_URL_HEADER
 import com.example.cb.test.jetpack.paging.RepoResponse
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Path
@@ -14,6 +17,13 @@ interface ApiService {
      */
     @GET("article/list/{page}/json")
     suspend fun getArticleList(@Path("page") pageNo: Int): ApiCodeResponse<ApiListResponse<WanAndroidBean>>
+
+
+    /**
+     * 获取首页文章数据
+     */
+    @GET("article/list/{page}/json")
+    suspend fun getArticleListCall(@Path("page") pageNo: Int): Call<ResponseBody>
 
 
     /**
