@@ -21,8 +21,8 @@ val AppGsonObject = Gson()
 /**
  * dp2px
  */
-fun dp2px(dp: Float):Int {
-   return XDensityUtils.dp2px(XLibrary.getContext(), dp)
+fun dp2px(dp: Float): Int {
+    return XDensityUtils.dp2px(XLibrary.getContext(), dp)
 }
 
 /**
@@ -72,3 +72,11 @@ fun <T> JSONArray.forEachIndex(action: (index: Int, T) -> Unit): Unit {
 inline fun <reified T> Gson.fromGson(jsonString: String) {
     fromJson(jsonString, T::class.java)
 }
+
+/**
+ * by lazy 默认模式是 [LazyThreadSafetyMode.SYNCHRONIZED] 双重加锁的单例;有些情况下不涉及多线程会有性能影响
+ * @param initializer
+ * @return Lazy<T>
+ */
+fun <T> lazyNone(initializer: () -> T): Lazy<T> = lazy(LazyThreadSafetyMode.NONE, initializer)
+
