@@ -2,6 +2,7 @@ package com.example.cb.test.kotlin.coroutines
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import androidx.lifecycle.lifecycleScope
 import cn.sccl.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
@@ -10,6 +11,7 @@ import kotlinx.android.synthetic.main.activity_coroutine_main.*
 import kotlinx.coroutines.*
 import java.net.HttpURLConnection
 import java.net.URL
+import kotlin.system.measureTimeMillis
 
 /**
  * ====================================================
@@ -71,7 +73,7 @@ class CoroutinesMainActivity : BaseActivity() {
         //async()不会为我们启动新的线程,需要在构造方法中传入Dispatchers
         button3.setOnClickListener {
             CoroutineScope(Dispatchers.Main).launch {
-                val data = async(Dispatchers.IO) { getImage(imageUrl) }
+                val data: Deferred<Bitmap?> = async(Dispatchers.IO) { getImage(imageUrl) }
                 imageView.setImageBitmap(data.await())
             }
         }
@@ -98,8 +100,30 @@ class CoroutinesMainActivity : BaseActivity() {
             testJob?.cancel()
         }
 
+        button7.setOnClickListener { globalScopeTest() }
+
+
+        button8.setOnClickListener { asyncMultipleTest() }
+        button9.setOnClickListener { cancelAndJoin() }
     }
 
+    private fun cancelAndJoin() {
+        lifecycleScope.launch {
+            val job = launch {
+                repeat(10) { index ->
+                    XLogUtils.d("job: I'm sleeping $index ...")
+                    delay(500)
+                }
+            }
+            delay(1300)//等待一会，在超时之前不会继续往下执行
+            XLogUtils.d("main: I'm tired of waiting")
+//            job.cancel()
+            job.join()
+//            job.cancelAndJoin()
+            XLogUtils.d("main: Now I can quit.")
+            XLogUtils.d("isActive ${job.isActive} isCanceled ${job.isCancelled} isComplete ${job.isCompleted}")
+        }
+    }
 
     /**
      * 网络获取一张图片
@@ -159,5 +183,61 @@ class CoroutinesMainActivity : BaseActivity() {
                 null
             }
         }
+    }
+
+    /**
+     * runBlocking回阻塞当前线程执行，但是内部的协程不会阻塞
+     */
+    private fun runBloTest() {
+        XLogUtils.d("caobin start")
+        //context上下文使用默认值,阻塞当前线程，直到代码块中的逻辑完成
+        runBlocking {
+            //这里是协程体
+            delay(1000)//挂起函数，延迟1000毫秒
+            XLogUtils.d("caobin runBlocking")
+        }
+        XLogUtils.d("caobin end")
+    }
+
+    private fun globalScopeTest() {
+        XLogUtils.d("start")
+        //创建全局作用域协程，类似于Application,不会阻塞当前线程，生命周期与应用程序一致
+        val job = GlobalScope.launch {
+            XLogUtils.d("delay 1s")
+            delay(1000)//1秒无阻塞延迟（默认单位为毫秒）
+            XLogUtils.d("delay 1s complete")
+        }
+        XLogUtils.d("end")//主线程继续，而协程被延迟
+    }
+
+    private fun asyncMultipleTest() {
+        XLogUtils.d("start")
+        GlobalScope.launch {
+            val time = measureTimeMillis {//计算执行时间
+                val deferredOne: Deferred<Int> = async {
+                    delay(2000)
+                    XLogUtils.d("asyncOne")
+                    100//这里返回值为100
+                }
+
+                val deferredTwo: Deferred<Int> = async {
+                    delay(3000)
+                    XLogUtils.d("asyncTwo")
+                    200//这里返回值为200
+                }
+
+                val deferredThr: Deferred<Int> = async {
+                    delay(4000)
+                    XLogUtils.d("asyncThr")
+                    300//这里返回值为300
+                }
+
+                //等待所有需要结果的协程完成获取执行结果
+                val result = deferredOne.await() + deferredTwo.await() + deferredThr.await()
+                XLogUtils.d("result == $result")
+            }
+            XLogUtils.d("耗时 $time ms")
+        }
+        XLogUtils.d("end")
     }
 }

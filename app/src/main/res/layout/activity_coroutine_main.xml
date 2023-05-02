@@ -64,22 +64,25 @@
         android:text="停止协程" />
 
     <Button
+        android:id="@+id/button7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAllCaps="false"
-        android:text="" />
+        android:text="globalScope协程" />
 
     <Button
+        android:id="@+id/button8"
         android:layout_width="match_parent"
         android:textAllCaps="false"
         android:layout_height="wrap_content"
-        android:text="" />
+        android:text="asyn并发" />
 
     <Button
+        android:id="@+id/button9"
         android:layout_width="match_parent"
         android:textAllCaps="false"
         android:layout_height="wrap_content"
-        android:text="" />
+        android:text="join and cancelJoin" />
 
     <Button
         android:layout_width="match_parent"
