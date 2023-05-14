@@ -6,7 +6,15 @@ import androidx.lifecycle.OnLifecycleEvent
 import cn.sccl.xlibrary.utils.XLogUtils
 
 class LifeCyclesModule:LifecycleObserver {
+    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    fun onMCreate() {
+        XLogUtils.d("onMCreate 1111")
+    }
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    fun onMStart() {
+        XLogUtils.d("Lifecycle.Event.ON_START 1111")
+    }
 
 
 

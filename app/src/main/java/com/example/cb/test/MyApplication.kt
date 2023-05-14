@@ -6,6 +6,7 @@ import cn.sccl.http.interceptor.BaseUrlInterceptor
 import cn.sccl.http.log.HttpLoggingInterceptor
 import cn.sccl.xlibrary.XLibrary
 import cn.sccl.xlibrary.kotlin.AppGsonObject
+import cn.sccl.xlibrary.utils.XLogUtils
 import com.example.cb.test.utils.SSLUtils
 import com.example.cb.test.weight.loadCallBack.EmptyCallback
 import com.example.cb.test.weight.loadCallBack.ErrorCallback
@@ -29,6 +30,7 @@ class MyApplication : Application() {
     }
 
     override fun onCreate() {
+        XLogUtils.d("caobin Application onCreate time " + System.currentTimeMillis())
         super.onCreate()
         app = this
         XLibrary.init(this)
@@ -44,20 +46,23 @@ class MyApplication : Application() {
         val sslParams = SSLUtils.getSslSocketFactory()
         //log相关
         val loggingInterceptor = HttpLoggingInterceptor("XHttp")
-        loggingInterceptor.setPrintLevel(if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY
-        else HttpLoggingInterceptor.Level.NONE) //log打印级别，决定了log显示的详细程度
+        loggingInterceptor.setPrintLevel(
+            if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY
+            else HttpLoggingInterceptor.Level.NONE
+        ) //log打印级别，决定了log显示的详细程度
         loggingInterceptor.setColorLevel(Level.INFO) //log颜色级别，决定了log在控制台显示的颜色
 
         val client = OkHttpClient.Builder()
-                .connectTimeout(5, TimeUnit.SECONDS)
-                .readTimeout(5, TimeUnit.SECONDS)
-                .addInterceptor(BaseUrlInterceptor())
+            .connectTimeout(5, TimeUnit.SECONDS)
+            .readTimeout(5, TimeUnit.SECONDS)
+            .addInterceptor(BaseUrlInterceptor())
 //                .addInterceptor(RxLogInterceptor())
-                .addInterceptor(loggingInterceptor)
-                .sslSocketFactory(sslParams.sSLSocketFactory, sslParams.trustManager)
-                .hostnameVerifier(HostnameVerifier { _, _ -> true })
-                .build()
-        XHttp.setRetrofit(Retrofit.Builder()
+            .addInterceptor(loggingInterceptor)
+            .sslSocketFactory(sslParams.sSLSocketFactory, sslParams.trustManager)
+            .hostnameVerifier(HostnameVerifier { _, _ -> true })
+            .build()
+        XHttp.setRetrofit(
+            Retrofit.Builder()
 //                .baseUrl("https://iot.sctel.com.cn/")
                 .baseUrl("https://www.wanandroid.com/")
                 .client(client)
@@ -69,10 +74,10 @@ class MyApplication : Application() {
     private fun initLoadSir() {
         //界面加载管理 初始化
         LoadSir.beginBuilder()
-                .addCallback(LoadingCallback())//加载
-                .addCallback(ErrorCallback())//错误
-                .addCallback(EmptyCallback())//空
-                .setDefaultCallback(SuccessCallback::class.java)//设置默认加载状态页
-                .commit()
+            .addCallback(LoadingCallback())//加载
+            .addCallback(ErrorCallback())//错误
+            .addCallback(EmptyCallback())//空
+            .setDefaultCallback(SuccessCallback::class.java)//设置默认加载状态页
+            .commit()
     }
 }

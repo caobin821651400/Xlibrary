@@ -18,12 +18,17 @@ class LifeCyclesActivity : BaseActivity() {
 
     override fun initUI() {
         setHeaderTitle("LifeCycles使用")
-        val aa = LifeCyclesModule()
+
         val bb = LifeCyclesModule2()
 
 
-        lifecycle.addObserver(aa)
         lifecycle.addObserver(bb)
+    }
+
+    override fun onStart() {
+        val aa = LifeCyclesModule()
+        lifecycle.addObserver(aa)
+        super.onStart()
     }
 
     override fun initEvent() {

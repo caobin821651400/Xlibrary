@@ -25,7 +25,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.custom_view.CustomViewActivity"
+        <activity
+            android:name=".ui.custom_view.CustomViewActivity"
 
             android:screenOrientation="landscape"></activity>
         <activity android:name=".kotlin.function.FunctionInlineActivity" />
@@ -45,6 +46,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name=".StartTimeRecordContentProvider"
+            android:authorities="${applicationId}.StartTimeProvider"
+            android:exported="false" />
 
         <service
             android:name=".service.IStudentService"
