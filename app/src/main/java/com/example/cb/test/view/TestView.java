@@ -6,6 +6,8 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import java.util.logging.Logger;
+
 import cn.sccl.xlibrary.utils.XLogUtils;
 
 /**
@@ -30,5 +32,25 @@ public class TestView extends View {
 
         XLogUtils.e(" paddingbottom "+getPaddingBottom());
 
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+        int mode = MeasureSpec.getMode(widthMeasureSpec);
+
+        String result = "";
+        if (mode == MeasureSpec.AT_MOST) {
+            result = "AT_MOST";
+        } if (mode == MeasureSpec.UNSPECIFIED) {
+            result = "UNSPECIFIED";
+        } if (mode == MeasureSpec.EXACTLY) {
+            result = "EXACTLY";
+        }
+
+
+        XLogUtils.d("caobin  mode="+result);
+        XLogUtils.d("caobin  size="+MeasureSpec.getSize(widthMeasureSpec));
     }
 }
