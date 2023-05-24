@@ -1,6 +1,7 @@
 package com.example.cb.test
 
 import android.app.Application
+import android.content.Context
 import cn.sccl.http.XHttp
 import cn.sccl.http.interceptor.BaseUrlInterceptor
 import cn.sccl.http.log.HttpLoggingInterceptor
@@ -29,6 +30,10 @@ class MyApplication : Application() {
         lateinit var app: MyApplication
     }
 
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        XLogUtils.d("caobin Application attachBaseContext time " + System.currentTimeMillis())
+    }
     override fun onCreate() {
         XLogUtils.d("caobin Application onCreate time " + System.currentTimeMillis())
         super.onCreate()

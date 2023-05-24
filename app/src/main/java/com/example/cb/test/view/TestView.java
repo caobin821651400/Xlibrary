@@ -6,7 +6,8 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
-import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.List;
 
 import cn.sccl.xlibrary.utils.XLogUtils;
 
@@ -20,17 +21,17 @@ import cn.sccl.xlibrary.utils.XLogUtils;
  */
 public class TestView extends View {
     public TestView(Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public TestView(Context context, @Nullable AttributeSet attrs) {
-        this(context, attrs,0);
+        this(context, attrs, 0);
     }
 
     public TestView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        XLogUtils.e(" paddingbottom "+getPaddingBottom());
+        XLogUtils.e(" paddingbottom " + getPaddingBottom());
 
     }
 
@@ -43,14 +44,16 @@ public class TestView extends View {
         String result = "";
         if (mode == MeasureSpec.AT_MOST) {
             result = "AT_MOST";
-        } if (mode == MeasureSpec.UNSPECIFIED) {
+        }
+        if (mode == MeasureSpec.UNSPECIFIED) {
             result = "UNSPECIFIED";
-        } if (mode == MeasureSpec.EXACTLY) {
+        }
+        if (mode == MeasureSpec.EXACTLY) {
             result = "EXACTLY";
         }
 
 
-        XLogUtils.d("caobin  mode="+result);
-        XLogUtils.d("caobin  size="+MeasureSpec.getSize(widthMeasureSpec));
+        XLogUtils.d("caobin  mode=" + result);
+        XLogUtils.d("caobin  size=" + MeasureSpec.getSize(widthMeasureSpec));
     }
 }
