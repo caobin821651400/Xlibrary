@@ -23,6 +23,7 @@ import com.example.cb.test.ui.custom_view.CustomViewActivity
 import com.example.cb.test.ui.material.MaterialActivity
 import com.example.cb.test.ui.view_pager.BannerActivity
 import com.example.cb.test.upload.UploadActivity
+import dalvik.system.DexClassLoader
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
