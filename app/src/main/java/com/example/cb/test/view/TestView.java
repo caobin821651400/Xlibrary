@@ -52,8 +52,12 @@ public class TestView extends View {
             result = "EXACTLY";
         }
 
-
         XLogUtils.d("caobin  mode=" + result);
         XLogUtils.d("caobin  size=" + MeasureSpec.getSize(widthMeasureSpec));
+    }
+
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed, left, top, right, bottom);
     }
 }

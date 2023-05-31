@@ -7,11 +7,6 @@
 
     <include layout="@layout/comment_header_activity" />
 
-
-    <com.example.cb.test.view.TestView
-        android:layout_width="100px"
-        android:layout_height="100px" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mRecyclerView"
         android:layout_width="match_parent"
