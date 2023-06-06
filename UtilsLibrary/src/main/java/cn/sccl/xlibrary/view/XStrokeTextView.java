@@ -42,9 +42,9 @@ public class XStrokeTextView extends TextView {
 
     public void init() {
         TextPaint paint = outlineTextView.getPaint();
-        paint.setStrokeWidth(15);// 描边宽度
+        paint.setStrokeWidth(3);// 描边宽度
         paint.setStyle(Paint.Style.STROKE);
-        outlineTextView.setTextColor(Color.parseColor("#000000"));// 描边颜色
+        outlineTextView.setTextColor(Color.parseColor("#ff0000"));// 描边颜色
         outlineTextView.setGravity(getGravity());
 //        outlineTextView.setTextScaleX(a.getFloat(attr, 1.0f));
     }
