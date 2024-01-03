@@ -4,16 +4,19 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.distinctUntilChanged
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import cn.sccl.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
 import com.example.cb.test.bean.CommonMenuBean
 import com.example.cb.test.view.CommonAdapter
-import kotlinx.android.synthetic.main.activity_jet_pack.*
+import kotlinx.android.synthetic.main.activity_jet_pack.mRecyclerView
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.onEach
-import java.util.*
+import kotlinx.coroutines.launch
 
 /**
  * @author: bincao2
@@ -46,6 +49,8 @@ class FlowHotClodActivity : BaseActivity() {
         mList.add(CommonMenuBean("StateFlow", null))
         mList.add(CommonMenuBean("SharedFlow", null))
         mList.add(CommonMenuBean("liveData防抖", null))
+        mList.add(CommonMenuBean("SharedFlow多次订阅", null))
+        mList.add(CommonMenuBean("生产>消费", null))
 
         mAdapter.dataLists = mList
 
@@ -65,14 +70,31 @@ class FlowHotClodActivity : BaseActivity() {
                 0 -> {
                     clodFlow()
                 }
+
                 1 -> go {
-                    viewModel.uiNavigation.emit(FlowHotClodViewModel.NavigationState.EmptyNavigation("222"))
-                    viewModel.uiNavigation.emit(FlowHotClodViewModel.NavigationState.ViewNavigation("111"))
+                    viewModel.uiNavigation.emit(
+                        FlowHotClodViewModel.NavigationState.EmptyNavigation(
+                            "222"
+                        )
+                    )
+                    viewModel.uiNavigation.emit(
+                        FlowHotClodViewModel.NavigationState.ViewNavigation(
+                            "111"
+                        )
+                    )
                 }
+
                 2 -> go {
                     viewModel.intentEvent.emit(FlowHotClodViewModel.NavigationTarget.Go2Main("Go2Main"))
                     viewModel.intentEvent.emit(FlowHotClodViewModel.NavigationTarget.Go2User("Go2User"))
+                    viewModel.intentEvent.emit(FlowHotClodViewModel.NavigationTarget.Go2Main("Go2Main"))
+                    viewModel.intentEvent.emit(FlowHotClodViewModel.NavigationTarget.Go2User("Go2User"))
+                    viewModel.intentEvent.emit(FlowHotClodViewModel.NavigationTarget.Go2Main("Go2Main"))
+                    viewModel.intentEvent.emit(FlowHotClodViewModel.NavigationTarget.Go2User("Go2User"))
+                    viewModel.intentEvent.emit(FlowHotClodViewModel.NavigationTarget.Go2Main("Go2Main"))
+                    viewModel.intentEvent.emit(FlowHotClodViewModel.NavigationTarget.Go2User("Go2User"))
                 }
+
                 3 -> go {
                     viewModel.liveData.value = "1"
                     viewModel.liveData.value = "1"
@@ -81,6 +103,58 @@ class FlowHotClodActivity : BaseActivity() {
                     viewModel.liveData.value = "2"
                     viewModel.liveData.value = "2"
                     viewModel.liveData.value = "3"
+                }
+
+                4 -> dome1()
+                5 -> dome2()
+            }
+        }
+    }
+
+    private fun dome1() {
+        val flow = MutableSharedFlow<String>(replay = 1)
+        lifecycleScope.launch {
+            //第一个订阅者
+            launch {
+                flow.collect {
+                    XLogUtils.d("$TAG collect1 $it")
+                }
+            }
+            //生产数据
+            launch {
+                (1..10).forEach {
+                    flow.emit("第${it}个")
+                }
+            }
+        }
+        //模拟在生产者产生数据后才订阅
+        lifecycleScope.launch {
+            delay(3000)
+            //第二个订阅者
+            flow.collect {
+                XLogUtils.d("$TAG collect2 $it")
+            }
+        }
+    }
+
+
+    private fun dome2() {
+        val flow = MutableSharedFlow<String>(replay = 2, extraBufferCapacity =1)
+        lifecycleScope.launch {
+            //第一个订阅者
+            launch {
+                flow.collect {
+                    delay(2000)
+                    XLogUtils.d("$TAG 消费 $it")
+                }
+            }
+            //生产数据
+            launch {
+                (1..10).forEach {
+                    val v = "第${it}个"
+                    XLogUtils.e("$TAG 生产 $v")
+                    flow.emit(v)
+                    delay(100)
                 }
             }
         }
@@ -108,16 +182,18 @@ class FlowHotClodActivity : BaseActivity() {
             viewModel.uiNavigation.onEach {
                 //有点像rxjava的map
                 it.state = "${it.state} onEach"
-            }.collect {
-                when (it) {
-                    is FlowHotClodViewModel.NavigationState.EmptyNavigation -> {
-                        XLogUtils.d("$TAG EmptyNavigation ${it.state}")
-                    }
-                    is FlowHotClodViewModel.NavigationState.ViewNavigation -> {
-                        XLogUtils.d("$TAG ViewNavigation  ${it.state}")
+            }
+                .collect {
+                    when (it) {
+                        is FlowHotClodViewModel.NavigationState.EmptyNavigation -> {
+                            XLogUtils.d("$TAG EmptyNavigation ${it.state}")
+                        }
+
+                        is FlowHotClodViewModel.NavigationState.ViewNavigation -> {
+                            XLogUtils.d("$TAG ViewNavigation  ${it.state}")
+                        }
                     }
                 }
-            }
         }
     }
 
@@ -128,6 +204,7 @@ class FlowHotClodActivity : BaseActivity() {
                     is FlowHotClodViewModel.NavigationTarget.Go2Main -> {
                         XLogUtils.d("$TAG Go2Main  ${it.value}")
                     }
+
                     is FlowHotClodViewModel.NavigationTarget.Go2User -> {
                         XLogUtils.d("$TAG Go2User  ${it.value}")
                     }

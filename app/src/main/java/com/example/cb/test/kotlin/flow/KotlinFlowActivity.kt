@@ -11,10 +11,25 @@ import cn.sccl.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
 import com.example.cb.test.bean.CommonMenuBean
-import kotlinx.android.synthetic.main.activity_kotlin_flow.*
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
-import java.util.*
+import kotlinx.android.synthetic.main.activity_kotlin_flow.mRecyclerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.channelFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.retry
+import kotlinx.coroutines.launch
 import kotlin.system.measureTimeMillis
 
 /**
@@ -46,6 +61,7 @@ class KotlinFlowActivity : BaseActivity(), CoroutineScope by MainScope() {
         mList.add(CommonMenuBean("flow结束", null))
         mList.add(CommonMenuBean("flow重试机制", null))
         mList.add(CommonMenuBean("普通flow冷流", null))
+        mList.add(CommonMenuBean("flow异步执行", null))
 
         mAdapter.dataLists = mList
     }
@@ -61,6 +77,7 @@ class KotlinFlowActivity : BaseActivity(), CoroutineScope by MainScope() {
                 5 -> launch { demo6() }
                 6 -> launch { demo7() }
                 7 -> launch { demo8() }
+                8 -> launch { demo33() }
             }
         }
     }
@@ -69,6 +86,7 @@ class KotlinFlowActivity : BaseActivity(), CoroutineScope by MainScope() {
         flow {
             (1..5).forEach {
                 delay(1000)
+                //必须在{}内部
                 emit(it)
             }
         }.collect {
@@ -76,10 +94,21 @@ class KotlinFlowActivity : BaseActivity(), CoroutineScope by MainScope() {
         }
     }
 
+    /**
+     *这里suspend方法就代表两个flow在同一个协程中同步执行
+     */
     private suspend fun demo2() {
-        flowOf(1, 2, 3, 4, 5).onEach { delay(1000) }.collect { XLogUtils.d("collect value= $it") }
-        //上面代码会阻塞下面的，是同步执行的
-        listOf(7, 8, 9, 10, 11).asFlow().onEach { delay(1000) }.collect { XLogUtils.d("collect value= $it") }
+        flowOf(1, 2, 3, 4, 5).onEach {
+            delay(1000)
+        }.collect {
+            XLogUtils.d("collect value= $it")
+        }
+        //上面flow会阻塞下面的，是同步执行的
+        flowOf(7, 8, 9, 10, 11).onEach {
+            delay(1000)
+        }.collect {
+            XLogUtils.d("collect value= $it")
+        }
     }
 
     private suspend fun demo3() {
@@ -120,34 +149,67 @@ class KotlinFlowActivity : BaseActivity(), CoroutineScope by MainScope() {
     }
 
     /**
+     *
+     */
+    private fun demo33() {
+        lifecycleScope.launch {
+            flowOf(1, 2, 3, 4, 5).onEach {
+                delay(1000)
+            }.collect {
+                XLogUtils.d("collect value= $it")
+            }
+        }
+
+        //上面flow会阻塞下面的，是同步执行的
+        lifecycleScope.launch {
+            flowOf(7, 8, 9, 10, 11).onEach {
+                delay(1000)
+            }.collect {
+                XLogUtils.d("collect value= $it")
+            }
+        }
+    }
+
+    /**
      * 值得注意的地方，不要使用 withContext() 来切换 flow 的线程。
      */
     private suspend fun demo4() {
-        listOf(1, 2, 3, 4, 5, 6, 7, 8, 9).asFlow()
+        flow { emit(1) }
             .onEach {
                 delay(1000)
             }
             .map {
-                XLogUtils.d("map->${Thread.currentThread().name}")
-                it * it
+                XLogUtils.d("map1->${Thread.currentThread().name}")
             }
             .flowOn(Dispatchers.IO)//对map进行线程切换，在线程池中切换
+            .map {
+                XLogUtils.e("map2->${Thread.currentThread().name}")
+            }
+            .flowOn(Dispatchers.Main)
             .collect {
                 //collect 执行的线程取决于 整个方法所在的线程
                 XLogUtils.d("${Thread.currentThread().name}: $it")
             }
     }
 
+    private var cancelJob: Job? = null
+
     /**
      * flow在挂起函数内是可以被中断的，不在挂起函数内是不能中断的
      */
     private suspend fun demo5() {
-        //超时可以取消协程,返回null
-        //withTimeout 则会抛出异常
-        val result = withTimeoutOrNull(3000) {
-            listOf(1, 2, 3, 4).asFlow().onEach { delay(1000) }.collect { XLogUtils.d("collect value= $it") }
+        //第二次点击取消协程
+        if (cancelJob != null) {
+            cancelJob?.cancel()
+            return
         }
-        XLogUtils.e("执行结果= $result")
+        cancelJob = lifecycleScope.launch {
+            (0..100).asFlow().onEach {
+                delay(1000)
+            }.collect {
+                XLogUtils.d("collect value= $it")
+            }
+        }
     }
 
 
@@ -164,8 +226,8 @@ class KotlinFlowActivity : BaseActivity(), CoroutineScope by MainScope() {
             emit(2)
             throw RuntimeException("发生异常")
         }
-            .onCompleted { XLogUtils.i("执行完毕") }
-//                .onCompletion { XLogUtils.i("执行完毕") }
+//            .onCompleted { XLogUtils.i("执行完毕") }
+                .onCompletion { XLogUtils.i("执行完毕") }
             .catch { XLogUtils.e("异常= ${it.printStackTrace()}") }
             .collect {
                 XLogUtils.d("collect value= $it")
@@ -179,7 +241,7 @@ class KotlinFlowActivity : BaseActivity(), CoroutineScope by MainScope() {
      */
     private suspend fun demo7() {
         (1..5).asFlow().onEach {
-            if (it == 3 && retryCount == 0) throw  RuntimeException("出错啦")
+            if (it == 3 && retryCount == 0) throw RuntimeException("出错啦")
         }.retry(2) {//重试两次都失败的情况 会抛出异常
             retryCount++;
             if (it is RuntimeException) {

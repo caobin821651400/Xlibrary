@@ -37,7 +37,7 @@ object Versions {
     const val viewmodelKtxVersion = "2.2.0"
     const val lifecycleExtVersion = "2.2.0"
     const val fragmentKtxVersion = "1.1.0"
-    const val lifecycleRuntimeVersion = "2.4.0-alpha01"
+    const val lifecycleRuntimeVersion = "2.4.0"
     const val liveDataVersion = "2.2.0"
 
 

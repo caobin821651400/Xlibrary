@@ -3,9 +3,12 @@ package com.example.cb.test.kotlin.flow
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asFlow
+import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 
 /**
  * @author: bincao2
@@ -16,7 +19,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
  * @updateRemark: 更新说明
  */
 class FlowHotClodViewModel : ViewModel() {
-
 
     val liveData=MutableLiveData<String>()
 
@@ -32,9 +34,9 @@ class FlowHotClodViewModel : ViewModel() {
 
     //SharedFlow 没有默认值
     //replay 重新发送订阅者之前以发送出的值 [粘性事件]
-    val intentEvent = MutableSharedFlow<NavigationTarget>(replay = 1)
+    val intentEvent = MutableSharedFlow<NavigationTarget>(1,5, BufferOverflow.SUSPEND)
 
-    //stateFlow必须要有默认值
+    //stateFlow必须要有默认值,默认防抖，同一时间内取最后一次
     val uiNavigation = MutableStateFlow<NavigationState>(NavigationState.EmptyNavigation("EmptyNavigation"))
 
 

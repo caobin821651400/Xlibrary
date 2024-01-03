@@ -1,7 +1,9 @@
 package com.example.cb.test.view;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -30,9 +32,13 @@ public class TestView extends View {
 
     public TestView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
         XLogUtils.e(" paddingbottom " + getPaddingBottom());
 
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        return super.dispatchTouchEvent(event);
     }
 
     @Override
@@ -58,6 +64,6 @@ public class TestView extends View {
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        super.onLayout(changed, left, top, right, bottom);
+        super.onLayout(changed, left, top, right+10, bottom);
     }
 }
