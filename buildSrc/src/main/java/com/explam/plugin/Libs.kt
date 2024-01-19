@@ -10,7 +10,7 @@ object Libs {
 
     //Kotlin
     const val kotlinCore = "androidx.core:core-ktx:${Versions.kotlinCore}"
-    const val kotlinVersion = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlinVersion}"
+//    const val kotlinVersion = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlinVersion}"
 
     //Common
     const val junit = "junit:junit:${Versions.junitVersion}"

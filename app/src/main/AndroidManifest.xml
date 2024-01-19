@@ -27,19 +27,19 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".ui.custom_view.CustomViewActivity"
-
+ android:exported="false"
             android:screenOrientation="landscape"></activity>
-        <activity android:name=".kotlin.function.FunctionInlineActivity" />
-        <activity android:name=".ui.constrain.MotionLayoutActivity" />
-        <activity android:name=".kotlin.flow.KotlinFlowActivity" />
-        <activity android:name=".ui.material.MaterialActivity" />
-        <activity android:name=".upload.UploadActivity" />
-        <activity android:name=".download.DownLoadActivity" />
-        <activity android:name=".kotlin.coroutines.net.HttpCoroutinesActivity" />
-        <activity android:name=".kotlin.coroutines.CoroutinesMainActivity" />
-        <activity android:name=".kotlin.KotlinMainActivity" />
-        <activity android:name=".jetpack.JetPackActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".kotlin.function.FunctionInlineActivity" android:exported="false"/>
+        <activity android:name=".ui.constrain.MotionLayoutActivity" android:exported="false"/>
+        <activity android:name=".kotlin.flow.KotlinFlowActivity" android:exported="false"/>
+        <activity android:name=".ui.material.MaterialActivity" android:exported="false"/>
+        <activity android:name=".upload.UploadActivity" android:exported="false"/>
+        <activity android:name=".download.DownLoadActivity" android:exported="false"/>
+        <activity android:name=".kotlin.coroutines.net.HttpCoroutinesActivity" android:exported="false"/>
+        <activity android:name=".kotlin.coroutines.CoroutinesMainActivity" android:exported="false"/>
+        <activity android:name=".kotlin.KotlinMainActivity" android:exported="false"/>
+        <activity android:name=".jetpack.JetPackActivity" android:exported="false"/>
+        <activity android:name=".MainActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -56,37 +56,37 @@
             android:name=".service.IStudentService"
             android:exported="true"
             android:process=":remote" />
-        <service android:name=".service.XService">
+        <service android:name=".service.XService" android:exported="false">
             <intent-filter>
                 <action android:name="cn.scu.finch" />
             </intent-filter>
         </service>
-        <service android:name=".service.TestService" />
+        <service android:name=".service.TestService"  android:exported="false"/>
 
-        <activity android:name=".ui.db.DbTestActivity" />
-        <activity android:name=".ui.aidl.AidlTestActivity" />
-        <activity android:name=".ui.anim.AnimTestActivity" />
-        <activity android:name=".mvp.MvpActivity" />
-        <activity android:name=".ui.scan.QRcodeEncoderActivity" />
-        <activity android:name=".rx.rxjava.RxJavaMainActivity" />
-        <activity android:name=".rx.rxjava.RxBackPressureActivity" />
-        <activity android:name=".rx.rxjava.RxBaseOperatorActivity" />
-        <activity android:name=".rx.rxjava.RxBooleanActivity" />
-        <activity android:name=".rx.rxjava.RxChangeOperatorActivity" />
-        <activity android:name=".rx.rxjava.RxFilterActivity" />
-        <activity android:name=".rx.rxjava.RxFunctionActivity" />
-        <activity android:name=".rx.rxjava.RxMergeActivity" />
-        <activity android:name=".rx.rxjava.SimpleUseActivity" />
-        <activity android:name=".jetpack.paging.PagingActivity" />
-        <activity android:name=".jetpack.navigation.NavigationActivity" />
-        <activity android:name=".jetpack.lifecycles.LifeCyclesActivity" />
-        <activity android:name=".kotlin.KotlinTestActivity" />
-        <activity android:name=".kotlin.KotlinSetActivity" />
-        <activity android:name=".ui.view_pager.BannerActivity" />
-        <activity android:name=".hook.HookDemoActivity" />
-        <activity android:name=".CommentWebViewActivity" />
-        <activity android:name="java.AnnotationTestActivity" />
-        <activity android:name=".kotlin.flow.FlowHotClodActivity" />
+        <activity android:name=".ui.db.DbTestActivity" android:exported="false"/>
+        <activity android:name=".ui.aidl.AidlTestActivity" android:exported="false"/>
+        <activity android:name=".ui.anim.AnimTestActivity" android:exported="false"/>
+        <activity android:name=".mvp.MvpActivity" android:exported="false"/>
+        <activity android:name=".ui.scan.QRcodeEncoderActivity" android:exported="false"/>
+        <activity android:name=".rx.rxjava.RxJavaMainActivity" android:exported="false"/>
+        <activity android:name=".rx.rxjava.RxBackPressureActivity" android:exported="false"/>
+        <activity android:name=".rx.rxjava.RxBaseOperatorActivity" android:exported="false"/>
+        <activity android:name=".rx.rxjava.RxBooleanActivity" android:exported="false"/>
+        <activity android:name=".rx.rxjava.RxChangeOperatorActivity" android:exported="false"/>
+        <activity android:name=".rx.rxjava.RxFilterActivity" android:exported="false"/>
+        <activity android:name=".rx.rxjava.RxFunctionActivity" android:exported="false"/>
+        <activity android:name=".rx.rxjava.RxMergeActivity" android:exported="false"/>
+        <activity android:name=".rx.rxjava.SimpleUseActivity" android:exported="false"/>
+        <activity android:name=".jetpack.paging.PagingActivity" android:exported="false"/>
+        <activity android:name=".jetpack.navigation.NavigationActivity" android:exported="false"/>
+        <activity android:name=".jetpack.lifecycles.LifeCyclesActivity" android:exported="false"/>
+        <activity android:name=".kotlin.KotlinTestActivity" android:exported="false"/>
+        <activity android:name=".kotlin.KotlinSetActivity" android:exported="false"/>
+        <activity android:name=".ui.view_pager.BannerActivity" android:exported="false"/>
+        <activity android:name=".hook.HookDemoActivity" android:exported="false"/>
+        <activity android:name=".CommentWebViewActivity" android:exported="false"/>
+        <activity android:name="java.AnnotationTestActivity" android:exported="false"/>
+        <activity android:name=".kotlin.flow.FlowHotClodActivity" android:exported="false"/>
     </application>
 
 </manifest>

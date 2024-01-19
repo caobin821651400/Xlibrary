@@ -27,7 +27,7 @@ android(Action {
 
 dependencies {
     implementation(Libs.kotlinCore)
-    implementation(Libs.kotlinVersion)
+//    implementation(Libs.kotlinVersion)
 
     implementation(Libs.glide)
     implementation(Libs.appcompat)

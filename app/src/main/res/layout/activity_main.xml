@@ -7,10 +7,18 @@
 
     <include layout="@layout/comment_header_activity" />
 
-    <Button
-        android:id="@+id/test"
+    <com.example.cb.test.view.Aaa
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:background="#ff0"
+        android:layout_height="300dp" >
+
+        <com.example.cb.test.view.Aa
+            android:layout_width="match_parent"
+            android:layout_margin="50dp"
+            android:background="#f00"
+            android:layout_height="match_parent" />
+
+    </com.example.cb.test.view.Aaa>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mRecyclerView"
