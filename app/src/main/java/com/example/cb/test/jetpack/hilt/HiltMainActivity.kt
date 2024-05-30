@@ -9,8 +9,11 @@ import cn.sccl.xlibrary.kotlin.lazyNone
 import cn.sccl.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
+import com.example.cb.test.jetpack.hilt.impl.HiltInterface
+import com.example.cb.test.jetpack.hilt.ok.OkHttpClient2
 import com.example.cb.test.jetpack.hilt.provider.HiltProvider
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.OkHttpClient
 import javax.inject.Inject
 
 /**
@@ -30,6 +33,10 @@ class HiltMainActivity : BaseActivity() {
 
     @Inject
     lateinit var mHiltProvider: HiltProvider
+    @Inject
+    lateinit var mHiltInterface: HiltInterface
+    @Inject
+    lateinit var mOkHttp: OkHttpClient2
 
     private val viewModule by viewModels<HiltViewModule>()
 
@@ -40,10 +47,17 @@ class HiltMainActivity : BaseActivity() {
 
     override fun initUI() {
         setHeaderTitle("Hilt使用")
+        //注入普通类
+        XLogUtils.v("joker log1=${mHiltProvider.getValue1()}")
+        XLogUtils.e("joker log2=${mHiltProvider.getChildValue1()}")
+        XLogUtils.d("joker log3=${mHiltProvider.getSecondChildValue1()}")
 
-        XLogUtils.v("joker log1=${mHiltProvider.getValue1()}");
-        XLogUtils.e("joker log2=${mHiltProvider.getChildValue1()}");
 
+        //接口实例
+        mHiltInterface.doSomeThing()
+
+        //三方SDK 不能修改构造方法的情况
+        mOkHttp.request()
     }
 
 
