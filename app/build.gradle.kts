@@ -1,13 +1,12 @@
 plugins {
     id("com.android.application")
-//    id("android-aspectjx")
+    id("com.google.dagger.hilt.android")
     kotlin("android")
     kotlin("kapt")
 }
 
 android(Action {
     compileSdkVersion(ProjectVersions.compileSdkVersion)
-    buildToolsVersion(ProjectVersions.buildToolsVersion)
     defaultConfig(Action {
         minSdkVersion(ProjectVersions.minSdkVersion)
         targetSdkVersion(ProjectVersions.targetSdkVersion)
@@ -39,9 +38,12 @@ android(Action {
     }
     packagingOptions {
         exclude("META-INF/proguard/coroutines.pro")
+        exclude("META-INF/gradle/incremental.annotation.processors")
     }
 })
-
+kapt {
+    correctErrorTypes = true
+}
 dependencies {
     implementation(Libs.kotlinCore)
 //    implementation(Libs.kotlinVersion)
@@ -71,11 +73,12 @@ dependencies {
     implementation(Libs.navigationFeatures)
 
     implementation(Libs.paging)
-    implementation(Libs.lifecycleExt)
     implementation(Libs.viewmodelKtx)
     implementation(Libs.fragmentKtx)
 
     implementation(Libs.loadsir)
+    implementation(Libs.hilt)
+    kapt(Libs.hiltCompiler)
 
     implementation(project(":HttpModule"))
     implementation(project(":UtilsLibrary"))

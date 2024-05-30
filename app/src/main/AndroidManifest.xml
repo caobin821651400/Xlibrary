@@ -158,6 +158,8 @@
         <activity
             android:name=".kotlin.flow.FlowHotClodActivity"
             android:exported="false" />
+        <activity android:name=".jetpack.hilt.HiltMainActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

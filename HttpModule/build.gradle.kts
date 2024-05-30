@@ -5,7 +5,6 @@ plugins {
 
 android(Action {
     compileSdkVersion(ProjectVersions.compileSdkVersion)
-    buildToolsVersion(ProjectVersions.buildToolsVersion)
     defaultConfig(Action {
         minSdkVersion(ProjectVersions.minSdkVersion)
         targetSdkVersion(ProjectVersions.targetSdkVersion)
@@ -31,7 +30,6 @@ dependencies {
     implementation(Libs.appcompat)
     implementation(Libs.gson)
 
-    implementation(Libs.lifecycleExt)
     implementation(Libs.lifecycleRuntime)
     implementation(Libs.lifecycleRuntimeKtx)
     implementation(Libs.viewmodelKtx)

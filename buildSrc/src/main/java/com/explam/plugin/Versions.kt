@@ -13,16 +13,17 @@ object Versions {
 
     const val gsonVersion="2.8.2"
     const val constraintlayoutVersion = "2.0.2"
-    const val appcompatVersion = "1.2.0"
+    const val appcompatVersion = "1.5.0"
     const val refreshLayoutVersion = "1.1.0"
     const val rvVersion = "1.1.0"
     const val glideVersion = "4.9.0"
-    const val materialVersion = "1.2.0"
+    const val materialVersion = "1.9.0"
     const val junitVersion = "4.12"
 
     const val navigationVersion = "2.3.0-alpha01"
     const val pagingVersion = "3.0.0-beta01"
     const val workVersion = "2.3.1"
+    const val hiltVersion = "2.44"
 
     const val retrofitVersion = "2.6.1"
     const val retrofitConverterGsonVersion = "2.3.0"
@@ -34,11 +35,10 @@ object Versions {
     const val retrofitRxAdapterVersion = "1.0.0"
     const val rxLifeVersion = "3.0.0"
 
-    const val viewmodelKtxVersion = "2.2.0"
-    const val lifecycleExtVersion = "2.2.0"
-    const val fragmentKtxVersion = "1.1.0"
-    const val lifecycleRuntimeVersion = "2.4.0"
-    const val liveDataVersion = "2.2.0"
+    const val viewmodelKtxVersion = "2.6.1"
+    const val fragmentKtxVersion = "1.6.0"
+    const val lifecycleRuntimeVersion = "2.6.0"
+    const val liveDataVersion = "2.6.0"
 
 
     const val loadsirVersion="1.3.8"

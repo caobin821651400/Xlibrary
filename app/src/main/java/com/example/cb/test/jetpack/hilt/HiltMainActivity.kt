@@ -1,14 +1,17 @@
 package com.example.cb.test.jetpack.hilt
 
 import android.annotation.SuppressLint
+import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.activity.viewModels
+import cn.sccl.xlibrary.kotlin.lazyNone
 import cn.sccl.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
-import com.example.cb.test.jetpack.hilt.other.HiltObject
-//import dagger.hilt.android.AndroidEntryPoint
-//import dagger.hilt.android.scopes.ActivityScoped
-//import kotlinx.android.synthetic.main.activity_hilt_main.*
-//import javax.inject.Inject
+import com.example.cb.test.jetpack.hilt.provider.HiltProvider
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 /**
  * ====================================================
@@ -17,56 +20,37 @@ import com.example.cb.test.jetpack.hilt.other.HiltObject
  * @Desc :Hilt使用
  * ====================================================
  */
-//@AndroidEntryPoint
-class HiltMainActivity /*: BaseActivity()*/ {
+@AndroidEntryPoint
+class HiltMainActivity : BaseActivity() {
 
 
-//    @ActivityModule.Type1
-//    @Inject
-//    lateinit var stringValue: String
-//
-//    @ActivityModule.Type2
-//    @Inject
-//    lateinit var stringValue2: String
-//
-//    @ActivityScoped
-//    @Inject
-//    lateinit var beanValue: HiltBean
-//
-//    @ActivityScoped
-//    @Inject
-//    lateinit var hiltObject: HiltObject
-//
-////    @Inject
-////    @ActivityScoped
-////    lateinit var hiltParamsObject: HiltParamsObject
-//
-////    private val viewModule by viewModels<HiltViewModule>()
-//
-//    override fun getLayoutId(): Int {
-//        return R.layout.activity_hilt_main
-//    }
-//
-//    override fun initUI() {
-//        setHeaderTitle("Hilt使用")
-//
-//        hiltObject?.let {
-//            XLogUtils.e(hiltObject.getName())
-//        }
-//
-////        XLogUtils.i("构造函数注入=${hiltParamsObject.getData()}")
-//
-////        textView.text = "new one"
-////        rootView.addView(textView, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 100))
-//    }
-//
-//
-//    @SuppressLint("SetTextI18n")
-//    override fun initEvent() {
-//        button.setOnClickListener {
-//            tvContent.text = "值=${stringValue}\n " +
-//                    "值2=${stringValue2} \n" +
-//                    "值3=${beanValue?.value} \n"
-//        }
-//    }
+    private val tvContent by lazyNone { findViewById<TextView>(R.id.tvContent) }
+    private val button by lazyNone { findViewById<Button>(R.id.button) }
+    private val rootView by lazyNone { findViewById<LinearLayout>(R.id.root_view) }
+
+    @Inject
+    lateinit var mHiltProvider: HiltProvider
+
+    private val viewModule by viewModels<HiltViewModule>()
+
+    override fun getLayoutId(): Int {
+        return R.layout.activity_hilt_main
+    }
+
+
+    override fun initUI() {
+        setHeaderTitle("Hilt使用")
+
+        XLogUtils.v("joker log1=${mHiltProvider.getValue1()}");
+        XLogUtils.e("joker log2=${mHiltProvider.getChildValue1()}");
+
+    }
+
+
+    @SuppressLint("SetTextI18n")
+    override fun initEvent() {
+        button.setOnClickListener {
+
+        }
+    }
 }

@@ -86,19 +86,19 @@ class AnimTestActivity : BaseActivity() {
         set.start()
 
         set.addListener(object : Animator.AnimatorListener {
-            override fun onAnimationCancel(animation: Animator?) {
+            override fun onAnimationCancel(animation: Animator) {
                 XLogUtils.d("onAnimationCancel")
             }
 
-            override fun onAnimationStart(animation: Animator?) {
+            override fun onAnimationStart(animation: Animator) {
                 XLogUtils.d("onAnimationStart")
             }
 
-            override fun onAnimationEnd(animation: Animator?) {
+            override fun onAnimationEnd(animation: Animator) {
                 XLogUtils.d("onAnimationEnd")
             }
 
-            override fun onAnimationRepeat(animation: Animator?) {
+            override fun onAnimationRepeat(animation: Animator) {
                 XLogUtils.d("onAnimationRepeat")
             }
         })

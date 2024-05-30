@@ -47,7 +47,6 @@ object Libs {
     const val paging = "androidx.paging:paging-runtime:${Versions.pagingVersion}"
     //     const val navigation ="androidx.work:work-runtime-ktx:${Versions.workVersion}"
     const val viewmodelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.viewmodelKtxVersion}"
-    const val lifecycleExt = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycleExtVersion}"
     const val fragmentKtx = "androidx.fragment:fragment-ktx:${Versions.fragmentKtxVersion}"
     const val lifecycleRuntimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycleRuntimeVersion}"
     const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime:${Versions.lifecycleRuntimeVersion}"
@@ -56,4 +55,6 @@ object Libs {
 
     //Other
     const val loadsir = "com.kingja.loadsir:loadsir:${Versions.loadsirVersion}"
+    const val hilt = "com.google.dagger:hilt-android:${Versions.hiltVersion}"
+    const val hiltCompiler = "com.google.dagger:hilt-android-compiler:${Versions.hiltVersion}"
 }

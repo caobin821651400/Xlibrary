@@ -14,6 +14,7 @@ import com.example.cb.test.weight.loadCallBack.ErrorCallback
 import com.example.cb.test.weight.loadCallBack.LoadingCallback
 import com.kingja.loadsir.callback.SuccessCallback
 import com.kingja.loadsir.core.LoadSir
+import dagger.hilt.android.HiltAndroidApp
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -24,6 +25,7 @@ import javax.net.ssl.HostnameVerifier
 /**
  * Created by cb on 2017/12/1.
  */
+@HiltAndroidApp
 class MyApplication : Application() {
 
     companion object {
@@ -34,6 +36,7 @@ class MyApplication : Application() {
         super.attachBaseContext(base)
         XLogUtils.d("caobin Application attachBaseContext time " + System.currentTimeMillis())
     }
+
     override fun onCreate() {
         XLogUtils.d("caobin Application onCreate time " + System.currentTimeMillis())
         super.onCreate()
@@ -68,7 +71,6 @@ class MyApplication : Application() {
             .build()
         XHttp.setRetrofit(
             Retrofit.Builder()
-//                .baseUrl("https://iot.sctel.com.cn/")
                 .baseUrl("https://www.wanandroid.com/")
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create(AppGsonObject))
