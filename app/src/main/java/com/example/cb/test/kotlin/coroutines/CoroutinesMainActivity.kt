@@ -2,13 +2,24 @@ package com.example.cb.test.kotlin.coroutines
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.widget.Button
+import android.widget.ImageView
 import androidx.lifecycle.lifecycleScope
+import cn.sccl.xlibrary.kotlin.lazyNone
 import cn.sccl.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
 import com.example.cb.test.kotlin.coroutines.net.HttpCoroutinesActivity
-import kotlinx.android.synthetic.main.activity_coroutine_main.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import java.net.HttpURLConnection
 import java.net.URL
 import kotlin.system.measureTimeMillis
@@ -24,6 +35,16 @@ class CoroutinesMainActivity : BaseActivity() {
 
     private val imageUrl = "http://110.190.91.33:6020/cdaaa875b5f1eeb3879b33498ee5c8a4"
 
+    private val button1 by lazyNone { findViewById<Button>(R.id.button1) }
+    private val button2 by lazyNone { findViewById<Button>(R.id.button2) }
+    private val button3 by lazyNone { findViewById<Button>(R.id.button3) }
+    private val button4 by lazyNone { findViewById<Button>(R.id.button4) }
+    private val button5 by lazyNone { findViewById<Button>(R.id.button5) }
+    private val button6 by lazyNone { findViewById<Button>(R.id.button6) }
+    private val button7 by lazyNone { findViewById<Button>(R.id.button7) }
+    private val button8 by lazyNone { findViewById<Button>(R.id.button8) }
+    private val button9 by lazyNone { findViewById<Button>(R.id.button9) }
+    private val imageView by lazyNone { findViewById<ImageView>(R.id.imageView) }
     override fun getLayoutId(): Int {
         return R.layout.activity_coroutine_main
     }

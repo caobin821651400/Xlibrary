@@ -1,10 +1,12 @@
 package com.example.cb.test.kotlin
 
 import android.os.Bundle
+import android.widget.TextView
 import cn.sccl.xlibrary.kotlin.AppGsonObject
 import cn.sccl.xlibrary.kotlin.forEach
 import cn.sccl.xlibrary.kotlin.forEachIndex
 import cn.sccl.xlibrary.kotlin.isNoEmpty
+import cn.sccl.xlibrary.kotlin.lazyNone
 import cn.sccl.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
@@ -15,7 +17,6 @@ import com.example.cb.test.utils.TOKEM
 import com.example.cb.test.utils.getToken
 import com.example.cb.test.utils.txt1
 import com.google.gson.reflect.TypeToken
-import kotlinx.android.synthetic.main.activity_kotlin_test.*
 import org.json.JSONArray
 
 /**
@@ -27,6 +28,7 @@ import org.json.JSONArray
  */
 class KotlinTestActivity : BaseActivity() {
 
+    private val tv by lazyNone { findViewById<TextView>(R.id.tv) }
     open var s = "111"
 
     override fun getLayoutId(): Int {
@@ -153,7 +155,8 @@ class KotlinTestActivity : BaseActivity() {
 
         //15.全局单例对象
         val str = """["123","456"]"""
-        val list = AppGsonObject.fromJson<List<String>>(str, object : TypeToken<List<String>>() {}.type)
+        val list =
+            AppGsonObject.fromJson<List<String>>(str, object : TypeToken<List<String>>() {}.type)
         if (!list.isNullOrEmpty()) {
             XLogUtils.e("列表数据=${list[0]}")
         }

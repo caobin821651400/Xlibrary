@@ -8,8 +8,8 @@
  */
 object Versions {
 
-    const val kotlinCore = "1.3.1"
-    const val kotlinVersion = "1.6.0"
+    const val kotlinCore = "1.8.0"
+    const val kotlinVersion = "1.8.0"
 
     const val gsonVersion="2.8.2"
     const val constraintlayoutVersion = "2.0.2"

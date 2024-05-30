@@ -4,13 +4,13 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.distinctUntilChanged
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.RecyclerView
+import cn.sccl.xlibrary.kotlin.lazyNone
 import cn.sccl.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
 import com.example.cb.test.bean.CommonMenuBean
 import com.example.cb.test.view.CommonAdapter
-import kotlinx.android.synthetic.main.activity_jet_pack.mRecyclerView
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.collect
@@ -28,6 +28,7 @@ import kotlinx.coroutines.launch
  */
 class FlowHotClodActivity : BaseActivity() {
 
+    private val mRecyclerView by lazyNone { findViewById<RecyclerView>(R.id.mRecyclerView) }
 
     companion object {
         const val TAG = "FlowHotClodActivityTAG"
@@ -139,7 +140,7 @@ class FlowHotClodActivity : BaseActivity() {
 
 
     private fun dome2() {
-        val flow = MutableSharedFlow<String>(replay = 2, extraBufferCapacity =1)
+        val flow = MutableSharedFlow<String>(replay = 2, extraBufferCapacity = 1)
         lifecycleScope.launch {
             //第一个订阅者
             launch {

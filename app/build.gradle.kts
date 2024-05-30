@@ -2,7 +2,6 @@ plugins {
     id("com.android.application")
 //    id("android-aspectjx")
     kotlin("android")
-    kotlin("android.extensions")
     kotlin("kapt")
 }
 
@@ -43,16 +42,7 @@ android(Action {
     }
 })
 
-
-repositories {
-    flatDir {
-        dirs("libs")
-    }
-    google()
-}
-
 dependencies {
-
     implementation(Libs.kotlinCore)
 //    implementation(Libs.kotlinVersion)
 

@@ -6,16 +6,19 @@ import android.content.Intent
 import android.content.ServiceConnection
 import android.os.IBinder
 import android.util.Log
+import android.widget.Button
+import cn.sccl.xlibrary.kotlin.lazyNone
 import com.example.cb.test.R
 import com.example.cb.test.aidl.IMyService
 import com.example.cb.test.aidl.Student
 import com.example.cb.test.base.BaseActivity
 import com.example.cb.test.service.IStudentService
-import kotlinx.android.synthetic.main.activity_aidl_test.*
 import okhttp3.*
 import java.io.IOException
 
 class AidlTestActivity : BaseActivity() {
+    private val btnGet by lazyNone { findViewById<Button>(R.id.btnGet) }
+    private val start by lazyNone { findViewById<Button>(R.id.start) }
     override fun getLayoutId(): Int {
         return R.layout.activity_aidl_test
     }
@@ -38,11 +41,11 @@ class AidlTestActivity : BaseActivity() {
             bindService(intentService, mServiceConnection, Context.BIND_AUTO_CREATE)
         }
 
-        val client=OkHttpClient.Builder().build()
+        val client = OkHttpClient.Builder().build()
         val result = Request.Builder().build()
 
 
-        val call=client.newCall(result).enqueue(object : Callback {
+        val call = client.newCall(result).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
             }
 

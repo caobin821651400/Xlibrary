@@ -5,15 +5,18 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.view.animation.DecelerateInterpolator
+import android.widget.Button
+import cn.sccl.xlibrary.kotlin.lazyNone
 import cn.sccl.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
-import kotlinx.android.synthetic.main.activity_anim_test.*
 
 /**
  * 属性动画练习
  */
 class AnimTestActivity : BaseActivity() {
+    private val button by lazyNone { findViewById<Button>(R.id.button) }
+    private val iv_image by lazyNone { findViewById<Button>(R.id.iv_image) }
     override fun getLayoutId(): Int {
         return R.layout.activity_anim_test
     }

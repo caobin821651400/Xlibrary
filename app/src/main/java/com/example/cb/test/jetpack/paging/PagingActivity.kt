@@ -4,18 +4,17 @@ import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import cn.sccl.xlibrary.kotlin.lazyNone
 import cn.sccl.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseViewModuleActivity
-import com.example.cb.test.kotlin.coroutines.loadServiceInit
-import com.example.cb.test.kotlin.coroutines.showLoading
-import com.kingja.loadsir.core.LoadService
-import kotlinx.android.synthetic.main.activity_paging.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class PagingActivity : BaseViewModuleActivity<PagingViewModel>() {
 
+    private val mRecyclerView by lazyNone { findViewById<RecyclerView>(R.id.mRecyclerView) }
     private val mAdapter = PagingAdapter()
 //    private lateinit var loadsir: LoadService<Any>
 
@@ -53,6 +52,7 @@ class PagingActivity : BaseViewModuleActivity<PagingViewModel>() {
                     XLogUtils.d("NotLoading")
 //                    loadsir.showSuccess()
                 }
+
                 is LoadState.Error -> XLogUtils.e("Error")
                 is LoadState.Loading -> {
                     XLogUtils.e("Loading")

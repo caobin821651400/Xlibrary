@@ -9,7 +9,6 @@ import android.provider.MediaStore
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
 import com.example.cb.test.utils.UriUtils
-import kotlinx.android.synthetic.main.activity_qrcode_decoder.*
 //import me.devilsen.czxing.BarcodeReader
 //import me.devilsen.czxing.ScannerManager
 //import me.devilsen.czxing.view.ScanActivityDelegate

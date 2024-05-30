@@ -5,6 +5,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import cn.sccl.xlibrary.adapter.XRecyclerViewAdapter
 import cn.sccl.xlibrary.adapter.XViewHolder
+import cn.sccl.xlibrary.kotlin.lazyNone
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
 import com.example.cb.test.bean.CommonMenuBean
@@ -13,7 +14,6 @@ import com.example.cb.test.kotlin.coroutines.CoroutinesMainActivity
 import com.example.cb.test.kotlin.flow.FlowHotClodActivity
 import com.example.cb.test.kotlin.flow.KotlinFlowActivity
 import com.example.cb.test.kotlin.function.FunctionInlineActivity
-import kotlinx.android.synthetic.main.activity_jet_pack.*
 import java.util.*
 
 /**
@@ -25,6 +25,7 @@ import java.util.*
  */
 class KotlinMainActivity : BaseActivity() {
 
+    private val mRecyclerView: RecyclerView by lazyNone { findViewById(R.id.mRecyclerView) }
     private lateinit var mAdapter: MAdapter
     private var mList: ArrayList<CommonMenuBean> = ArrayList()
 

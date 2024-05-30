@@ -1,10 +1,11 @@
 package com.example.cb.test.hook
 
 import android.content.Intent
+import android.widget.Button
+import cn.sccl.xlibrary.kotlin.lazyNone
 import cn.sccl.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
-import kotlinx.android.synthetic.main.activity_hook.*
 
 /**
  * ====================================================
@@ -16,12 +17,16 @@ import kotlinx.android.synthetic.main.activity_hook.*
  */
 class HookDemoActivity : BaseActivity() {
 
+    private val btnHook1 by lazyNone { findViewById<Button>(R.id.btnHook1) }
+    private val btnHook2 by lazyNone { findViewById<Button>(R.id.btnHook2) }
+    private val btnHook3 by lazyNone { findViewById<Button>(R.id.btnHook3) }
     override fun getLayoutId(): Int {
         return R.layout.activity_hook
     }
 
     override fun initUI() {
-        setHeaderTitle("简单Hook使用")}
+        setHeaderTitle("简单Hook使用")
+    }
 
     override fun initEvent() {
         btnHook1.setOnClickListener { hookConstant() }
@@ -114,7 +119,8 @@ class HookDemoActivity : BaseActivity() {
 
             //第六种(有两个参数有返回值)
             //这里注意 第五种和第六种 属于方法的重载
-            val method6 = hookClass.getDeclaredMethod("hookMethod5", Int::class.java, Double::class.java)
+            val method6 =
+                hookClass.getDeclaredMethod("hookMethod5", Int::class.java, Double::class.java)
             method6.isAccessible = true
             val obj6 = method6.invoke(hookObject, 99, 1.toDouble())
             XLogUtils.d("第六种结果-->$obj6")

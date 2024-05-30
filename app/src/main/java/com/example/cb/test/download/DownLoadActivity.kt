@@ -2,16 +2,19 @@ package com.example.cb.test.download
 
 import android.Manifest
 import android.os.Environment
+import android.widget.Button
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import cn.sccl.http.XHttp
 import cn.sccl.http.download.DownLadProgressListener
 import cn.sccl.http.download.DownLoadManager
 import cn.sccl.http.exception.NetException
+import cn.sccl.xlibrary.kotlin.lazyNone
 import cn.sccl.xlibrary.utils.XLogUtils
 import cn.sccl.xlibrary.utils.XPermission
 import com.example.cb.test.MyApplication
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
-import kotlinx.android.synthetic.main.activity_down_load.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
@@ -25,11 +28,16 @@ import retrofit2.Retrofit
  * @Desc :
  * ====================================================
  */
-class DownLoadActivity : BaseActivity(), CoroutineScope by MainScope(), DownLadProgressListener.OnDownLoadListener {
+class DownLoadActivity : BaseActivity(), CoroutineScope by MainScope(),
+    DownLadProgressListener.OnDownLoadListener {
 
     private val url1 = "http://update.9158.com/miaolive/Miaolive.apk"
     private val url2 = "https://o8g2z2sa4.qnssl.com/android/momo_8.18.5_c1.apk"
     private val url3 = "https://o8g2z2sa4.qnssl.com/android/momo_8.18.5_c1.apk"
+
+    private val mRecyclerView by lazyNone { findViewById<RecyclerView>(R.id.mRecyclerView) }
+    private val btnDownLoad by lazyNone { findViewById<Button>(R.id.btnDownLoad) }
+    private val tvInfo by lazyNone { findViewById<TextView>(R.id.tvInfo) }
 
     companion object {
         const val TAG2 = "aaaaa->"
@@ -44,22 +52,22 @@ class DownLoadActivity : BaseActivity(), CoroutineScope by MainScope(), DownLadP
         setHeaderTitle("下载")
 
         XPermission.requestPermissions(this, 1025,
-                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                object : XPermission.OnPermissionListener {
-                    override fun onPermissionGranted() {
-                    }
+            arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+            object : XPermission.OnPermissionListener {
+                override fun onPermissionGranted() {
+                }
 
-                    override fun onPermissionDenied() {
-                    }
-                })
+                override fun onPermissionDenied() {
+                }
+            })
 
         val client = OkHttpClient.Builder().build()
 
         XHttp.setDownLoadRetrofit(
-                Retrofit.Builder()
-                        .baseUrl("https://iot.sctel.com.cn/")
-                        .client(client)
-                        .build()
+            Retrofit.Builder()
+                .baseUrl("https://iot.sctel.com.cn/")
+                .client(client)
+                .build()
         )
 
 //        mAdapter2=DownLoadAdapter2()
@@ -90,15 +98,15 @@ class DownLoadActivity : BaseActivity(), CoroutineScope by MainScope(), DownLadP
         isRun = true
         btnDownLoad.text = "暂停"
         DownLoadManager.downLoad(
-                url1, url1,
-                getBasePath(), "111.apk", this
+            url1, url1,
+            getBasePath(), "111.apk", this
         )
     }
 
     private suspend fun startDownLoad2() {
         DownLoadManager.downLoad(
-                url2, url2,
-                getBasePath(), "222.apk", this
+            url2, url2,
+            getBasePath(), "222.apk", this
         )
     }
 
@@ -137,10 +145,16 @@ class DownLoadActivity : BaseActivity(), CoroutineScope by MainScope(), DownLadP
     override fun onCancel(tag: String) {
     }
 
-    override fun onUpdate(tag: String, progress: Int, loadedLength: Long, totalLength: Long, isDone: Boolean) {
+    override fun onUpdate(
+        tag: String,
+        progress: Int,
+        loadedLength: Long,
+        totalLength: Long,
+        isDone: Boolean
+    ) {
         XLogUtils.i(
-                "下载进度 $tag  loadedLength= $loadedLength  totalLength= $totalLength" +
-                        "  isDone $isDone thread ${Thread.currentThread().name}"
+            "下载进度 $tag  loadedLength= $loadedLength  totalLength= $totalLength" +
+                    "  isDone $isDone thread ${Thread.currentThread().name}"
         )
         tvInfo.text = "进度=$progress"
     }

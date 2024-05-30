@@ -9,8 +9,6 @@ import androidx.lifecycle.lifecycleScope
 import cn.sccl.xlibrary.kotlin.AppGsonObject
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseFragment
-import kotlinx.android.synthetic.main.activity_http.*
-import kotlinx.android.synthetic.main.fragment_kotlin_http.*
 import kotlinx.coroutines.launch
 
 /**

@@ -1,9 +1,10 @@
 package com.example.cb.test.kotlin.function
 
+import android.widget.Button
+import cn.sccl.xlibrary.kotlin.lazyNone
 import cn.sccl.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
-import kotlinx.android.synthetic.main.activity_function_inline.*
 
 /**
  * ====================================================
@@ -14,6 +15,9 @@ import kotlinx.android.synthetic.main.activity_function_inline.*
  */
 class FunctionInlineActivity : BaseActivity() {
 
+    private val button1 by lazyNone { findViewById<Button>(R.id.button1) }
+    private val button2 by lazyNone { findViewById<Button>(R.id.button2) }
+    private val button3 by lazyNone { findViewById<Button>(R.id.button3) }
 
     override fun getLayoutId() = R.layout.activity_function_inline
 

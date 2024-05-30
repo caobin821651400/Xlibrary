@@ -6,8 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.sccl.xlibrary.adapter.XRecyclerViewAdapter
 import cn.sccl.xlibrary.adapter.XViewHolder
-import cn.sccl.xlibrary.dialog.XActionSheetDialog.XMenuListener
-import cn.sccl.xlibrary.utils.XLogUtils
+import cn.sccl.xlibrary.kotlin.lazyNone
 import com.example.cb.test.base.BaseActivity
 import com.example.cb.test.bean.CommonMenuBean
 import com.example.cb.test.download.DownLoadActivity
@@ -23,10 +22,6 @@ import com.example.cb.test.ui.custom_view.CustomViewActivity
 import com.example.cb.test.ui.material.MaterialActivity
 import com.example.cb.test.ui.view_pager.BannerActivity
 import com.example.cb.test.upload.UploadActivity
-import dalvik.system.DexClassLoader
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
 import java.AnnotationTestActivity
 
 
@@ -40,8 +35,12 @@ import java.AnnotationTestActivity
  */
 class MainActivity : BaseActivity() {
 
+    private val mRecyclerView: RecyclerView by lazyNone { findViewById(R.id.mRecyclerView) }
+
+
     private val mList: ArrayList<CommonMenuBean> = ArrayList()
     lateinit var mAdapter: MAdapter
+
     override fun getLayoutId(): Int {
         return R.layout.activity_main
     }

@@ -5,13 +5,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
+import cn.sccl.xlibrary.kotlin.lazyNone
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
-import kotlinx.android.synthetic.main.activity_view_pager.*
-import java.util.*
 
 
 class BannerActivity : BaseActivity() {
+    private val view_pager by lazyNone { findViewById<ViewPager>(R.id.view_pager) }
     override fun getLayoutId(): Int {
         return R.layout.activity_view_pager;
     }
@@ -19,8 +19,10 @@ class BannerActivity : BaseActivity() {
     override fun initEvent() {
     }
 
-    private val images = arrayOf(R.drawable.img_banner_one, R.drawable.img_banner_two,
-            R.drawable.img_banner_three, R.drawable.img_banner_four, R.drawable.img_banner_five)
+    private val images = arrayOf(
+        R.drawable.img_banner_one, R.drawable.img_banner_two,
+        R.drawable.img_banner_three, R.drawable.img_banner_four, R.drawable.img_banner_five
+    )
     private var imageLists = ArrayList<Int>()
     private var currentPosition: Int = 0
 
@@ -69,7 +71,11 @@ class BannerActivity : BaseActivity() {
                 }
             }
 
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
             }
 
             override fun onPageSelected(position: Int) {

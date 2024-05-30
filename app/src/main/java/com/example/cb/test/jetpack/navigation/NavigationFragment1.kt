@@ -2,12 +2,13 @@ package com.example.cb.test.jetpack.navigation
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
+import cn.sccl.xlibrary.kotlin.lazyNone
 import cn.sccl.xlibrary.utils.XLogUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_navigation1.*
 import kotlinx.coroutines.launch
 
 /**
@@ -17,8 +18,10 @@ import kotlinx.coroutines.launch
  * @Desc :
  * ====================================================
  */
-class NavigationFragment1 : BaseFragment()  {
+class NavigationFragment1 : BaseFragment() {
 
+    private val btn1 by lazyNone { requireView().findViewById<Button>(R.id.btn1) }
+    private val btn2 by lazyNone { requireView().findViewById<Button>(R.id.btn2) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +33,7 @@ class NavigationFragment1 : BaseFragment()  {
     }
 
     override fun initUI(v: View?) {
-        viewLifecycleOwner.lifecycleScope.launch {  }
+        viewLifecycleOwner.lifecycleScope.launch { }
     }
 
     override fun initEvent(view: View?) {

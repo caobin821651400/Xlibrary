@@ -7,13 +7,14 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import cn.sccl.xlibrary.adapter.XRecyclerViewAdapter
 import cn.sccl.xlibrary.adapter.XViewHolder
+import cn.sccl.xlibrary.kotlin.lazyNone
+import cn.sccl.xlibrary.widget.XSwipeRefreshLayout
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseViewModuleActivity
 import com.example.cb.test.kotlin.coroutines.loadListData
 import com.example.cb.test.kotlin.coroutines.loadServiceInit
 import com.example.cb.test.kotlin.coroutines.showLoading
 import com.kingja.loadsir.core.LoadService
-import kotlinx.android.synthetic.main.activity_http.*
 
 /**
  * ====================================================
@@ -27,6 +28,8 @@ class HttpCoroutinesActivity : BaseViewModuleActivity<NetViewModule>() {
     private lateinit var mAdapter: Adapter
     private lateinit var loadsir: LoadService<Any>
 
+    private val mRecyclerView by lazyNone { findViewById<RecyclerView>(R.id.mRecyclerView) }
+    private val mRefreshLayout by lazyNone { findViewById<XSwipeRefreshLayout>(R.id.mRefreshLayout) }
     override fun getLayoutId() = R.layout.activity_http
 
     override fun createViewModel() = ViewModelProvider(this).get(NetViewModule::class.java)
@@ -42,7 +45,12 @@ class HttpCoroutinesActivity : BaseViewModuleActivity<NetViewModule>() {
 //        supportFragmentManager.beginTransaction().add(R.id.content, HttpCoroutinesFragment()).commit()
 
         mAdapter = Adapter(mRecyclerView)
-        mRecyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL))
+        mRecyclerView.addItemDecoration(
+            DividerItemDecoration(
+                this,
+                DividerItemDecoration.HORIZONTAL
+            )
+        )
         mRecyclerView.adapter = mAdapter
 
 
@@ -70,7 +78,8 @@ class HttpCoroutinesActivity : BaseViewModuleActivity<NetViewModule>() {
     }
 
 
-    inner class Adapter(rv: RecyclerView) : XRecyclerViewAdapter<WanAndroidBean>(rv, R.layout.item_list_zns) {
+    inner class Adapter(rv: RecyclerView) :
+        XRecyclerViewAdapter<WanAndroidBean>(rv, R.layout.item_list_zns) {
 
         override fun bindData(holder: XViewHolder, data: WanAndroidBean, position: Int) {
             (holder.convertView as TextView).text = data.title
