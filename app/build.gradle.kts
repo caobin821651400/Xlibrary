@@ -72,6 +72,7 @@ dependencies {
     implementation(Libs.navigationUiKtx)
     implementation(Libs.navigationFeatures)
 
+    implementation(Libs.koin)
     implementation(Libs.paging)
     implementation(Libs.viewmodelKtx)
     implementation(Libs.fragmentKtx)

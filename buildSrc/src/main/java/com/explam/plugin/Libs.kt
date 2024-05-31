@@ -44,6 +44,7 @@ object Libs {
     const val navigationFeatures = "androidx.navigation:navigation-dynamic-features-fragment:${Versions.navigationVersion}"
 
     //Jetpack
+    const val koin = "io.insert-koin:koin-android:3.5.0"
     const val paging = "androidx.paging:paging-runtime:${Versions.pagingVersion}"
     //     const val navigation ="androidx.work:work-runtime-ktx:${Versions.workVersion}"
     const val viewmodelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.viewmodelKtxVersion}"
