@@ -11,12 +11,12 @@ class OkHttpClient2 {
 
     private var mOkHttpIntercept: OkHttpIntercept? = null
 
-    fun request() {
-        XLogUtils.v("joker 发送请求")
+    fun request(text: String = "") {
+        XLogUtils.v("joker 发送请求:${text}")
         mOkHttpIntercept?.intercept()
     }
 
-    fun addIntercept(intercept:OkHttpIntercept) {
-        mOkHttpIntercept=intercept
+    fun addIntercept(intercept: OkHttpIntercept) {
+        mOkHttpIntercept = intercept
     }
 }
