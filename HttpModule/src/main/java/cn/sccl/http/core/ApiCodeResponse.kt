@@ -1,6 +1,4 @@
-package com.example.cb.test.kotlin.coroutines.net
-
-import cn.sccl.http.core.BaseResponse
+package cn.sccl.http.core
 
 
 /**
@@ -14,15 +12,15 @@ import cn.sccl.http.core.BaseResponse
  * 4.重写 getResponseCode、getResponseData、getResponseMsg方法，传入你的 code data msg
  * ====================================================
  */
-data class ApiCodeResponse<T>(var errorCode: Int, var errorMsg: String, var data: T) : BaseResponse<T>() {
+data class ApiCodeResponse<T>(var code: Int, var msg: String, var data: T) : BaseResponse<T>() {
 
 
-    override fun getResponseCode() = errorCode
+    override fun getResponseCode() = code
 
     override fun getResponseData() = data
 
-    override fun getResponseMsg() = errorMsg
+    override fun getResponseMsg() = msg
 
-    override fun isSuccess(): Boolean = errorCode == 0
+    override fun isSuccess(): Boolean = code == 0
 
 }
