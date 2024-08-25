@@ -13,7 +13,6 @@ import com.example.cb.test.base.BaseActivity
 class CustomViewActivity : BaseActivity() {
     override fun getLayoutId() = R.layout.activity_custom_view
     override fun initUI() {
-
     }
 
     override fun initEvent() {}
