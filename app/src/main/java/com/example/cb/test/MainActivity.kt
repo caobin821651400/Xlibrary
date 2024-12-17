@@ -9,6 +9,7 @@ import cn.sccl.xlibrary.adapter.XViewHolder
 import cn.sccl.xlibrary.kotlin.lazyNone
 import com.example.cb.test.base.BaseActivity
 import com.example.cb.test.bean.CommonMenuBean
+import com.example.cb.test.bubble.BubbleMainActivity
 import com.example.cb.test.download.DownLoadActivity
 import com.example.cb.test.hook.HookDemoActivity
 import com.example.cb.test.jetpack.JetPackActivity
@@ -52,6 +53,7 @@ class MainActivity : BaseActivity() {
         mRecyclerView.adapter = mAdapter
 
 
+        mList.add(CommonMenuBean("气泡view", BubbleMainActivity::class.java))
         mList.add(CommonMenuBean("RxJava使用", RxJavaMainActivity::class.java))
         mList.add(CommonMenuBean("JetPack使用", JetPackActivity::class.java))
         mList.add(CommonMenuBean("Kotlin使用", KotlinMainActivity::class.java))

@@ -160,6 +160,8 @@
             android:exported="false" />
         <activity android:name=".jetpack.hilt.HiltMainActivity"
             android:exported="false" />
+        <activity android:name=".bubble.BubbleActivity" />
+        <activity android:name=".bubble.BubbleMainActivity" />
     </application>
 
 </manifest>
