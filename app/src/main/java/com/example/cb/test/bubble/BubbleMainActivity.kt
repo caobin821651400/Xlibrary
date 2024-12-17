@@ -26,6 +26,8 @@ class BubbleMainActivity : BaseActivity() {
         button1.setOnClickListener {
             startActivity(Intent(this, BubbleActivity::class.java))
         }
-        button2.setOnClickListener { }
+        button2.setOnClickListener {
+            startActivity(Intent(this, BubbleActivity2::class.java))
+        }
     }
 }

@@ -13,22 +13,21 @@ import com.example.cb.test.base.BaseActivity
  * @author cb
  * @date 2024/12/16
  */
-class BubbleActivity : BaseActivity() {
+class BubbleActivity2 : BaseActivity() {
 
     private val timeEdit: EditText by lazyNone { findViewById(R.id.time_edit2) }
     private val timeEdit1: EditText by lazyNone { findViewById(R.id.time_edit1) }
     private val colorEdit: EditText by lazyNone { findViewById(R.id.time_edit3) }
     private val colorEdit2: EditText by lazyNone { findViewById(R.id.time_edit4) }
     private val rootView: LinearLayout by lazyNone { findViewById(R.id.root_view) }
-    private val mBubbleView1: BubbleView1 by lazyNone { findViewById(R.id.view) }
+    private val mBubbleView1: BubbleView2 by lazyNone { findViewById(R.id.view) }
     private val startBtn: Button by lazyNone { findViewById(R.id.start) }
     private val resetBtn: Button by lazyNone { findViewById(R.id.reset) }
     private val debugBtn: Button by lazyNone { findViewById(R.id.debug) }
     private val bgBtn: Button by lazyNone { findViewById(R.id.bgBtn) }
     private var showDebug = false
 
-
-    override fun getLayoutId() = R.layout.activity_bubble_view
+    override fun getLayoutId() = R.layout.activity_bubble_view2
 
     override fun initUI() {
         setHeaderTitle("动画1")

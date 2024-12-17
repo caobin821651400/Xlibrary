@@ -9,7 +9,7 @@
 
     <include layout="@layout/comment_header_activity" />
 
-    <com.example.cb.test.bubble.BubbleView1
+    <com.example.cb.test.bubble.BubbleView2
         android:id="@+id/view"
         android:layout_width="500px"
         android:layout_height="500px"
@@ -20,7 +20,7 @@
         android:id="@+id/time_edit1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="气泡出现时间" />
+        android:hint="气泡消失时间" />
 
     <EditText
         android:id="@+id/time_edit2"

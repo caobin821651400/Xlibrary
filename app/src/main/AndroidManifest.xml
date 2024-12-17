@@ -162,6 +162,7 @@
             android:exported="false" />
         <activity android:name=".bubble.BubbleActivity" />
         <activity android:name=".bubble.BubbleMainActivity" />
+        <activity android:name=".bubble.BubbleActivity2" />
     </application>
 
 </manifest>
