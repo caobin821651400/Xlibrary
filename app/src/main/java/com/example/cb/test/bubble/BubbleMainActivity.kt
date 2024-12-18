@@ -15,6 +15,7 @@ class BubbleMainActivity : BaseActivity() {
 
     private val button1: Button by lazyNone { findViewById(R.id.button1) }
     private val button2: Button by lazyNone { findViewById(R.id.button2) }
+    private val button3: Button by lazyNone { findViewById(R.id.button3) }
 
     override fun getLayoutId() = R.layout.activity_bubble_main
 
@@ -28,6 +29,9 @@ class BubbleMainActivity : BaseActivity() {
         }
         button2.setOnClickListener {
             startActivity(Intent(this, BubbleActivity2::class.java))
+        }
+        button3.setOnClickListener {
+            startActivity(Intent(this, BubbleActivity3::class.java))
         }
     }
 }
