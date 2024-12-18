@@ -56,6 +56,8 @@ class BubbleView3 @JvmOverloads constructor(
     private val hiddenAnimProportion =
         (animTotalDuration - animHiddenDuration) / animTotalDuration * 1.0f//气泡消失时机占比
     private val hiddenAlphaTotalProgress = 1f - hiddenAnimProportion//气泡消失时开始时机
+    // 圆的数据列表
+    private val circles = mutableListOf<Circle>()
 
     // TODO: caobin 2024/12/18 val
     private var circleCount = Random.nextInt(5, 9)
@@ -66,8 +68,6 @@ class BubbleView3 @JvmOverloads constructor(
      */
     private var mCircleColor = Color.GREEN
 
-    // 圆的数据列表
-    private val circles = mutableListOf<Circle>()
 
     /**
      * 设置气泡圆的颜色
