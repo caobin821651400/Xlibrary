@@ -9,6 +9,7 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.annotation.ColorInt
 import androidx.core.animation.addListener
+import androidx.core.view.animation.PathInterpolatorCompat
 import cn.sccl.xlibrary.kotlin.lazyNone
 import com.example.cb.test.BuildConfig
 import kotlin.random.Random
@@ -203,6 +204,7 @@ class BubbleView3 @JvmOverloads constructor(
         val animator = ValueAnimator.ofFloat(0f, 1f)
         animator.duration = animTotalDuration
         animator.startDelay = circle.delayStart
+        animator.interpolator= PathInterpolatorCompat.create(0.25f, 0.8f, 0.5f, 1f)
         animator.addUpdateListener { animation ->
             val progress = animation.animatedFraction
 
