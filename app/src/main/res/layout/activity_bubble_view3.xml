@@ -18,7 +18,7 @@
 <!--        android:layout_marginVertical="20dp" />-->
 
 
-    <com.example.cb.test.bubble.AnimatedCustomView
+    <com.example.cb.test.bubble.BubbleView3
         android:id="@+id/view"
         android:layout_width="300px"
         android:layout_gravity="center"

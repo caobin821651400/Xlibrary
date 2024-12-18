@@ -21,7 +21,7 @@ class BubbleActivity3 : BaseActivity() {
     private val colorEdit: EditText by lazyNone { findViewById(R.id.time_edit3) }
     private val colorEdit2: EditText by lazyNone { findViewById(R.id.time_edit4) }
     private val rootView: LinearLayout by lazyNone { findViewById(R.id.root_view) }
-    private val mBubbleView3: AnimatedCustomView by lazyNone { findViewById(R.id.view) }
+    private val mBubbleView3: BubbleView3 by lazyNone { findViewById(R.id.view) }
     private val startBtn: Button by lazyNone { findViewById(R.id.start) }
     private val resetBtn: Button by lazyNone { findViewById(R.id.reset) }
     private val debugBtn: Button by lazyNone { findViewById(R.id.debug) }
@@ -37,7 +37,7 @@ class BubbleActivity3 : BaseActivity() {
     override fun initEvent() {
         debugBtn.setOnClickListener {
             showDebug = !showDebug
-            AnimatedCustomView.showDebug = showDebug
+            BubbleView3.showDebug = showDebug
             debugBtn.text = "debug enable:$showDebug"
         }
 
@@ -45,19 +45,19 @@ class BubbleActivity3 : BaseActivity() {
             val timeText1 = timeEdit1.text.toString()
             if (timeText1.isNotEmpty()) {
                 val time1 = timeText1.toLong()
-                AnimatedCustomView.animHiddenDuration = time1
+                BubbleView3.animHiddenDuration = time1
             }
 
             val timeText2 = timeEdit.text.toString()
             if (timeText2.isNotEmpty()) {
                 val time2 = timeText2.toLong()
-                AnimatedCustomView.animTotalDuration = time2
+                BubbleView3.animTotalDuration = time2
             }
 
             val timeText3 = timeEdit3.text.toString()
             if (timeText3.isNotEmpty()) {
                 val time3 = timeText3.toLong()
-                AnimatedCustomView.animTotalDuration = time3
+                BubbleView3.animTotalDuration = time3
             }
 
             val color = colorEdit.text.toString()
