@@ -161,9 +161,10 @@
         <activity android:name=".jetpack.hilt.HiltMainActivity"
             android:exported="false" />
         <activity android:name=".bubble.BubbleActivity" />
-        <activity android:name=".bubble.BubbleMainActivity" />
+        <activity android:name=".bubble.CustomizeViewActivity" />
         <activity android:name=".bubble.BubbleActivity2" />
         <activity android:name=".bubble.BubbleActivity3" />
+        <activity android:name=".ui.progress.ProgressActivity" />
     </application>
 
 </manifest>

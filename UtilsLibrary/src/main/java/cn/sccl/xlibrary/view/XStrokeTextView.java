@@ -10,6 +10,8 @@ import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import cn.sccl.xlibrary.utils.XDensityUtils;
+
 /**
  * 阴影textview
  * Created by Mr.ye on 2018/1/8.
@@ -42,9 +44,9 @@ public class XStrokeTextView extends TextView {
 
     public void init() {
         TextPaint paint = outlineTextView.getPaint();
-        paint.setStrokeWidth(3);// 描边宽度
+        paint.setStrokeWidth(XDensityUtils.dp2px(getContext(),2));// 描边宽度
         paint.setStyle(Paint.Style.STROKE);
-        outlineTextView.setTextColor(Color.parseColor("#ff0000"));// 描边颜色
+        outlineTextView.setTextColor(Color.parseColor("#ffffff"));// 描边颜色
         outlineTextView.setGravity(getGravity());
 //        outlineTextView.setTextScaleX(a.getFloat(attr, 1.0f));
     }
