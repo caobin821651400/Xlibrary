@@ -40,15 +40,15 @@ class BubbleView3 @JvmOverloads constructor(
         var showDebug = BuildConfig.DEBUG
 
         // TODO: caobin 2024/12/18 varl
-        var animationDelay = 80L // 每个圆动画启动的间隔时间（单位：ms）
-        var animTotalDuration = 480L // 每个圆的动画持续时间
-        var animHiddenDuration = 200L // 每个圆消失动画
+        var animationDelay = 800L // 每个圆动画启动的间隔时间（单位：ms）
+        var animTotalDuration = 4800L // 每个圆的动画持续时间
+        var animHiddenDuration = 2000L // 每个圆消失动画
     }
 
     // 定义矩形和圆的尺寸（px 值）
-    private val orangeRectWidth = 300f // 橙色矩形的宽度
+    private val orangeRectWidth = 500f // 橙色矩形的宽度
     private val orangeRectHeight = orangeRectWidth / 9f // 橙色矩形的高度
-    private val yellowRectHeight = orangeRectWidth * 5 / 9 // 黄色矩形的高度
+    private val yellowRectHeight = orangeRectWidth * 6 / 9 // 黄色矩形的高度
     private val minCircleRadius = orangeRectHeight * 0.15f // 绿色圆的最小半径
     private val maxCircleRadius = orangeRectHeight * 0.20f // 绿色圆的最大半径
     private val minHorizontalSpacing = orangeRectHeight / 2 // 圆之间的最小水平间距
