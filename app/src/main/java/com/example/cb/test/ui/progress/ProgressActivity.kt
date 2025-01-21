@@ -1,14 +1,15 @@
 package com.example.cb.test.ui.progress
 
 import android.graphics.Color
+import android.graphics.drawable.ClipDrawable
 import android.graphics.drawable.LayerDrawable
-import android.graphics.drawable.ScaleDrawable
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RoundRectShape
 import android.view.Gravity
 import android.widget.Button
 import android.widget.ProgressBar
 import cn.sccl.xlibrary.kotlin.lazyNone
+import cn.sccl.xlibrary.utils.XDensityUtils
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
 
@@ -19,11 +20,16 @@ import com.example.cb.test.base.BaseActivity
  */
 class ProgressActivity : BaseActivity() {
 
-    private val progressBar: ProgressBar by lazyNone { findViewById(R.id.ProgressBar) }
+    private val progressBar1: ProgressBar by lazyNone { findViewById(R.id.progressBar1) }
+    private val progressBar2: RoundCornerProgressBar by lazyNone { findViewById(R.id.progressBar2) }
+    private val progressBar3: CircleProgressBar by lazyNone { findViewById(R.id.progressBar3) }
+    private val button: Button by lazyNone { findViewById(R.id.button) }
+    private val button2: Button by lazyNone { findViewById(R.id.button2) }
+    private val fireworksView: FireworksView by lazyNone { findViewById(R.id.fireworksView) }
 
     private val mProgressDrawable by lazyNone {
         val background = ShapeDrawable(
-            getRoundRectShape(100f)
+            getRoundRectShape(XDensityUtils.dp2px(this, 100f).toFloat())
         ).apply {
             paint.color = Color.parseColor("#EEECEA")
         }
@@ -31,12 +37,12 @@ class ProgressActivity : BaseActivity() {
         val secondary = ShapeDrawable()
         secondary.paint.color = Color.TRANSPARENT
 
-        val progress = ScaleDrawable(
+        val progress = ClipDrawable(
             ShapeDrawable(
-                getRoundRectShape(100f)
+                getRoundRectShape(XDensityUtils.dp2px(this, 100f).toFloat())
             ).apply {
                 paint.color = Color.parseColor("#4AB096")
-            }, Gravity.START, 1f, -1f
+            }, Gravity.START, ClipDrawable.HORIZONTAL
         )
 
         val layers = arrayOf(background, secondary, progress)
@@ -51,11 +57,21 @@ class ProgressActivity : BaseActivity() {
 
     override fun initUI() {
         setHeaderTitle("进度条")
-        progressBar.progressDrawable = mProgressDrawable
+        progressBar1.progressDrawable = mProgressDrawable
     }
 
-    override fun initEvent() {
+    var mProgress = 0
 
+    override fun initEvent() {
+        button2.setOnClickListener {
+            fireworksView.startPlay()
+        }
+        button.setOnClickListener {
+            mProgress++
+            progressBar1.setProgress(mProgress)
+            progressBar2.setProgress(mProgress)
+            progressBar3.setProgress(mProgress)
+        }
     }
 
     private fun getRoundRectShape(size: Float): RoundRectShape {

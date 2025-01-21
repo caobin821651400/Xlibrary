@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CusStrokeTextView">
+        <attr name="cst_stroke_width" format="dimension" />
+        <attr name="cst_stroke_color" format="dimension" />
+    </declare-styleable>
+
+
+    <declare-styleable name="RoundCornerProgressBar">
+        <attr name="rcpb_stroke_width" format="dimension" />
+        <attr name="rcpb_stroke_color" format="color" />
+        <attr name="rcpb_progress_color" format="color" />
+        <attr name="rcpb_progress" format="integer" />
+    </declare-styleable>
+</resources>

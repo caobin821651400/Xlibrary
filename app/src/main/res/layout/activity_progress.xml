@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#dfdfdf"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <include layout="@layout/comment_header_activity" />
@@ -24,35 +25,70 @@
             android:background="@drawable/shape_progress_bg" />
 
         <ProgressBar
-            android:id="@+id/ProgressBar"
+            android:id="@+id/progressBar1"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="16dp"
-            android:max="100"
-            android:layout_marginHorizontal="4dp"
             android:layout_gravity="center"
+            android:layout_marginHorizontal="4dp"
+            android:max="100"
             android:maxHeight="16dp"
-            android:minHeight="16dp"
-            android:progress="50" />
+            android:minHeight="16dp" />
 
         <cn.sccl.xlibrary.view.XStrokeTextView
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="16%"
             android:textColor="#3B3937"
-            android:textSize="12sp"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content" />
+            android:textSize="12sp" />
 
     </FrameLayout>
+
+    <com.example.cb.test.ui.progress.RoundCornerProgressBar
+        android:id="@+id/progressBar2"
+        android:layout_width="200dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        app:rcpb_progress_color="#4AB096"
+        app:rcpb_stroke_color="#ffffff"
+        app:rcpb_stroke_width="2dp" />
+
+    <com.example.cb.test.ui.progress.CircleProgressBar
+        android:id="@+id/progressBar3"
+        android:layout_width="200dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp" />
 
 
     <cn.sccl.xlibrary.view.XStrokeTextView
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
         android:text="16%"
         android:textColor="#3B3937"
-        android:layout_marginTop="20dp"
-        android:textSize="82sp"
-        android:layout_gravity="center"
-        android:layout_height="wrap_content" />
+        android:textSize="82sp" />
 
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="进度+1" />
+
+    <com.example.cb.test.ui.progress.FireworksView
+        android:id="@+id/fireworksView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="动效2" />
 </LinearLayout>
