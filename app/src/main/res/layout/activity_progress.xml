@@ -79,12 +79,6 @@
         android:layout_height="wrap_content"
         android:text="进度+1" />
 
-    <com.example.cb.test.ui.progress.FireworksView
-        android:id="@+id/fireworksView"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp" />
 
     <Button
         android:id="@+id/button2"

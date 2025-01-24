@@ -7,6 +7,7 @@ import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RoundRectShape
 import android.view.Gravity
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ProgressBar
 import cn.sccl.xlibrary.kotlin.lazyNone
 import cn.sccl.xlibrary.utils.XDensityUtils
@@ -25,7 +26,6 @@ class ProgressActivity : BaseActivity() {
     private val progressBar3: CircleProgressBar by lazyNone { findViewById(R.id.progressBar3) }
     private val button: Button by lazyNone { findViewById(R.id.button) }
     private val button2: Button by lazyNone { findViewById(R.id.button2) }
-    private val fireworksView: FireworksView by lazyNone { findViewById(R.id.fireworksView) }
 
     private val mProgressDrawable by lazyNone {
         val background = ShapeDrawable(
@@ -64,7 +64,6 @@ class ProgressActivity : BaseActivity() {
 
     override fun initEvent() {
         button2.setOnClickListener {
-            fireworksView.startPlay()
         }
         button.setOnClickListener {
             mProgress++
