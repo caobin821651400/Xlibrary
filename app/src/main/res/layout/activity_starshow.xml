@@ -21,8 +21,8 @@
             app:hl_shadowOffsetY="0dp">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
                 android:gravity="center"
                 android:background="@drawable/shape_corners_5dp_bg_cblibrary"
                 android:paddingLeft="10dp"

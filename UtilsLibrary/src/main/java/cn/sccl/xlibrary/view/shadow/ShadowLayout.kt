@@ -74,24 +74,9 @@ class ShadowLayout @JvmOverloads constructor(
     private val rectf = RectF() //阴影布局子空间区域
     private var firstView: View? = null //如有子View则为子View，否则为ShadowLayout本身
 
-    //
-    private var isSym = false //控件区域是否对称，如不对称则区域跟随阴影走
-
     private val defaultShadowColor = Color.parseColor("#2a000000")
 
     init {
-        initView(context, attrs)
-    }
-
-
-    private fun initView(context: Context, attrs: AttributeSet?) {
-        initAttributes(attrs)
-
-        setPadding()
-    }
-
-
-    private fun initAttributes(attrs: AttributeSet?) {
         val attr = context.obtainStyledAttributes(attrs, R.styleable.ShadowLayout)
         cornerRadius = attr.getDimension(R.styleable.ShadowLayout_hl_cornerRadius, 0f)
         mCornerRadiusLeftTop =
@@ -111,17 +96,20 @@ class ShadowLayout @JvmOverloads constructor(
         //y轴偏移量
         mOffsetY = attr.getDimension(R.styleable.ShadowLayout_hl_shadowOffsetY, 0f)
         mShadowColor = attr.getColor(R.styleable.ShadowLayout_hl_shadowColor, defaultShadowColor)
-
-        isSym = attr.getBoolean(R.styleable.ShadowLayout_hl_shadowSymmetry, true)
         attr.recycle()
+        setPadding()
     }
-
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
         if (w > 0 && h > 0) {
             setBackgroundCompat(w, h)
         }
+        rectf.left = leftPadding.toFloat()
+        rectf.top = topPadding.toFloat()
+        rectf.right = (width - rightPadding).toFloat()
+        rectf.bottom = (height - bottomPadding).toFloat()
+        initCornerValue((rectf.bottom - rectf.top).toInt())
     }
 
 
@@ -136,6 +124,7 @@ class ShadowLayout @JvmOverloads constructor(
         }
     }
 
+    val path = Path()
 
     /**
      * 对子View进行绘制，也是剪裁子view的关键
@@ -161,22 +150,23 @@ class ShadowLayout @JvmOverloads constructor(
                     )
                     canvas.clipPath(path)
                 } else {
-                    val path = Path()
+                    path.reset()
                     path.addRoundRect(rectf, cornerRadius, cornerRadius, Path.Direction.CW)
                     canvas.clipPath(path)
                 }
             } else {
-                val outerR = getCornerValue(trueHeight)
-                val path = Path()
-                path.addRoundRect(
-                    leftPadding.toFloat(),
-                    topPadding.toFloat(),
-                    (width - rightPadding).toFloat(),
-                    (height - bottomPadding).toFloat(),
-                    outerR,
-                    Path.Direction.CW
-                )
-                canvas.clipPath(path)
+                if (cornerValues != null) {
+                    path.reset()
+                    path.addRoundRect(
+                        leftPadding.toFloat(),
+                        topPadding.toFloat(),
+                        (width - rightPadding).toFloat(),
+                        (height - bottomPadding).toFloat(),
+                        cornerValues!!,
+                        Path.Direction.CW
+                    )
+                    canvas.clipPath(path)
+                }
             }
         }
         super.dispatchDraw(canvas)
@@ -186,14 +176,12 @@ class ShadowLayout @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
-        rectf.left = leftPadding.toFloat()
-        rectf.top = topPadding.toFloat()
-        rectf.right = (width - rightPadding).toFloat()
-        rectf.bottom = (height - bottomPadding).toFloat()
+
     }
 
+    private var cornerValues: FloatArray? = null
 
-    private fun getCornerValue(trueHeight: Int): FloatArray {
+    private fun initCornerValue(trueHeight: Int) {
         var leftTop: Int
         var rightTop: Int
         var rightBottom: Int
@@ -239,7 +227,7 @@ class ShadowLayout @JvmOverloads constructor(
             leftBottom = trueHeight / 2
         }
 
-        val outerR = floatArrayOf(
+        cornerValues = floatArrayOf(
             leftTop.toFloat(),
             leftTop.toFloat(),
             rightTop.toFloat(),
@@ -249,135 +237,76 @@ class ShadowLayout @JvmOverloads constructor(
             leftBottom.toFloat(),
             leftBottom.toFloat()
         ) //左上，右上，右下，左下
-        return outerR
     }
 
 
     private fun setPadding() {
-        //控件区域是否对称，默认是对称。不对称的话，那么控件区域随着阴影区域走
-        if (isSym) {
-            val xPadding = (shadowLimit + abs(mOffsetX.toDouble())).toInt()
-            val yPadding = (shadowLimit + abs(mOffsetY.toDouble())).toInt()
-            leftPadding = xPadding
-            topPadding = yPadding
-            rightPadding = xPadding
-            bottomPadding = yPadding
-        } else {
-            if (abs(mOffsetY.toDouble()) > shadowLimit) {
-                mOffsetY = if (mOffsetY > 0) {
-                    shadowLimit
-                } else {
-                    0 - shadowLimit
-                }
-            }
-
-
-            if (abs(mOffsetX.toDouble()) > shadowLimit) {
-                mOffsetX = if (mOffsetX > 0) {
-                    shadowLimit
-                } else {
-                    0 - shadowLimit
-                }
-            }
-            topPadding = (shadowLimit - mOffsetY).toInt()
-            bottomPadding = (shadowLimit + mOffsetY).toInt()
-            rightPadding = (shadowLimit - mOffsetX).toInt()
-            leftPadding = (shadowLimit + mOffsetX).toInt()
-        }
+        val xPadding = (shadowLimit + abs(mOffsetX.toDouble())).toInt()
+        val yPadding = (shadowLimit + abs(mOffsetY.toDouble())).toInt()
+        leftPadding = xPadding
+        topPadding = yPadding
+        rightPadding = xPadding
+        bottomPadding = yPadding
         setPadding(leftPadding, topPadding, rightPadding, bottomPadding)
     }
 
 
     @Suppress("deprecation")
     private fun setBackgroundCompat(w: Int, h: Int) {
-        val bitmap = createShadowBitmap(
-            w, h,
-            cornerRadius,
-            shadowLimit, mOffsetX, mOffsetY, mShadowColor, Color.TRANSPARENT
-        )
+        val bitmap = createShadowBitmap(w, h, mShadowColor)
         val drawable = BitmapDrawable(bitmap)
         background = drawable
     }
 
 
-    private fun createShadowBitmap(
-        shadowWidth: Int, shadowHeight: Int, cornerRadius: Float, shadowRadius: Float,
-        dx: Float, dy: Float, shadowColor: Int, fillColor: Int
-    ): Bitmap {
-        //优化阴影bitmap大小,将尺寸缩小至原来的1/4。
-        var shadowWidth = shadowWidth
-        var shadowHeight = shadowHeight
-        var cornerRadius = cornerRadius
-        var shadowRadius = shadowRadius
-        var dx = dx
-        var dy = dy
-        dx /= 4
-        dy /= 4
-        shadowWidth = if (shadowWidth / 4 == 0) 1 else shadowWidth / 4
-        shadowHeight = if (shadowHeight / 4 == 0) 1 else shadowHeight / 4
-        cornerRadius /= 4
-        shadowRadius /= 4
+    private fun createShadowBitmap(width: Int, height: Int, shadowColor: Int): Bitmap {
+        val shadowWidth = if (width / 4 == 0) 1 else width / 4
+        val shadowHeight = if (height / 4 == 0) 1 else height / 4
+        val cornerRadius = cornerRadius / 4
+        val shadowDiffuse = shadowLimit / 4
+        val dx = mOffsetX / 4
+        val dy = mOffsetY / 4
 
         val output = Bitmap.createBitmap(shadowWidth, shadowHeight, Bitmap.Config.ARGB_4444)
         val canvas = Canvas(output)
 
         //这里缩小limit的是因为，setShadowLayer后会将bitmap扩散到shadowWidth，shadowHeight
         //同时也要根据某边的隐藏情况去改变
-        var rect_left = 0f
-        var rect_right = 0f
-        var rect_top = 0f
-        var rect_bottom = 0f
-
-        rect_left = shadowRadius
-
-
-        rect_top = shadowRadius
-
-        rect_right = shadowWidth - shadowRadius
-
-
-        rect_bottom = shadowHeight - shadowRadius
-
+        val rectLeft = shadowDiffuse
+        val rectRight = shadowWidth - shadowDiffuse
+        val rectBottom = shadowHeight - shadowDiffuse
 
         val shadowRect = RectF(
-            rect_left,
-            rect_top,
-            rect_right,
-            rect_bottom
+            rectLeft,
+            shadowDiffuse,
+            rectRight,
+            rectBottom
         )
 
-        if (isSym) {
-            if (dy > 0) {
-                shadowRect.top += dy
-                shadowRect.bottom -= dy
-            } else if (dy < 0) {
-                shadowRect.top += (abs(dy.toDouble())).toFloat()
-                shadowRect.bottom -= abs(dy.toDouble()).toFloat()
-            }
-
-            if (dx > 0) {
-                shadowRect.left += dx
-                shadowRect.right -= dx
-            } else if (dx < 0) {
-                shadowRect.left += (abs(dx.toDouble())).toFloat()
-                shadowRect.right -= abs(dx.toDouble()).toFloat()
-            }
-        } else {
-            shadowRect.top -= dy
+        if (dy > 0) {
+            shadowRect.top += dy
             shadowRect.bottom -= dy
-            shadowRect.right -= dx
-            shadowRect.left -= dx
+        } else if (dy < 0) {
+            shadowRect.top += (abs(dy.toDouble())).toFloat()
+            shadowRect.bottom -= abs(dy.toDouble()).toFloat()
         }
 
+        if (dx > 0) {
+            shadowRect.left += dx
+            shadowRect.right -= dx
+        } else if (dx < 0) {
+            shadowRect.left += (abs(dx.toDouble())).toFloat()
+            shadowRect.right -= abs(dx.toDouble()).toFloat()
+        }
 
-        shadowPaint!!.color = fillColor
-        if (!isInEditMode) { //dx  dy
-            shadowPaint!!.setShadowLayer(shadowRadius / 2, dx, dy, shadowColor)
+        shadowPaint.color = Color.TRANSPARENT
+        if (!isInEditMode) {
+            shadowPaint.setShadowLayer(shadowDiffuse / 2, dx, dy, shadowColor)
         }
 
         if (mCornerRadiusLeftBottom == -1f && mCornerRadiusLeftTop == -1f && mCornerRadiusRightTop == -1f && mCornerRadiusRightBottom == -1f) {
             //如果没有设置整个属性，那么按原始去画
-            canvas.drawRoundRect(shadowRect, cornerRadius, cornerRadius, shadowPaint!!)
+            canvas.drawRoundRect(shadowRect, cornerRadius, cornerRadius, shadowPaint)
         } else {
             //目前最佳的解决方案
             rectf.left = leftPadding.toFloat()
@@ -385,8 +314,7 @@ class ShadowLayout @JvmOverloads constructor(
             rectf.right = (width - rightPadding).toFloat()
             rectf.bottom = (height - bottomPadding).toFloat()
 
-
-            shadowPaint!!.isAntiAlias = true
+            shadowPaint.isAntiAlias = true
             val leftTop = if (mCornerRadiusLeftTop == -1f) {
                 cornerRadius.toInt() / 4
             } else {
@@ -420,7 +348,7 @@ class ShadowLayout @JvmOverloads constructor(
             ) //左上，右上，右下，左下
             val path = Path()
             path.addRoundRect(shadowRect, outerR, Path.Direction.CW)
-            canvas.drawPath(path, shadowPaint!!)
+            canvas.drawPath(path, shadowPaint)
         }
 
         return output
