@@ -165,6 +165,7 @@
         <activity android:name=".bubble.BubbleActivity2" />
         <activity android:name=".bubble.BubbleActivity3" />
         <activity android:name=".ui.progress.ProgressActivity" />
+        <activity android:name=".ui.StarShowActivity" />
     </application>
 
 </manifest>

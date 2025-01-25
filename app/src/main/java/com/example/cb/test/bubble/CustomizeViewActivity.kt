@@ -5,6 +5,7 @@ import android.widget.Button
 import cn.sccl.xlibrary.kotlin.lazyNone
 import com.example.cb.test.R
 import com.example.cb.test.base.BaseActivity
+import com.example.cb.test.ui.StarShowActivity
 import com.example.cb.test.ui.progress.ProgressActivity
 
 /**
@@ -18,6 +19,7 @@ class CustomizeViewActivity : BaseActivity() {
     private val button2: Button by lazyNone { findViewById(R.id.button2) }
     private val button3: Button by lazyNone { findViewById(R.id.button3) }
     private val button4: Button by lazyNone { findViewById(R.id.button4) }
+    private val button5: Button by lazyNone { findViewById(R.id.button5) }
 
     override fun getLayoutId() = R.layout.activity_customize_view
 
@@ -38,6 +40,9 @@ class CustomizeViewActivity : BaseActivity() {
 
         button4.setOnClickListener {
             startActivity(Intent(this, ProgressActivity::class.java))
+        }
+        button5.setOnClickListener {
+            startActivity(Intent(this, StarShowActivity::class.java))
         }
     }
 }
