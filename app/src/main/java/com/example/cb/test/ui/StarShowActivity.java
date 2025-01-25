@@ -13,7 +13,7 @@ import com.example.cb.test.R;
 /**
  * 动态设置阴影页
  */
-public class StarShowActivity extends AppCompatActivity implements View.OnClickListener {
+public class StarShowActivity extends AppCompatActivity  {
     private cn.sccl.xlibrary.view.shadow.ShadowLayout ShadowLayout;
     private SeekBar skbar_x;
     private SeekBar skbar_y;
@@ -27,10 +27,6 @@ public class StarShowActivity extends AppCompatActivity implements View.OnClickL
     private SeekBar skbar_green;
     private int blue;
     private SeekBar skbar_blue;
-    private ImageView tab_topShow;
-    private ImageView tab_bottomShow;
-    private ImageView tab_rightShow;
-    private ImageView tab_leftShow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,14 +41,6 @@ public class StarShowActivity extends AppCompatActivity implements View.OnClickL
         skbar_red = findViewById(R.id.skbar_red);
         skbar_green = findViewById(R.id.skbar_green);
         skbar_blue = findViewById(R.id.skbar_blue);
-        tab_topShow = findViewById(R.id.tab_topShow);
-        tab_topShow.setOnClickListener(this);
-        tab_bottomShow = findViewById(R.id.tab_bottomShow);
-        tab_bottomShow.setOnClickListener(this);
-        tab_rightShow = findViewById(R.id.tab_rightShow);
-        tab_rightShow.setOnClickListener(this);
-        tab_leftShow = findViewById(R.id.tab_leftShow);
-        tab_leftShow.setOnClickListener(this);
 
 
         skbar_corner.setMax((int) (ShadowLayout.getCornerRadius() * 3));
@@ -208,29 +196,6 @@ public class StarShowActivity extends AppCompatActivity implements View.OnClickL
 
 
     }
-
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.tab_topShow:
-                ShadowLayout.setShadowHiddenTop(select(tab_topShow));
-                break;
-
-            case R.id.tab_bottomShow:
-                ShadowLayout.setShadowHiddenBottom(select(tab_bottomShow));
-                break;
-
-            case R.id.tab_leftShow:
-                ShadowLayout.setShadowHiddenLeft(select(tab_leftShow));
-                break;
-
-            case R.id.tab_rightShow:
-                ShadowLayout.setShadowHiddenRight(select(tab_rightShow));
-                break;
-        }
-    }
-
 
     public boolean select(ImageView imageView) {
         if (imageView.isSelected()) {
