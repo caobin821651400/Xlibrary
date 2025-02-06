@@ -11,6 +11,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.util.AttributeSet
 import android.view.ViewGroup
 import cn.sccl.xlibrary.kotlin.lazyNone
+import cn.sccl.xlibrary.utils.XLogUtils
 import com.cb.xlibrary.R
 import kotlin.math.abs
 
@@ -254,7 +255,9 @@ class ShadowHelper(private val viewGroup: ViewGroup) : ShadowLayoutImpl {
         val dx = mOffsetX / 4
         val dy = mOffsetY / 4
 
-        val output = Bitmap.createBitmap(shadowWidth, shadowHeight, Bitmap.Config.ARGB_4444)
+        val output = Bitmap.createBitmap(shadowWidth, shadowHeight, Bitmap.Config.ARGB_8888)
+
+        XLogUtils.d("大小："+output.byteCount)
         val canvas = Canvas(output)
 
         //这里缩小limit的是因为，setShadowLayer后会将bitmap扩散到shadowWidth，shadowHeight
