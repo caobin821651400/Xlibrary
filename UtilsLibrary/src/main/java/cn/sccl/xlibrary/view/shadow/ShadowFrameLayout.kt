@@ -7,7 +7,7 @@ import android.widget.FrameLayout
 
 
 /**
- * 阴影容器，媲美cardView
+ * 阴影FrameLayout
  * @author: cb
  * @date: 2025/1/25
  * @desc: 描述
@@ -63,6 +63,14 @@ class ShadowFrameLayout @JvmOverloads constructor(
      */
     override fun setShadowOffsetY(dy: Float) {
         mShadowHelper.setShadowOffsetY(dy)
+    }
+
+    override fun getShadowOffsetX(): Float {
+        return mShadowHelper.getShadowOffsetX()
+    }
+
+    override fun getShadowOffsetY(): Float {
+        return mShadowHelper.getShadowOffsetY()
     }
 
     /**

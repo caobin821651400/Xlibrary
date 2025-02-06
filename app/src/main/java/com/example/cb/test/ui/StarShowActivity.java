@@ -2,18 +2,20 @@ package com.example.cb.test.ui;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.cb.test.R;
 
 /**
  * 动态设置阴影页
  */
-public class StarShowActivity extends AppCompatActivity  {
-    private cn.sccl.xlibrary.view.shadow.ShadowFrameLayout ShadowLayout;
+public class StarShowActivity extends AppCompatActivity {
+    private cn.sccl.xlibrary.view.shadow.ShadowFrameLayout shadowLayout;
     private SeekBar skbar_x;
     private SeekBar skbar_y;
     private SeekBar skbar_limit;
@@ -27,11 +29,14 @@ public class StarShowActivity extends AppCompatActivity  {
     private int blue;
     private SeekBar skbar_blue;
 
+    private View lineTop;
+    private View lineBottom;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_starshow);
-        ShadowLayout = findViewById(R.id.ShadowLayout);
+        shadowLayout = findViewById(R.id.ShadowLayout);
         skbar_x = findViewById(R.id.skbar_x);
         skbar_y = findViewById(R.id.skbar_y);
         skbar_limit = findViewById(R.id.skbar_limit);
@@ -40,14 +45,31 @@ public class StarShowActivity extends AppCompatActivity  {
         skbar_red = findViewById(R.id.skbar_red);
         skbar_green = findViewById(R.id.skbar_green);
         skbar_blue = findViewById(R.id.skbar_blue);
+        lineTop = findViewById(R.id.topLine);
+        lineBottom = findViewById(R.id.bottomLine);
 
+        shadowLayout.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                shadowLayout.removeOnLayoutChangeListener(this);
+                //底部
+                ConstraintLayout.LayoutParams lp= (ConstraintLayout.LayoutParams) lineBottom.getLayoutParams();
+                lp.bottomMargin = (int) shadowLayout.getShadowOffsetY();
+                lineBottom.post(() -> lineBottom.setLayoutParams(lp));
 
-        skbar_corner.setMax((int) (ShadowLayout.getCornerRadius() * 3));
-        skbar_corner.setProgress((int) ShadowLayout.getCornerRadius());
+                //顶部
+                ConstraintLayout.LayoutParams lp2= (ConstraintLayout.LayoutParams) lineTop.getLayoutParams();
+                lp2.topMargin = (int) shadowLayout.getShadowOffsetY();
+                lineTop.post(() -> lineTop.setLayoutParams(lp2));
+            }
+        });
+
+        skbar_corner.setMax((int) (shadowLayout.getCornerRadius() * 3));
+        skbar_corner.setProgress((int) shadowLayout.getCornerRadius());
         skbar_corner.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                ShadowLayout.setCornerRadius(progress);
+                shadowLayout.setCornerRadius(progress);
             }
 
             @Override
@@ -62,12 +84,12 @@ public class StarShowActivity extends AppCompatActivity  {
         });
 
 
-        skbar_limit.setMax((int) (ShadowLayout.getShadowLimit() * 3));
-        skbar_limit.setProgress((int) ShadowLayout.getShadowLimit());
+        skbar_limit.setMax((int) (shadowLayout.getShadowLimit() * 3));
+        skbar_limit.setProgress((int) shadowLayout.getShadowLimit());
         skbar_limit.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                ShadowLayout.setShadowLimit(progress);
+                shadowLayout.setShadowLimit(progress);
             }
 
             @Override
@@ -85,7 +107,7 @@ public class StarShowActivity extends AppCompatActivity  {
         skbar_x.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                ShadowLayout.setShadowOffsetX(progress - 100);
+                shadowLayout.setShadowOffsetX(progress - 100);
             }
 
             @Override
@@ -103,7 +125,7 @@ public class StarShowActivity extends AppCompatActivity  {
         skbar_y.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                ShadowLayout.setShadowOffsetY(progress - 100);
+                shadowLayout.setShadowOffsetY(progress - 100);
             }
 
             @Override
@@ -122,7 +144,7 @@ public class StarShowActivity extends AppCompatActivity  {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 alpha = progress;
-                ShadowLayout.setShadowColor(Color.argb(alpha, red, green, blue));
+                shadowLayout.setShadowColor(Color.argb(alpha, red, green, blue));
             }
 
             @Override
@@ -141,7 +163,7 @@ public class StarShowActivity extends AppCompatActivity  {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 red = progress;
-                ShadowLayout.setShadowColor(Color.argb(alpha, red, green, blue));
+                shadowLayout.setShadowColor(Color.argb(alpha, red, green, blue));
             }
 
             @Override
@@ -160,7 +182,7 @@ public class StarShowActivity extends AppCompatActivity  {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 green = progress;
-                ShadowLayout.setShadowColor(Color.argb(alpha, red, green, blue));
+                shadowLayout.setShadowColor(Color.argb(alpha, red, green, blue));
             }
 
             @Override
@@ -179,7 +201,7 @@ public class StarShowActivity extends AppCompatActivity  {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 blue = progress;
-                ShadowLayout.setShadowColor(Color.argb(alpha, red, green, blue));
+                shadowLayout.setShadowColor(Color.argb(alpha, red, green, blue));
             }
 
             @Override

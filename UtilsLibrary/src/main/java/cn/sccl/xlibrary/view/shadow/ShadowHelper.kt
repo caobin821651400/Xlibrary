@@ -287,9 +287,7 @@ class ShadowHelper(private val viewGroup: ViewGroup) : ShadowLayoutImpl {
         }
 
         shadowPaint.color = Color.TRANSPARENT
-        if (!viewGroup.isInEditMode) {
-            shadowPaint.setShadowLayer(shadowDiffuse / 2, dx, dy, shadowColor)
-        }
+        shadowPaint.setShadowLayer(shadowDiffuse / 2, dx, dy, shadowColor)
 
         if (mCornerRadiusLeftBottom == -1f
             && mCornerRadiusLeftTop == -1f
@@ -355,35 +353,43 @@ class ShadowHelper(private val viewGroup: ViewGroup) : ShadowLayoutImpl {
     /**
      * 设置x轴阴影的偏移量
      *
-     * @param mDx
+     * @param dx
      */
-    override fun setShadowOffsetX(mDx: Float) {
-        if (abs(mDx.toDouble()) > shadowLimit) {
-            if (mDx > 0) {
+    override fun setShadowOffsetX(dx: Float) {
+        if (abs(dx.toDouble()) > shadowLimit) {
+            if (dx > 0) {
                 this.mOffsetX = this.shadowLimit
             } else {
                 this.mOffsetX = -shadowLimit
             }
         } else {
-            this.mOffsetX = mDx
+            this.mOffsetX = dx
         }
         setPadding()
+    }
+
+    override fun getShadowOffsetX(): Float {
+        return abs(mOffsetX) + shadowLimit
+    }
+
+    override fun getShadowOffsetY(): Float {
+        return abs(mOffsetY) + shadowLimit
     }
 
     /**
      * 设置y轴阴影的偏移量
      *
-     * @param mDy
+     * @param dy
      */
-    override fun setShadowOffsetY(mDy: Float) {
-        if (abs(mDy.toDouble()) > shadowLimit) {
-            if (mDy > 0) {
+    override fun setShadowOffsetY(dy: Float) {
+        if (abs(dy.toDouble()) > shadowLimit) {
+            if (dy > 0) {
                 this.mOffsetY = this.shadowLimit
             } else {
                 this.mOffsetY = -shadowLimit
             }
         } else {
-            this.mOffsetY = mDy
+            this.mOffsetY = dy
         }
         setPadding()
     }
@@ -391,10 +397,10 @@ class ShadowHelper(private val viewGroup: ViewGroup) : ShadowLayoutImpl {
     /**
      * 设置shadowLayout圆角
      *
-     * @param mCornerRadius
+     * @param cornerRadius
      */
-    override fun setCornerRadius(mCornerRadius: Int) {
-        this.cornerRadius = mCornerRadius.toFloat()
+    override fun setCornerRadius(cornerRadius: Int) {
+        this.cornerRadius = cornerRadius.toFloat()
         if (viewGroup.width != 0 && viewGroup.height != 0) {
             setBackgroundCompat(viewGroup.width, viewGroup.height)
         }
@@ -403,20 +409,20 @@ class ShadowHelper(private val viewGroup: ViewGroup) : ShadowLayoutImpl {
     /**
      * 设置阴影扩散区域
      *
-     * @param mShadowLimit
+     * @param shadowLimit
      */
-    override fun setShadowLimit(mShadowLimit: Int) {
-        this.shadowLimit = mShadowLimit.toFloat()
+    override fun setShadowLimit(shadowLimit: Int) {
+        this.shadowLimit = shadowLimit.toFloat()
         setPadding()
     }
 
     /**
      * 设置阴影颜色值
      *
-     * @param mShadowColor
+     * @param shadowColor
      */
-    override fun setShadowColor(mShadowColor: Int) {
-        this.mShadowColor = mShadowColor
+    override fun setShadowColor(shadowColor: Int) {
+        this.mShadowColor = shadowColor
         if (viewGroup.width != 0 && viewGroup.height != 0) {
             setBackgroundCompat(viewGroup.width, viewGroup.height)
         }

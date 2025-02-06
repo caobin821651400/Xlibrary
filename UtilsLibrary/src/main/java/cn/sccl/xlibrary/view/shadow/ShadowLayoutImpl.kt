@@ -19,7 +19,6 @@ interface ShadowLayoutImpl {
      */
     fun getShadowLimit(): Float
 
-
     /**
      * 设置x轴阴影的偏移量
      *
@@ -33,6 +32,18 @@ interface ShadowLayoutImpl {
      * @param dy
      */
     fun setShadowOffsetY(dy: Float)
+
+    /**
+     * X轴阴影偏移量
+     * @return Float
+     */
+    fun getShadowOffsetX(): Float
+
+    /**
+     * Y轴阴影偏移量
+     * @return Float
+     */
+    fun getShadowOffsetY(): Float
 
     /**
      * 设置ShadowLayoutImpl圆角
