@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp">
 
-        <cn.sccl.xlibrary.view.shadow.ShadowLayout
+        <cn.sccl.xlibrary.view.shadow.ShadowFrameLayout
             android:id="@+id/ShadowLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
                 android:text="圆角"
                 android:textColor="#000" />
 
-        </cn.sccl.xlibrary.view.shadow.ShadowLayout>
+        </cn.sccl.xlibrary.view.shadow.ShadowFrameLayout>
 
     </RelativeLayout>
 

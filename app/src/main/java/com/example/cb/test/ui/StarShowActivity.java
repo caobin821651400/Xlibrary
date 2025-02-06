@@ -2,7 +2,6 @@ package com.example.cb.test.ui;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 
@@ -14,7 +13,7 @@ import com.example.cb.test.R;
  * 动态设置阴影页
  */
 public class StarShowActivity extends AppCompatActivity  {
-    private cn.sccl.xlibrary.view.shadow.ShadowLayout ShadowLayout;
+    private cn.sccl.xlibrary.view.shadow.ShadowFrameLayout ShadowLayout;
     private SeekBar skbar_x;
     private SeekBar skbar_y;
     private SeekBar skbar_limit;
