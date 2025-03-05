@@ -3,11 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="50dp"
+        android:background="#33dadada">
 
         <cn.sccl.xlibrary.view.shadow.ShadowFrameLayout
             android:id="@+id/ShadowLayout"
@@ -15,43 +18,58 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             app:hl_cornerRadius="10dp"
-            app:hl_shadowColor="#2aff0000"
+            app:hl_shadowColor="#ff0000"
             app:hl_shadowLimit="20dp"
             app:hl_shadowOffsetX="0dp"
-            app:hl_shadowOffsetY="5dp"
+            app:hl_shadowOffsetY="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:layout_width="56dp"
+                android:layout_width="100dp"
                 android:layout_height="56dp"
-                android:background="@drawable/shape_corners_5dp_bg_cblibrary"
+                android:background="#ffffff"
                 android:gravity="center"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:text="圆角"
-                android:textColor="#000" />
-
+                android:textColor="#000"
+                app:layout_constraintBottom_toBottomOf="@+id/ShadowLayout"
+                app:layout_constraintEnd_toEndOf="@+id/ShadowLayout"
+                app:layout_constraintStart_toStartOf="@+id/ShadowLayout"
+                app:layout_constraintTop_toTopOf="@+id/ShadowLayout" />
         </cn.sccl.xlibrary.view.shadow.ShadowFrameLayout>
 
         <View
             android:id="@+id/bottomLine"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="1px"
+            android:background="#f00"
             app:layout_constraintBottom_toBottomOf="@+id/ShadowLayout"
-            android:background="#f00" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <View
             android:id="@+id/topLine"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="1px"
-            app:layout_constraintTop_toTopOf="@+id/ShadowLayout"
-            android:background="#f00" />
+            android:background="#f00"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ShadowLayout" />
+
+        <View
+            android:id="@+id/rightLine"
+            android:layout_width="1px"
+            android:layout_height="58dp"
+            android:background="#ff0"
+            app:layout_constraintBottom_toBottomOf="@+id/ShadowLayout"
+            app:layout_constraintEnd_toEndOf="@+id/ShadowLayout"
+            app:layout_constraintTop_toTopOf="@+id/ShadowLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     <LinearLayout
         android:layout_width="match_parent"

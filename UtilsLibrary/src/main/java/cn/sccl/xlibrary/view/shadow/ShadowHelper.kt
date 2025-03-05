@@ -22,7 +22,6 @@ import kotlin.math.abs
  */
 class ShadowHelper(private val viewGroup: ViewGroup) : ShadowLayoutImpl {
 
-
     private val shadowPaint by lazyNone {
         Paint().apply {
             isAntiAlias = true
@@ -223,12 +222,11 @@ class ShadowHelper(private val viewGroup: ViewGroup) : ShadowLayoutImpl {
      * 阴影内边距
      */
     fun setPadding() {
-        val xPadding = (shadowLimit + abs(mOffsetX.toDouble())).toInt()
-        val yPadding = (shadowLimit + abs(mOffsetY.toDouble())).toInt()
-        leftPadding = xPadding
-        topPadding = yPadding
-        rightPadding = xPadding
-        bottomPadding = yPadding
+        val p = shadowLimit.toInt()
+        leftPadding = p
+        topPadding = p
+        rightPadding = p
+        bottomPadding = p
         viewGroup.setPadding(leftPadding, topPadding, rightPadding, bottomPadding)
     }
 
@@ -248,100 +246,60 @@ class ShadowHelper(private val viewGroup: ViewGroup) : ShadowLayoutImpl {
      * @return Bitmap
      */
     private fun createShadowBitmap(width: Int, height: Int, shadowColor: Int): Bitmap {
-        val shadowWidth = if (width / 4 == 0) 1 else width / 4
-        val shadowHeight = if (height / 4 == 0) 1 else height / 4
+        //阴影bitmap的X起始位置，整个控件的1/4
+        val shadowXStart = if (width / 4 == 0) 1 else width / 4
+        //阴影bitmap的Y起始位置，整个控件的1/4
+        val shadowYStart = if (height / 4 == 0) 1 else height / 4
         val cornerRadius = cornerRadius / 4
+        //模糊范围的扩散区域，上面的shadowXStart，shadowYStart形成的bitmap四周是没有模糊的效果的
         val shadowDiffuse = shadowLimit / 4
-        val dx = mOffsetX / 4
-        val dy = mOffsetY / 4
 
-        val output = Bitmap.createBitmap(shadowWidth, shadowHeight, Bitmap.Config.ARGB_8888)
+        //阴影XY轴偏移量，一般是底部偏移
+        var dx = mOffsetX
+        var dy = mOffsetY
 
-        XLogUtils.d("大小："+output.byteCount)
+        val output = Bitmap.createBitmap(shadowXStart, shadowYStart, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(output)
+        XLogUtils.d("大小：" + output.byteCount)
 
-        //这里缩小limit的是因为，setShadowLayer后会将bitmap扩散到shadowWidth，shadowHeight
-        //同时也要根据某边的隐藏情况去改变
-        val rectLeft = shadowDiffuse
-        val rectRight = shadowWidth - shadowDiffuse
-        val rectBottom = shadowHeight - shadowDiffuse
-
+        //整个阴影的矩形区域，包括模糊扩散的区域
         val shadowRect = RectF(
-            rectLeft,
             shadowDiffuse,
-            rectRight,
-            rectBottom
+            shadowDiffuse,
+            shadowXStart - shadowDiffuse,
+            shadowYStart - shadowDiffuse
         )
+        val maxOffset = shadowDiffuse / 2
 
+        //计算偏移最大值,保证XY轴偏移量不能超出范围
         if (dy > 0) {
-            shadowRect.top += dy
-            shadowRect.bottom -= dy
+            if (dy > maxOffset) {
+                dy = maxOffset
+            }
         } else if (dy < 0) {
-            shadowRect.top += (abs(dy.toDouble())).toFloat()
-            shadowRect.bottom -= abs(dy.toDouble()).toFloat()
+            if (dy < -maxOffset) {
+                dy = -maxOffset
+            }
         }
+        shadowRect.top += dy
+        shadowRect.bottom += dy
 
+        //计算偏移最大值,保证XY轴偏移量不能超出范围
         if (dx > 0) {
-            shadowRect.left += dx
-            shadowRect.right -= dx
+            if (dx > maxOffset) {
+                dx = maxOffset
+            }
         } else if (dx < 0) {
-            shadowRect.left += (abs(dx.toDouble())).toFloat()
-            shadowRect.right -= abs(dx.toDouble()).toFloat()
+            if (dx < -maxOffset) {
+                dx = -maxOffset
+            }
         }
+        shadowRect.left += dx
+        shadowRect.right += dx
 
         shadowPaint.color = Color.TRANSPARENT
-        shadowPaint.setShadowLayer(shadowDiffuse / 2, dx, dy, shadowColor)
-
-        if (mCornerRadiusLeftBottom == -1f
-            && mCornerRadiusLeftTop == -1f
-            && mCornerRadiusRightTop == -1f
-            && mCornerRadiusRightBottom == -1f
-        ) {
-            //如果没有设置整个属性，那么按原始去画
-            canvas.drawRoundRect(shadowRect, cornerRadius, cornerRadius, shadowPaint)
-        } else {
-            //目前最佳的解决方案
-            rectF.left = leftPadding.toFloat()
-            rectF.top = topPadding.toFloat()
-            rectF.right = (width - rightPadding).toFloat()
-            rectF.bottom = (height - bottomPadding).toFloat()
-
-            shadowPaint.isAntiAlias = true
-            val leftTop = if (mCornerRadiusLeftTop == -1f) {
-                cornerRadius.toInt() / 4
-            } else {
-                mCornerRadiusLeftTop.toInt() / 4
-            }
-            val leftBottom = if (mCornerRadiusLeftBottom == -1f) {
-                cornerRadius.toInt() / 4
-            } else {
-                mCornerRadiusLeftBottom.toInt() / 4
-            }
-            val rightTop = if (mCornerRadiusRightTop == -1f) {
-                cornerRadius.toInt() / 4
-            } else {
-                mCornerRadiusRightTop.toInt() / 4
-            }
-            val rightBottom = if (mCornerRadiusRightBottom == -1f) {
-                cornerRadius.toInt() / 4
-            } else {
-                mCornerRadiusRightBottom.toInt() / 4
-            }
-
-            val outerR = floatArrayOf(
-                leftTop.toFloat(),
-                leftTop.toFloat(),
-                rightTop.toFloat(),
-                rightTop.toFloat(),
-                rightBottom.toFloat(),
-                rightBottom.toFloat(),
-                leftBottom.toFloat(),
-                leftBottom.toFloat()
-            )
-            val path = Path()
-            path.addRoundRect(shadowRect, outerR, Path.Direction.CW)
-            canvas.drawPath(path, shadowPaint)
-        }
+        shadowPaint.setShadowLayer(shadowDiffuse / 2, 0f, 0f, shadowColor)
+        canvas.drawRoundRect(shadowRect, cornerRadius, cornerRadius, shadowPaint)
         return output
     }
 
@@ -368,7 +326,9 @@ class ShadowHelper(private val viewGroup: ViewGroup) : ShadowLayoutImpl {
         } else {
             this.mOffsetX = dx
         }
-        setPadding()
+        if (viewGroup.width != 0 && viewGroup.height != 0) {
+            setBackgroundCompat(viewGroup.width, viewGroup.height)
+        }
     }
 
     override fun getShadowOffsetX(): Float {
@@ -394,7 +354,10 @@ class ShadowHelper(private val viewGroup: ViewGroup) : ShadowLayoutImpl {
         } else {
             this.mOffsetY = dy
         }
-        setPadding()
+
+        if (viewGroup.width != 0 && viewGroup.height != 0) {
+            setBackgroundCompat(viewGroup.width, viewGroup.height)
+        }
     }
 
     /**

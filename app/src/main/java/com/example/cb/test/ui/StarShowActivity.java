@@ -11,6 +11,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.cb.test.R;
 
+import cn.sccl.xlibrary.utils.XDensityUtils;
+import cn.sccl.xlibrary.utils.XLogUtils;
+
 /**
  * 动态设置阴影页
  */
