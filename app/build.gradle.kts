@@ -15,13 +15,35 @@ android(Action {
         versionName = ProjectVersions.versionName
         multiDexEnabled = true
     })
-    buildTypes(Action {
-        getByName("release") {
-            isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+
+    signingConfigs {
+        create("release") {
+            storeFile = file("../jxGlobal.jks")
+            storePassword = "juxue123321"
+            keyAlias = "tvbrowser"
+            keyPassword = "juxue123321"
         }
-    })
+    }
+
+    buildTypes {
+        getByName("debug") {
+            isDebuggable = true
+            isMinifyEnabled = true
+            signingConfig = signingConfigs.getByName("release")
+        }
+        getByName("release") {
+            isDebuggable = false
+            isMinifyEnabled = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+            signingConfig = signingConfigs.getByName("release")
+        }
+    }
+
     kotlinOptions(Action { jvmTarget = "1.8" })
+
 
     sourceSets {
         getByName("main") {
