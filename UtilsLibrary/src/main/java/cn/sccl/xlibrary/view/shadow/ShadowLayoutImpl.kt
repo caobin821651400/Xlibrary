@@ -1,9 +1,9 @@
 package cn.sccl.xlibrary.view.shadow
 
 /**
- *
- * @author cb
- * @date 2025/2/6
+ * @author: cb
+ * @date: 2025/3/25
+ * @desc: 描述
  */
 interface ShadowLayoutImpl {
 
@@ -62,10 +62,28 @@ interface ShadowLayoutImpl {
     /**
      * 设置阴影颜色值
      *
-     * @param shadowColor
+     * @param color
      */
-    fun setShadowColor(shadowColor: Int)
+    fun setShadowColor(color: Int)
 
+    /**
+     * 设置描边颜色值
+     *
+     * @param color
+     */
+    fun setStrokeColor(color: Int)
+
+    /**
+     * 描边的宽度
+     * @param width Float
+     */
+    fun setStrokeWidth(width: Float)
+
+    /**
+     * 允许描边
+     * @param enable Boolean
+     */
+    fun enableStrokeWidth(enable: Boolean)
 
     /**
      * 单独设置4个圆角属性
@@ -81,5 +99,4 @@ interface ShadowLayoutImpl {
         leftBottom: Int,
         rightBottom: Int
     )
-
 }

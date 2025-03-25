@@ -18,7 +18,7 @@ import cn.sccl.xlibrary.utils.XLogUtils;
  * 动态设置阴影页
  */
 public class StarShowActivity extends AppCompatActivity {
-    private cn.sccl.xlibrary.view.shadow.ShadowFrameLayout shadowLayout;
+    private cn.sccl.xlibrary.view.shadow.ShadowConstraintLayout shadowLayout;
     private SeekBar skbar_x;
     private SeekBar skbar_y;
     private SeekBar skbar_limit;

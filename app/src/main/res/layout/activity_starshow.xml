@@ -7,12 +7,12 @@
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="50dp"
         android:background="#33dadada">
 
-        <cn.sccl.xlibrary.view.shadow.ShadowFrameLayout
+        <cn.sccl.xlibrary.view.shadow.ShadowConstraintLayout
             android:id="@+id/ShadowLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="56dp"
                 android:layout_height="56dp"
                 android:background="#ffffff"
                 android:gravity="center"
@@ -36,11 +36,19 @@
                 android:paddingRight="10dp"
                 android:text="圆角"
                 android:textColor="#000"
-                app:layout_constraintBottom_toBottomOf="@+id/ShadowLayout"
-                app:layout_constraintEnd_toEndOf="@+id/ShadowLayout"
-                app:layout_constraintStart_toStartOf="@+id/ShadowLayout"
-                app:layout_constraintTop_toTopOf="@+id/ShadowLayout" />
-        </cn.sccl.xlibrary.view.shadow.ShadowFrameLayout>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <View
+                android:layout_width="56dp"
+                android:layout_gravity="bottom"
+                android:background="#33000000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_height="20dp"/>
+        </cn.sccl.xlibrary.view.shadow.ShadowConstraintLayout>
 
         <View
             android:id="@+id/bottomLine"
@@ -54,7 +62,7 @@
         <View
             android:id="@+id/topLine"
             android:layout_width="200dp"
-            android:layout_height="1px"
+            android:layout_height="1dp"
             android:background="#f00"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

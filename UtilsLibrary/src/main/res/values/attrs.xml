@@ -384,5 +384,12 @@
         <attr name="hl_cornerRadius_leftBottom" format="dimension" />
         <!--圆角：右下圆角。同上-->
         <attr name="hl_cornerRadius_rightBottom" format="dimension" />
+
+        <!--允许描边-->
+        <attr name="hl_enable_stroke" format="boolean" />
+        <!--描边的宽度-->
+        <attr name="hl_stroke_width" format="dimension" />
+        <!--描边的颜色-->
+        <attr name="hl_stroke_color" format="color" />
     </declare-styleable>
 </resources>

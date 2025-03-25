@@ -29,6 +29,28 @@ class ShadowHelper(private val viewGroup: ViewGroup) : ShadowLayoutImpl {
         }
     }
 
+    /**
+     * 是否允许描边
+     */
+    private var enableStroke = false
+
+    /**
+     * 描边的宽度
+     */
+    private var mStrokeWidth = 2f
+
+    /**
+     * 描边的颜色
+     */
+    private var mStrokeColor = Color.GREEN
+
+    private val strokePaint by lazyNone {
+        Paint().apply {
+            isAntiAlias = true
+            style = Paint.Style.STROKE
+        }
+    }
+
     private val clipPath = Path()
 
     /**
@@ -107,28 +129,15 @@ class ShadowHelper(private val viewGroup: ViewGroup) : ShadowLayoutImpl {
      * @param canvas
      */
     fun dispatchDraw(canvas: Canvas) {
-        val trueHeight = (rectF.bottom - rectF.top).toInt()
         if (viewGroup.getChildAt(0) != null) {
             if (mCornerRadiusLeftTop == -1f
                 && mCornerRadiusLeftBottom == -1f
                 && mCornerRadiusRightTop == -1f
                 && mCornerRadiusRightBottom == -1f
             ) {
-                //说明没有设置过任何特殊角、且是半圆。
-                if (cornerRadius > trueHeight / 2) {
-                    val path = Path()
-                    path.addRoundRect(
-                        rectF,
-                        (trueHeight / 2).toFloat(),
-                        (trueHeight / 2).toFloat(),
-                        Path.Direction.CW
-                    )
-                    canvas.clipPath(path)
-                } else {
-                    clipPath.reset()
-                    clipPath.addRoundRect(rectF, cornerRadius, cornerRadius, Path.Direction.CW)
-                    canvas.clipPath(clipPath)
-                }
+                clipPath.reset()
+                clipPath.addRoundRect(rectF, cornerRadius, cornerRadius, Path.Direction.CW)
+                canvas.clipPath(clipPath)
             } else {
                 cornerValues?.let {
                     clipPath.reset()
@@ -141,6 +150,35 @@ class ShadowHelper(private val viewGroup: ViewGroup) : ShadowLayoutImpl {
                         Path.Direction.CW
                     )
                     canvas.clipPath(clipPath)
+                }
+            }
+        }
+    }
+
+    fun onDraw(canvas: Canvas) {
+        //描边
+        if (enableStroke) {
+            strokePaint.strokeWidth = mStrokeWidth
+            strokePaint.color = mStrokeColor
+            clipPath.reset()
+            if (mCornerRadiusLeftTop == -1f
+                && mCornerRadiusLeftBottom == -1f
+                && mCornerRadiusRightTop == -1f
+                && mCornerRadiusRightBottom == -1f
+            ) {
+                clipPath.addRoundRect(rectF, cornerRadius, cornerRadius, Path.Direction.CW)
+                canvas.drawPath(clipPath, strokePaint)
+            } else {
+                cornerValues?.let {
+                    clipPath.addRoundRect(
+                        leftPadding.toFloat(),
+                        topPadding.toFloat(),
+                        (viewGroup.width - rightPadding).toFloat(),
+                        (viewGroup.height - bottomPadding).toFloat(),
+                        it,
+                        Path.Direction.CW
+                    )
+                    canvas.drawPath(clipPath, strokePaint)
                 }
             }
         }
@@ -385,10 +423,10 @@ class ShadowHelper(private val viewGroup: ViewGroup) : ShadowLayoutImpl {
     /**
      * 设置阴影颜色值
      *
-     * @param shadowColor
+     * @param color
      */
-    override fun setShadowColor(shadowColor: Int) {
-        this.mShadowColor = shadowColor
+    override fun setShadowColor(color: Int) {
+        this.mShadowColor = color
         if (viewGroup.width != 0 && viewGroup.height != 0) {
             setBackgroundCompat(viewGroup.width, viewGroup.height)
         }
@@ -416,5 +454,33 @@ class ShadowHelper(private val viewGroup: ViewGroup) : ShadowLayoutImpl {
         if (viewGroup.width != 0 && viewGroup.height != 0) {
             setBackgroundCompat(viewGroup.width, viewGroup.height)
         }
+    }
+
+    /**
+     * 设置描边颜色值
+     *
+     * @param color
+     */
+    override fun setStrokeColor(color: Int) {
+        mStrokeColor = color
+        viewGroup.invalidate()
+    }
+
+    /**
+     * 描边的宽度
+     * @param width Float
+     */
+    override fun setStrokeWidth(width: Float) {
+        mStrokeWidth = width
+        viewGroup.invalidate()
+    }
+
+    /**
+     * 允许描边
+     * @param enable Boolean
+     */
+    override fun enableStrokeWidth(enable: Boolean) {
+        enableStroke = enable
+        viewGroup.invalidate()
     }
 }

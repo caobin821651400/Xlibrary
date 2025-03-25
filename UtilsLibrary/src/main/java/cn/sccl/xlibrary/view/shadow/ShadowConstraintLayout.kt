@@ -3,20 +3,18 @@ package cn.sccl.xlibrary.view.shadow
 import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
-import android.widget.FrameLayout
-
+import androidx.constraintlayout.widget.ConstraintLayout
 
 /**
- * 阴影FrameLayout
- * @author: cb
- * @date: 2025/1/25
- * @desc: 描述
+ *
+ * @author cb
+ * @date 2025/3/24
  */
-class ShadowFrameLayout @JvmOverloads constructor(
+class ShadowConstraintLayout @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : FrameLayout(context, attrs, defStyleAttr), ShadowLayoutImpl {
+) : ConstraintLayout(context, attrs, defStyleAttr), ShadowLayoutImpl {
 
     private val mShadowHelper = ShadowHelper(this)
 
@@ -37,6 +35,11 @@ class ShadowFrameLayout @JvmOverloads constructor(
     override fun dispatchDraw(canvas: Canvas) {
         mShadowHelper.dispatchDraw(canvas)
         super.dispatchDraw(canvas)
+    }
+
+    override fun onDraw(canvas: Canvas) {
+        super.onDraw(canvas)
+        mShadowHelper.onDraw(canvas)
     }
 
     override fun getCornerRadius(): Float {
@@ -100,19 +103,6 @@ class ShadowFrameLayout @JvmOverloads constructor(
         mShadowHelper.setShadowColor(shadowColor)
     }
 
-    override fun setStrokeColor(color: Int) {
-        mShadowHelper.setShadowColor(color)
-    }
-
-    override fun setStrokeWidth(width: Float) {
-        mShadowHelper.setStrokeWidth(width)
-    }
-
-    override fun enableStrokeWidth(enable: Boolean) {
-        mShadowHelper.enableStrokeWidth(enable)
-    }
-
-
     /**
      * 单独设置4个圆角属性
      *
@@ -134,4 +124,17 @@ class ShadowFrameLayout @JvmOverloads constructor(
             rightBottom
         )
     }
+
+    override fun setStrokeColor(color: Int) {
+        mShadowHelper.setShadowColor(color)
+    }
+
+    override fun setStrokeWidth(width: Float) {
+        mShadowHelper.setStrokeWidth(width)
+    }
+
+    override fun enableStrokeWidth(enable: Boolean) {
+        mShadowHelper.enableStrokeWidth(enable)
+    }
+
 }
