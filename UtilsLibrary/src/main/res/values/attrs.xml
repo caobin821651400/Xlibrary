@@ -366,30 +366,30 @@
 
     <declare-styleable name="ShadowLayout">
         <!--阴影：阴影颜色-->
-        <attr name="hl_shadowColor" format="color" />
+        <attr name="sl_shadowColor" format="color" />
         <!--阴影：阴影的扩散范围(也可以理解为扩散程度)-->
-        <attr name="hl_shadowLimit" format="dimension" />
+        <attr name="sl_shadowLimit" format="dimension" />
         <!--阴影：x轴的偏移量-->
-        <attr name="hl_shadowOffsetX" format="dimension" />
+        <attr name="sl_shadowOffsetX" format="dimension" />
         <!--阴影：y轴的偏移量-->
-        <attr name="hl_shadowOffsetY" format="dimension" />
+        <attr name="sl_shadowOffsetY" format="dimension" />
 
         <!--圆角：统一大小，其中包括了阴影，shape、背景图、stroke边框圆角-->
-        <attr name="hl_cornerRadius" format="dimension" />
-        <!--圆角：左上圆角。设置后会忽略hl_cornerRadius的值-->
-        <attr name="hl_cornerRadius_leftTop" format="dimension" />
+        <attr name="sl_cornerRadius" format="dimension" />
+        <!--圆角：左上圆角。设置后会忽略sl_cornerRadius的值-->
+        <attr name="sl_cornerRadius_leftTop" format="dimension" />
         <!--圆角：右上圆角。同上-->
-        <attr name="hl_cornerRadius_rightTop" format="dimension" />
+        <attr name="sl_cornerRadius_rightTop" format="dimension" />
         <!--圆角：左下圆角。同上-->
-        <attr name="hl_cornerRadius_leftBottom" format="dimension" />
+        <attr name="sl_cornerRadius_leftBottom" format="dimension" />
         <!--圆角：右下圆角。同上-->
-        <attr name="hl_cornerRadius_rightBottom" format="dimension" />
+        <attr name="sl_cornerRadius_rightBottom" format="dimension" />
 
         <!--允许描边-->
-        <attr name="hl_enable_stroke" format="boolean" />
+        <attr name="sl_enable_stroke" format="boolean" />
         <!--描边的宽度-->
-        <attr name="hl_stroke_width" format="dimension" />
+        <attr name="sl_stroke_width" format="dimension" />
         <!--描边的颜色-->
-        <attr name="hl_stroke_color" format="color" />
+        <attr name="sl_stroke_color" format="color" />
     </declare-styleable>
 </resources>

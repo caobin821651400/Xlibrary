@@ -9,6 +9,7 @@ import android.graphics.Path
 import android.graphics.RectF
 import android.graphics.drawable.BitmapDrawable
 import android.util.AttributeSet
+import android.view.View
 import android.view.ViewGroup
 import cn.sccl.xlibrary.kotlin.lazyNone
 import cn.sccl.xlibrary.utils.XLogUtils
@@ -101,24 +102,27 @@ class ShadowHelper(private val viewGroup: ViewGroup) : ShadowLayoutImpl {
     fun parseAttributes(context: Context?, attrs: AttributeSet? = null) {
         if (context == null) return
         val attr = context.obtainStyledAttributes(attrs, R.styleable.ShadowLayout)
-        cornerRadius = attr.getDimension(R.styleable.ShadowLayout_hl_cornerRadius, 0f)
+        cornerRadius = attr.getDimension(R.styleable.ShadowLayout_sl_cornerRadius, 0f)
         mCornerRadiusLeftTop =
-            attr.getDimension(R.styleable.ShadowLayout_hl_cornerRadius_leftTop, -1f)
+            attr.getDimension(R.styleable.ShadowLayout_sl_cornerRadius_leftTop, -1f)
         mCornerRadiusLeftBottom =
-            attr.getDimension(R.styleable.ShadowLayout_hl_cornerRadius_leftBottom, -1f)
+            attr.getDimension(R.styleable.ShadowLayout_sl_cornerRadius_leftBottom, -1f)
         mCornerRadiusRightTop =
-            attr.getDimension(R.styleable.ShadowLayout_hl_cornerRadius_rightTop, -1f)
+            attr.getDimension(R.styleable.ShadowLayout_sl_cornerRadius_rightTop, -1f)
         mCornerRadiusRightBottom =
-            attr.getDimension(R.styleable.ShadowLayout_hl_cornerRadius_rightBottom, -1f)
+            attr.getDimension(R.styleable.ShadowLayout_sl_cornerRadius_rightBottom, -1f)
 
         //默认扩散区域宽度
-        shadowLimit = attr.getDimension(R.styleable.ShadowLayout_hl_shadowLimit, 5f)
+        shadowLimit = attr.getDimension(R.styleable.ShadowLayout_sl_shadowLimit, 5f)
 
         //x轴偏移量
-        mOffsetX = attr.getDimension(R.styleable.ShadowLayout_hl_shadowOffsetX, 0f)
+        mOffsetX = attr.getDimension(R.styleable.ShadowLayout_sl_shadowOffsetX, 0f)
         //y轴偏移量
-        mOffsetY = attr.getDimension(R.styleable.ShadowLayout_hl_shadowOffsetY, 0f)
-        mShadowColor = attr.getColor(R.styleable.ShadowLayout_hl_shadowColor, defaultShadowColor)
+        mOffsetY = attr.getDimension(R.styleable.ShadowLayout_sl_shadowOffsetY, 0f)
+        mShadowColor = attr.getColor(R.styleable.ShadowLayout_sl_shadowColor, defaultShadowColor)
+        enableStroke = attr.getBoolean(R.styleable.ShadowLayout_sl_enable_stroke, false)
+        mStrokeWidth = attr.getDimension(R.styleable.ShadowLayout_sl_stroke_width, 2f)
+        mStrokeColor = attr.getColor(R.styleable.ShadowLayout_sl_stroke_color, Color.GREEN)
         attr.recycle()
         setPadding()
     }
@@ -271,6 +275,7 @@ class ShadowHelper(private val viewGroup: ViewGroup) : ShadowLayoutImpl {
 
     @Suppress("deprecation")
     private fun setBackgroundCompat(w: Int, h: Int) {
+        viewGroup.setLayerType(View.LAYER_TYPE_SOFTWARE, null)
         val bitmap = createShadowBitmap(w, h, mShadowColor)
         val drawable = BitmapDrawable(bitmap)
         viewGroup.background = drawable
