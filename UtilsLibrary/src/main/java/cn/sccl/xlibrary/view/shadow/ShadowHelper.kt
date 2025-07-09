@@ -1,18 +1,17 @@
 package cn.sccl.xlibrary.view.shadow
 
 import android.content.Context
-import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.RectF
-import android.graphics.drawable.BitmapDrawable
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.withStyledAttributes
+import androidx.core.graphics.toColorInt
 import cn.sccl.xlibrary.kotlin.lazyNone
-import cn.sccl.xlibrary.utils.XLogUtils
 import com.cb.xlibrary.R
 import kotlin.math.abs
 
@@ -23,10 +22,20 @@ import kotlin.math.abs
  */
 class ShadowHelper(private val viewGroup: ViewGroup) : ShadowLayoutImpl {
 
-    private val shadowPaint by lazyNone {
+    private val mShadowPaint by lazyNone {
         Paint().apply {
             isAntiAlias = true
             style = Paint.Style.FILL
+            color = Color.TRANSPARENT
+        }
+    }
+
+    private val mStrokePaint by lazyNone {
+        Paint().apply {
+            isAntiAlias = true
+            style = Paint.Style.STROKE
+            strokeWidth = mStrokeWidth
+            color = mStrokeColor
         }
     }
 
@@ -45,14 +54,10 @@ class ShadowHelper(private val viewGroup: ViewGroup) : ShadowLayoutImpl {
      */
     private var mStrokeColor = Color.GREEN
 
-    private val strokePaint by lazyNone {
-        Paint().apply {
-            isAntiAlias = true
-            style = Paint.Style.STROKE
-        }
-    }
-
-    private val clipPath = Path()
+    /**
+     * 裁剪圆角
+     */
+    private val mClipPath = Path()
 
     /**
      * 阴影颜色
@@ -63,7 +68,7 @@ class ShadowHelper(private val viewGroup: ViewGroup) : ShadowLayoutImpl {
      * 阴影扩散区域大小
      * @return
      */
-    private var shadowLimit = 5f
+    private var mShadowBlur = 5f
 
     /**
      * 阴影x偏移量
@@ -79,52 +84,93 @@ class ShadowHelper(private val viewGroup: ViewGroup) : ShadowLayoutImpl {
      * 圆角大小
      * @return
      */
-    private var cornerRadius: Float = 0f
+    private var mCornerRadius: Float = 0f
     private var mCornerRadiusLeftTop = 0f
     private var mCornerRadiusRightTop = 0f
     private var mCornerRadiusLeftBottom = 0f
     private var mCornerRadiusRightBottom = 0f
 
-    //子布局与父布局的padding（即通过padding来实现mShadowLimit的大小和阴影展示）
-    private var leftPadding = 0
-    private var topPadding = 0
-    private var rightPadding = 0
-    private var bottomPadding = 0
-    private val rectF = RectF() //阴影布局子空间区域
+    /**
+     * 裁剪区域，没有描边就是viewGroup本身的宽高
+     */
+    private val boundsRectF by lazy(LazyThreadSafetyMode.NONE) { RectF() }
+
+    private val shadowPath by lazy(LazyThreadSafetyMode.NONE) { Path() }
 
     /**
      * 圆角数据
      */
     private var cornerValues: FloatArray? = null
 
-    private val defaultShadowColor = Color.parseColor("#2a000000")
+    private val defaultShadowColor = "#2a000000".toColorInt()
 
     fun parseAttributes(context: Context?, attrs: AttributeSet? = null) {
+        viewGroup.setWillNotDraw(false)
         if (context == null) return
-        val attr = context.obtainStyledAttributes(attrs, R.styleable.ShadowLayout)
-        cornerRadius = attr.getDimension(R.styleable.ShadowLayout_sl_cornerRadius, 0f)
-        mCornerRadiusLeftTop =
-            attr.getDimension(R.styleable.ShadowLayout_sl_cornerRadius_leftTop, -1f)
-        mCornerRadiusLeftBottom =
-            attr.getDimension(R.styleable.ShadowLayout_sl_cornerRadius_leftBottom, -1f)
-        mCornerRadiusRightTop =
-            attr.getDimension(R.styleable.ShadowLayout_sl_cornerRadius_rightTop, -1f)
-        mCornerRadiusRightBottom =
-            attr.getDimension(R.styleable.ShadowLayout_sl_cornerRadius_rightBottom, -1f)
+        context.withStyledAttributes(attrs, R.styleable.ShadowLayout) {
+            mCornerRadius = getDimension(R.styleable.ShadowLayout_sl_cornerRadius, 0f)
+            mCornerRadiusLeftTop =
+                getDimension(R.styleable.ShadowLayout_sl_cornerRadius_leftTop, -1f)
+            mCornerRadiusLeftBottom =
+                getDimension(R.styleable.ShadowLayout_sl_cornerRadius_leftBottom, -1f)
+            mCornerRadiusRightTop =
+                getDimension(R.styleable.ShadowLayout_sl_cornerRadius_rightTop, -1f)
+            mCornerRadiusRightBottom =
+                getDimension(R.styleable.ShadowLayout_sl_cornerRadius_rightBottom, -1f)
 
-        //默认扩散区域宽度
-        shadowLimit = attr.getDimension(R.styleable.ShadowLayout_sl_shadowLimit, 5f)
+            //默认扩散区域宽度
+            mShadowBlur = getDimension(R.styleable.ShadowLayout_sl_shadowBlur, 5f)
 
-        //x轴偏移量
-        mOffsetX = attr.getDimension(R.styleable.ShadowLayout_sl_shadowOffsetX, 0f)
-        //y轴偏移量
-        mOffsetY = attr.getDimension(R.styleable.ShadowLayout_sl_shadowOffsetY, 0f)
-        mShadowColor = attr.getColor(R.styleable.ShadowLayout_sl_shadowColor, defaultShadowColor)
-        enableStroke = attr.getBoolean(R.styleable.ShadowLayout_sl_enable_stroke, false)
-        mStrokeWidth = attr.getDimension(R.styleable.ShadowLayout_sl_stroke_width, 2f)
-        mStrokeColor = attr.getColor(R.styleable.ShadowLayout_sl_stroke_color, Color.GREEN)
-        attr.recycle()
-        setPadding()
+            //x轴偏移量
+            mOffsetX = getDimension(R.styleable.ShadowLayout_sl_shadowOffsetX, 0f)
+            //y轴偏移量
+            mOffsetY = getDimension(R.styleable.ShadowLayout_sl_shadowOffsetY, 0f)
+            mShadowColor = getColor(R.styleable.ShadowLayout_sl_shadowColor, defaultShadowColor)
+            enableStroke = getBoolean(R.styleable.ShadowLayout_sl_enable_stroke, false)
+            mStrokeWidth = getDimension(R.styleable.ShadowLayout_sl_stroke_width, 2f)
+            mStrokeColor = getColor(R.styleable.ShadowLayout_sl_stroke_color, Color.GREEN)
+        }
+        initShadowPaint()
+      // viewGroup.setLayerType(View.LAYER_TYPE_SOFTWARE, null)
+    }
+
+    /**
+     * 控件大小改变
+     * @param w
+     * @param h
+     */
+    fun onSizeChanged(w: Int, h: Int) {
+        initCornerValue(h)
+        boundsRectF.set(
+            mStrokeWidth,
+            mStrokeWidth,
+            w - mStrokeWidth,
+            h - mStrokeWidth
+        )
+
+        initPath()
+    }
+
+    private fun initPath() {
+        //阴影
+        shadowPath.reset()
+        if (isAllCornerRadius()) {
+            shadowPath.addRoundRect(boundsRectF, mCornerRadius, mCornerRadius, Path.Direction.CW)
+        } else {
+            cornerValues?.let {
+                shadowPath.addRoundRect(boundsRectF, it, Path.Direction.CW)
+            }
+        }
+
+        //内容区域
+        mClipPath.reset()
+        if (isAllCornerRadius()) {
+            mClipPath.addRoundRect(boundsRectF, mCornerRadius, mCornerRadius, Path.Direction.CW)
+        } else {
+            cornerValues?.let {
+                mClipPath.addRoundRect(boundsRectF, it, Path.Direction.CW)
+            }
+        }
     }
 
     /**
@@ -132,71 +178,51 @@ class ShadowHelper(private val viewGroup: ViewGroup) : ShadowLayoutImpl {
      *
      * @param canvas
      */
-    fun dispatchDraw(canvas: Canvas) {
+    override fun dispatchDraw(canvas: Canvas) {
         if (viewGroup.getChildAt(0) != null) {
-            if (mCornerRadiusLeftTop == -1f
-                && mCornerRadiusLeftBottom == -1f
-                && mCornerRadiusRightTop == -1f
-                && mCornerRadiusRightBottom == -1f
-            ) {
-                clipPath.reset()
-                clipPath.addRoundRect(rectF, cornerRadius, cornerRadius, Path.Direction.CW)
-                canvas.clipPath(clipPath)
+            if (isAllCornerRadius()) {
+                canvas.clipPath(mClipPath)
             } else {
-                cornerValues?.let {
-                    clipPath.reset()
-                    clipPath.addRoundRect(
-                        leftPadding.toFloat(),
-                        topPadding.toFloat(),
-                        (viewGroup.width - rightPadding).toFloat(),
-                        (viewGroup.height - bottomPadding).toFloat(),
-                        it,
-                        Path.Direction.CW
-                    )
-                    canvas.clipPath(clipPath)
-                }
+                cornerValues?.let { canvas.clipPath(mClipPath) }
             }
         }
     }
 
-    fun onDraw(canvas: Canvas) {
-        //描边
-        if (enableStroke) {
-            strokePaint.strokeWidth = mStrokeWidth
-            strokePaint.color = mStrokeColor
-            clipPath.reset()
-            if (mCornerRadiusLeftTop == -1f
-                && mCornerRadiusLeftBottom == -1f
-                && mCornerRadiusRightTop == -1f
-                && mCornerRadiusRightBottom == -1f
-            ) {
-                clipPath.addRoundRect(rectF, cornerRadius, cornerRadius, Path.Direction.CW)
-                canvas.drawPath(clipPath, strokePaint)
-            } else {
-                cornerValues?.let {
-                    clipPath.addRoundRect(
-                        leftPadding.toFloat(),
-                        topPadding.toFloat(),
-                        (viewGroup.width - rightPadding).toFloat(),
-                        (viewGroup.height - bottomPadding).toFloat(),
-                        it,
-                        Path.Direction.CW
-                    )
-                    canvas.drawPath(clipPath, strokePaint)
-                }
-            }
+    override fun onDrawBeforeSuper(canvas: Canvas) {
+        drawShadow(canvas)
+    }
+
+    override fun onDrawAfterSuper(canvas: Canvas) {
+        drawStroke(canvas)
+    }
+
+    /**
+     * 画阴影
+     */
+    private fun drawShadow(canvas: Canvas) {
+        canvas.drawPath(shadowPath, mShadowPaint)
+    }
+
+    /**
+     * 描边
+     */
+    private fun drawStroke(canvas: Canvas) {
+        if (!enableStroke) return
+        if (isAllCornerRadius()) {
+            canvas.drawPath(mClipPath, mStrokePaint)
+        } else {
+            cornerValues?.let { canvas.drawPath(mClipPath, mStrokePaint) }
         }
     }
 
-    fun onSizeChanged(w: Int, h: Int) {
-        if (w > 0 && h > 0) {
-            setBackgroundCompat(w, h)
-        }
-        rectF.left = leftPadding.toFloat()
-        rectF.top = topPadding.toFloat()
-        rectF.right = (viewGroup.width - rightPadding).toFloat()
-        rectF.bottom = (viewGroup.height - bottomPadding).toFloat()
-        initCornerValue((rectF.bottom - rectF.top).toInt())
+    /**
+     * 四个圆角值一样
+     */
+    private fun isAllCornerRadius(): Boolean {
+        return mCornerRadiusLeftTop == -1f
+                && mCornerRadiusLeftBottom == -1f
+                && mCornerRadiusRightTop == -1f
+                && mCornerRadiusRightBottom == -1f
     }
 
     /**
@@ -209,7 +235,7 @@ class ShadowHelper(private val viewGroup: ViewGroup) : ShadowLayoutImpl {
         var rightBottom: Int
         var leftBottom: Int
         leftTop = if (mCornerRadiusLeftTop == -1f) {
-            cornerRadius.toInt()
+            mCornerRadius.toInt()
         } else {
             mCornerRadiusLeftTop.toInt()
         }
@@ -219,7 +245,7 @@ class ShadowHelper(private val viewGroup: ViewGroup) : ShadowLayoutImpl {
         }
 
         rightTop = if (mCornerRadiusRightTop == -1f) {
-            cornerRadius.toInt()
+            mCornerRadius.toInt()
         } else {
             mCornerRadiusRightTop.toInt()
         }
@@ -229,7 +255,7 @@ class ShadowHelper(private val viewGroup: ViewGroup) : ShadowLayoutImpl {
         }
 
         rightBottom = if (mCornerRadiusRightBottom == -1f) {
-            cornerRadius.toInt()
+            mCornerRadius.toInt()
         } else {
             mCornerRadiusRightBottom.toInt()
         }
@@ -239,7 +265,7 @@ class ShadowHelper(private val viewGroup: ViewGroup) : ShadowLayoutImpl {
         }
 
         leftBottom = if (mCornerRadiusLeftBottom == -1f) {
-            cornerRadius.toInt()
+            mCornerRadius.toInt()
         } else {
             mCornerRadiusLeftBottom.toInt()
         }
@@ -261,146 +287,66 @@ class ShadowHelper(private val viewGroup: ViewGroup) : ShadowLayoutImpl {
     }
 
     /**
-     * 阴影内边距
+     * 阴影初始化
      */
-    fun setPadding() {
-        val p = shadowLimit.toInt()
-        leftPadding = p
-        topPadding = p
-        rightPadding = p
-        bottomPadding = p
-        viewGroup.setPadding(leftPadding, topPadding, rightPadding, bottomPadding)
-    }
-
-
-    @Suppress("deprecation")
-    private fun setBackgroundCompat(w: Int, h: Int) {
-        viewGroup.setLayerType(View.LAYER_TYPE_SOFTWARE, null)
-        val bitmap = createShadowBitmap(w, h, mShadowColor)
-        val drawable = BitmapDrawable(bitmap)
-        viewGroup.background = drawable
-    }
-
-    /**
-     * 创建阴影视图
-     * @param width Int
-     * @param height Int
-     * @param shadowColor Int
-     * @return Bitmap
-     */
-    private fun createShadowBitmap(width: Int, height: Int, shadowColor: Int): Bitmap {
-        //阴影bitmap的X起始位置，整个控件的1/4
-        val shadowXStart = if (width / 4 == 0) 1 else width / 4
-        //阴影bitmap的Y起始位置，整个控件的1/4
-        val shadowYStart = if (height / 4 == 0) 1 else height / 4
-        val cornerRadius = cornerRadius / 4
-        //模糊范围的扩散区域，上面的shadowXStart，shadowYStart形成的bitmap四周是没有模糊的效果的
-        val shadowDiffuse = shadowLimit / 4
-
-        //阴影XY轴偏移量，一般是底部偏移
-        var dx = mOffsetX
-        var dy = mOffsetY
-
-        val output = Bitmap.createBitmap(shadowXStart, shadowYStart, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(output)
-        XLogUtils.d("大小：" + output.byteCount)
-
-        //整个阴影的矩形区域，包括模糊扩散的区域
-        val shadowRect = RectF(
-            shadowDiffuse,
-            shadowDiffuse,
-            shadowXStart - shadowDiffuse,
-            shadowYStart - shadowDiffuse
-        )
-        val maxOffset = shadowDiffuse / 2
-
-        //计算偏移最大值,保证XY轴偏移量不能超出范围
-        if (dy > 0) {
-            if (dy > maxOffset) {
-                dy = maxOffset
-            }
-        } else if (dy < 0) {
-            if (dy < -maxOffset) {
-                dy = -maxOffset
-            }
-        }
-        shadowRect.top += dy
-        shadowRect.bottom += dy
-
-        //计算偏移最大值,保证XY轴偏移量不能超出范围
-        if (dx > 0) {
-            if (dx > maxOffset) {
-                dx = maxOffset
-            }
-        } else if (dx < 0) {
-            if (dx < -maxOffset) {
-                dx = -maxOffset
-            }
-        }
-        shadowRect.left += dx
-        shadowRect.right += dx
-
-        shadowPaint.color = Color.TRANSPARENT
-        shadowPaint.setShadowLayer(shadowDiffuse / 2, 0f, 0f, shadowColor)
-        canvas.drawRoundRect(shadowRect, cornerRadius, cornerRadius, shadowPaint)
-        return output
+    private fun initShadowPaint() {
+        mShadowPaint.color = Color.TRANSPARENT
+        mShadowPaint.setShadowLayer(mShadowBlur, mOffsetX, mOffsetY, mShadowColor)
     }
 
     override fun getCornerRadius(): Float {
-        return cornerRadius
+        return mCornerRadius
     }
 
-    override fun getShadowLimit(): Float {
-        return shadowLimit
+    override fun getShadowBlur(): Float {
+        return mShadowBlur
     }
 
     /**
-     * 设置x轴阴影的偏移量
+     * 设置x轴阴影的偏移量,不能大于阴影扩散范围
      *
      * @param dx
      */
     override fun setShadowOffsetX(dx: Float) {
-        if (abs(dx.toDouble()) > shadowLimit) {
+        if (abs(dx.toDouble()) > mShadowBlur) {
             if (dx > 0) {
-                this.mOffsetX = this.shadowLimit
+                this.mOffsetX = this.mShadowBlur
             } else {
-                this.mOffsetX = -shadowLimit
+                this.mOffsetX = -mShadowBlur
             }
         } else {
             this.mOffsetX = dx
         }
-        if (viewGroup.width != 0 && viewGroup.height != 0) {
-            setBackgroundCompat(viewGroup.width, viewGroup.height)
-        }
-    }
-
-    override fun getShadowOffsetX(): Float {
-        return abs(mOffsetX) + shadowLimit
-    }
-
-    override fun getShadowOffsetY(): Float {
-        return abs(mOffsetY) + shadowLimit
+        initShadowPaint()
+        invalidate()
     }
 
     /**
-     * 设置y轴阴影的偏移量
+     * 设置y轴阴影的偏移量,不能大于阴影扩散范围
      *
      * @param dy
      */
     override fun setShadowOffsetY(dy: Float) {
-        if (abs(dy.toDouble()) > shadowLimit) {
+        if (abs(dy.toDouble()) > mShadowBlur) {
             if (dy > 0) {
-                this.mOffsetY = this.shadowLimit
+                this.mOffsetY = this.mShadowBlur
             } else {
-                this.mOffsetY = -shadowLimit
+                this.mOffsetY = -mShadowBlur
             }
         } else {
             this.mOffsetY = dy
         }
 
-        if (viewGroup.width != 0 && viewGroup.height != 0) {
-            setBackgroundCompat(viewGroup.width, viewGroup.height)
-        }
+        initShadowPaint()
+        invalidate()
+    }
+
+    override fun getShadowOffsetX(): Float {
+        return mOffsetX
+    }
+
+    override fun getShadowOffsetY(): Float {
+        return mOffsetY
     }
 
     /**
@@ -409,20 +355,19 @@ class ShadowHelper(private val viewGroup: ViewGroup) : ShadowLayoutImpl {
      * @param cornerRadius
      */
     override fun setCornerRadius(cornerRadius: Int) {
-        this.cornerRadius = cornerRadius.toFloat()
-        if (viewGroup.width != 0 && viewGroup.height != 0) {
-            setBackgroundCompat(viewGroup.width, viewGroup.height)
-        }
+        this.mCornerRadius = cornerRadius.toFloat()
+        requestLayout()
     }
 
     /**
      * 设置阴影扩散区域
      *
-     * @param shadowLimit
+     * @param blur
      */
-    override fun setShadowLimit(shadowLimit: Int) {
-        this.shadowLimit = shadowLimit.toFloat()
-        setPadding()
+    override fun setShadowBlur(blur: Int) {
+        this.mShadowBlur = blur.toFloat()
+        initShadowPaint()
+        invalidate()
     }
 
     /**
@@ -432,9 +377,12 @@ class ShadowHelper(private val viewGroup: ViewGroup) : ShadowLayoutImpl {
      */
     override fun setShadowColor(color: Int) {
         this.mShadowColor = color
-        if (viewGroup.width != 0 && viewGroup.height != 0) {
-            setBackgroundCompat(viewGroup.width, viewGroup.height)
-        }
+        initShadowPaint()
+        invalidate()
+    }
+
+    override fun getShadowColor(): Int {
+        return mShadowColor
     }
 
 
@@ -456,9 +404,7 @@ class ShadowHelper(private val viewGroup: ViewGroup) : ShadowLayoutImpl {
         mCornerRadiusRightTop = rightTop.toFloat()
         mCornerRadiusLeftBottom = leftBottom.toFloat()
         mCornerRadiusRightBottom = rightBottom.toFloat()
-        if (viewGroup.width != 0 && viewGroup.height != 0) {
-            setBackgroundCompat(viewGroup.width, viewGroup.height)
-        }
+        requestLayout()
     }
 
     /**
@@ -468,7 +414,8 @@ class ShadowHelper(private val viewGroup: ViewGroup) : ShadowLayoutImpl {
      */
     override fun setStrokeColor(color: Int) {
         mStrokeColor = color
-        viewGroup.invalidate()
+        mStrokePaint.color = mStrokeColor
+        invalidate()
     }
 
     /**
@@ -476,8 +423,11 @@ class ShadowHelper(private val viewGroup: ViewGroup) : ShadowLayoutImpl {
      * @param width Float
      */
     override fun setStrokeWidth(width: Float) {
+        if (!enableStroke) return
+        if (width > mShadowBlur) return
         mStrokeWidth = width
-        viewGroup.invalidate()
+        mStrokePaint.strokeWidth = mStrokeWidth
+        requestLayout()
     }
 
     /**
@@ -486,6 +436,15 @@ class ShadowHelper(private val viewGroup: ViewGroup) : ShadowLayoutImpl {
      */
     override fun enableStrokeWidth(enable: Boolean) {
         enableStroke = enable
+        requestLayout()
+    }
+
+    private fun invalidate() {
         viewGroup.invalidate()
+    }
+
+    private fun requestLayout() {
+        onSizeChanged(viewGroup.width, viewGroup.height)
+        invalidate()
     }
 }

@@ -37,17 +37,26 @@ class ShadowConstraintLayout @JvmOverloads constructor(
         super.dispatchDraw(canvas)
     }
 
+    override fun onDrawBeforeSuper(canvas: Canvas) {
+        mShadowHelper.onDrawBeforeSuper(canvas)
+    }
+
+    override fun onDrawAfterSuper(canvas: Canvas) {
+        mShadowHelper.onDrawAfterSuper(canvas)
+    }
+
     override fun onDraw(canvas: Canvas) {
+        onDrawBeforeSuper(canvas)
         super.onDraw(canvas)
-        mShadowHelper.onDraw(canvas)
+        onDrawAfterSuper(canvas)
     }
 
     override fun getCornerRadius(): Float {
         return mShadowHelper.getCornerRadius()
     }
 
-    override fun getShadowLimit(): Float {
-        return mShadowHelper.getShadowLimit()
+    override fun getShadowBlur(): Float {
+        return mShadowHelper.getShadowBlur()
     }
 
     /**
@@ -88,19 +97,23 @@ class ShadowConstraintLayout @JvmOverloads constructor(
     /**
      * 设置阴影扩散区域
      *
-     * @param shadowLimit
+     * @param blur
      */
-    override fun setShadowLimit(shadowLimit: Int) {
-        mShadowHelper.setShadowLimit(shadowLimit)
+    override fun setShadowBlur(blur: Int) {
+        mShadowHelper.setShadowBlur(blur)
     }
 
     /**
      * 设置阴影颜色值
      *
-     * @param shadowColor
+     * @param color
      */
-    override fun setShadowColor(shadowColor: Int) {
-        mShadowHelper.setShadowColor(shadowColor)
+    override fun setShadowColor(color: Int) {
+        mShadowHelper.setShadowColor(color)
+    }
+
+    override fun getShadowColor(): Int {
+        return mShadowHelper.getShadowColor()
     }
 
     /**

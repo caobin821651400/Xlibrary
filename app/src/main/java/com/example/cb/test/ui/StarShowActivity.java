@@ -2,17 +2,14 @@ package com.example.cb.test.ui;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.cb.test.R;
-
-import cn.sccl.xlibrary.utils.XDensityUtils;
-import cn.sccl.xlibrary.utils.XLogUtils;
 
 /**
  * 动态设置阴影页
@@ -31,9 +28,8 @@ public class StarShowActivity extends AppCompatActivity {
     private SeekBar skbar_green;
     private int blue;
     private SeekBar skbar_blue;
-
-    private View lineTop;
-    private View lineBottom;
+    private SeekBar skbar_stroke;
+    private CheckBox check_stroke;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,23 +44,19 @@ public class StarShowActivity extends AppCompatActivity {
         skbar_red = findViewById(R.id.skbar_red);
         skbar_green = findViewById(R.id.skbar_green);
         skbar_blue = findViewById(R.id.skbar_blue);
-        lineTop = findViewById(R.id.topLine);
-        lineBottom = findViewById(R.id.bottomLine);
+        skbar_stroke = findViewById(R.id.skbar_stroke);
+        check_stroke = findViewById(R.id.check_stroke);
 
-        shadowLayout.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
-            @Override
-            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                shadowLayout.removeOnLayoutChangeListener(this);
-                //底部
-                ConstraintLayout.LayoutParams lp= (ConstraintLayout.LayoutParams) lineBottom.getLayoutParams();
-                lp.bottomMargin = (int) shadowLayout.getShadowOffsetY();
-                lineBottom.post(() -> lineBottom.setLayoutParams(lp));
+        check_stroke.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            shadowLayout.enableStrokeWidth(isChecked);
+        });
 
-                //顶部
-                ConstraintLayout.LayoutParams lp2= (ConstraintLayout.LayoutParams) lineTop.getLayoutParams();
-                lp2.topMargin = (int) shadowLayout.getShadowOffsetY();
-                lineTop.post(() -> lineTop.setLayoutParams(lp2));
-            }
+        shadowLayout.post(() -> {
+            int color = shadowLayout.getShadowColor();
+            alpha = Color.alpha(color);
+            blue = Color.blue(color);
+            red = Color.red(color);
+            green = Color.green(color);
         });
 
         skbar_corner.setMax((int) (shadowLayout.getCornerRadius() * 3));
@@ -87,12 +79,12 @@ public class StarShowActivity extends AppCompatActivity {
         });
 
 
-        skbar_limit.setMax((int) (shadowLayout.getShadowLimit() * 3));
-        skbar_limit.setProgress((int) shadowLayout.getShadowLimit());
+        skbar_limit.setMax((int) (shadowLayout.getShadowBlur() * 3));
+        skbar_limit.setProgress((int) shadowLayout.getShadowBlur());
         skbar_limit.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                shadowLayout.setShadowLimit(progress);
+                shadowLayout.setShadowBlur(progress);
             }
 
             @Override
@@ -106,11 +98,12 @@ public class StarShowActivity extends AppCompatActivity {
             }
         });
 
-
+        skbar_x.setMax((int) (shadowLayout.getShadowBlur()*2));
+        skbar_x.setProgress((int) (shadowLayout.getShadowOffsetX()));
         skbar_x.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                shadowLayout.setShadowOffsetX(progress - 100);
+                shadowLayout.setShadowOffsetX(progress - shadowLayout.getShadowBlur());
             }
 
             @Override
@@ -125,10 +118,12 @@ public class StarShowActivity extends AppCompatActivity {
         });
 
 
+        skbar_y.setMax((int) (shadowLayout.getShadowBlur()*2));
+        skbar_y.setProgress((int) (shadowLayout.getShadowOffsetY()));
         skbar_y.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                shadowLayout.setShadowOffsetY(progress - 100);
+                shadowLayout.setShadowOffsetY(progress - shadowLayout.getShadowBlur());
             }
 
             @Override
@@ -205,6 +200,24 @@ public class StarShowActivity extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 blue = progress;
                 shadowLayout.setShadowColor(Color.argb(alpha, red, green, blue));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        skbar_stroke.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                int max = 30;
+                shadowLayout.setStrokeWidth((progress / 100f) * max);
             }
 
             @Override

@@ -368,7 +368,7 @@
         <!--阴影：阴影颜色-->
         <attr name="sl_shadowColor" format="color" />
         <!--阴影：阴影的扩散范围(也可以理解为扩散程度)-->
-        <attr name="sl_shadowLimit" format="dimension" />
+        <attr name="sl_shadowBlur" format="dimension" />
         <!--阴影：x轴的偏移量-->
         <attr name="sl_shadowOffsetX" format="dimension" />
         <!--阴影：y轴的偏移量-->

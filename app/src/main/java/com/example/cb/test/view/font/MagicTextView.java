@@ -130,10 +130,7 @@ public class MagicTextView extends TextView {
                 this.setStroke(strokeWidth, strokeColor, strokeJoin, strokeMiter);
             }
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB
-                && (  innerShadows.size() > 0
-                || foregroundDrawable != null
-        )
+        if (!innerShadows.isEmpty() || foregroundDrawable != null
         ){
             setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         }

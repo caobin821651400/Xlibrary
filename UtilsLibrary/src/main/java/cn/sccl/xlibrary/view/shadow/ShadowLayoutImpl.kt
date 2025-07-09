@@ -1,5 +1,7 @@
 package cn.sccl.xlibrary.view.shadow
 
+import android.graphics.Canvas
+
 /**
  * @author: cb
  * @date: 2025/3/25
@@ -17,7 +19,7 @@ interface ShadowLayoutImpl {
      * 阴影扩散区域
      * @return Float
      */
-    fun getShadowLimit(): Float
+    fun getShadowBlur(): Float
 
     /**
      * 设置x轴阴影的偏移量
@@ -55,9 +57,9 @@ interface ShadowLayoutImpl {
     /**
      * 设置阴影扩散区域
      *
-     * @param shadowLimit
+     * @param blur
      */
-    fun setShadowLimit(shadowLimit: Int)
+    fun setShadowBlur(blur: Int)
 
     /**
      * 设置阴影颜色值
@@ -65,6 +67,11 @@ interface ShadowLayoutImpl {
      * @param color
      */
     fun setShadowColor(color: Int)
+
+    /**
+     * 获取阴影颜色
+     */
+    fun getShadowColor(): Int
 
     /**
      * 设置描边颜色值
@@ -99,4 +106,8 @@ interface ShadowLayoutImpl {
         leftBottom: Int,
         rightBottom: Int
     )
+
+    fun dispatchDraw(canvas: Canvas)
+    fun onDrawBeforeSuper(canvas: Canvas)
+    fun onDrawAfterSuper(canvas: Canvas)
 }
