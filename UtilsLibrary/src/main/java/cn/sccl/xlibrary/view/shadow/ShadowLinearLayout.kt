@@ -3,18 +3,18 @@ package cn.sccl.xlibrary.view.shadow
 import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
-import androidx.constraintlayout.widget.ConstraintLayout
+import android.widget.LinearLayout
 
 /**
  *
  * @author cb
  * @date 2025/3/24
  */
-class ShadowConstraintLayout @JvmOverloads constructor(
+class ShadowLinearLayout @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : ConstraintLayout(context, attrs, defStyleAttr), ShadowLayoutImpl {
+) : LinearLayout(context, attrs, defStyleAttr), ShadowLayoutImpl {
 
     private val mShadowHelper = ShadowHelper(this)
 

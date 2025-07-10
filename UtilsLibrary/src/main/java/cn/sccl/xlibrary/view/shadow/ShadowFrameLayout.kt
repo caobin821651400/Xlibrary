@@ -5,12 +5,10 @@ import android.graphics.Canvas
 import android.util.AttributeSet
 import android.widget.FrameLayout
 
-
 /**
- * 阴影FrameLayout
- * @author: cb
- * @date: 2025/1/25
- * @desc: 描述
+ *
+ * @author cb
+ * @date 2025/3/24
  */
 class ShadowFrameLayout @JvmOverloads constructor(
     context: Context,
@@ -118,19 +116,6 @@ class ShadowFrameLayout @JvmOverloads constructor(
         return mShadowHelper.getShadowColor()
     }
 
-    override fun setStrokeColor(color: Int) {
-        mShadowHelper.setShadowColor(color)
-    }
-
-    override fun setStrokeWidth(width: Float) {
-        mShadowHelper.setStrokeWidth(width)
-    }
-
-    override fun enableStrokeWidth(enable: Boolean) {
-        mShadowHelper.enableStrokeWidth(enable)
-    }
-
-
     /**
      * 单独设置4个圆角属性
      *
@@ -151,5 +136,17 @@ class ShadowFrameLayout @JvmOverloads constructor(
             leftBottom,
             rightBottom
         )
+    }
+
+    override fun setStrokeColor(color: Int) {
+        mShadowHelper.setShadowColor(color)
+    }
+
+    override fun setStrokeWidth(width: Float) {
+        mShadowHelper.setStrokeWidth(width)
+    }
+
+    override fun enableStrokeWidth(enable: Boolean) {
+        mShadowHelper.enableStrokeWidth(enable)
     }
 }
